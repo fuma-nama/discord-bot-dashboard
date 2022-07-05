@@ -1,37 +1,23 @@
-# Changelog
+## [1.1.0] 2022-06-08
 
-## [1.4.1]
- 
-### Updated
-- Added link to flatlogic on login page
+🐛 Bugs solved:
 
-## [1.4.0]
- 
-### Updated
-- Update libs, fixed text visibility
+- Calendar card - Card border bug on dark mode
+- Development Table - Missing content bug
+- Solved the warnings regarding stylis-plugin-rtl
+- Fixed console warnings
 
-## [1.3.0]
- 
-### Updated
-- Update libs
- 
-## [1.2.0]
- 
-### Updated
-- Update libs
-- Merge PR 
- 
-## [1.1.0]
+## [1.0.1] 2022-04-25
 
-### Updated
+### Multiple design bugs on mobile solved
 
-Following libs have beed updated to the recent versions:
-- React - 16.7.1
-- React-router - 4.3.1
-- Reactstrap - 7.1.0
+- Default - "Daily traffic" card - text align problem on mobile - solved.
+- Navbar - Icons - align problem with all icons on mobile - solved.
+- Profile - "Your storage" card - "More" icon align problem on mobile - solved.
+- Profile - "Complete your profile" card - text align problem on mobile - solved.
 
-## [1.0.0]
+## [1.0.0] 2022-04-18
 
-### New Features
+### Original Release
 
-- Shadow added to image
+- Added Chakra UI as base framework

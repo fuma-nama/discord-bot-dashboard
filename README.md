@@ -1,95 +1,115 @@
-## React Dashboard — "[isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)" admin dashboard template
-built with [React](https://facebook.github.io/react/), [Bootstrap](http://getbootstrap.com/), [React Router](https://reacttraining.com/react-router/),
-[Redux](http://redux.js.org/) and [GraphQL](http://graphql.org/) based on
-[Create React App](https://github.com/facebook/create-react-app) and latest industry best practices.
+# [Horizon UI ⚡️](https://horizon-ui.com/horizon-ui-chakra) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https://horizon-ui.com/&text=Check%20Horizon%20UI,%20the%20trendiest%20open-source%20admin%20template%20for%20Chakra%20UI%20&%20React!)
 
-[View Demo](https://flatlogic.com/admin-dashboards/react-dashboard/demo) | [Download](https://github.com/flatlogic/react-dashboard.git) | [More templates](https://flatlogic.com/templates) | [Support forum](https://flatlogic.com/forum)
+![version](https://img.shields.io/badge/version-1.1.0-blue.svg)
+![license](https://img.shields.io/badge/license-MIT-blue.svg)
+[![GitHub issues open](https://img.shields.io/github/issues/horizon-ui/horizon-ui-chakra.svg?maxAge=2592000)](https://github.com/horizon-ui/horizon-ui-chakra/issues?q=is%3Aopen+is%3Aissue)
 
-[![react-dashboard](screenshot.png)](https://flatlogic.com/admin-dashboards/react-dashboard/demo)
+<p>&nbsp;</p>
 
-This seed project is a sort of a free version of a template that may be found on
-[Themeforest](https://themeforest.net/category/site-templates/admin-templates)
-or [Wrapbootstrap](https://wrapbootstrap.com/themes/admin) with working backend integration.
-You may use it to bootstrap the development of your next web app.
+[<img alt="Horizon UI" src="https://i.ibb.co/fdyTwz1/introduction-image-2.png" /> ](https://github.com/horizon-ui/horizon-ui-chakra)
+
+<p>&nbsp;</p>
 
 
-## Features
-* React
-* Mobile friendly layout (responsive)
-* React Router
-* Bootstrap3
-* GraphQL
-* Nodejs backend inegration
-* Sass styles
-* Stylish, clean, responsive layout
-* Lots of utility css classes for rapid development (flatlogic css set)
-* Authentication
-* CRUD operations examples
+Get started and build your dream web app with Horizon UI, the most trendiest &
+innovative Open Source Admin Template for Chakra UI & React!
 
-## Quick Start
+---
 
-#### 1. Get the latest version
+### Introduction
 
-You can start by cloning the latest version of React Dashboard on your
-local machine by running:
+Designed for those who like modern UI elements and beautiful websites. Made of
+hundred of elements, designed blocks and fully coded pages, Horizon UI is ready
+to help you create stunning websites and webapps.
 
-```shell
-$ git clone -o react-dashboard -b master --single-branch \
-      https://github.com/flatlogic/react-dashboard.git MyApp
-$ cd MyApp
+Save hundreds of hours trying to create and develop a dashboard from scratch.
+The fastest, most responsive & trendiest dashboard is here. Seriously.
+
+With Horizon UI you will find many examples for pages like NFTs Pages,
+Authentication Pages, Profile and so on. Just choose between a Basic Design or a
+cover and you are good to go!
+
+### 🎉 [NEW] Horizon UI Components
+All the main components from both versions, this will help you to see and interact with all & the latest added components of Horizon (also, new components are on the way, stay tuned)! ⚡️
+<a href="https://horizon-ui.com/components/?ref=readme-horizon" target="_blank">See all components</a>
+
+
+### Documentation
+
+Each element is well presented in a very complex documentation. You can read
+more about the <a href="https://horizon-ui.com/documentation/docs/introduction?ref=readme-horizon" target="_blank">documentation
+here.</a>
+
+### Quick Start
+
+Install Horizon UI by running either of the following:
+
+- Install NodeJS LTS from
+  [NodeJs Official Page](https://nodejs.org/en/?ref=horizon-documentation)
+  (NOTE: Product only works with LTS version)
+
+Clone the repository with the following command:
+
+```bash
+git clone https://github.com/horizon-ui/horizon-ui-chakra.git
 ```
 
-#### 2. Run `yarn install`
+Run in terminal this command:
 
-This will install both run-time project dependencies and developer tools listed
-in [package.json](../package.json) file.
-
-#### 3. Run `yarn dev`
-
-This command will start the app with simultaneously with express server,
-set up your database, start local server XAMPP, opensever, or other tool
-to start database, connect to it in file 
-```shell
-src > data > sequelize.js.
+```bash
+npm install
 ```
-Also go to  
-```shell
-src > data > schema.js 
+
+Then run this command to start your local server
+
+```bash
+npm start
 ```
-and enable mutation. This preparation
-will enable to realize CRUD operations locally
 
-### 4. How to create db
+### Example Pages
 
-Create db. For instance name it "sequelize" and add posts table to it,
-your table should have same structure as you can see on the screenshot
-<br>
-![table structure](table.png)
+If you want to get inspiration or just show something directly to your clients,
+you can jump start your development with our pre-built example pages. You will
+be able to quickly set up the basic structure for your web project. View
+<a href="https://horizon-ui.com/horizon-ui-chakra/?ref=readme-horizon" target="_blank">example
+pages here.</a>
 
-> [http://localhost:3000/](http://localhost:3000/) — Node.js server<br>
-> [http://localhost:3000/graphql](http://localhost:3000/graphql) — GraphQL server and IDE<br>
+### Versions
 
-Now you can open your web app in a browser, on mobile devices and start
-hacking. Whenever you modify any of the source files inside the `/src` folder,
-the module bundler ([Webpack](http://webpack.github.io/)) will recompile the
-app on the fly and refresh all the connected browsers.
+| Free Version                                                                                                       | PRO Version                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| [![Horizon UI](https://i.ibb.co/fdyTwz1/introduction-image-2.png)](https://www.horizon-ui.com/?ref=readme-horizon) | [![Horizon UI PRO](https://i.ibb.co/R6jFKRM/introduction-image-1.png)](https://www.horizon-ui.com/pro?ref=readme-horizon) |
 
-For more info please refer to [getting started](./docs/getting-started.md) guide to download and run the project (Node.js >= 6.5)
+### Figma Version
 
-## Support
-For any additional information please go to our [**support forum**](https://flatlogic.com/forum) and raise your questions or feedback provide there. We highly appreciate your participation!
+Horizon UI is available in Figma format as well! Check it out on Figma
+Community! 🎨
+[See the Horizon UI Figma design files](https://bit.ly/horizon-figma)
 
-## How can I support developers?
-- Star our GitHub repo :star:
-- [Tweet about it](https://twitter.com/intent/tweet?text=Amazing%20dashboard%20built%20with%20NodeJS,%20React%20and%20Bootstrap!&url=https://github.com/flatlogic/react-dashboard&via=flatlogic).
-- Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
-- Follow [@flatlogic on Twitter](https://twitter.com/flatlogic).
-- Subscribe to Flatlogic newsletter at [flatlogic.com](https://flatlogic.com/)
-- Like our page on [Facebook](https://www.facebook.com/flatlogic/) :thumbsup:
+### Reporting Issues
 
-## Premium themes
-Looking for premium themes and templates? Check out more [admin dashboard templates at flatlogic.com](https://flatlogic.com/admin-dashboards).
+We use GitHub Issues as the official bug tracker for the Horizon UI. Here are
+some advices for our users that want to report an issue:
 
-## License
+1. Make sure that you are using the latest version of the Horizon UI Dashbaord.
+   Check the CHANGELOG from your dashboard on our
+   [CHANGE LOG File](https://github.com/horizon-ui/horizon-ui-chakra/blob/main/CHANGELOG.md?ref=readme-horizon).
+2. Providing us reproducible steps for the issue will shorten the time it takes
+   for it to be fixed.
+3. Some issues may be browser specific, so specifying in what browser you
+   encountered the issue might help.
 
-[MIT](https://github.com/flatlogic/react-dashboard/blob/master/LICENSE.txt) and another [MIT](https://github.com/flatlogic/react-dashboard/blob/master/LICENSE-react-starter-kit.txt) from RSK.
+---
+
+### Community
+
+Connect with the community! Feel free to ask questions, report issues, and meet
+new people that already use Horizon UI!
+
+💬 [Join the #HorizonUI Discord Community!](https://discord.gg/f6tEKFBd4m)
+
+### Copyright and license
+
+⭐️ [Copyright 2022 Simmmple ](https://www.simmmple.com/?ref=readme-horizon)
+
+📄 [Horizon UI License](https://www.simmmple.com/licenses?ref=readme-horizon)
