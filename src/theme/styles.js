@@ -92,6 +92,19 @@ export const globalStyles = {
       html: {
         fontFamily: "DM Sans",
       },
+      "::-webkit-scrollbar": {
+        width: "16px",
+        borderRadius: "8px",
+        backgroundColor: `rgba(0, 0, 0, 0.05)`,
+      },
+      "::-webkit-scrollbar-thumb": {
+        width: "9px",
+        borderRadius: "8px",
+        backgroundColor: mode(
+          `rgba(0, 0,0, 0.2)`,
+          `rgba(255, 255,255, 0.1)`
+        )(props),
+      },
     }),
   },
 };

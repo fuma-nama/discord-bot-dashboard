@@ -13,13 +13,18 @@ import {
 import Card from "components/card/Card.js";
 // Assets
 import React, { useContext, useState } from "react";
-import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { GuildContext } from "../../contexts/GuildContext";
 import { enableFeature } from "api/yeecord";
 
-export default function Feature(props) {
-  const { banner, name, description, favorite, id } = props;
-  const [enabled, setEnabled] = useState(props.enabled);
+export default function Feature({
+  banner,
+  name,
+  description,
+  configUrl,
+  id,
+  enabled: featureEnabled,
+}) {
+  const [enabled, setEnabled] = useState(featureEnabled);
   const guild = useContext(GuildContext);
 
   const textColor = useColorModeValue("navy.700", "white");
@@ -91,7 +96,7 @@ export default function Feature(props) {
             mt="25px"
           >
             {enabled ? (
-              <ConfigButton id={id} />
+              <ConfigButton id={id} configUrl={configUrl} />
             ) : (
               <EnableButton
                 id={id}
@@ -106,10 +111,10 @@ export default function Feature(props) {
   );
 }
 
-function ConfigButton({ id }) {
+function ConfigButton({ configUrl }) {
   return (
     <Link
-      href={`${window.location.href}/${id}`}
+      href={configUrl}
       mt={{
         base: "0px",
         md: "10px",

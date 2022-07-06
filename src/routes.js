@@ -8,6 +8,10 @@ import { BiServer } from "react-icons/bi";
 import Dashboard from "views/guild/dashboard";
 import Features from "views/guild/features";
 
+/**
+ * Public Routes that can access on sidebar
+ * Path variables are not allowed (ex: feature/:id)
+ */
 const routes = [
   {
     name: "服務器儀表板",

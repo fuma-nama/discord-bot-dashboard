@@ -3,13 +3,10 @@ import Feature from "components/card/Feature";
 import { useContext } from "react";
 
 import { FeatureContext } from "contexts/FeatureContext";
-import { GuildContext } from "contexts/GuildContext";
 
 export default function FeatureGrid() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const { features } = useContext(FeatureContext);
-
-  const { id: server } = useContext(GuildContext);
 
   return (
     <Flex direction="column">
@@ -26,13 +23,7 @@ export default function FeatureGrid() {
       </Flex>
       <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
         {features.map((feature) => {
-          return (
-            <Feature
-              key={feature.id}
-              {...feature}
-              configUrl={`#/guild/${server}/feature/${feature.id}`}
-            />
-          );
+          return <Feature {...feature} />;
         })}
       </SimpleGrid>
     </Flex>

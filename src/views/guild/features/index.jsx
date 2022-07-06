@@ -49,6 +49,7 @@ function Features() {
       >
         <Flex
           flexDirection="column"
+          mb="10"
           gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
         >
           <Banner />

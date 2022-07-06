@@ -1,10 +1,9 @@
 import React from "react";
 
 // Chakra imports
-import { Flex, useColorModeValue } from "@chakra-ui/react";
+import { Text, Flex, useColorModeValue } from "@chakra-ui/react";
 
 // Custom components
-import { HorizonLogo } from "components/icons/Icons";
 import { HSeparator } from "components/separator/Separator";
 
 export function SidebarBrand() {
@@ -12,9 +11,11 @@ export function SidebarBrand() {
   let logoColor = useColorModeValue("navy.700", "white");
 
   return (
-    <Flex align='center' direction='column'>
-      <HorizonLogo h='26px' w='175px' my='32px' color={logoColor} />
-      <HSeparator mb='20px' />
+    <Flex align="center" direction="column">
+      <Text my="32px" fontWeight="extrabold" fontSize="2xl" color={logoColor}>
+        Yeecord Dashboard
+      </Text>
+      <HSeparator mb="20px" />
     </Flex>
   );
 }
