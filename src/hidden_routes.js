@@ -7,8 +7,8 @@ import Feature from "views/guild/feature";
 const routes = [
   {
     name: "功能配置面板",
-    path: "/feature/:feature",
-    component: Feature,
+    path: "feature/:feature",
+    component: <Feature />,
   },
 ];
 

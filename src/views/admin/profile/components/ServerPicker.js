@@ -27,7 +27,7 @@ export default function ServerPicker({ servers }) {
       <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
         把Yeecord邀請到你的服務器, 並且客製化你的機器人
       </Text>
-      <Stack overflowY="auto" maxHeight="container.md" direction="column">
+      <Stack direction="column">
         {servers.map((server) => {
           return (
             <Server

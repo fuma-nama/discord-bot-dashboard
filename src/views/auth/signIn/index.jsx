@@ -14,7 +14,7 @@ import { oauth2 } from "variables/links";
 // Custom components
 import DefaultAuth from "layouts/auth/Default";
 // Assets
-import illustration from "assets/img/auth/auth.png";
+import illustration from "assets/img/common/logo_1024x1024.png";
 import { FaDiscord } from "react-icons/fa";
 
 function SignIn() {

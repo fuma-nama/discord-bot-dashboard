@@ -4,6 +4,7 @@ import Footer from "components/footer/FooterAdmin.js";
 import Profile from "views/admin/profile";
 // Layout components
 import { UserDataProvider } from "contexts/DataContext";
+import {Outlet} from "react-router-dom";
 
 // Custom Chakra theme
 export default function Dashboard() {
@@ -25,6 +26,7 @@ export default function Dashboard() {
           <Footer />
         </Box>
       </UserDataProvider>
+      <Outlet />
     </Box>
   );
 }

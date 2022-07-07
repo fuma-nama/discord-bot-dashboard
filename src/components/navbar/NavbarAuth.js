@@ -25,7 +25,7 @@ import {
 import IconBox from "components/icons/IconBox";
 import { HorizonLogo } from "components/icons/Icons";
 import { SidebarResponsive } from "components/sidebar/Sidebar";
-import { SidebarContext } from "contexts/SidebarContext";
+import { PageInfoContext } from "contexts/PageInfoContext";
 
 // Assets
 import { GoChevronDown, GoChevronRight } from "react-icons/go";
@@ -435,7 +435,7 @@ export default function AuthNavbar(props) {
   );
 
   return (
-    <SidebarContext.Provider value={{ sidebarWidth }}>
+    <PageInfoContext.Provider value={{ sidebarWidth }}>
       <Flex
         position={navbarPosition}
         top='16px'
@@ -496,7 +496,7 @@ export default function AuthNavbar(props) {
           </Link>
         </Flex>
       </Flex>
-    </SidebarContext.Provider>
+    </PageInfoContext.Provider>
   );
 }
 

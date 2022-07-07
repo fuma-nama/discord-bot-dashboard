@@ -15,9 +15,9 @@ export function AccountProvider({ children }) {
   return (
     <AccountContext.Provider
       value={{
-        accessToken: accessToken,
-        tokenType: tokenType,
-        setInfo: setInfo,
+        accessToken,
+        tokenType,
+        setInfo
       }}
     >
       {children}
@@ -36,8 +36,9 @@ export function saveSecret(secret, context) {
 export function logout(context) {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("tokenType");
+
   context.setInfo({
     accessToken: null,
-    tokenType: null,
+    tokenType: null
   });
 }

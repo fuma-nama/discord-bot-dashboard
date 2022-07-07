@@ -1,8 +1,9 @@
-import { Input, Text, Switch, Select } from "@chakra-ui/react";
+import { Input, Text, Switch } from "@chakra-ui/react";
 import Card from "components/card/Card.js";
+import {SelectField} from "components/fields/SelectField";
 
 export function OptionPanel({ value, onChange, option }) {
-  console.log(value);
+
   const getInput = () => {
     switch (option.type) {
       case "boolean":
@@ -33,19 +34,15 @@ export function OptionPanel({ value, onChange, option }) {
         );
       case "enum":
         return (
-          <Select
-            placeholder="選擇一個項目"
-            value={value}
-            onChange={({ target }) => onChange(target.value)}
-          >
-            {option.choices.map((choice) => {
-              return (
-                <option key={choice} id={choice}>
-                  {choice}
-                </option>
-              );
-            })}
-          </Select>
+          <SelectField
+              options={option.choices.map((choice) => ({
+                  label: choice,
+                  value: choice,
+              }))}
+              placeholder="選擇一個項目"
+              value={value}
+              onChange={(v) => onChange(v)}
+          />
         );
       default:
         return <></>;

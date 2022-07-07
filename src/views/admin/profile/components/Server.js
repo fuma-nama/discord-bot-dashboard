@@ -14,7 +14,8 @@ import {
 import Card from "components/card/Card.js";
 import React from "react";
 // Assets
-import { iconToUrl } from "../../../../api/discord/DiscordApi";
+import { iconToUrl } from "api/discord/DiscordApi";
+import {invite} from "variables/links";
 
 export default function Server(props) {
   const { server, ...rest } = props;
@@ -22,7 +23,6 @@ export default function Server(props) {
 
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
-  const brandColor = useColorModeValue("brand.500", "white");
   const bg = useColorModeValue("white", "navy.700");
   return (
     <Card bg={bg} {...rest} p="14px">
@@ -46,13 +46,19 @@ export default function Server(props) {
           >
             {name}
           </Text>
-          <Link href={`/#/guild/${server.id}`}>
-            <Button fontWeight="500" color={brandColor} fontSize="md">
-              配置服務器
-            </Button>
-          </Link>
+          <ServerButton server={server} />
         </Stack>
       </Flex>
     </Card>
   );
+}
+
+function ServerButton({server}) {
+  const url = server.configurable? `/guild/${server.id}` : invite;
+
+  return <Link href={url}>
+    <Button fontWeight="500" variant={server.configurable? "brand" : "outline"} fontSize="md">
+      {server.configurable? "配置服務器" : "邀請到服務器"}
+    </Button>
+  </Link>
 }

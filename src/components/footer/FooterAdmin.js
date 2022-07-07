@@ -10,6 +10,7 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+import {blog, homepage, support} from "../../variables/links";
 
 export default function Footer() {
   const textColor = useColorModeValue("gray.400", "white");
@@ -38,18 +39,31 @@ export default function Footer() {
         {" "}
         &copy; {1900 + new Date().getYear()}
         <Text as='span' fontWeight='500' ms='4px'>
-          Horizon UI. All Rights Reserved. Made with love by
+          Yeecord Dashboard. All Rights Reserved. Made with love by
           <Link
             mx='3px'
             color={textColor}
-            href='https://www.simmmple.com'
+            href={homepage}
             target='_blank'
             fontWeight='700'>
-            Simmmple!
+            Yeecord!
           </Link>
         </Text>
       </Text>
       <List display='flex'>
+          <ListItem
+              me={{
+                  base: "20px",
+                  md: "44px",
+              }}>
+              <Link
+                  fontWeight='500'
+                  color={textColor}
+                  href={homepage}
+              >
+                  Home Page
+              </Link>
+          </ListItem>
         <ListItem
           me={{
             base: "20px",
@@ -58,39 +72,15 @@ export default function Footer() {
           <Link
             fontWeight='500'
             color={textColor}
-            href='mailto:hello@simmmple.com'>
+            href={support}>
             Support
-          </Link>
-        </ListItem>
-        <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}>
-          <Link
-            fontWeight='500'
-            color={textColor}
-            href='https://www.simmmple.com/licenses'>
-            License
-          </Link>
-        </ListItem>
-        <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}>
-          <Link
-            fontWeight='500'
-            color={textColor}
-            href='https://simmmple.com/terms-of-service'>
-            Terms of Use
           </Link>
         </ListItem>
         <ListItem>
           <Link
             fontWeight='500'
             color={textColor}
-            href='https://www.blog.simmmple.com/'>
+            href={blog}>
             Blog
           </Link>
         </ListItem>

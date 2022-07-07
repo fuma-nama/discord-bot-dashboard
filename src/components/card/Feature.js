@@ -3,12 +3,11 @@ import {
   Box,
   Button,
   Flex,
-  Icon,
   Image,
-  Link,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import {Link} from "react-router-dom";
 // Custom components
 import Card from "components/card/Card.js";
 // Assets
@@ -114,20 +113,11 @@ export default function Feature({
 function ConfigButton({ configUrl }) {
   return (
     <Link
-      href={configUrl}
-      mt={{
-        base: "0px",
-        md: "10px",
-        lg: "0px",
-        xl: "10px",
-        "2xl": "0px",
-      }}
+      to={configUrl}
     >
       <Button
-        variant="darkBrand"
-        color="white"
+        variant="brand"
         fontSize="sm"
-        fontWeight="500"
         borderRadius="70px"
         px="24px"
         py="5px"
@@ -154,9 +144,8 @@ function EnableButton({ id: featureId, guild, onEnable }) {
     <Button
       onClick={onClick}
       isLoading={enabling}
-      color="white"
       fontSize="sm"
-      fontWeight="500"
+      variant="action"
       borderRadius="70px"
       px="24px"
       py="5px"

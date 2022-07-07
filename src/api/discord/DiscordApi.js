@@ -1,27 +1,30 @@
 export async function getAccountInfo(context) {
   const { tokenType, accessToken } = context;
 
-  const userResult = await fetch("https://discordapp.com/api/users/@me", {
+  const user = await fetch("https://discordapp.com/api/users/@me", {
     headers: {
       authorization: `${tokenType} ${accessToken}`,
     },
-  }).then((result) => result.json());
+  })
 
-  const guildsResult = await fetch(
-    "https://discordapp.com/api/users/@me/guilds",
-    {
-      headers: {
-        authorization: `${tokenType} ${accessToken}`,
-      },
-    }
-  ).then((result) => result.json());
+  const guilds = await fetch(
+      "https://discordapp.com/api/users/@me/guilds",
+      {
+        headers: {
+          authorization: `${tokenType} ${accessToken}`,
+        },
+      }
+  );
 
-  const guilds = guildsResult;
+  try {
 
-  return {
-    user: userResult,
-    guilds: Array.from(guilds).filter((g) => g.owner),
-  };
+    return {
+      user: await user.json(),
+      guilds: Array.from(await guilds.json()).filter((g) => g.owner),
+    };
+  } catch (e) {
+    throw e;
+  }
 }
 
 export function bannerToUrl(id, hash) {

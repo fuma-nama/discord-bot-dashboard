@@ -1,9 +1,10 @@
 /**
+ * Get configurable servers
  * @returns A array of server ids which yeecord is enabled in the server and owned by user
  */
-export async function getCustomableServers(user) {
+export async function getConfigurableServers(userId) {
   await delay(3000);
-  return ["server_id"];
+  return ["684766026776576052"];
 }
 
 //Used to test to async function
@@ -21,13 +22,36 @@ const features = [
 ];
 
 /**
+ * Showing votes of beta features that planning to be added
+ */
+const betaFeatures = [
+  {
+    name: "自動毀滅服務器",
+    description: "在需要時破壞服務器",
+    votes: "69"
+  },
+  {
+    name: "自動毀滅服務器2",
+    description: "在需要時破壞服務器",
+    votes: "6"
+  }
+]
+
+/**
+ * Get configurable features of a server
  * @returns An array of features
  */
-export async function getFeatures() {
+export async function getFeatures(serverId) {
   await delay(3000);
-  return features;
+  return {
+    features,
+    betaFeatures
+  };
 }
 
+/**
+ * Enable a feature for a server
+ */
 export async function enableFeature(serverId, featureId) {
   await delay(2000);
 }
@@ -67,11 +91,12 @@ const ExampleOption4 = {
 };
 
 /**
- * @returns feature details, including configurable options
+ * @returns feature info, and configurable options
  */
 export async function getFeatureDetail(serverId, featureId) {
   await delay(2000);
   return {
+    id: featureId,
     name: "自動殺死凱恩",
     description: "凱恩加入服務器時自動殺死凱恩",
     options: [ExampleOption, ExampleOption2, ExampleOption3, ExampleOption4],
@@ -79,10 +104,41 @@ export async function getFeatureDetail(serverId, featureId) {
 }
 
 /**
+ * Update Feature options value
+ * @param serverId
+ * @param featureId
  * @param {Map<String, *>} options a Map of (optionId - value)
  * @returns true if success
  */
-export async function updateFeatureOptions(options) {
+export async function updateFeatureOptions(serverId, featureId, options) {
   await delay(3000);
-  return true;
+}
+
+/**
+ * Get configurable settings of a server
+ */
+export async function getSettings(serverId) {
+  await delay(3000)
+  return {
+    options: [ExampleOption, ExampleOption2, ExampleOption3, ExampleOption4],
+  }
+}
+
+export async function updateSettingsOptions(serverId, changes) {
+  await delay(3000);
+}
+
+
+/**
+ * Normal server details
+ */
+export async function getServerDetails() {
+
+}
+
+/**
+ * Advanced Details of server
+ */
+export async function getServerAdvancedDetails() {
+
 }

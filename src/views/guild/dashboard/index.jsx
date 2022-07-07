@@ -54,8 +54,10 @@ import WeeklyRevenue from "./components/WeeklyRevenue";
 import { columnsDataCheck, columnsDataComplex } from "./variables/columnsData";
 import tableDataCheck from "./variables/tableDataCheck.json";
 import tableDataComplex from "./variables/tableDataComplex.json";
+import {usePageInfo} from "../../../contexts/PageInfoContext";
 
 export default function UserReports() {
+    usePageInfo("服務器儀表板")
   // Chakra Color Mode
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");

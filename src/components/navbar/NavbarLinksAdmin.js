@@ -23,12 +23,12 @@ import React, { useContext } from "react";
 import { MdNotificationsNone } from "react-icons/md";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import { UserDataContext } from "contexts/DataContext";
-import { SidebarContext } from "contexts/SidebarContext";
+import { PageInfoContext } from "contexts/PageInfoContext";
 
 export default function HeaderLinks(props) {
   const { secondary } = props;
   const { colorMode, toggleColorMode } = useColorMode();
-  const { routes } = useContext(SidebarContext);
+  const { routes } = useContext(PageInfoContext);
 
   // Chakra Color Mode
   const navbarIcon = useColorModeValue("gray.400", "white");

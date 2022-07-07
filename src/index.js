@@ -1,72 +1,77 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import ReactDOM from "react-dom";
 import "assets/css/App.css";
 import {
-  HashRouter,
-  Route,
-  Switch,
-  Redirect,
-  useParams,
+    BrowserRouter, Navigate, Route, Routes,
+    useSearchParams,
 } from "react-router-dom";
 import AuthLayout from "layouts/auth";
 import AdminLayout from "layouts/admin";
-import GuildLayout from "layouts/guild";
-import { ChakraProvider } from "@chakra-ui/react";
+import GuildLayout, { GuildRoutes } from "layouts/guild";
+import {ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
 import {
-  AccountContext,
-  AccountProvider,
-  saveSecret,
+    AccountContext,
+    AccountProvider,
+    saveSecret,
 } from "./contexts/AccountContext";
 
 ReactDOM.render(
-  <AccountProvider>
-    <ChakraProvider theme={theme}>
-      <React.StrictMode>
-        <Routers />
-      </React.StrictMode>
-    </ChakraProvider>
-  </AccountProvider>,
-  document.getElementById("root")
+    <AccountProvider>
+        <ChakraProvider theme={theme}>
+            <React.StrictMode>
+                <BrowserRouter>
+                    <AppRoutes/>
+                </BrowserRouter>
+            </React.StrictMode>
+        </ChakraProvider>
+    </AccountProvider>,
+    document.getElementById("root")
 );
 
-function Routers() {
-  const accountCtx = useContext(AccountContext);
+function AppRoutes() {
+    const accountCtx = useContext(AccountContext);
+    const [params] = useSearchParams()
 
-  const getUrlParam = () => {
-    const fragment = new URLSearchParams(window.location.hash.slice(1));
-    const info = {
-      accessToken: fragment.get("access_token"),
-      tokenType: fragment.get("token_type"),
+    const getUrlParam = () => {
+        const accessToken = params.get("accessToken")
+
+        if (accessToken) {
+            saveSecret({
+                    accessToken,
+                    tokenType: params.get("tokenType")
+                },
+                accountCtx
+            );
+        }
     };
 
-    if (info.accessToken) {
-      saveSecret(info, accountCtx);
-    }
-  };
+    getUrlParam();
 
-  getUrlParam();
-  const { accessToken } = accountCtx;
+    const {accessToken} = accountCtx
+    return (
+        <Routes>
+            {accessToken && (
+                <>
+                    <Route path={`/admin`} element={<AdminLayout />}/>
+                    <Route path="/guild/:id/*" element={<GuildLayout />} >
+                        {GuildRoutes()}
+                    </Route>
 
-  return (
-    <HashRouter>
-      <Switch>
-        {accessToken && (
-          <>
-            <Route path={`/admin`} component={AdminLayout} />
-            <Route path="/guild/:id" component={GuildLayout} />
-            <Redirect from="/" to="/admin" />
-            <Redirect from="/auth/sign-in" to="/admin" />
-          </>
-        )}
+                    <Route path="/" element={
+                        <Navigate replace to="/admin"/>
+                    }/>
+                </>
+            )}
 
-        {!accessToken && (
-          <>
-            <Route path={`/auth`} component={AuthLayout} />
-            <Redirect to="/auth" />
-          </>
-        )}
-      </Switch>
-    </HashRouter>
-  );
+            {!accessToken && (
+                <>
+                    <Route path={`/auth`} element={<AuthLayout />}/>
+                    <Route path="*" element={
+                        <Navigate replace to="/auth/sign-in"/>
+                    } />
+                </>
+            )}
+        </Routes>
+    );
 }

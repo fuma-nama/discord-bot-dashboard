@@ -14,14 +14,12 @@ import {
   ModalFooter,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { updateFeatureOptions } from "api/yeecord";
 
 export function SaveAlert({
   saving,
-  setSaving,
   changes,
-  onSave: afterSave,
-  onDiscard: afterDiscard,
+  onSave,
+  onDiscard ,
 }) {
   const [error, setError] = useState(null);
   let alertBg = useColorModeValue(
@@ -32,27 +30,6 @@ export function SaveAlert({
 
   let mainText = useColorModeValue("navy.700", "white");
   let brand = useColorModeValue("green.300", "green.500");
-
-  const onSave = () => {
-    const target = new Map(changes);
-    setSaving(true);
-
-    updateFeatureOptions(target)
-      .then(() => {
-        afterSave(target);
-      })
-      .catch((e) => {
-        setError(e.message);
-      })
-      .finally(() => {
-        setSaving(false);
-      });
-  };
-
-  const onDiscard = () => {
-    setSaving(false);
-    afterDiscard();
-  };
 
   return (
     <>

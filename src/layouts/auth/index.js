@@ -4,7 +4,7 @@ import SignIn from "views/auth/signIn";
 import { Box, useColorModeValue } from "@chakra-ui/react";
 
 // Layout components
-import { SidebarContext } from "contexts/SidebarContext";
+import { PageInfoContext } from "contexts/PageInfoContext";
 
 // Custom Chakra theme
 export default function Auth() {
