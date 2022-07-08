@@ -1,4 +1,5 @@
 import Feature from "views/guild/feature";
+import ActionPanel from "./views/guild/action/config";
 
 /**
  * Routes that cannot access from sidebar
@@ -6,10 +7,13 @@ import Feature from "views/guild/feature";
  */
 const routes = [
   {
-    name: "功能配置面板",
     path: "feature/:feature",
     component: <Feature />,
   },
+  {
+    path: "action/:action",
+    component: <ActionPanel />
+  }
 ];
 
 export default routes;

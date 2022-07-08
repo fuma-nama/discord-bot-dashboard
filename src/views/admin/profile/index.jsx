@@ -8,7 +8,7 @@ import ServerPicker from "views/admin/profile/components/ServerPicker";
 
 // Assets
 import React, {useMemo, useState} from "react";
-import {UserDataContext} from "contexts/DataContext";
+import {UserDataContext} from "contexts/UserDataContext";
 import {useContext} from "react";
 import {avatarToUrl, bannerToUrl} from "api/discord/DiscordApi";
 import {getConfigurableServers} from "api/yeecord";

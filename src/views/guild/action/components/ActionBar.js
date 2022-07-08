@@ -1,10 +1,10 @@
-import {Flex, Icon, Text, useColorModeValue} from "@chakra-ui/react";
+import {Flex, Icon, Input, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card";
 import React, {useContext} from "react";
 import {BsPeopleFill} from "react-icons/bs";
 import {FeatureContext} from "../../../../contexts/FeatureContext";
 
-export function BetaFeatures() {
+export function ActionBar() {
     const textColor = useColorModeValue("secondaryGray.900", "white");
     const {betaFeatures} = useContext(FeatureContext);
 
@@ -22,11 +22,6 @@ export function BetaFeatures() {
                     在我們的不和諧服務器中投票，告訴我們您希望什麼功能
                 </Text>
             </Flex>
-        {
-            betaFeatures.map((feature, key) => (
-                <BetaFeature key={key} {...feature} />
-            ))
-        }
     </Card>
 
 }

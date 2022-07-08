@@ -1,23 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   Box,
-  Button,
   Flex,
-  Grid,
-  Stack,
-  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 
 // Custom components
-import { OptionPanel } from "components/fields/OptionPanel";
-import { SaveAlert } from "../../../components/alert/SaveAlert";
 import Banner from "./components/Banner";
-import TableTopCreators from "./components/TableTopCreators";
-import Card from "components/card/Card.js";
-import tableDataTopCreators from "./variables/tableDataTopCreators.json";
-import { tableColumnsTopCreators } from "./variables/tableColumnsTopCreators";
 import { updateFeatureOptions } from "api/yeecord";
 
 import {

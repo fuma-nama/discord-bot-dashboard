@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 
 // Chakra imports
-import { Button, Flex, Link, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { FeatureDetailContext } from "contexts/FeatureDetailContext";
 // Assets
-import banner from "assets/img/nfts/NftBanner1.png";
+import banner from "assets/img/layout/NftBanner1.png";
 import { GuildContext } from "contexts/GuildContext";
 import { BiArrowBack } from "react-icons/bi";
+import {Link} from "react-router-dom";
 
 export default function Banner() {
   const { name, description } = useContext(FeatureDetailContext);
@@ -65,17 +66,9 @@ function BackButton() {
   const { id: serverId } = useContext(GuildContext);
 
   return (
-    <Link href={`/#/guild/${serverId}/features`}>
+    <Link to={`/guild/${serverId}/features`}>
       <Button
-        bg="white"
-        color="black"
-        _hover={{ bg: "whiteAlpha.900" }}
-        _active={{ bg: "white" }}
-        _focus={{ bg: "white" }}
-        fontWeight="500"
-        fontSize="14px"
-        py="20px"
-        px="27"
+          variant="white"
         me="38px"
         leftIcon={<BiArrowBack />}
       >

@@ -6,8 +6,8 @@ import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import {PageInfoContext} from "contexts/PageInfoContext";
 import React, {useState} from "react";
-import {Route, Routes, Navigate, Outlet, useParams} from "react-router-dom";
-import {UserDataProvider} from "contexts/DataContext";
+import {Route, Navigate, Outlet, useParams} from "react-router-dom";
+import {UserDataProvider} from "contexts/UserDataContext";
 //routes
 import routes from "routes.js";
 import hidden_routes from "hidden_routes.js";
@@ -57,29 +57,27 @@ function RouteWrapper({children}) {
                 transitionProperty="top, bottom, width"
                 transitionTimingFunction="linear, linear, ease"
             >
-                <UserDataProvider>
-                    <Portal>
-                        <Box>
-                            <Navbar
-                                onOpen={onOpen}
-                                logoText={"Horizon UI Dashboard PRO"}
-                                brandText={info ? info.name : "Loading..."}
-                                message={info ? info.name : "Loading..."}
-                                fixed={fixed}
-                            />
-                        </Box>
-                    </Portal>
-
-                    <Box
-                        mx="auto"
-                        p={{base: "20px", md: "30px"}}
-                        pe="20px"
-                        minH="100vh"
-                        pt="50px"
-                    >
-                        {children}
+                <Portal>
+                    <Box>
+                        <Navbar
+                            onOpen={onOpen}
+                            logoText={"Horizon UI Dashboard PRO"}
+                            brandText={info ? info.name : "Loading..."}
+                            message={info ? info.name : "Loading..."}
+                            fixed={fixed}
+                        />
                     </Box>
-                </UserDataProvider>
+                </Portal>
+
+                <Box
+                    mx="auto"
+                    p={{base: "20px", md: "30px"}}
+                    pe="20px"
+                    minH="100vh"
+                    pt="50px"
+                >
+                    {children}
+                </Box>
                 <Box>
                     <Footer/>
                 </Box>
@@ -94,9 +92,13 @@ export default function GuildBoard() {
 
     return (
         <GuildContext.Provider value={{id}}>
-            <RouteWrapper>
-                <Outlet/>
-            </RouteWrapper>
+            <UserDataProvider>
+
+                <RouteWrapper>
+                    <Outlet/>
+                </RouteWrapper>
+            </UserDataProvider>
+
         </GuildContext.Provider>
     );
 }

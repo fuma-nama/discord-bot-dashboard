@@ -14,5 +14,5 @@ export function usePageInfo(name) {
         setInfo({
             name: name
         })
-    }, [])
+    }, [name, setInfo])
 }

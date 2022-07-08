@@ -22,7 +22,7 @@ import React, { useContext } from "react";
 // Assets
 import { MdNotificationsNone } from "react-icons/md";
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
-import { UserDataContext } from "contexts/DataContext";
+import { UserDataContext } from "contexts/UserDataContext";
 import { PageInfoContext } from "contexts/PageInfoContext";
 
 export default function HeaderLinks(props) {

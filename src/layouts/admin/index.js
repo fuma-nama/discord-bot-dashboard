@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 import Footer from "components/footer/FooterAdmin.js";
 import Profile from "views/admin/profile";
 // Layout components
-import { UserDataProvider } from "contexts/DataContext";
+import { UserDataProvider } from "contexts/UserDataContext";
 import {Outlet} from "react-router-dom";
 
 // Custom Chakra theme
@@ -12,6 +12,7 @@ export default function Dashboard() {
   document.documentElement.dir = "ltr";
 
   return (
+
     <Box
       minHeight="100vh"
       height="100%"

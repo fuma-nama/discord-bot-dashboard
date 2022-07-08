@@ -1,10 +1,11 @@
+// noinspection ES6UnusedImports
+
 import React, { useState } from "react";
 import SignIn from "views/auth/signIn";
 // Chakra imports
 import { Box, useColorModeValue } from "@chakra-ui/react";
 
 // Layout components
-import { PageInfoContext } from "contexts/PageInfoContext";
 
 // Custom Chakra theme
 export default function Auth() {

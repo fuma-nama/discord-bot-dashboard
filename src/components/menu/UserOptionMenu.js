@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { AccountContext, logout } from "../../contexts/AccountContext";
-import { UserDataContext } from "contexts/DataContext";
+import { UserDataContext } from "contexts/UserDataContext";
 
 export default function UserOptionMenu() {
   let menuBg = useColorModeValue("white", "navy.800");

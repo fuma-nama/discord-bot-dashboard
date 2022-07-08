@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import ReactDOM from "react-dom";
 import "assets/css/App.css";
 import {
@@ -8,20 +8,30 @@ import {
 import AuthLayout from "layouts/auth";
 import AdminLayout from "layouts/admin";
 import GuildLayout, { GuildRoutes } from "layouts/guild";
-import {ChakraProvider } from "@chakra-ui/react";
+import {Center, ChakraProvider, Spinner, Stack, Text} from "@chakra-ui/react";
 import theme from "theme/theme";
+import {
+    QueryClient,
+    QueryClientProvider,
+} from 'react-query'
+
 import {
     AccountContext,
     AccountProvider,
     saveSecret,
 } from "./contexts/AccountContext";
+import {invite} from "./variables/links";
+
+const queryClient = new QueryClient()
 
 ReactDOM.render(
     <AccountProvider>
         <ChakraProvider theme={theme}>
             <React.StrictMode>
                 <BrowserRouter>
-                    <AppRoutes/>
+                    <QueryClientProvider client={queryClient}>
+                        <AppRoutes/>
+                    </QueryClientProvider>
                 </BrowserRouter>
             </React.StrictMode>
         </ChakraProvider>
@@ -58,7 +68,11 @@ function AppRoutes() {
                         {GuildRoutes()}
                     </Route>
 
-                    <Route path="/" element={
+                    <Route path="/invite" element={
+                        <Redirect url={invite} />
+                    }/>
+
+                    <Route path="*" element={
                         <Navigate replace to="/admin"/>
                     }/>
                 </>
@@ -74,4 +88,17 @@ function AppRoutes() {
             )}
         </Routes>
     );
+}
+
+function Redirect({url}) {
+    useEffect(() => {
+        window.location.href = url;
+    }, [url]);
+
+    return <Center height="100vh">
+        <Stack direction="column" align="center">
+            <Spinner size="lg"/>
+            <Text>正在加載...</Text>
+        </Stack>
+    </Center>;
 }

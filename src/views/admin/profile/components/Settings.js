@@ -1,9 +1,8 @@
 // Chakra imports
-import {Button, Flex, Text, useColorMode, useColorModeValue} from "@chakra-ui/react";
+import {Button, Text, useColorMode, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 // Custom components
 import SwitchField from "components/fields/SwitchField";
-import Menu from "components/menu/MainMenu";
 import {AccountContext, logout} from "../../../../contexts/AccountContext";
 import {useContext} from "react";
 

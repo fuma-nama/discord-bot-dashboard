@@ -15,6 +15,17 @@ export const buttonStyles = {
         },
       },
       variants: {
+        white: () => ({
+          bg: "white",
+          color: "black",
+          _hover: { bg: "whiteAlpha.900" },
+          _active: { bg: "white" },
+          _focus: { bg: "white" },
+          fontWeight: "500",
+          fontSize: "14px",
+          py: "20px",
+          px: "27",
+        }),
         outline: () => ({
           borderRadius: "16px",
         }),

@@ -11,25 +11,23 @@ import {
 
 // Custom components
 import Banner from "./components/Banner";
-import FeatureGrid from "./components/FeatureGrid";
+import ActionsList from "./components/ActionsList";
 import { FeaturesProvider } from "contexts/FeatureContext";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
-import {BetaFeatures} from "./components/BetaFeatures";
+import {ActionBar} from "./components/ActionBar";
+import {ActionsProvider} from "../../../contexts/actions/ActionsContext";
 
-export default function FeaturesBoard() {
+export default function ActionsBoard() {
   return (
-    <FeaturesProvider>
-      <Features />
-    </FeaturesProvider>
+      <Actions />
   );
 }
 
-function Features() {
-  usePageInfo("功能控制板")
+function Actions() {
+  usePageInfo("動作面板")
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-      {/* Main Fields */}
       <Grid
         mb="20px"
         gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
@@ -42,16 +40,17 @@ function Features() {
           gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
         >
           <Banner />
-          <FeatureGrid />
+          <ActionsProvider>
+            <ActionsList />
+          </ActionsProvider>
         </Flex>
         <Flex
           flexDirection="column"
           gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}
         >
-          <BetaFeatures />
+          <ActionBar />
         </Flex>
       </Grid>
-      {/* Delete Product */}
     </Box>
   );
 }

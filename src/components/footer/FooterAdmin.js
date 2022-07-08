@@ -6,7 +6,6 @@ import {
   List,
   ListItem,
   Text,
-  Button,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
