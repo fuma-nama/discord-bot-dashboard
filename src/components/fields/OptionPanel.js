@@ -1,6 +1,7 @@
-import { Input, Text, Switch } from "@chakra-ui/react";
+import { Text, Switch } from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import {SelectField} from "components/fields/SelectField";
+import {InputField} from "./InputField";
 
 export function OptionPanel({ value, onChange, option }) {
 
@@ -20,11 +21,8 @@ export function OptionPanel({ value, onChange, option }) {
       case "string":
         const isText = option.type === "string";
         return (
-          <Input
-            fontWeight="500"
-            variant="main"
+          <InputField
             type={isText ? "text" : "number"}
-            _placeholder={{ fontWeight: "400", color: "secondaryGray.600" }}
             value={value}
             placeholder={isText ? "請輸入文字" : "請輸入數字"}
             onChange={({ target }) =>

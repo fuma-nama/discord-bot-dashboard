@@ -85,5 +85,5 @@ export async function getServerAdvancedDetails() {
  * RPG information of a user
  */
 export async function getRPGInfo(userId) {
-
+  await delay(3000)
 }

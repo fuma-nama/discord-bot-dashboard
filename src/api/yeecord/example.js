@@ -1,5 +1,7 @@
-import {delay} from "./utils";
-
+const AuthHeaders = {
+    userId: 6969696969696,
+    //you may add some headers soon
+}
 /**
  * An option of feature, going to support following types soon:
  *

@@ -1,12 +1,15 @@
-import {Flex, Icon, Input, Text, useColorModeValue} from "@chakra-ui/react";
+import {Button, Flex, FormControl, FormLabel, Icon, Input, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card";
-import React, {useContext} from "react";
-import {BsPeopleFill} from "react-icons/bs";
-import {FeatureContext} from "../../../../contexts/FeatureContext";
+import React, {useContext, useState} from "react";
+import {SelectField} from "../../../../components/fields/SelectField";
+import {ActionTypesContext} from "../../../../contexts/actions/ActionsContext";
+import {useMutation, useQuery, useQueryClient} from "react-query";
+import {addAction} from "../../../../api/yeecord";
+import {useParams} from "react-router-dom";
+import {InputField} from "../../../../components/fields/InputField";
 
 export function ActionBar() {
     const textColor = useColorModeValue("secondaryGray.900", "white");
-    const {betaFeatures} = useContext(FeatureContext);
 
     return <Card p="0px">
             <Flex
@@ -16,68 +19,60 @@ export function ActionBar() {
                 py="18px"
             >
                 <Text color={textColor} fontSize="xl" fontWeight="600">
-                    測試版功能
+                    管理動作
                 </Text>
-                <Text color={textColor}>
-                    在我們的不和諧服務器中投票，告訴我們您希望什麼功能
+                <Text color={textColor} mb={10}>
+                    添加新的動作或克隆它們
                 </Text>
+                <Control />
             </Flex>
     </Card>
-
 }
 
-function BetaFeature({name, description, votes}) {
-    // Chakra Color Mode
-    const textColor = useColorModeValue("brands.900", "white");
-    const bgItem = useColorModeValue(
-        {bg: "white", boxShadow: "0px 40px 58px -20px rgba(112, 144, 176, 0.12)"},
-        {bg: "navy.700", boxShadow: "unset"}
-    );
+function Control() {
+    const queryClient = useQueryClient()
 
-    return (
-        <Card
-            _hover={bgItem}
-            bg='transparent'
-            boxShadow='unset'
-            px='24px'
-            py='21px'
-            transition='0.2s linear'>
-            <Flex direction={{base: "column"}} justify='center'>
-                <Flex position='relative' align='center'>
-                    <Flex
-                        direction='column'
-                        w={{base: "70%", md: "100%"}}
-                        me={{base: "4px", md: "32px", xl: "10px", "3xl": "32px"}}>
-                        <Text
-                            color={textColor}
-                            fontSize={{
-                                base: "md",
-                            }}
-                            mb='5px'
-                            fontWeight='bold'
-                            me='14px'>
-                            {name}
-                        </Text>
-                        <Text
-                            color='secondaryGray.600'
-                            fontSize={{
-                                base: "sm",
-                            }}
-                            fontWeight='400'
-                            me='14px'>
-                            {description}
-                        </Text>
-                    </Flex>
-                    <Flex
-                        me={{base: "4px", md: "32px", xl: "10px", "3xl": "32px"}}
-                        align='center'>
-                        <Icon as={BsPeopleFill} color={textColor} width='18px' me='7px'/>
-                        <Text fontWeight='700' fontSize='md' color={textColor}>
-                            {votes}
-                        </Text>
-                    </Flex>
-                </Flex>
-            </Flex>
-        </Card>
-    );
+    const {id: serverId} = useParams()
+    const {types} = useContext(ActionTypesContext)
+
+    const [description, setDescription] = useState("")
+    const [type, setType] = useState()
+
+    const typeOptions = types.map(type => ({
+        label: type.name,
+        value: type.id
+    }))
+
+    const mutation = useMutation(
+        (args) => addAction(serverId, ...args), {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['actions'])
+        },
+    })
+
+    return <FormControl>
+        <FormLabel htmlFor='type'>動作類型</FormLabel>
+        <SelectField
+            id='type'
+            placeholder="選擇一種操作類型"
+            value={type}
+            onChange={setType}
+            options={typeOptions}
+        />
+        <FormLabel htmlFor='detail'>描述</FormLabel>
+        <InputField
+            id='detail'
+            placeholder="動作描述 (可選)"
+            value={description}
+            onChange={({target}) => setDescription(target.value)}
+        />
+        <Button
+            mt={4}
+            isLoading={mutation.isLoading}
+            type='submit'
+            onClick={() => mutation.mutate([type, description])}
+        >
+            添加新動作
+        </Button>
+    </FormControl>
 }

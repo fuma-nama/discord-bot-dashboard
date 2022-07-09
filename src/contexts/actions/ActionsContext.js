@@ -1,6 +1,6 @@
 import {createContext} from "react";
-import { QueryHolderSkeleton} from "../components/AsyncContext";
-import {getActions} from "api/yeecord";
+import {QueryHolder, QueryHolderSkeleton} from "../components/AsyncContext";
+import {getActions, getActionTypes} from "api/yeecord";
 import {GuildContext} from "../GuildContext";
 import {useQuery} from "react-query";
 
@@ -14,9 +14,27 @@ export function ActionsProvider({children}) {
         getActions(serverId)
     )
 
-    return <QueryHolderSkeleton {...query}>{
+    return <QueryHolderSkeleton {...query}>
         <ActionsContext.Provider value={{actions: query.data}}>
             {children}
         </ActionsContext.Provider>
-    }</QueryHolderSkeleton>
+    </QueryHolderSkeleton>
+}
+
+export const ActionTypesContext = createContext({
+    types: null
+})
+
+export function ActionTypesProvider({children}) {
+    const query = useQuery("actions_type", () =>
+        getActionTypes()
+    )
+
+    return <QueryHolderSkeleton {...query}>
+        <ActionTypesContext.Provider value={{
+            types: query.data
+        }}>
+            {children}
+        </ActionTypesContext.Provider>
+    </QueryHolderSkeleton>
 }

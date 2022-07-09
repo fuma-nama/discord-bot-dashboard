@@ -17,7 +17,7 @@ import { useState } from "react";
 
 export function SaveAlert({
   saving,
-  changes,
+  visible,
   onSave,
   onDiscard ,
 }) {
@@ -46,7 +46,7 @@ export function SaveAlert({
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Slide direction="bottom" in={changes.size !== 0} style={{ zIndex: 10 }}>
+      <Slide direction="bottom" in={visible} style={{ zIndex: 10 }}>
         <Alert
           w={{
             base: "calc(100vw - 6%)",

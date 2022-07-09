@@ -11,37 +11,50 @@ import {
 } from "@chakra-ui/react";
 import {OptionPanel} from "./OptionPanel";
 import {SaveAlert} from "components/alert/SaveAlert";
+import ErrorModal from "../modal/ErrorModal";
 
-export function ConfigPanel({options: defaultOptions, onSave: save}) {
+export function MultiConfigPanel({groups: defaultGroups, onSave: save}) {
     const [saving, setSaving] = useState(false);
-    const [options, setOptions] = useState(defaultOptions);
+    const [groups, setGroups] = useState(defaultGroups);
     const [changes, setChanges] = useState(new Map());
     const [error, setError] = useState(null);
 
     const onChange = (id, value) => {
         if (saving) return;
-        setChanges(new Map(changes.set(id, value)));
+
+        setChanges(new Map(
+            changes.set(id, value)
+        ));
     };
 
     const afterSave = (changes) => {
-        const updated = options.map((option) => {
-            return {
-                ...option,
-                value: changes.has(option.id) ? changes.get(option.id) : option.value,
-            };
+        const updated = groups.map((group) => {
+            const groupChanges = changes.get(group.id)
+
+            if (groupChanges == null)
+                return group
+            else
+                return {
+                    ...group,
+                    value: group.value.map(option => {
+                        return {
+                            ...option,
+                            value: groupChanges.get(option.id)
+                        }
+                    }),
+                };
         });
 
-        setOptions(updated);
+        setGroups(updated);
         setChanges(new Map());
     }
 
     const onSave = () => {
-        const target = new Map(changes);
         setSaving(true);
 
-        save(target)
+        save(changes)
             .then(() => {
-                afterSave(target);
+                afterSave(changes);
             })
             .catch((e) => {
                 setError(e.message);
@@ -58,22 +71,23 @@ export function ConfigPanel({options: defaultOptions, onSave: save}) {
 
     return (
         <>
-            <SaveErrorModal error={error} setError={setError} />
-            <Stack mt="10">
-                {options.map((option) => (
-                    <OptionPanel
-                        option={option}
-                        value={
-                            changes.has(option.id) ? changes.get(option.id) : option.value
-                        }
-                        key={option.id}
-                        onChange={(v) => onChange(option.id, v)}
-                    />
-                ))}
-            </Stack>
+            <ErrorModal
+                header="未能保存更改"
+                error={error}
+                onClose={() => setError(null)}
+            />
+            {groups.map(group =>
+                <ConfigGroupItem
+                    key={group.id}
+                    saving={saving}
+                    group={group}
+                    changes={changes.get(group.id)}
+                    onChange={onChange}
+                />
+            )}
             <SaveAlert
+                visible={changes.size !== 0}
                 saving={saving}
-                changes={changes}
                 onSave={onSave}
                 onDiscard={onDiscard}
             />
@@ -81,20 +95,46 @@ export function ConfigPanel({options: defaultOptions, onSave: save}) {
     );
 }
 
-function SaveErrorModal({error, setError}) {
-    let modalBg = useColorModeValue("rgba(244, 247, 254)", "rgba(11,20,55)");
+function ConfigGroupItem({group, saving, changes, onChange: setChanges}) {
+    const onChange = (id, value) => {
+        if (saving)
+            return;
 
-    return <Modal isCentered isOpen={error != null} onClose={() => setError(null)}>
-        <ModalContent bg={modalBg} rounded="2xl">
-            <ModalHeader>未能保存更改</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-                <Text>{error}</Text>
-            </ModalBody>
+        let temp = changes == null? new Map() : changes;
 
-            <ModalFooter>
-                <Button onClick={() => setError(null)}>關閉</Button>
-            </ModalFooter>
-        </ModalContent>
-    </Modal>
+        setChanges(group.id, temp.set(id, value));
+    };
+
+    return <ConfigItemList
+        options={group.value}
+        changes={changes}
+        onChange={onChange}
+    />
+}
+
+function ConfigItemList({options, changes, onChange}) {
+    return <Stack mt="10">
+        {options.map((option) => (
+            <OptionPanel
+                option={option}
+                value={
+                    changes && changes.has(option.id) ? changes.get(option.id) : option.value
+                }
+                key={option.id}
+                onChange={(v) => onChange(option.id, v)}
+            />
+        ))}
+    </Stack>
+}
+
+export function ConfigPanel({options: defaultOptions, onSave: save}) {
+    const group = {
+        id: "root",
+        value: defaultOptions
+    }
+
+    const onSave = (changes) => {
+        return save(changes["root"])
+    }
+    return <MultiConfigPanel groups={[group]} onSave={onSave}/>
 }

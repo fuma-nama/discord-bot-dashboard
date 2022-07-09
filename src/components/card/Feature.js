@@ -14,17 +14,27 @@ import Card from "components/card/Card.js";
 import React, { useContext, useState } from "react";
 import { GuildContext } from "../../contexts/GuildContext";
 import { enableFeature } from "api/yeecord";
+import {useMutation} from "react-query";
 
 export default function Feature({
   banner,
   name,
   description,
   configUrl,
-  id,
+  id: featureId,
   enabled: featureEnabled,
 }) {
   const [enabled, setEnabled] = useState(featureEnabled);
   const guild = useContext(GuildContext);
+
+    const enableMutation = useMutation(
+        () => enableFeature(guild.id, featureId),
+        {
+            onSuccess() {
+                setEnabled(true)
+            }
+        }
+    )
 
   const textColor = useColorModeValue("navy.700", "white");
   const brandColor = useColorModeValue("brand.500", "brand.400");
@@ -36,8 +46,8 @@ export default function Feature({
           <Image
             bgColor={brandColor}
             src={banner}
-            w={{ base: "100%", "3xl": "100%" }}
-            h={{ base: "100%", "3xl": "100%" }}
+            w="100%"
+            h="100%"
             borderRadius="20px"
           />
         </Box>
@@ -59,10 +69,6 @@ export default function Feature({
                 fontSize={{
                   base: "xl",
                   md: "lg",
-                  lg: "lg",
-                  xl: "lg",
-                  "2xl": "md",
-                  "3xl": "lg",
                 }}
                 mb="5px"
                 fontWeight="bold"
@@ -95,12 +101,11 @@ export default function Feature({
             mt="25px"
           >
             {enabled ? (
-              <ConfigButton id={id} configUrl={configUrl} />
+              <ConfigButton configUrl={configUrl} />
             ) : (
               <EnableButton
-                id={id}
-                guild={guild}
-                onEnable={() => setEnabled(true)}
+                  enabling={enableMutation.isLoading}
+                onEnable={enableMutation.mutate}
               />
             )}
           </Flex>
@@ -128,24 +133,12 @@ function ConfigButton({ configUrl }) {
   );
 }
 
-function EnableButton({ id: featureId, guild, onEnable }) {
-  const [enabling, setEnabling] = useState(false);
-
-  const onClick = () => {
-    setEnabling(true);
-
-    enableFeature(guild.id, featureId).then(() => {
-      setEnabling(false);
-      onEnable();
-    });
-  };
-
+function EnableButton({ enabling, onEnable }) {
   return (
     <Button
-      onClick={onClick}
+      onClick={onEnable}
       isLoading={enabling}
       fontSize="sm"
-      variant="action"
       borderRadius="70px"
       px="24px"
       py="5px"

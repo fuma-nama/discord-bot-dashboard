@@ -15,7 +15,7 @@ import ActionsList from "./components/ActionsList";
 import { FeaturesProvider } from "contexts/FeatureContext";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
 import {ActionBar} from "./components/ActionBar";
-import {ActionsProvider} from "../../../contexts/actions/ActionsContext";
+import {ActionsProvider, ActionTypesProvider} from "../../../contexts/actions/ActionsContext";
 
 export default function ActionsBoard() {
   return (
@@ -48,7 +48,9 @@ function Actions() {
           flexDirection="column"
           gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}
         >
-          <ActionBar />
+          <ActionTypesProvider>
+            <ActionBar />
+          </ActionTypesProvider>
         </Flex>
       </Grid>
     </Box>

@@ -1,8 +1,9 @@
 import { createContext, useContext } from "react";
-import {AsyncContext, QueryHolder} from "./components/AsyncContext";
+import {QueryHolder} from "./components/AsyncContext";
 import { GuildContext } from "./GuildContext";
 import { getFeatureDetail } from "api/yeecord";
 import {useQuery} from "react-query";
+import {useParams} from "react-router-dom";
 
 export const FeatureDetailContext = createContext({
   name: null,
@@ -10,7 +11,8 @@ export const FeatureDetailContext = createContext({
   options: null,
 });
 
-export function FeatureDetailProvider({ featureId, children }) {
+export function FeatureDetailProvider({ children }) {
+  const { feature: featureId } = useParams()
   const { id: serverId } = useContext(GuildContext);
   const query = useQuery(["feature_detail", serverId, featureId] , () =>
       getFeatureDetail(serverId, featureId)

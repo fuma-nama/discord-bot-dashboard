@@ -1,5 +1,5 @@
 import {createContext, useContext} from "react";
-import {AsyncContext, QueryHolder} from "./components/AsyncContext";
+import { QueryHolder} from "./components/AsyncContext";
 import { getFeatures } from "api/yeecord";
 import {GuildContext} from "./GuildContext";
 import {useQuery} from "react-query";

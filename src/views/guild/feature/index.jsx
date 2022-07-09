@@ -18,9 +18,9 @@ import { useContext } from "react";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
 import {GuildContext} from "../../../contexts/GuildContext";
 import {ConfigPanel} from "../../../components/fields/ConfigPanel";
+import {useParams} from "react-router-dom";
 
 export default function FeaturePanel() {
-  const textColor = useColorModeValue("secondaryGray.900", "white");
 
   return (
     <FeatureDetailProvider>

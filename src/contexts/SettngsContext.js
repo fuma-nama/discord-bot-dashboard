@@ -1,9 +1,8 @@
 import {createContext, useContext} from "react";
-import {AsyncContext, QueryHolder} from "./components/AsyncContext";
+import {QueryHolder} from "./components/AsyncContext";
 import {getSettings} from "../api/yeecord";
 import {GuildContext} from "./GuildContext";
 import {useQuery} from "react-query";
-import {getAccountInfo} from "../api/discord/DiscordApi";
 
 export const SettingsContext = createContext({
     options: null

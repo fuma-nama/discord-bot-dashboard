@@ -1,12 +1,13 @@
 import React, {useContext} from "react";
 
-import {Box, Flex,} from "@chakra-ui/react";
+import {Box, Flex} from "@chakra-ui/react";
 
 import {usePageInfo} from "contexts/PageInfoContext";
-import {ConfigPanel} from "components/fields/ConfigPanel";
-import {modifyAction} from "api/yeecord";
+import { MultiConfigPanel} from "components/fields/ConfigPanel";
+import {modifyAction, modifyActionInfo} from "api/yeecord";
 import {ActionDetailContext, ActionDetailProvider} from "contexts/actions/ActionDetailContext";
 import {useParams} from "react-router-dom";
+import ActionBar from "./components/ActionBar";
 
 export default function ActionPanel() {
     return (
@@ -17,6 +18,7 @@ export default function ActionPanel() {
                     mb="10"
                     gridArea={{xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2"}}
                 >
+                    <ActionBar />
                     <ActionConfigPanel/>
                 </Flex>
             </Box>
@@ -27,11 +29,37 @@ export default function ActionPanel() {
 function ActionConfigPanel() {
     const {action: actionId} = useParams();
     const {action, options} = useContext(ActionDetailContext);
-    usePageInfo(action.description || action.type.name)
+    usePageInfo(action.type.name)
 
-    const onSave = (changes) => modifyAction(actionId, changes)
+    const onSave = async (changes) => {
+        const info = changes.get("info")
+        const description = info["description"]
 
-    return (
-        <ConfigPanel options={options} onSave={onSave}/>
-    );
+        if (action.description !== description) {
+            await modifyActionInfo(actionId, description)
+        }
+
+        await modifyAction(actionId, changes.get("options"))
+    }
+
+    const groups = [
+        {
+            id: "info",
+            value: [
+                {
+                    id: "description",
+                    name: "動作描述",
+                    description: "這個動作的描述，用於告訴用戶這個動作實際上是做什麼的",
+                    type: "string",
+                    value: action.description,
+                }
+            ]
+        },
+        {
+            id: "options",
+            value: options
+        }
+    ]
+
+    return (<MultiConfigPanel groups={groups} onSave={onSave}/>)
 }
