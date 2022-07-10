@@ -1,6 +1,7 @@
 # Yeecord Dashboard
 
 Manage everything from website :D
+Feel free to contribute this project
 
 Maintained by MONEY
 
