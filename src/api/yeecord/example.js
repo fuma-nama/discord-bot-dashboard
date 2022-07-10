@@ -1,3 +1,6 @@
+import Information from "../../views/admin/profile/components/Information";
+import React from "react";
+
 const AuthHeaders = {
     userId: 6969696969696,
     //you may add some headers soon
@@ -11,7 +14,7 @@ export const ExampleOption = {
     id: "kill_friends",
     name: "殺死他的朋友",
     description: "當他的朋友加入時也殺死他們",
-    type: "boolean", //boolean, string, enum, number
+    type: "boolean", //boolean, string, enum, number, color
     choices: null, //only enum type option have choices array
     value: true,
 };
@@ -40,8 +43,24 @@ export const ExampleOption4 = {
     choices: null,
     value: 1,
 };
+export const ExampleOption5 = {
+    id: "color",
+    name: "我的顏色",
+    description: "",
+    type: "color",
+    choices: null,
+    value: null,
+}
+export const ExampleOption6 = {
+    id: "kill_message",
+    name: "我的顏色",
+    description: "",
+    type: "message_create",
+    choices: null,
+    value: null,
+}
 
-export const ExampleOptions = [ExampleOption, ExampleOption2, ExampleOption3, ExampleOption4]
+export const ExampleOptions = [ExampleOption, ExampleOption2, ExampleOption3, ExampleOption4, ExampleOption5, ExampleOption6]
 
 //Used to test to async function
 export const features = [
@@ -73,21 +92,105 @@ export const betaFeatures = [
 
 export const ServerDetails = {
     earned: 4321,
+    members: {
+        count: 6969,
+        grow: 23 //as percentage
+    },
     command: {
-        usage: 1200,
+        total: 1200,
         most: "&pick"
     },
+    /**
+     * Status of the bot
+     * show as percentage
+     */
     bot: {
         ram: 30,
         cpu: 80,
-        gpu: 30
-    }
+    },
+    unlocked: [
+        {
+            name: "免費功能",
+            enabled: true
+        },
+        {
+            name: "高級功能",
+            enabled: true
+        },
+        {
+            name: "付費功能",
+            enabled: false
+        },
+        {
+            name: "測試版功能",
+            enabled: false
+        }
+    ]
 }
 
 export const ServerDetailsAdvanced = {
-    commandUsage: {
-        "1/5": 3000,
-        "2/5": 43,
-        "3/5": 4324
+    /**
+     * Total command usage of this year
+     */
+    command: {
+        total: 4322,
+        /**
+         * One element per month
+         */
+        usage: [
+            {
+                name: "查詢類型的指令",
+                data: [50, 64, 48, 66, 49, 68],
+            },
+            {
+                name: "音樂命令",
+                data: [30, 40, 24, 66, 20, 44],
+            },
+            {
+                name: "RPG遊戲命令",
+                data: [50, 20, 54, 46, 60, 56],
+            },
+            {
+                name: "特殊命令",
+                data: [3, 2, 4, 36, 10, 26],
+            }
+        ]
+    },
+
+    dvc: {
+        total: 432,
+        usage: [
+            {
+                name: "動態語音通道",
+                data: [50, 64, 48, 66, 49, 68, 52],
+            },
+        ]
     }
 }
+
+export const ExampleRPGInfo = [
+    {
+        name: "您的餘額",
+        value: "$432423"
+    },
+    {
+        name: "創建時間",
+        value: "April 29, 2019 3:51 PM (3 years ago)\n"
+    },
+    {
+        name: "民生職業",
+        value: "產品設計師"
+    },
+    {
+        name: "冒險職業",
+        value: "Web開發人員"
+    },
+    {
+        name: "稱號",
+        value: "Single Dog"
+    },
+    {
+        name: "感情狀態",
+        value: "單身"
+    }
+]

@@ -1,4 +1,14 @@
-import {Button, Flex, FormControl, FormLabel, Icon, Input, Text, useColorModeValue} from "@chakra-ui/react";
+import {
+    Button,
+    Flex,
+    FormControl,
+    FormHelperText,
+    FormLabel,
+    Icon,
+    Input,
+    Text,
+    useColorModeValue
+} from "@chakra-ui/react";
 import Card from "components/card/Card";
 import React, {useContext, useState} from "react";
 import {SelectField} from "../../../../components/fields/SelectField";
@@ -36,7 +46,8 @@ function Control() {
     const {types} = useContext(ActionTypesContext)
 
     const [description, setDescription] = useState("")
-    const [type, setType] = useState()
+    const [type, setType] = useState(null)
+    const [error, setError] = useState(false)
 
     const typeOptions = types.map(type => ({
         label: type.name,
@@ -50,6 +61,16 @@ function Control() {
         },
     })
 
+    const onSubmit = () => {
+        if (type == null) {
+            setError(true)
+            return
+        }
+
+        setError(false)
+        mutation.mutate([type, description])
+    }
+
     return <FormControl>
         <FormLabel htmlFor='type'>動作類型</FormLabel>
         <SelectField
@@ -58,6 +79,7 @@ function Control() {
             value={type}
             onChange={setType}
             options={typeOptions}
+            isInvalid={error && type == null}
         />
         <FormLabel htmlFor='detail'>描述</FormLabel>
         <InputField
@@ -66,11 +88,12 @@ function Control() {
             value={description}
             onChange={({target}) => setDescription(target.value)}
         />
+        <FormHelperText>你可以稍後給它一個描述</FormHelperText>
         <Button
             mt={4}
             isLoading={mutation.isLoading}
             type='submit'
-            onClick={() => mutation.mutate([type, description])}
+            onClick={onSubmit}
         >
             添加新動作
         </Button>

@@ -49,7 +49,7 @@ export default function Default(props) {
                 {growth}
               </Text>
               <Text color='secondaryGray.600' fontSize='xs' fontWeight='400'>
-                since last month
+                自上個月以來
               </Text>
             </Flex>
           ) : null}

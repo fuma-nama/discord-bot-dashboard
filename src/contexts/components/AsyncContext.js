@@ -20,16 +20,16 @@ export function QueryHolder({error, isLoading, refetch, children}) {
     return children
 }
 
-export function QueryHolderSkeleton({error, isLoading, refetch, height = "200px", children}) {
+export function QueryHolderSkeleton({error, isLoading, refetch, height = "200px", children, direction = "column", ...rest}) {
     if (error) {
         return <ErrorPanel height={height} error={error} onRetry={refetch}/>
     }
 
     if (isLoading) {
 
-        return <Flex gap={4} direction="column" mt="10">
-            <Skeleton isLoaded={false} height={height} rounded="lg" />
-            <Skeleton isLoaded={false} height={height} rounded="lg" />
+        return <Flex gap={4} direction={direction} my="5" {...rest}>
+            <Skeleton width="100%" isLoaded={false} height={height} rounded="lg" />
+            <Skeleton width="100%" isLoaded={false} height={height} rounded="lg" />
         </Flex>
     }
 

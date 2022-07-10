@@ -17,5 +17,5 @@ export function SettingsProvider({children}) {
         <SettingsContext.Provider value={query.data}>
             {children}
         </SettingsContext.Provider>
-    }</QueryHolder>
+    </QueryHolder>
 }

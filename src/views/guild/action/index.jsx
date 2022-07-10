@@ -12,7 +12,6 @@ import {
 // Custom components
 import Banner from "./components/Banner";
 import ActionsList from "./components/ActionsList";
-import { FeaturesProvider } from "contexts/FeatureContext";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
 import {ActionBar} from "./components/ActionBar";
 import {ActionsProvider, ActionTypesProvider} from "../../../contexts/actions/ActionsContext";

@@ -57,6 +57,10 @@ export async function addAction(serverId, typeId, description) {
     return "action_id"
 }
 
+export async function cloneAction(actionId) {
+    await delay(2000)
+}
+
 export async function deleteAction(actionId) {
     await delay(2000)
 }

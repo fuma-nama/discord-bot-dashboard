@@ -1,16 +1,15 @@
 import {
   Flex,
   Table,
-  Checkbox,
   Tbody,
   Td,
   Text,
   Th,
   Thead,
   Tr,
-  useColorModeValue,
+  useColorModeValue, Icon,
 } from "@chakra-ui/react";
-import React, { useMemo } from "react";
+import React, {useContext} from "react";
 import {
   useGlobalFilter,
   usePagination,
@@ -21,16 +20,27 @@ import {
 // Custom components
 import Card from "components/card/Card";
 import Menu from "components/menu/MainMenu";
-export default function CheckTable(props) {
-  const { columnsData, tableData } = props;
+import {ServerDetailContext} from "contexts/server/ServerDetailContext";
+import {MdCancel, MdCheckCircle} from "react-icons/md";
 
-  const columns = useMemo(() => columnsData, [columnsData]);
-  const data = useMemo(() => tableData, [tableData]);
+export const columns = [
+  {
+    Header: "NAME",
+    accessor: "name",
+  },
+  {
+    Header: "ENABLED",
+    accessor: "enabled",
+  },
+];
+
+export default function FeatureTable() {
+  const {detail} = useContext(ServerDetailContext)
 
   const tableInstance = useTable(
     {
       columns,
-      data,
+      data: detail.unlocked
     },
     useGlobalFilter,
     useSortBy,
@@ -61,7 +71,7 @@ export default function CheckTable(props) {
           fontSize='22px'
           fontWeight='700'
           lineHeight='100%'>
-          Check Table
+          服務器功能
         </Text>
         <Menu />
       </Flex>
@@ -94,44 +104,42 @@ export default function CheckTable(props) {
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
                   let data = "";
-                  if (cell.column.Header === "NAME") {
-                    data = (
-                      <Flex align='center'>
-                        <Checkbox
-                          defaultChecked={cell.value[1]}
-                          colorScheme='brandScheme'
-                          me='10px'
-                        />
-                        <Text color={textColor} fontSize='sm' fontWeight='700'>
-                          {cell.value[0]}
-                        </Text>
-                      </Flex>
-                    );
-                  } else if (cell.column.Header === "PROGRESS") {
-                    data = (
-                      <Flex align='center'>
-                        <Text
-                          me='10px'
-                          color={textColor}
-                          fontSize='sm'
-                          fontWeight='700'>
-                          {cell.value}%
-                        </Text>
-                      </Flex>
-                    );
-                  } else if (cell.column.Header === "QUANTITY") {
-                    data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
-                      </Text>
-                    );
-                  } else if (cell.column.Header === "DATE") {
-                    data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
-                      </Text>
-                    );
+
+                  switch (cell.column.Header) {
+                    case "NAME": {
+                      data = (
+                          <Text color={textColor} fontSize='md' fontWeight='700'>
+                            {cell.value}
+                          </Text>
+                      );
+                      break;
+                    }
+                    case "ENABLED": {
+                      data = (
+                          <Flex align='center'>
+                            <Icon
+                                w='24px'
+                                h='24px'
+                                me='5px'
+                                color={
+                                  cell.value? "green.500" : "red.500"
+                                }
+                                as={
+                                  cell.value? MdCheckCircle : MdCancel
+                                }
+                            />
+                            <Text color={textColor} fontSize='sm' fontWeight='700'>
+                              {cell.value? "Enabled" : "Locked"}
+                            </Text>
+                          </Flex>
+                      );
+                      break;
+                    }
+                    default: {
+                      data = "UNKNOWN"
+                    }
                   }
+
                   return (
                     <Td
                       {...cell.getCellProps()}

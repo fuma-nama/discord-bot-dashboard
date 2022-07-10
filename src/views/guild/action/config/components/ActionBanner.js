@@ -9,7 +9,7 @@ import { BiArrowBack } from "react-icons/bi";
 import {ActionDetailContext} from "../../../../../contexts/actions/ActionDetailContext";
 import {Link} from "react-router-dom";
 
-export default function ActionBar() {
+export default function ActionBanner() {
   const { description, status } = useContext(ActionDetailContext).action;
 
   return (

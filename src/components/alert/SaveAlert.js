@@ -62,10 +62,14 @@ export function SaveAlert({
           bg={alertBg}
           textColor={mainText}
           mb="10"
+          flexDirection={{base: "column", md: "row"}}
         >
           <AlertIcon />
           您有一些未保存的更改
-          <ButtonGroup ml="auto">
+          <ButtonGroup ml={{
+            base: "0",
+            md: "auto"
+          }}>
             <Button bg={brand} isLoading={saving} onClick={onSave}>
               立即保存
             </Button>

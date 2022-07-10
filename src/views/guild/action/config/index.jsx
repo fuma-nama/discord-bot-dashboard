@@ -7,7 +7,7 @@ import { MultiConfigPanel} from "components/fields/ConfigPanel";
 import {modifyAction, modifyActionInfo} from "api/yeecord";
 import {ActionDetailContext, ActionDetailProvider} from "contexts/actions/ActionDetailContext";
 import {useParams} from "react-router-dom";
-import ActionBar from "./components/ActionBar";
+import ActionBanner from "./components/ActionBanner";
 
 export default function ActionPanel() {
     return (
@@ -18,7 +18,7 @@ export default function ActionPanel() {
                     mb="10"
                     gridArea={{xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2"}}
                 >
-                    <ActionBar />
+                    <ActionBanner />
                     <ActionConfigPanel/>
                 </Flex>
             </Box>

@@ -94,7 +94,7 @@ export default function AdminNavbar(props) {
       <Flex
         w="100%"
         flexDirection={{
-          sm: "column",
+          base: "column",
           md: "row",
         }}
         alignItems={{ xl: "center" }}

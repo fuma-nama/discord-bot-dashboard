@@ -12,14 +12,11 @@ import Card from "components/card/Card.js";
 import BarChart from "components/charts/BarChart";
 import React from "react";
 import {
-  barChartDataConsumption,
-  barChartOptionsConsumption,
+  weekBarChartOptions,
 } from "variables/charts";
 import { MdBarChart } from "react-icons/md";
 
-export default function WeeklyRevenue(props) {
-  const { ...rest } = props;
-
+export default function WeeklyVC({data}) {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const iconColor = useColorModeValue("brand.500", "white");
@@ -33,7 +30,7 @@ export default function WeeklyRevenue(props) {
     { bg: "whiteAlpha.100" }
   );
   return (
-    <Card align='center' direction='column' w='100%' {...rest}>
+    <Card align='center' direction='column' w='100%'>
       <Flex align='center' w='100%' px='15px' py='10px'>
         <Text
           me='auto'
@@ -41,7 +38,7 @@ export default function WeeklyRevenue(props) {
           fontSize='xl'
           fontWeight='700'
           lineHeight='100%'>
-          Weekly Revenue
+          動態語音頻道數量
         </Text>
         <Button
           align='center'
@@ -53,16 +50,15 @@ export default function WeeklyRevenue(props) {
           w='37px'
           h='37px'
           lineHeight='100%'
-          borderRadius='10px'
-          {...rest}>
+          borderRadius='10px'>
           <Icon as={MdBarChart} color={iconColor} w='24px' h='24px' />
         </Button>
       </Flex>
 
       <Box h='240px' mt='auto'>
         <BarChart
-          chartData={barChartDataConsumption}
-          chartOptions={barChartOptionsConsumption}
+          chartData={data.dvc.usage}
+          chartOptions={weekBarChartOptions}
         />
       </Box>
     </Card>

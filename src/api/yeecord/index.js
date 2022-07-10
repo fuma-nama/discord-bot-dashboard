@@ -1,5 +1,5 @@
 import {delay} from "./utils";
-import {betaFeatures, ExampleOptions, features, ServerDetails, ServerDetailsAdvanced} from "./example";
+import {betaFeatures, ExampleOptions, ExampleRPGInfo, features, ServerDetails, ServerDetailsAdvanced} from "./example";
 
 export * from "./action";
 
@@ -68,7 +68,7 @@ export async function updateSettingsOptions(serverId, changes) {
 /**
  * Normal server details
  */
-export async function getServerDetails() {
+export async function getServerDetails(serverId) {
   await delay(3000)
   return ServerDetails
 }
@@ -76,7 +76,7 @@ export async function getServerDetails() {
 /**
  * Advanced Details of server
  */
-export async function getServerAdvancedDetails() {
+export async function getServerAdvancedDetails(serverId) {
   await delay(3000)
   return ServerDetailsAdvanced
 }
@@ -86,4 +86,5 @@ export async function getServerAdvancedDetails() {
  */
 export async function getRPGInfo(userId) {
   await delay(3000)
+  return ExampleRPGInfo
 }

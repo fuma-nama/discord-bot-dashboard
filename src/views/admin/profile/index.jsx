@@ -11,8 +11,10 @@ import React, {useMemo, useState} from "react";
 import {UserDataContext} from "contexts/UserDataContext";
 import {useContext} from "react";
 import {avatarToUrl, bannerToUrl} from "api/discord/DiscordApi";
-import {getConfigurableServers} from "api/yeecord";
+import {getConfigurableServers, getRPGInfo} from "api/yeecord";
 import {useEffect} from "react";
+import {QueryHolder, QueryHolderSkeleton} from "../../../contexts/components/AsyncContext";
+import {useQuery} from "react-query";
 
 function LoadedOverview({configurableServers, isLoaded}) {
     const userData = useContext(UserDataContext);
@@ -24,6 +26,11 @@ function LoadedOverview({configurableServers, isLoaded}) {
         configurable: configurableServers.includes(g.id)
             })),
         [configurableServers, isLoaded, userData.guilds]
+    )
+
+    const query = useQuery(
+        ["user_rpg_info", id],
+        () => getRPGInfo(id)
     )
 
     return (
@@ -72,14 +79,18 @@ function LoadedOverview({configurableServers, isLoaded}) {
                 <Skeleton gridArea="1 / 1 / 2 / 2" isLoaded={isLoaded} rounded="lg">
                     {guilds ? <ServerPicker servers={guilds}/> : null}
                 </Skeleton>
-                <General
-                    gridArea={{
-                        base: "2 / 1 / 4 / 2",
-                        lg: "1 / 2 / 2 / 2",
-                    }}
-                    minH="365px"
-                    pe="20px"
-                />
+                <QueryHolderSkeleton {...query}>
+
+                    <General
+                        gridArea={{
+                            base: "2 / 1 / 4 / 2",
+                            lg: "1 / 2 / 2 / 2",
+                        }}
+                        minH="365px"
+                        pe="20px"
+                        data={query.data}
+                    />
+                </QueryHolderSkeleton>
             </Grid>
         </Box>
     );
@@ -88,14 +99,10 @@ function LoadedOverview({configurableServers, isLoaded}) {
 export default function Overview() {
     const userData = useContext(UserDataContext);
 
-    const [configurableServers, setConfigurableServers] = useState(null);
-    useEffect(() => {
-        getConfigurableServers(userData.id).then((result) => {
-            setConfigurableServers(result);
-        });
-    }, [userData.id]);
+    const query = useQuery(
+        ["configurable_servers", userData.id],
+        () => getConfigurableServers(userData.id)
+    )
 
-    const isLoaded = configurableServers != null
-
-    return <LoadedOverview configurableServers={configurableServers} isLoaded={isLoaded}/>
+    return <LoadedOverview configurableServers={query.data} isLoaded={query.isFetched}/>
 }

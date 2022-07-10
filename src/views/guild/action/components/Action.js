@@ -1,10 +1,23 @@
 import React, {Fragment} from "react";
-import {Button, Flex, Grid, GridItem, Text, useColorModeValue} from "@chakra-ui/react";
+import {
+    Button,
+    Flex,
+    Grid,
+    GridItem, Icon,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuList,
+    Text,
+    useColorModeValue
+} from "@chakra-ui/react";
 import Card from "../../../../components/card/Card";
 import {Link} from "react-router-dom";
-import {addAction, deleteAction, runAction} from "../../../../api/yeecord";
-import {useMutation, useQuery, useQueryClient} from "react-query";
+import {cloneAction, deleteAction, runAction} from "../../../../api/yeecord";
+import {useMutation, useQueryClient} from "react-query";
 import ErrorModal from "../../../../components/modal/ErrorModal";
+import {FaRegClone} from "react-icons/fa";
+import ActionMenu from "../../../../components/menu/ActionMenu";
 
 function ValueField({options}) {
     return <Grid
@@ -33,12 +46,28 @@ export function Action({description, status, createdAt, type, configUrl}) {
         () => runAction(id)
     )
 
+
     const deleteMutation = useMutation(
         () => deleteAction(id), {
             onSuccess: () => {
                 queryClient.invalidateQueries(['actions'])
             },
         })
+    const cloneMutation = useMutation(
+        () => cloneAction(id), {
+            onSuccess() {
+                queryClient.invalidateQueries(['actions'])
+            }
+        }
+    )
+
+    const actions = [
+        {
+            name: "複製",
+            icon: FaRegClone,
+            onClick: cloneMutation.mutate
+        }
+    ]
 
     return (
         <>
@@ -63,9 +92,9 @@ export function Action({description, status, createdAt, type, configUrl}) {
                             {name}
                         </Text>
                         <ValueField options={[
-                            ["Status", status],
-                            ["Detail", description],
-                            ["Created At", createdAt.toLocaleDateString()]
+                            ["狀態", status],
+                            ["描述", description],
+                            ["創建於", createdAt.toLocaleDateString()]
                         ]}/>
                     </Flex>
                     <ActionButtons
@@ -76,12 +105,19 @@ export function Action({description, status, createdAt, type, configUrl}) {
                         deleting={deleteMutation.isLoading}
                     />
                 </Flex>
+                <ActionMenu
+                    position="absolute"
+                    right="10px"
+                    top="10px"
+                    actions={actions}
+                />
             </Card>
         </>
     );
 }
 
 function ActionButtons({configUrl, onRun, onDelete, running, deleting}) {
+
     const disabled = running || deleting;
 
     const ActionButton = (props) => {
@@ -102,7 +138,7 @@ function ActionButtons({configUrl, onRun, onDelete, running, deleting}) {
         gap={2}>
         <ActionButton isLoading={running} onClick={onRun}>運行動作</ActionButton>
         <Link to={configUrl}>
-            <ActionButton>
+            <ActionButton w="full">
                 修改動作
             </ActionButton>
         </Link>
