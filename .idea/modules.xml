@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/yeecord-dashboard.iml" filepath="$PROJECT_DIR$/.idea/yeecord-dashboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dashboard.iml" filepath="$PROJECT_DIR$/dashboard.iml" />
     </modules>
   </component>
 </project>
