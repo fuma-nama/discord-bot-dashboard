@@ -1,5 +1,13 @@
 import {delay} from "./utils";
-import {betaFeatures, ExampleOptions, ExampleRPGInfo, features, ServerDetails, ServerDetailsAdvanced} from "./example";
+import {
+  betaFeatures,
+  ExampleOptions,
+  ExampleRPGInfo,
+  features,
+  Notifications,
+  ServerDetails,
+  ServerDetailsAdvanced
+} from "./example";
 
 export * from "./action";
 
@@ -79,6 +87,14 @@ export async function getServerDetails(serverId) {
 export async function getServerAdvancedDetails(serverId) {
   await delay(3000)
   return ServerDetailsAdvanced
+}
+
+/**
+ * get Notifications of server
+ */
+export async function getNotifications(serverId) {
+  await delay(2000)
+  return Notifications
 }
 
 /**

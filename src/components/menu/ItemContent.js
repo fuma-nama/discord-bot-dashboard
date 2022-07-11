@@ -3,7 +3,7 @@ import { Icon, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import { MdUpgrade } from "react-icons/md";
 import React from "react";
 
-export function ItemContent(props) {
+export function ItemContent({title, description}) {
   const textColor = useColorModeValue("navy.700", "white");
   return (
     <>
@@ -25,14 +25,14 @@ export function ItemContent(props) {
           fontWeight='bold'
           color={textColor}
           fontSize={{ base: "md", md: "md" }}>
-          New Update: {props.info}
+          {title}
         </Text>
         <Flex alignItems='center'>
           <Text
             fontSize={{ base: "sm", md: "sm" }}
             lineHeight='100%'
             color={textColor}>
-            A new update for your downloaded item is available!
+              {description}
           </Text>
         </Flex>
       </Flex>

@@ -1,13 +1,16 @@
 import React, {useContext, useEffect} from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 import "assets/css/App.css";
 import {
-    BrowserRouter, Navigate, Route, Routes,
+    BrowserRouter,
+    Navigate,
+    Route,
+    Routes,
     useSearchParams,
 } from "react-router-dom";
 import AuthLayout from "layouts/auth";
 import AdminLayout from "layouts/admin";
-import GuildLayout, { GuildRoutes } from "layouts/guild";
+import GuildLayout, {GuildRoutes} from "layouts/guild";
 import {Center, ChakraProvider, Spinner, Stack, Text} from "@chakra-ui/react";
 import theme from "theme/theme";
 import {
@@ -25,17 +28,18 @@ import {invite} from "./variables/links";
 const queryClient = new QueryClient()
 
 ReactDOM.render(
-    <AccountProvider>
-        <ChakraProvider theme={theme}>
-            <React.StrictMode>
-                <BrowserRouter>
-                    <QueryClientProvider client={queryClient}>
+    <React.StrictMode>
+        <AccountProvider>
+            <ChakraProvider theme={theme}>
+                <QueryClientProvider client={queryClient}>
+
+                    <BrowserRouter>
                         <AppRoutes/>
-                    </QueryClientProvider>
-                </BrowserRouter>
-            </React.StrictMode>
-        </ChakraProvider>
-    </AccountProvider>,
+                    </BrowserRouter>
+                </QueryClientProvider>
+            </ChakraProvider>
+        </AccountProvider>
+    </React.StrictMode>,
     document.getElementById("root")
 );
 
@@ -63,13 +67,13 @@ function AppRoutes() {
         <Routes>
             {accessToken && (
                 <>
-                    <Route path={`/admin`} element={<AdminLayout />}/>
-                    <Route path="/guild/:id/*" element={<GuildLayout />} >
+                    <Route path={`/admin`} element={<AdminLayout/>}/>
+                    <Route path="/guild/:id/*" element={<GuildLayout/>}>
                         {GuildRoutes()}
                     </Route>
 
                     <Route path="/invite" element={
-                        <Redirect url={invite} />
+                        <Redirect url={invite}/>
                     }/>
 
                     <Route path="*" element={
@@ -80,10 +84,10 @@ function AppRoutes() {
 
             {!accessToken && (
                 <>
-                    <Route path={`/auth`} element={<AuthLayout />}/>
+                    <Route path={`/signin`} element={<AuthLayout/>} exact/>
                     <Route path="*" element={
-                        <Navigate replace to="/auth/sign-in"/>
-                    } />
+                        <Navigate replace to="/signin"/>
+                    }/>
                 </>
             )}
         </Routes>

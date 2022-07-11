@@ -1,7 +1,8 @@
-import {FormControl, FormHelperText, FormLabel, Input, Text} from "@chakra-ui/react";
+import { FormControl, FormHelperText, FormLabel, HStack, Stack, Text} from "@chakra-ui/react";
 import {Tabs, TabList, TabPanels, Tab, TabPanel} from '@chakra-ui/react'
-import {OptionField} from "../fields/OptionPanel";
+import {OptionField, OptionHandlerContext} from "../fields/OptionPanel";
 import {HSeparator} from "../separator/Separator";
+import {InputField} from "../fields/InputField";
 
 const DefaultEmbed = {
     title: "",
@@ -20,6 +21,10 @@ const DefaultEmbed = {
 
 const DefaultMessage = ""
 
+const handler = {
+    "_embed_field": (props) => <EmbedField {...props} />
+}
+
 export default function MessageBuildCard({value, onChange}) {
     const get = (name) => {
         return value != null && value[name]
@@ -33,8 +38,8 @@ export default function MessageBuildCard({value, onChange}) {
 
     return <Tabs defaultIndex={data.type === "message" ? 0 : 1}>
         <TabList>
-            <Tab>Message</Tab>
-            <Tab>Embed</Tab>
+            <Tab>信息</Tab>
+            <Tab>嵌入</Tab>
         </TabList>
 
         <TabPanels>
@@ -50,7 +55,6 @@ export default function MessageBuildCard({value, onChange}) {
 
 function MessagePanel({data, onChange}) {
     const onType = (v) => {
-        console.log(v)
         onChange({
             ...data,
             message: v
@@ -59,9 +63,10 @@ function MessagePanel({data, onChange}) {
 
     return <FormControl>
         <FormLabel htmlFor='content'>內容</FormLabel>
-        <Input
+        <InputField
             id='content'
             variant="main"
+            placeholder="YEEE"
             value={data.message}
             onChange={event => onType(event.target.value)}
         />
@@ -90,36 +95,37 @@ function EmbedPanel({data, onChange}) {
     }
 
     const info = {
-        name: "Basic",
+        name: "基本設置",
         fields: [
             {
-                name: "Title",
+                name: "標題",
                 id: "title",
                 type: "string",
             },
             {
-                name: "Description",
+                name: "描述",
                 id: "detail",
-                type: "string"
+                type: "long_string"
             },
             {
-                name: "Url",
+                name: "網址",
                 id: "url",
                 type: "string"
             },
             {
-                name: "Footer",
+                name: "頁腳",
                 id: "footer",
                 type: "string"
             },
             {
-                name: "Color",
+                name: "顏色",
                 id: "color",
                 type: "color"
             }
         ],
         mapper(field) {
             return <Field
+                head
                 key={field.id}
                 option={field}
                 value={embed[field.id]}
@@ -129,16 +135,25 @@ function EmbedPanel({data, onChange}) {
     }
 
     const advanced = {
-        name: "Advanced",
+        name: "高級設置",
         fields: [
             {
-                name: "Footer",
-                id: "footer",
-                type: "string"
+                name: "信息字段",
+                id: "fields",
+                type: "array",
+                element: {
+                    type: "_embed_field",
+                    holder: {
+                        name: "",
+                        value: "",
+                        inline: false
+                    }
+                }
             }
         ],
         mapper(field) {
             return <Field
+                head
                 key={field.id}
                 option={field}
                 value={embed[field.id]}
@@ -148,26 +163,27 @@ function EmbedPanel({data, onChange}) {
     }
 
     const author = {
-        name: "Author",
+        name: "作者設置",
         fields: [
             {
                 id: "name",
-                name: "Name",
+                name: "姓名",
                 type: "string"
             },
             {
                 id: "link",
-                name: "Link",
+                name: "網址鏈接",
                 type: "string"
             },
             {
                 id: "icon",
-                name: "Icon",
+                name: "頭像",
                 type: "string"
             }
         ],
         mapper(field) {
             return <Field
+                head
                 key={field.id}
                 option={field}
                 value={embed.author[field.id]}
@@ -177,23 +193,62 @@ function EmbedPanel({data, onChange}) {
     }
 
     return <FormControl>
-        <Category {...info} isFirst />
-        <Category {...author} />
-        <Category {...advanced} />
+        <OptionHandlerContext.Provider value={handler}>
+            <Category {...info} isFirst/>
+            <Category {...author} />
+            <Category {...advanced} />
+        </OptionHandlerContext.Provider>
     </FormControl>
 }
 
 function Category({isFirst, name, fields, mapper}) {
+    return <Stack>
+        {!isFirst && <HSeparator my="5"/>}
+        <Text fontSize="2xl" fontWeight="bold" my="4">{name}</Text>
+        <Stack gap={3}>
+            {fields.map(mapper)}
+        </Stack>
+    </Stack>
+}
+
+function Field({option, value, onChange, head}) {
     return <>
-        {!isFirst && <HSeparator my="5" />}
-        <Text fontSize="2xl" fontWeight="bold" mt="5">{name}</Text>
-        {fields.map(mapper)}
+        <Text wordBreak="keep-all" fontSize={head && "xl"} fontWeight={head && "bold"}>{option.name}</Text>
+        <OptionField value={value} onChange={onChange} option={option}/>
     </>
 }
 
-function Field({option, value, onChange}) {
-    return <>
-        <FormLabel mt="4">{option.name}</FormLabel>
-        <OptionField value={value} onChange={onChange} option={option}/>
-    </>
+function EmbedField({value, onChange}) {
+    const change = (name, v) => {
+        onChange({
+            ...value,
+            [name]: v
+        })
+    }
+
+    return <Stack w="full" direction={{base: "column", md: "row"}} alignItems={{md: "baseline"}}>
+        <Field option={{
+            name: "名稱",
+            type: "string"
+        }}
+               value={value.name}
+               onChange={v => change("name", v)}
+        />
+        <Field option={{
+            name: "數值",
+            type: "string"
+        }}
+               value={value.value}
+               onChange={v => change("value", v)}
+        />
+        <HStack w="full" direction="row-reverse" alignItems="baseline">
+            <Field option={{
+                name: "水平",
+                type: "boolean"
+            }}
+                   value={value.inline}
+                   onChange={v => change("inline", v)}
+            />
+        </HStack>
+    </Stack>
 }

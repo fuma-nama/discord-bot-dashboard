@@ -20,7 +20,9 @@ export function QueryHolder({error, isLoading, refetch, children}) {
     return children
 }
 
-export function QueryHolderSkeleton({error, isLoading, refetch, height = "200px", children, direction = "column", ...rest}) {
+export function QueryHolderSkeleton({query, height = "200px", children, direction = "column", ...rest}) {
+    const {error, isLoading, refetch} = query
+
     if (error) {
         return <ErrorPanel height={height} error={error} onRetry={refetch}/>
     }

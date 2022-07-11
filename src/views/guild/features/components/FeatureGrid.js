@@ -27,7 +27,6 @@ export default function FeatureGrid() {
             <Feature
               key={feature.id}
               {...feature}
-              configUrl={`../feature/${feature.id}`}
             />
           );
         })}

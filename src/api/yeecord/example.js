@@ -59,8 +59,19 @@ export const ExampleOption6 = {
     choices: null,
     value: null,
 }
+export const ExampleOption7 = {
+    id: "all_targets",
+    name: "All Targets",
+    description: "",
+    type: "array",
+    element: {
+        type: "string",
+        holder: ""
+    },
+    value: null,
+}
 
-export const ExampleOptions = [ExampleOption, ExampleOption2, ExampleOption3, ExampleOption4, ExampleOption5, ExampleOption6]
+export const ExampleOptions = [ExampleOption, ExampleOption2, ExampleOption3, ExampleOption4, ExampleOption5, ExampleOption6, ExampleOption7]
 
 //Used to test to async function
 export const features = [
@@ -168,6 +179,10 @@ export const ServerDetailsAdvanced = {
     }
 }
 
+/**
+ * Personal RPG info
+ * For dynamic adding fields at backend, it is an array of entries
+ */
 export const ExampleRPGInfo = [
     {
         name: "您的餘額",
@@ -192,5 +207,16 @@ export const ExampleRPGInfo = [
     {
         name: "感情狀態",
         value: "單身"
+    }
+]
+
+export const Notifications = [
+    {
+        title: "凱恩在紐約穿女裝",
+        description: "一位名叫MONEY的記者在紐約發現凱恩穿著女裝去逛街"
+    },
+    {
+        title: "凱恩在紐約穿女裝",
+        description: "一位名叫MONEY的記者在紐約發現凱恩穿著女裝去逛街"
     }
 ]

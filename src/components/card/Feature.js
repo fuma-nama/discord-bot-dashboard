@@ -14,24 +14,27 @@ import Card from "components/card/Card.js";
 import React, {useContext, useState} from "react";
 import {GuildContext} from "../../contexts/GuildContext";
 import {enableFeature} from "api/yeecord";
-import {useMutation} from "react-query";
+import {useMutation, useQueryClient} from "react-query";
 
 export default function Feature({
                                     banner,
                                     name,
                                     description,
-                                    configUrl,
                                     id: featureId,
                                     enabled: featureEnabled,
                                 }) {
     const [enabled, setEnabled] = useState(featureEnabled);
-    const guild = useContext(GuildContext);
+    const {id: serverId} = useContext(GuildContext);
+    const client = useQueryClient()
 
+    const configUrl = `/guild/${serverId}/feature/${featureId}`
     const enableMutation = useMutation(
-        () => enableFeature(guild.id, featureId),
+        () => enableFeature(serverId, featureId),
         {
             onSuccess() {
                 setEnabled(true)
+
+                return client.invalidateQueries(["features", serverId])
             }
         }
     )

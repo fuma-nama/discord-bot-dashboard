@@ -50,7 +50,7 @@ function ActionConfigPanel() {
                     id: "description",
                     name: "動作描述",
                     description: "這個動作的描述，用於告訴用戶這個動作實際上是做什麼的",
-                    type: "string",
+                    type: "long_string",
                     value: action.description,
                 }
             ]

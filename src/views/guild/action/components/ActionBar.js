@@ -4,8 +4,6 @@ import {
     FormControl,
     FormHelperText,
     FormLabel,
-    Icon,
-    Input,
     Text,
     useColorModeValue
 } from "@chakra-ui/react";
@@ -13,7 +11,7 @@ import Card from "components/card/Card";
 import React, {useContext, useState} from "react";
 import {SelectField} from "../../../../components/fields/SelectField";
 import {ActionTypesContext} from "../../../../contexts/actions/ActionsContext";
-import {useMutation, useQuery, useQueryClient} from "react-query";
+import {useMutation, useQueryClient} from "react-query";
 import {addAction} from "../../../../api/yeecord";
 import {useParams} from "react-router-dom";
 import {InputField} from "../../../../components/fields/InputField";
@@ -57,7 +55,7 @@ function Control() {
     const mutation = useMutation(
         (args) => addAction(serverId, ...args), {
         onSuccess: () => {
-            queryClient.invalidateQueries(['actions'])
+            return queryClient.invalidateQueries(['actions', serverId])
         },
     })
 

@@ -103,7 +103,7 @@ export function UserReports() {
                 />
             </SimpleGrid>
 
-            <QueryHolderSkeleton {...query} direction="row" height="400px">
+            <QueryHolderSkeleton query={query} direction="row" height="400px">
 
                 <SimpleGrid columns={{base: 1, md: 2, xl: 2}} gap="20px" mb="20px">
                     <TotalCommand data={query.data}/>

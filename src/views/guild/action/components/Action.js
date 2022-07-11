@@ -1,23 +1,20 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useContext} from "react";
 import {
     Button,
     Flex,
     Grid,
-    GridItem, Icon,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuList,
+    GridItem,
     Text,
     useColorModeValue
 } from "@chakra-ui/react";
-import Card from "../../../../components/card/Card";
+import Card from "components/card/Card";
 import {Link} from "react-router-dom";
-import {cloneAction, deleteAction, runAction} from "../../../../api/yeecord";
+import {cloneAction, deleteAction, runAction} from "api/yeecord";
 import {useMutation, useQueryClient} from "react-query";
-import ErrorModal from "../../../../components/modal/ErrorModal";
+import ErrorModal from "components/modal/ErrorModal";
 import {FaRegClone} from "react-icons/fa";
-import ActionMenu from "../../../../components/menu/ActionMenu";
+import ActionMenu from "components/menu/ActionMenu";
+import {GuildContext} from "contexts/GuildContext";
 
 function ValueField({options}) {
     return <Grid
@@ -37,26 +34,27 @@ function ValueField({options}) {
     </Grid>
 }
 
-export function Action({description, status, createdAt, type, configUrl}) {
+export function Action({id: actionId, description, status, createdAt, type}) {
     const queryClient = useQueryClient()
-    const {name, id} = type;
     const textColor = useColorModeValue("navy.700", "white");
+    const {id: serverId} = useContext(GuildContext)
+
+    const configUrl = `/guild/${serverId}/action/${actionId}`
 
     const runMutation = useMutation(
-        () => runAction(id)
+        () => runAction(actionId)
     )
 
-
     const deleteMutation = useMutation(
-        () => deleteAction(id), {
+        () => deleteAction(actionId), {
             onSuccess: () => {
-                queryClient.invalidateQueries(['actions'])
+                return queryClient.invalidateQueries(['actions', serverId])
             },
         })
     const cloneMutation = useMutation(
-        () => cloneAction(id), {
+        () => cloneAction(actionId), {
             onSuccess() {
-                queryClient.invalidateQueries(['actions'])
+                return queryClient.invalidateQueries(['actions', serverId])
             }
         }
     )
@@ -89,7 +87,7 @@ export function Action({description, status, createdAt, type, configUrl}) {
                             fontWeight="bold"
                             me="14px"
                         >
-                            {name}
+                            {type.name}
                         </Text>
                         <ValueField options={[
                             ["狀態", status],

@@ -79,7 +79,7 @@ function LoadedOverview({configurableServers, isLoaded}) {
                 <Skeleton gridArea="1 / 1 / 2 / 2" isLoaded={isLoaded} rounded="lg">
                     {guilds ? <ServerPicker servers={guilds}/> : null}
                 </Skeleton>
-                <QueryHolderSkeleton {...query}>
+                <QueryHolderSkeleton query={query}>
 
                     <General
                         gridArea={{
