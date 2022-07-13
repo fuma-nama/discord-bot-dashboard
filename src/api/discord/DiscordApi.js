@@ -1,19 +1,12 @@
 import {fetchAuto} from "../utils";
-import {api} from "../../variables/links";
 
 export async function getAccountInfo() {
   const user = await fetchAuto(`/users/@me`, {toJson: true})
-
-  const guilds = await fetch(
-      `${api}/guilds`,
-      {
-        credentials: "include"
-      }
-  );
+  const guilds = await fetchAuto(`/guilds`, {toJson: true});
 
   return {
     user,
-    guilds: await guilds.json()
+    guilds
   };
 }
 
