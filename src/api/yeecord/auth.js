@@ -5,6 +5,7 @@ export async function hasLoggedIn() {
     return await fetch(
         `${api}/auth`,
         {
+            credentials: "include",
             method: "HEAD",
         }
     ).then(res =>
