@@ -54,7 +54,7 @@ function SignIn() {
       >
         <Box me="auto">
           <Heading color={textColor} fontSize="36px" mb="10px">
-            登錄到你的Discord賬戶
+            使用 Discord 登入控制面板
           </Heading>
           <Text
             mb="36px"
@@ -63,7 +63,7 @@ function SignIn() {
             fontWeight="400"
             fontSize="md"
           >
-            讓我們知道你目前所擁有的服務器(?
+            讓 Discord 不再只是聊天軟體
           </Text>
         </Box>
         <Flex
@@ -93,7 +93,7 @@ function SignIn() {
             onClick={onSignIn}
           >
             <Icon as={FaDiscord} w="20px" h="20px" me="10px" />
-            登錄Discord
+            Discord 登入
           </Button>
           <Flex
             flexDirection="column"
