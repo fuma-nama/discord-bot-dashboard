@@ -6,6 +6,7 @@ export function hasLoggedIn() {
     return fetchAuto(
         "/auth",
         {
+            credentials: "include",
             method: "HEAD",
         }
     ).then(res =>
