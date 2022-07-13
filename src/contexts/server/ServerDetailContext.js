@@ -16,7 +16,7 @@ export function ServerDetailProvider({children}) {
         () => getServerDetails(serverId)
     )
 
-    return <QueryHolder {...query}>
+    return <QueryHolder query={query}>
         <ServerDetailContext.Provider value={{
             detail: query.data
         }}>

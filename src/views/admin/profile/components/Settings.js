@@ -3,13 +3,12 @@ import {Button, Text, useColorMode, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 // Custom components
 import SwitchField from "components/fields/SwitchField";
-import {AccountContext, logout} from "../../../../contexts/AccountContext";
-import {useContext} from "react";
+import {useLogout} from "../../../../api/yeecord";
 
 export default function Settings(props) {
   const { ...rest } = props;
   const { colorMode, setColorMode } = useColorMode();
-  const accountCtx = useContext(AccountContext);
+  const logout = useLogout()
 
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -53,7 +52,8 @@ export default function Settings(props) {
             size="lg"
             mt="auto"
             variant="brand"
-            onClick={() => logout(accountCtx)}
+            isLoading={logout.isLoading}
+            onClick={logout.mutate}
         >
             登出帳號
         </Button>

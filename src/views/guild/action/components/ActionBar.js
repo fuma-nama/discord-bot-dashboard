@@ -9,12 +9,12 @@ import {
 } from "@chakra-ui/react";
 import Card from "components/card/Card";
 import React, {useContext, useState} from "react";
-import {SelectField} from "../../../../components/fields/SelectField";
-import {ActionTypesContext} from "../../../../contexts/actions/ActionsContext";
+import {SelectField} from "components/fields/SelectField";
+import {ActionTypesContext} from "contexts/actions/ActionsContext";
 import {useMutation, useQueryClient} from "react-query";
-import {addAction} from "../../../../api/yeecord";
+import {addAction} from "api/yeecord";
 import {useParams} from "react-router-dom";
-import {InputField} from "../../../../components/fields/InputField";
+import {InputField} from "components/fields/InputField";
 
 export function ActionBar() {
     const textColor = useColorModeValue("secondaryGray.900", "white");

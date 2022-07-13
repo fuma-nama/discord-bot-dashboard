@@ -15,7 +15,7 @@ export function ActionDetailProvider({children}) {
         getActionDetail(action)
     )
 
-    return <QueryHolder {...query}>
+    return <QueryHolder query={query}>
         <ActionDetailContext.Provider value={query.data}>
             {children}
         </ActionDetailContext.Provider>

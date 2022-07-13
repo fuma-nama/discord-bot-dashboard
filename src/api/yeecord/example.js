@@ -1,11 +1,11 @@
-import Information from "../../views/admin/profile/components/Information";
-import React from "react";
+import exmapleImage from "assets/img/common/logo_1024x1024.png";
 
 const AuthHeaders = {
     userId: 6969696969696,
     //you may add some headers soon
 }
 /**
+ * Options can be defined from either backend or frontend
  * An option of feature, going to support following types soon:
  *
  * Date, Time, File
@@ -14,9 +14,9 @@ export const ExampleOption = {
     id: "kill_friends",
     name: "殺死他的朋友",
     description: "當他的朋友加入時也殺死他們",
-    type: "boolean", //boolean, string, enum, number, color
+    type: "boolean", //boolean, string, enum, number, color, message_create, array
     choices: null, //only enum type option have choices array
-    value: true,
+    value: true, //value must be nonnull in string, boolean, number type
 };
 
 export const ExampleOption2 = {
@@ -24,7 +24,6 @@ export const ExampleOption2 = {
     name: "殺死他的朋友",
     description: "當他的朋友加入時也殺死他們",
     type: "string",
-    choices: null,
     value: "test",
 };
 export const ExampleOption3 = {
@@ -33,6 +32,7 @@ export const ExampleOption3 = {
     description: "當他的朋友加入時也殺死他們",
     type: "enum",
     choices: ["Gay", "Dalao", "None"],
+    multiple: true, //allow selecting multi options, the value might be return as an array
     value: "Gay",
 };
 export const ExampleOption4 = {
@@ -40,7 +40,6 @@ export const ExampleOption4 = {
     name: "殺死他的朋友",
     description: "當他的朋友加入時也殺死他們",
     type: "number",
-    choices: null,
     value: 1,
 };
 export const ExampleOption5 = {
@@ -48,7 +47,6 @@ export const ExampleOption5 = {
     name: "我的顏色",
     description: "",
     type: "color",
-    choices: null,
     value: null,
 }
 export const ExampleOption6 = {
@@ -56,7 +54,6 @@ export const ExampleOption6 = {
     name: "我的顏色",
     description: "",
     type: "message_create",
-    choices: null,
     value: null,
 }
 export const ExampleOption7 = {
@@ -70,8 +67,44 @@ export const ExampleOption7 = {
     },
     value: null,
 }
+/**
+ * to add a role or channel option, use id_enum and define choosable entries at choices
+ * description is nullable, you may add the color arg to customize option color
+ */
+export const ExampleOption8 = {
+    id: "channel",
+    name: "Target Channel",
+    description: "Where to kill people",
+    type: "id_enum",
+    choices: [
+        { name: "General", description: "My chat channel", id: 432423 },
+        { name: "Off-Topic", description: "Share your cool things", id: 534424 },
+        { name: "NSFW", id: 696969, color: "#de5656" }
+    ],
+    element: { //nullable
+        type: "channel" //supports channel and role
+    },
+    value: 432423, //id of enum
+}
+export const ExampleOption9 = {
+    id: "image",
+    name: "Example Image",
+    description: "A image",
+    type: "image",
+    value: "", //as image url, non-nullable
+}
 
-export const ExampleOptions = [ExampleOption, ExampleOption2, ExampleOption3, ExampleOption4, ExampleOption5, ExampleOption6, ExampleOption7]
+export const ExampleOptions = [
+    ExampleOption,
+    ExampleOption2,
+    ExampleOption3,
+    ExampleOption4,
+    ExampleOption5,
+    ExampleOption6,
+    ExampleOption7,
+    ExampleOption8,
+    ExampleOption9
+]
 
 //Used to test to async function
 export const features = [
@@ -81,7 +114,13 @@ export const features = [
         name: "自動殺死凱恩",
         description: "凱恩加入服務器時自動殺死凱恩",
         enabled: false,
-        favorite: false,
+    },
+    {
+        id: "auto_description_server",
+        banner: exmapleImage,
+        name: "自動毀滅服務器",
+        description: "凱恩加入服務器時自動殺死凱恩",
+        enabled: true,
     },
 ];
 

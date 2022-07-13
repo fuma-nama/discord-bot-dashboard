@@ -4,11 +4,12 @@ import React from "react";
 import SignIn from "views/auth/signIn";
 // Chakra imports
 import { Box, useColorModeValue } from "@chakra-ui/react";
+import AuthProcessing from "../../views/auth/signIn/processing";
 
 // Layout components
 
 // Custom Chakra theme
-export default function Auth({layout = SignIn}) {
+export default function Auth({isCallback = false}) {
   // states and functions
   // functions for changing the states from components
   const authBg = useColorModeValue("white", "navy.900");
@@ -27,7 +28,7 @@ export default function Auth({layout = SignIn}) {
       transitionTimingFunction="linear, linear, ease"
     >
       <Box mx="auto" minH="100vh">
-        {layout()}
+        {isCallback? <AuthProcessing/> : <SignIn/>}
       </Box>
     </Box>
   );

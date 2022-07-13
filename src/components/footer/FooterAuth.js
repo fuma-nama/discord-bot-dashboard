@@ -32,9 +32,17 @@ export default function Footer() {
         }}
         mb={{ base: "20px", lg: "0px" }}>
         {" "}
-        &copy; 2019 ~ {new Date().getFullYear()}
+        &copy; {1900 + new Date().getYear()}
         <Text as='span' fontWeight='500' ms='4px'>
-            YEE式機器龍
+          Dashboard. All Rights Reserved. Made with love by
+          <Link
+            mx='3px'
+            color={textColor}
+            href='https://www.simmmple.com'
+            target='_blank'
+            fontWeight='700'>
+            Yeecord!
+          </Link>
         </Text>
       </Text>
     </Flex>

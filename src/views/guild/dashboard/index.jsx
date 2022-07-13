@@ -17,12 +17,8 @@ import FeatureTable from "./components/FeatureTable";
 import ComplexTable from "./components/ComplexTable";
 import DailyTraffic from "./components/DailyTraffic";
 import Status from "./components/Status";
-import Tasks from "./components/Tasks";
 import TotalCommand from "./components/TotalCommand";
 import WeeklyVC from "./components/WeeklyVC";
-import {columnsDataCheck, columnsDataComplex} from "./variables/columnsData";
-import tableDataCheck from "./variables/tableDataCheck.json";
-import tableDataComplex from "./variables/tableDataComplex.json";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
 import {ServerDetailContext, ServerDetailProvider} from "../../../contexts/server/ServerDetailContext";
 import {BsPeopleFill} from "react-icons/bs";
@@ -30,7 +26,7 @@ import {VscDebugConsole} from "react-icons/vsc";
 import {FiCommand} from "react-icons/fi";
 import {useQuery} from "react-query";
 import {getServerAdvancedDetails} from "../../../api/yeecord";
-import {QueryHolder, QueryHolderSkeleton} from "../../../contexts/components/AsyncContext";
+import { QueryHolderSkeleton} from "../../../contexts/components/AsyncContext";
 import {GuildContext} from "../../../contexts/GuildContext";
 
 export default function Dashboard() {

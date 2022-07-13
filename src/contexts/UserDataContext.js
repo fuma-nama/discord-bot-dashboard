@@ -7,13 +7,12 @@ import {useQuery} from "react-query";
 export const UserDataContext = createContext();
 
 export function UserDataProvider({ children }) {
-  const accountCtx = useContext(AccountContext);
-  const query = useQuery(["user_data", accountCtx.accessToken], () =>
-      getAccountInfo(accountCtx)
+  const query = useQuery("user_data",
+      () => getAccountInfo()
   )
 
   return (
-    <QueryHolder {...query}>
+    <QueryHolder query={query}>
       <UserDataContext.Provider value={query.data}>
         {children}
       </UserDataContext.Provider>

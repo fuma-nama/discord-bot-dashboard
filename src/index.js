@@ -15,84 +15,71 @@ import {Center, ChakraProvider, Spinner, Stack, Text} from "@chakra-ui/react";
 import theme from "theme/theme";
 import {
     QueryClient,
-    QueryClientProvider,
+    QueryClientProvider, useQuery,
 } from 'react-query'
 
 import {
     AccountContext,
-    AccountProvider,
-    saveSecret,
+    AccountProvider, login,
 } from "./contexts/AccountContext";
 import {invite} from "./variables/links";
-import AuthProcessing from "./views/auth/signIn/processing";
+import {hasLoggedIn} from "./api/yeecord";
+import {QueryHolder} from "./contexts/components/AsyncContext";
 
 const queryClient = new QueryClient()
 
 ReactDOM.render(
     <React.StrictMode>
-        <AccountProvider>
-            <ChakraProvider theme={theme}>
-                <QueryClientProvider client={queryClient}>
-
-                    <BrowserRouter>
-                        <AppRoutes/>
-                    </BrowserRouter>
-                </QueryClientProvider>
-            </ChakraProvider>
-        </AccountProvider>
+        <ChakraProvider theme={theme}>
+            <QueryClientProvider client={queryClient}>
+                <AppRouter/>
+            </QueryClientProvider>
+        </ChakraProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );
 
-function AppRoutes() {
-    const accountCtx = useContext(AccountContext);
-    const [params] = useSearchParams()
+function AppRouter() {
+    const loginQuery = useQuery(
+        "logged_in",
+        () => hasLoggedIn()
+    )
 
-    const getUrlParam = () => {
-        const accessToken = params.get("accessToken")
+    const loggedIn = loginQuery.data
 
-        if (accessToken) {
-            saveSecret({
-                    accessToken,
-                    tokenType: params.get("tokenType")
-                },
-                accountCtx
-            );
-        }
-    };
-
-    getUrlParam();
-
-    const {accessToken} = accountCtx
     return (
-        <Routes>
-            {accessToken && (
-                <>
-                    <Route path={`/admin`} element={<AdminLayout/>}/>
-                    <Route path="/guild/:id/*" element={<GuildLayout/>}>
-                        {GuildRoutes()}
-                    </Route>
+        <QueryHolder query={loginQuery}>
+            <BrowserRouter>
+                <Routes>
+                    {loggedIn && (
+                        <>
+                            <Route path={`/admin`} element={<AdminLayout/>}/>
+                            <Route path="/guild/:id/*" element={<GuildLayout/>}>
+                                {GuildRoutes()}
+                            </Route>
 
-                    <Route path="/invite" element={
-                        <Redirect url={invite}/>
-                    }/>
+                            <Route path="/invite" element={
+                                <Redirect url={invite}/>
+                            }/>
 
-                    <Route path="*" element={
-                        <Navigate replace to="/admin"/>
-                    }/>
-                </>
-            )}
+                            <Route path="*" element={
+                                <Navigate replace to="/admin"/>
+                            }/>
+                        </>
+                    )}
 
-            {!accessToken && (
-                <>
-                    <Route path={`/auth`} element={<AuthLayout layout={AuthProcessing}/>}/>
-                    <Route path={`/signin`} element={<AuthLayout/>} exact/>
-                    <Route path="*" element={
-                        <Navigate replace to="/signin"/>
-                    }/>
-                </>
-            )}
-        </Routes>
+                    {!loggedIn && (
+                        <>
+                            <Route path={`/auth`} element={<AuthLayout isCallback/>}/>
+                            <Route path={`/signin`} element={<AuthLayout/>} exact/>
+                            <Route path="*" element={
+                                <Navigate replace to="/signin"/>
+                            }/>
+                        </>
+                    )}
+                </Routes>
+            </BrowserRouter>
+        </QueryHolder>
     );
 }
 

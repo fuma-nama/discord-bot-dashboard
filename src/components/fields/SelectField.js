@@ -9,11 +9,11 @@ export function SelectField(props) {
         chakraStyles={{
             dropdownIndicator: (provided) => ({
                 ...provided,
-               background: "brand"
+               background: "brand",
             }),
             menuList: (provided) => ({
                 ...provided,
-                background: bgColor
+                background: bgColor,
             })
         }}
         focusBorderColor={brandColor}

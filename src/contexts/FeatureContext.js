@@ -16,7 +16,7 @@ export function FeaturesProvider({ children }) {
   )
 
   return (
-    <QueryHolder {...query}>
+    <QueryHolder query={query}>
         <FeatureContext.Provider value={query.data}>
           {children}
         </FeatureContext.Provider>

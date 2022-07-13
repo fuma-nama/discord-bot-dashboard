@@ -44,65 +44,35 @@ export default function Feature({
 
     return (
         <Card p="20px">
-            <Flex direction={{base: "column"}} justify="center">
-                <Box mb={{base: "20px", "2xl": "20px"}} position="relative">
+            <Flex direction="row" gap={3} h="100%">
+                {banner && <Box w="10rem">
                     <Image
                         bgColor={brandColor}
                         src={banner}
-                        w="100%"
-                        h="100%"
                         borderRadius="20px"
                     />
-                </Box>
+                </Box>}
                 <Flex flexDirection="column" justify="space-between" h="100%">
-                    <Flex
-                        justify="space-between"
-                        direction={{
-                            base: "row",
-                            md: "column",
-                            lg: "row",
-                            xl: "column",
-                            "2xl": "row",
-                        }}
-                        mb="auto"
-                    >
-                        <Flex direction="column">
-                            <Text
-                                color={textColor}
-                                fontSize={{
-                                    base: "xl",
-                                    md: "lg",
-                                }}
-                                mb="5px"
-                                fontWeight="bold"
-                                me="14px"
-                            >
-                                {name}
-                            </Text>
-                            <Text
-                                color="secondaryGray.600"
-                                fontSize={{
-                                    base: "sm",
-                                }}
-                                fontWeight="400"
-                                me="14px"
-                            >
-                                {description}
-                            </Text>
-                        </Flex>
+                    <Flex direction="column">
+                        <Text
+                            color={textColor}
+                            fontSize="lg"
+                            mb="5px"
+                            fontWeight="bold"
+                            me="14px"
+                        >
+                            {name}
+                        </Text>
+                        <Text
+                            color="secondaryGray.600"
+                            fontSize="sm"
+                            fontWeight="400"
+                            me="14px"
+                        >
+                            {description}
+                        </Text>
                     </Flex>
-                    <Flex
-                        align="start"
-                        justify="space-between"
-                        direction={{
-                            base: "row",
-                            md: "column",
-                            lg: "row",
-                            xl: "column",
-                            "2xl": "row",
-                        }}
-                        mt="25px"
-                    >
+                    <Flex mt="5">
                         {enabled ? (
                             <ConfigButton configUrl={configUrl}/>
                         ) : (

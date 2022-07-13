@@ -19,7 +19,7 @@ export function SaveAlert({
   saving,
   visible,
   onSave,
-  onDiscard ,
+  onDiscard,
 }) {
   const [error, setError] = useState(null);
   let alertBg = useColorModeValue(

@@ -1,12 +1,9 @@
-export async function getAccountInfo(context) {
-  const { tokenType, accessToken } = context;
+import {api} from "variables/links";
 
-  const user = await fetch("https://discordapp.com/api/users/@me", {
-    headers: {
-      authorization: `${tokenType} ${accessToken}`,
-    },
-  })
+export async function getAccountInfo() {
+  const user = await fetch(`${api}/users/@me`)
 
+  /*
   const guilds = await fetch(
       "https://discordapp.com/api/users/@me/guilds",
       {
@@ -15,12 +12,14 @@ export async function getAccountInfo(context) {
         },
       }
   );
+   */
 
   try {
 
     return {
       user: await user.json(),
-      guilds: Array.from(await guilds.json()).filter((g) => g.owner),
+      guilds: []
+      //guilds: Array.from(await guilds.json()).filter((g) => g.owner),
     };
   } catch (e) {
     throw e;

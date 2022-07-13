@@ -1,71 +1,55 @@
 import React, {useState} from "react";
 import {
-    Button, Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
+    Box,
     Stack,
-    Text, useColorModeValue
 } from "@chakra-ui/react";
 import {OptionPanel} from "./OptionPanel";
 import {SaveAlert} from "components/alert/SaveAlert";
 import ErrorModal from "../modal/ErrorModal";
+import {useMutation} from "react-query";
 
 export function MultiConfigPanel({groups: defaultGroups, onSave: save}) {
-    const [saving, setSaving] = useState(false);
     const [groups, setGroups] = useState(defaultGroups);
     const [changes, setChanges] = useState(new Map());
-    const [error, setError] = useState(null);
+    const mutation = useMutation(() => save(changes), {
+        onSuccess() {
+            afterSave()
+        }
+    })
 
     const onChange = (id, value) => {
-        if (saving) return;
+        if (mutation.isLoading) return;
 
         setChanges(new Map(
             changes.set(id, value)
         ));
     };
 
-    const afterSave = (changes) => {
+    const afterSave = () => {
         const updated = groups.map((group) => {
             const groupChanges = changes.get(group.id)
 
             if (groupChanges == null)
                 return group
-            else
-                return {
-                    ...group,
-                    value: group.value.map(option => {
-                        return {
-                            ...option,
-                            value: groupChanges.get(option.id)
-                        }
-                    }),
-                };
+
+            return {
+                ...group,
+                options: group.options.map(option => {
+                    return {
+                        ...option,
+                        value: groupChanges.has(option.id)?
+                            groupChanges.get(option.id) :
+                            option.value
+                    }
+                }),
+            };
         });
 
         setGroups(updated);
         setChanges(new Map());
     }
 
-    const onSave = () => {
-        setSaving(true);
-
-        save(changes)
-            .then(() => {
-                afterSave(changes);
-            })
-            .catch((e) => {
-                setError(e.message);
-            })
-            .finally(() => {
-                setSaving(false);
-            });
-    };
-
     const onDiscard = () => {
-        setSaving(false);
         setChanges(new Map())
     };
 
@@ -73,22 +57,24 @@ export function MultiConfigPanel({groups: defaultGroups, onSave: save}) {
         <>
             <ErrorModal
                 header="未能保存更改"
-                error={error}
-                onClose={() => setError(null)}
+                error={mutation.error}
+                onClose={mutation.reset}
             />
-            {groups.map(group =>
-                <ConfigGroupItem
-                    key={group.id}
-                    saving={saving}
-                    group={group}
-                    changes={changes.get(group.id)}
-                    onChange={onChange}
-                />
-            )}
+            <Box mb={70}>
+                {groups.map(group =>
+                    <ConfigGroupItem
+                        key={group.id}
+                        saving={mutation.isLoading}
+                        group={group}
+                        changes={changes.get(group.id)}
+                        onChange={onChange}
+                    />
+                )}
+            </Box>
             <SaveAlert
                 visible={changes.size !== 0}
-                saving={saving}
-                onSave={onSave}
+                saving={mutation.isLoading}
+                onSave={mutation.mutate}
                 onDiscard={onDiscard}
             />
         </>
@@ -106,7 +92,7 @@ function ConfigGroupItem({group, saving, changes, onChange: setChanges}) {
     };
 
     return <ConfigItemList
-        options={group.value}
+        options={group.options}
         changes={changes}
         onChange={onChange}
     />
@@ -128,13 +114,60 @@ function ConfigItemList({options, changes, onChange}) {
 }
 
 export function ConfigPanel({options: defaultOptions, onSave: save}) {
-    const group = {
-        id: "root",
-        value: defaultOptions
+    const [options, setOptions] = useState(defaultOptions);
+    const [changes, setChanges] = useState(new Map());
+    const mutation = useMutation(save, {
+        onSuccess() {
+            afterSave()
+        }
+    })
+
+    const onChange = (id, value) => {
+        if (mutation.isLoading) return;
+
+        setChanges(new Map(
+            changes.set(id, value)
+        ))
+    };
+
+    const afterSave = () => {
+        const updated = options.map((option) => {
+            return {
+                ...option,
+                value: changes.has(option.id)?
+                    changes.get(option.id) :
+                    option.value
+            };
+        });
+
+        setOptions(updated);
+        setChanges(new Map());
     }
 
-    const onSave = (changes) => {
-        return save(changes["root"])
-    }
-    return <MultiConfigPanel groups={[group]} onSave={onSave}/>
+    const onDiscard = () => {
+        setChanges(new Map())
+    };
+
+    return (
+        <>
+            <ErrorModal
+                header="未能保存更改"
+                error={mutation.error}
+                onClose={mutation.reset}
+            />
+            <Box mb={70}>
+                <ConfigItemList
+                    options={options}
+                    changes={changes}
+                    onChange={onChange}
+                />
+            </Box>
+            <SaveAlert
+                visible={changes.size !== 0}
+                saving={mutation.isLoading}
+                onSave={mutation.mutate}
+                onDiscard={onDiscard}
+            />
+        </>
+    );
 }

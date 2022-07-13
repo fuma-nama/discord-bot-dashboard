@@ -13,7 +13,7 @@ export function SettingsProvider({children}) {
         getSettings(serverId)
     )
 
-    return <QueryHolder {...query}>
+    return <QueryHolder query={query}>
         <SettingsContext.Provider value={query.data}>
             {children}
         </SettingsContext.Provider>

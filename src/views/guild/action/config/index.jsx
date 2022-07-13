@@ -45,7 +45,7 @@ function ActionConfigPanel() {
     const groups = [
         {
             id: "info",
-            value: [
+            options: [
                 {
                     id: "description",
                     name: "動作描述",
@@ -57,7 +57,7 @@ function ActionConfigPanel() {
         },
         {
             id: "options",
-            value: options
+            options
         }
     ]
 

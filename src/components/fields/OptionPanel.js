@@ -7,6 +7,8 @@ import ColorField from "./ColorField";
 import {createContext, useContext, useMemo} from "react";
 import ArrayField from "./ArrayField";
 import TextArea from "./TextArea";
+import IdSelectField from "./IdSelectField";
+import ImageField from "./ImageField";
 
 export function OptionPanel({value, onChange, option}) {
     const input = useInput(value, onChange, option)
@@ -98,9 +100,24 @@ export function getInput(value, onChange, option) {
                     }))}
                     placeholder="選擇一個項目"
                     value={value}
-                    onChange={(v) => onChange(v)}
+                    onChange={onChange}
+                    isMulti={option.multiple}
                 />
             );
+        case "id_enum":
+            return (
+                <IdSelectField
+                value={value}
+                onChange={onChange}
+                options={option.choices}
+                multiple={option.multiple}
+                element={option.element}
+                />
+            )
+        case "image":
+            return (
+                <ImageField value={value} onChange={onChange} />
+            )
         default:
             return null;
     }

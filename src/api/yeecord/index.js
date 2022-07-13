@@ -10,7 +10,7 @@ import {
 } from "./example";
 
 export * from "./action";
-
+export * from "./auth";
 /**
  * Get configurable servers
  * @returns A array of server ids which yeecord is enabled in the server and owned by user

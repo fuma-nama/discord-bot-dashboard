@@ -7,21 +7,20 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import {useContext} from "react";
-import {AccountContext, logout} from "../../contexts/AccountContext";
 import {UserDataContext} from "contexts/UserDataContext";
 import {Link} from "react-router-dom";
+import { useLogout} from "../../api/yeecord";
 
 export default function UserOptionMenu() {
-    let menuBg = useColorModeValue("white", "navy.800");
+    const menuBg = useColorModeValue("white", "navy.800");
     const textColor = useColorModeValue("secondaryGray.900", "white");
     const shadow = useColorModeValue(
         "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
         "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
     );
     const borderColor = useColorModeValue("#E6ECFA", "rgba(135, 140, 189, 0.3)");
-
-    const accountCtx = useContext(AccountContext);
     const infoCtx = useContext(UserDataContext);
+    const logout = useLogout()
 
     return (
         <MenuList
@@ -57,7 +56,8 @@ export default function UserOptionMenu() {
                     color="red.400"
                     borderRadius="8px"
                     px="14px"
-                    onClick={() => logout(accountCtx)}
+                    isLoading={logout.isLoading}
+                    onClick={logout.mutate}
                 >
                     <Text fontSize="sm">登出</Text>
                 </MenuItem>

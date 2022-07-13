@@ -16,7 +16,7 @@ import DefaultAuth from "layouts/auth/Default";
 import illustration from "assets/img/common/logo_1024x1024.png";
 import { FaDiscord } from "react-icons/fa";
 
-function SignIn() {
+function SignIn({loading = false}) {
   // Chakra color mode
 
   const textColor = useColorModeValue("navy.700", "white");
@@ -94,6 +94,7 @@ function SignIn() {
             _active={dcActive}
             _focus={dcActive}
             onClick={onSignIn}
+            isLoading={loading}
           >
             <Icon as={FaDiscord} w="20px" h="20px" me="10px" />
             Discord 登入
