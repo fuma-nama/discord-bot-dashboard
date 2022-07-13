@@ -1,13 +1,11 @@
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 import ReactDOM from 'react-dom';
 import "assets/css/App.css";
 import {
     BrowserRouter,
     Navigate,
     Route,
-    Routes,
-    useSearchParams,
-} from "react-router-dom";
+    Routes, } from "react-router-dom";
 import AuthLayout from "layouts/auth";
 import AdminLayout from "layouts/admin";
 import GuildLayout, {GuildRoutes} from "layouts/guild";

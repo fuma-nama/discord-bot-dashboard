@@ -1,4 +1,3 @@
-import {api} from "variables/links";
 import {useMutation, useQueryClient} from "react-query";
 import {fetchAuto} from "../utils";
 
@@ -27,7 +26,7 @@ export function login(code) {
 }
 
 export async function logout() {
-
+    return fetchAuto("/auth/signout")
 }
 
 export function useLogout() {
