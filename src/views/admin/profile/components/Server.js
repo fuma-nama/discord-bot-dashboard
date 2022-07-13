@@ -30,6 +30,7 @@ export default function Server(props) {
           src={iconToUrl(id, icon)}
           borderRadius="8px"
           me="20px"
+          loading={"lazy"}
         />
         <Stack
           mt={{ base: "10px", md: "0" }}

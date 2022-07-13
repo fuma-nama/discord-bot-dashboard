@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Chart from "react-apexcharts";
+
+const ReactApexChart = React.lazy(() => import("react-apexcharts"))
 
 class ColumnChart extends Component {
   constructor(props) {
@@ -19,13 +20,15 @@ class ColumnChart extends Component {
 
   render() {
     return (
-      <Chart
-        options={this.state.chartOptions}
-        series={this.state.chartData}
-        type='bar'
-        width='100%'
-        height='100%'
-      />
+      <React.Suspense fallback={<div/>}>
+        <ReactApexChart
+          options={this.state.chartOptions}
+          series={this.state.chartData}
+          type='bar'
+          width='100%'
+          height='100%'
+        />
+      </React.Suspense>
     );
   }
 }
