@@ -1,7 +1,5 @@
 import React from "react";
 
-const ReactApexChart = React.lazy(() => import("react-apexcharts"))
-
 class LineChart extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +18,8 @@ class LineChart extends React.Component {
   }
 
   render() {
+    const ReactApexChart = React.lazy(() => import("react-apexcharts"))
+    
     return (
       <React.Suspense fallback={<div/>}>
         <ReactApexChart

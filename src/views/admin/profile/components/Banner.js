@@ -17,6 +17,7 @@ export default function Banner(props) {
       <Box
         bgColor="#4318FF"
         bg={banner && `url(${banner})`}
+        bgPosition={"center"}
         bgSize="cover"
         borderRadius="16px"
         h="131px"
