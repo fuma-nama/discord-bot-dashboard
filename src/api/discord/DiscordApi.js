@@ -1,7 +1,7 @@
-import {api} from "variables/links";
+import {fetchAuto} from "../utils";
 
 export async function getAccountInfo() {
-  const user = await fetch(`${api}/users/@me`)
+  const user = await fetchAuto(`/users/@me`, {toJson: true})
 
   /*
   const guilds = await fetch(
@@ -14,16 +14,18 @@ export async function getAccountInfo() {
   );
    */
 
-  try {
-
-    return {
-      user: await user.json(),
-      guilds: []
-      //guilds: Array.from(await guilds.json()).filter((g) => g.owner),
-    };
-  } catch (e) {
-    throw e;
-  }
+  return {
+    user,
+    guilds: [
+      {
+        "icon": "d7438912f61e7cf6c9178f2c32691631",
+        "owner": true,
+        id: "600363644991176822",
+        name: "Kanecord Cosplay Community",
+      }
+    ]
+    //guilds: Array.from(await guilds.json()).filter((g) => g.owner),
+  };
 }
 
 export function bannerToUrl(id, hash) {

@@ -1,9 +1,10 @@
 import {api} from "variables/links";
 import {useMutation, useQueryClient} from "react-query";
+import {fetchAuto} from "../utils";
 
-export async function hasLoggedIn() {
-    return await fetch(
-        `${api}/auth`,
+export function hasLoggedIn() {
+    return fetchAuto(
+        "/auth",
         {
             method: "HEAD",
         }
@@ -12,8 +13,8 @@ export async function hasLoggedIn() {
     )
 }
 
-export async function login(code) {
-    return await fetch(`${api}/auth`, {
+export function login(code) {
+    return fetchAuto("/auth", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -21,7 +22,6 @@ export async function login(code) {
         body: JSON.stringify({
             code
         }),
-        credentials: "include"
     })
 }
 

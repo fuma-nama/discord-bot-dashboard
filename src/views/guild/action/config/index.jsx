@@ -33,9 +33,10 @@ function ActionConfigPanel() {
 
     const onSave = async (changes) => {
         const info = changes.get("info")
-        const description = info["description"]
 
-        if (action.description !== description) {
+        if (info != null) {
+            const description = info["description"]
+
             await modifyActionInfo(actionId, description)
         }
 

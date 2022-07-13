@@ -18,10 +18,6 @@ import {
     QueryClientProvider, useQuery,
 } from 'react-query'
 
-import {
-    AccountContext,
-    AccountProvider, login,
-} from "./contexts/AccountContext";
 import {invite} from "./variables/links";
 import {hasLoggedIn} from "./api/yeecord";
 import {QueryHolder} from "./contexts/components/AsyncContext";

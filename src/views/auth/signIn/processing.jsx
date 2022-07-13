@@ -23,16 +23,13 @@ function validate() {
 }
 
 function AuthProcessing() {
-	const client = useQueryClient()
-
 	const mutation = useMutation(
 		() => validate(),
 		{
 			onSuccess(result) {
-				console.log(result)
 				if (result.ok) {
-					client.invalidateQueries("logged_in")
-					window.location.href = "/admin"
+					console.log("ok", result)
+					//window.location.href = "/admin"
 				}
 			}
 		}

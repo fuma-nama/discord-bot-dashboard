@@ -1,4 +1,4 @@
-import {delay} from "./utils";
+import {delay} from "../utils";
 import {ExampleOptions} from "./example";
 
 const ActionTypes = [

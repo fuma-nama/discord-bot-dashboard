@@ -1,4 +1,4 @@
-import {delay} from "./utils";
+import {delay} from "../utils";
 import {
   betaFeatures,
   ExampleOptions,
@@ -17,7 +17,7 @@ export * from "./auth";
  */
 export async function getConfigurableServers(userId) {
   await delay(3000);
-  return ["684766026776576052"];
+  return ["600363644991176822"];
 }
 
 /**

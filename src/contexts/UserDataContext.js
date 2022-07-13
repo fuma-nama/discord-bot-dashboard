@@ -1,5 +1,4 @@
-import { createContext, useContext} from "react";
-import { AccountContext } from "contexts/AccountContext";
+import { createContext} from "react";
 import { getAccountInfo } from "api/discord/DiscordApi";
 import {QueryHolder} from "./components/AsyncContext";
 import {useQuery} from "react-query";
