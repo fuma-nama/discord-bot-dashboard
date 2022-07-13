@@ -24,6 +24,7 @@ import {
     saveSecret,
 } from "./contexts/AccountContext";
 import {invite} from "./variables/links";
+import AuthProcessing from "./views/auth/signIn/processing";
 
 const queryClient = new QueryClient()
 
@@ -84,6 +85,7 @@ function AppRoutes() {
 
             {!accessToken && (
                 <>
+                    <Route path={`/auth`} element={<AuthLayout layout={AuthProcessing}/>}/>
                     <Route path={`/signin`} element={<AuthLayout/>} exact/>
                     <Route path="*" element={
                         <Navigate replace to="/signin"/>
