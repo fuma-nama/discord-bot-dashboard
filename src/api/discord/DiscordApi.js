@@ -29,10 +29,10 @@ export async function getAccountInfo() {
 }
 
 export function bannerToUrl(id, hash) {
-  return `https://cdn.discordapp.com/banners/${id}/${hash}`;
+  return `https://cdn.discordapp.com/banners/${id}/${hash}?size=1024`;
 }
 export function avatarToUrl(id, hash) {
-  return `https://cdn.discordapp.com/avatars/${id}/${hash}`;
+  return `https://cdn.discordapp.com/avatars/${id}/${hash}?size=512`;
 }
 
 export function iconToUrl(id, hash) {
