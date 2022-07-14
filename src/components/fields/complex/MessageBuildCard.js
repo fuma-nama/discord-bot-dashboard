@@ -1,8 +1,19 @@
-import { FormControl, FormHelperText, FormLabel, HStack, Stack, Text} from "@chakra-ui/react";
-import {Tabs, TabList, TabPanels, Tab, TabPanel} from '@chakra-ui/react'
-import {OptionField, OptionHandlerContext} from "../fields/OptionPanel";
-import {HSeparator} from "../separator/Separator";
-import {InputField} from "../fields/InputField";
+import {
+    FormControl,
+    FormHelperText,
+    FormLabel,
+    HStack,
+    Stack,
+    Tab,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs,
+    Text
+} from "@chakra-ui/react";
+import {OptionField, OptionHandlerContext} from "../OptionPanel";
+import {HSeparator} from "../../separator/Separator";
+import {InputField} from "../InputField";
 
 const DefaultEmbed = {
     title: "",

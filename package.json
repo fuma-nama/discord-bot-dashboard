@@ -19,6 +19,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "chakra-react-select": "^3.3.8",
+    "emoji-mart": "^5.1.0",
     "framer-motion": "^4.1.17",
     "react": "17.0.2",
     "react-apexcharts": "^1.4.0",

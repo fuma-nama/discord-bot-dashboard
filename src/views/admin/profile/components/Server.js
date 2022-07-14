@@ -1,18 +1,11 @@
 // Chakra imports
-import {
-  Button,
-  Flex,
-  Image,
-  Stack,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import {Button, Flex, Image, Stack, Text, useColorModeValue,} from "@chakra-ui/react";
 // Custom components
 import {Link} from "react-router-dom";
 import Card from "components/card/Card.js";
 import React from "react";
 // Assets
-import { iconToUrl } from "api/discord/DiscordApi";
+import {iconToUrl} from "api/discord/DiscordApi";
 
 export default function Server(props) {
   const { server, ...rest } = props;
@@ -52,11 +45,11 @@ export default function Server(props) {
 }
 
 function ServerButton({server}) {
-  const url = server.configurable? `/guild/${server.id}` : "/invite";
+  const url = server.exist ? `/guild/${server.id}` : "/invite";
 
-  return <Link to={url} target={server.configurable? "_self" : "_blank"}>
-    <Button fontWeight="500" variant={server.configurable? "brand" : "outline"} fontSize="md">
-      {server.configurable? "配置服務器" : "邀請到服務器"}
+  return <Link to={url} target={server.exist ? "_self" : "_blank"}>
+    <Button fontWeight="500" variant={server.exist ? "brand" : "outline"} fontSize="md">
+      {server.exist ? "配置服務器" : "邀請到服務器"}
     </Button>
   </Link>
 }

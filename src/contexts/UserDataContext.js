@@ -1,12 +1,15 @@
-import { createContext} from "react";
-import { getAccountInfo } from "api/discord/DiscordApi";
+import {createContext} from "react";
+import {getAccountInfo} from "api/discord/DiscordApi";
 import {QueryHolder} from "./components/AsyncContext";
 import {useQuery} from "react-query";
 
-export const UserDataContext = createContext();
+export const UserDataContext = createContext({
+    user: null,
+    guilds: null
+});
 
-export function UserDataProvider({ children }) {
-  const query = useQuery("user_data",
+export function UserDataProvider({children}) {
+    const query = useQuery("user_data",
       () => getAccountInfo(),
       {
           refetchOnWindowFocus: false

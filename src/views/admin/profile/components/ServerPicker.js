@@ -1,19 +1,12 @@
 // Chakra imports
-import { Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import {Stack, Text, useColorModeValue} from "@chakra-ui/react";
 // Custom components
 import Card from "components/card/Card.js";
-import React, {useContext, useMemo} from "react";
+import React from "react";
 import Server from "views/admin/profile/components/Server";
-import {UserDataContext} from "../../../../contexts/UserDataContext";
 import {QueryHolderSkeleton} from "../../../../contexts/components/AsyncContext";
 
 export default function ServerPicker({ query, ...rest }) {
-    const userData = useContext(UserDataContext);
-
-    const guilds = query.isSuccess && userData.guilds.map(g => ({
-        ...g,
-        configurable: query.data.includes(g.id)
-    }))
 
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -34,7 +27,7 @@ export default function ServerPicker({ query, ...rest }) {
       </Text>
       <Stack direction="column">
           <QueryHolderSkeleton query={query} count={3}>
-              <Servers guilds={guilds} />
+              <Servers guilds={query.data}/>
           </QueryHolderSkeleton>
       </Stack>
     </Card>

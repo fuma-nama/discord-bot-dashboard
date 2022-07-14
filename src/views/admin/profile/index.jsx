@@ -1,4 +1,4 @@
-import {Box, Grid, Skeleton} from "@chakra-ui/react";
+import {Box, Grid} from "@chakra-ui/react";
 
 // Custom components
 import Banner from "views/admin/profile/components/Banner";
@@ -7,31 +7,35 @@ import Settings from "views/admin/profile/components/Settings";
 import ServerPicker from "views/admin/profile/components/ServerPicker";
 
 // Assets
-import React, {useMemo, useState} from "react";
+import React, {useContext} from "react";
 import {UserDataContext} from "contexts/UserDataContext";
-import {useContext} from "react";
 import {avatarToUrl, bannerToUrl} from "api/discord/DiscordApi";
-import {getConfigurableServers, getRPGInfo} from "api/yeecord";
-import { QueryHolderSkeleton} from "../../../contexts/components/AsyncContext";
+import {getGuilds, getRPGInfo} from "api/yeecord";
+import {QueryHolderSkeleton} from "../../../contexts/components/AsyncContext";
 import {useQuery} from "react-query";
 
 export default function Overview() {
     const userData = useContext(UserDataContext);
     const {id, banner, username, avatar} = userData.user;
 
-    const query = useQuery(
+    const rpgQuery = useQuery(
         ["user_rpg_info", id],
-        () => getRPGInfo(id)
+        () => getRPGInfo(id),
+        {
+            refetchOnWindowFocus: false,
+            refetchInterval: 20 * 1000
+        }
     )
 
     const guildQuery = useQuery(
-        ["configurable_servers", userData.id],
-        () => getConfigurableServers(userData.id)
+        "guilds",
+        () => getGuilds()
     )
+
+    const guilds = guildQuery.data
 
     return (
         <Box pt={{base: "130px", md: "80px", xl: "80px"}}>
-            {/* Main Fields */}
             <Grid
                 templateColumns={{
                     base: "1fr",
@@ -48,8 +52,8 @@ export default function Overview() {
                     banner={banner && bannerToUrl(id, banner)}
                     avatar={avatarToUrl(id, avatar)}
                     name={username}
-                    joinedServers={guildQuery.isSuccess ? guildQuery.data.length : "Loading..."}
-                    servers={userData.guilds.length}
+                    joinedServers={guildQuery.isSuccess ? guilds.filter(g => g.exist).length : "Loading..."}
+                    servers={guildQuery.isSuccess ? guilds.length : "Loading..."}
                 />
                 <Settings
                     gridArea={{
@@ -72,8 +76,8 @@ export default function Overview() {
                 }}
                 gap={{base: "20px", xl: "20px"}}
             >
-                <ServerPicker query={guildQuery} gridArea="1 / 1 / 2 / 2" />
-                <QueryHolderSkeleton query={query} height="400px">
+                <ServerPicker query={guildQuery} gridArea="1 / 1 / 2 / 2"/>
+                <QueryHolderSkeleton query={rpgQuery} height="400px">
                     <General
                         gridArea={{
                             base: "2 / 1 / 4 / 2",
@@ -81,7 +85,7 @@ export default function Overview() {
                         }}
                         minH="365px"
                         pe="20px"
-                        data={query.data}
+                        data={rpgQuery.data}
                     />
                 </QueryHolderSkeleton>
             </Grid>

@@ -2,13 +2,15 @@ import {Box, Switch, Text} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import {SelectField} from "components/fields/SelectField";
 import {InputField} from "./InputField";
-import MessageBuildCard from "../card/MessageBuildCard";
+import MessageBuildCard from "./complex/MessageBuildCard";
 import ColorField from "./ColorField";
 import {createContext, useContext, useMemo} from "react";
-import ArrayField from "./ArrayField";
+import ArrayField from "./complex/ArrayField";
 import TextArea from "./TextArea";
 import IdSelectField from "./IdSelectField";
 import ImageField from "./ImageField";
+import EmojiField from "./EmojiField";
+import PairField from "./complex/PairField";
 
 export function OptionPanel({value, onChange, option}) {
     const input = useInput(value, onChange, option)
@@ -16,7 +18,7 @@ export function OptionPanel({value, onChange, option}) {
     const inline = option.type === "boolean"
 
     return (
-        <Card flexDirection={inline? "row-reverse" : "column"} gap={5}>
+        <Card flexDirection={inline ? "row-reverse" : "column"} gap={5}>
             <Box w="full">
                 <Text fontWeight="extrabold" fontSize="xl">
                     {option.name}
@@ -107,16 +109,24 @@ export function getInput(value, onChange, option) {
         case "id_enum":
             return (
                 <IdSelectField
-                value={value}
-                onChange={onChange}
-                options={option.choices}
-                multiple={option.multiple}
-                element={option.element}
+                    value={value}
+                    onChange={onChange}
+                    options={option.choices}
+                    multiple={option.multiple}
+                    element={option.element}
                 />
             )
         case "image":
             return (
-                <ImageField value={value} onChange={onChange} />
+                <ImageField value={value} onChange={onChange}/>
+            )
+        case "emoji":
+            return (
+                <EmojiField value={value} onChange={onChange}/>
+            )
+        case "pair":
+            return (
+                <PairField element={option.element} value={value} onChange={onChange}/>
             )
         default:
             return null;

@@ -1,6 +1,6 @@
-import {OptionField} from "./OptionPanel";
+import {OptionField} from "../OptionPanel";
 import {Box, Button, Flex, Text} from "@chakra-ui/react";
-import {HSeparator} from "../separator/Separator";
+import {HSeparator} from "../../separator/Separator";
 
 export default function ArrayField({element, value: valueRaw, onChange}) {
     const value = valueRaw || []
