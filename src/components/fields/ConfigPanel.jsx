@@ -1,8 +1,5 @@
 import React, {useState} from "react";
-import {
-    Box,
-    Stack,
-} from "@chakra-ui/react";
+import {Box, Stack,} from "@chakra-ui/react";
 import {OptionPanel} from "./OptionPanel";
 import {SaveAlert} from "components/alert/SaveAlert";
 import ErrorModal from "../modal/ErrorModal";

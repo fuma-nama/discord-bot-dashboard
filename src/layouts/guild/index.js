@@ -1,12 +1,12 @@
 // Chakra imports
-import {Portal, Box, useDisclosure} from "@chakra-ui/react";
+import {Box, Portal, useDisclosure} from "@chakra-ui/react";
 import Footer from "components/footer/FooterAdmin.js";
 // Layout components
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import {PageInfoContext} from "contexts/PageInfoContext";
 import React, {useState} from "react";
-import {Route, Navigate, Outlet, useParams} from "react-router-dom";
+import {Navigate, Outlet, Route, useParams} from "react-router-dom";
 import {UserDataProvider} from "contexts/UserDataContext";
 //routes
 import routes from "routes.js";
@@ -56,6 +56,7 @@ function RouteWrapper({children}) {
                 transitionDuration=".2s, .2s, .35s"
                 transitionProperty="top, bottom, width"
                 transitionTimingFunction="linear, linear, ease"
+                overflow="hidden"
             >
                 <Portal>
                     <Box>
