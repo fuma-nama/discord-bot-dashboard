@@ -96,7 +96,7 @@ function ConfigGroupItem({group, saving, changes, onChange: setChanges}) {
 }
 
 function ConfigItemList({options, changes, onChange}) {
-    return <Stack mt="10">
+    return <Stack mt="10" overflow="hidden">
         {options.map((option) => (
             <OptionPanel
                 option={option}
