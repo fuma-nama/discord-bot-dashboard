@@ -14,9 +14,9 @@ export function ActionsProvider({children}) {
         getActions(serverId)
     )
 
-    return <QueryHolderSkeleton query={query}>
+    return <QueryHolderSkeleton query={query} count={3}>
         <ActionsContext.Provider value={{actions: query.data}}>
-            {query.data && children}
+            {children}
         </ActionsContext.Provider>
     </QueryHolderSkeleton>
 }
@@ -30,7 +30,7 @@ export function ActionTypesProvider({children}) {
         getActionTypes()
     )
 
-    return <QueryHolderSkeleton query={query}>
+    return <QueryHolderSkeleton query={query} height="500px">
         <ActionTypesContext.Provider value={{
             types: query.data
         }}>

@@ -17,7 +17,7 @@ export * from "./auth";
  */
 export async function getConfigurableServers(userId) {
   await delay(3000);
-  return ["600363644991176822"];
+  return ["600363644991176822", "684766026776576052"];
 }
 
 /**

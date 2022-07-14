@@ -1,4 +1,5 @@
-import {Text, Spinner, Center, Stack, Button, Skeleton, Flex} from "@chakra-ui/react";
+import {Text, Spinner, Center, Stack, Button, Skeleton} from "@chakra-ui/react";
+import React from "react";
 
 export function QueryHolder({query, children, nullable}) {
     const {error, isLoading, refetch} = query;
@@ -19,10 +20,14 @@ export function QueryHolder({query, children, nullable}) {
         );
     }
 
-    return (nullable || query.data != null) && children
+    if (nullable || query.data != null) {
+        return parseChildren(children)
+    }
+
+    return <></>
 }
 
-export function QueryHolderSkeleton({query, height = "200px", children, direction = "column", nullable}) {
+export function QueryHolderSkeleton({query, height = "200px", children, count = 1, nullable}) {
     const {error, isLoading, refetch} = query
 
     if (error) {
@@ -31,13 +36,21 @@ export function QueryHolderSkeleton({query, height = "200px", children, directio
 
     if (isLoading) {
 
-        return <Flex gap={4} direction={direction} my="5">
-            <Skeleton width="100%" isLoaded={false} height={height} rounded="lg" />
-            <Skeleton width="100%" isLoaded={false} height={height} rounded="lg" />
-        </Flex>
+        return [...Array(count)].map((_, i) =>
+            <Skeleton key={i} isLoaded={false} height={height} rounded="lg" />
+        )
     }
 
-    return (nullable || query.data != null) && children
+    if (nullable || query.data != null) {
+        return parseChildren(children)
+    }
+
+    return <></>
+}
+
+function parseChildren(children) {
+    return typeof children === 'function'?
+        children() : children
 }
 
 function ErrorPanel({error, onRetry, ...rest}) {

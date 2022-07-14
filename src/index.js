@@ -5,7 +5,8 @@ import {
     BrowserRouter,
     Navigate,
     Route,
-    Routes, } from "react-router-dom";
+    Routes,
+} from "react-router-dom";
 import AuthLayout from "layouts/auth";
 import AdminLayout from "layouts/admin";
 import GuildLayout, {GuildRoutes} from "layouts/guild";
@@ -36,7 +37,10 @@ ReactDOM.render(
 function AppRouter() {
     const loginQuery = useQuery(
         "logged_in",
-        () => hasLoggedIn()
+        () => hasLoggedIn(),
+        {
+            refetchOnWindowFocus: false
+        }
     )
 
     const loggedIn = loginQuery.data

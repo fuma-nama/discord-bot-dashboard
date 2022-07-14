@@ -15,21 +15,18 @@ import {getConfigurableServers, getRPGInfo} from "api/yeecord";
 import { QueryHolderSkeleton} from "../../../contexts/components/AsyncContext";
 import {useQuery} from "react-query";
 
-function LoadedOverview({configurableServers, isLoaded}) {
+export default function Overview() {
     const userData = useContext(UserDataContext);
     const {id, banner, username, avatar} = userData.user;
-
-    const guilds = useMemo(() =>
-            isLoaded && userData.guilds.map(g => ({
-        ...g,
-        configurable: configurableServers.includes(g.id)
-            })),
-        [configurableServers, isLoaded, userData.guilds]
-    )
 
     const query = useQuery(
         ["user_rpg_info", id],
         () => getRPGInfo(id)
+    )
+
+    const guildQuery = useQuery(
+        ["configurable_servers", userData.id],
+        () => getConfigurableServers(userData.id)
     )
 
     return (
@@ -51,7 +48,7 @@ function LoadedOverview({configurableServers, isLoaded}) {
                     banner={banner && bannerToUrl(id, banner)}
                     avatar={avatarToUrl(id, avatar)}
                     name={username}
-                    joinedServers={isLoaded ? configurableServers.length : "Loading..."}
+                    joinedServers={guildQuery.isSuccess ? guildQuery.data.length : "Loading..."}
                     servers={userData.guilds.length}
                 />
                 <Settings
@@ -75,11 +72,8 @@ function LoadedOverview({configurableServers, isLoaded}) {
                 }}
                 gap={{base: "20px", xl: "20px"}}
             >
-                <Skeleton gridArea="1 / 1 / 2 / 2" isLoaded={isLoaded} rounded="lg">
-                    {guilds ? <ServerPicker servers={guilds}/> : null}
-                </Skeleton>
-                <QueryHolderSkeleton query={query}>
-
+                <ServerPicker query={guildQuery} gridArea="1 / 1 / 2 / 2" />
+                <QueryHolderSkeleton query={query} height="400px">
                     <General
                         gridArea={{
                             base: "2 / 1 / 4 / 2",
@@ -93,15 +87,4 @@ function LoadedOverview({configurableServers, isLoaded}) {
             </Grid>
         </Box>
     );
-}
-
-export default function Overview() {
-    const userData = useContext(UserDataContext);
-
-    const query = useQuery(
-        ["configurable_servers", userData.id],
-        () => getConfigurableServers(userData.id)
-    )
-
-    return <LoadedOverview configurableServers={query.data} isLoaded={query.isFetched}/>
 }

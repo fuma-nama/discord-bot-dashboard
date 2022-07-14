@@ -19,7 +19,7 @@ export default function UserOptionMenu() {
         "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
     );
     const borderColor = useColorModeValue("#E6ECFA", "rgba(135, 140, 189, 0.3)");
-    const infoCtx = useContext(UserDataContext);
+    const {user} = useContext(UserDataContext);
     const logout = useLogout()
 
     return (
@@ -43,7 +43,7 @@ export default function UserOptionMenu() {
                     fontWeight="700"
                     color={textColor}
                 >
-                    👋&nbsp; 歡迎, {infoCtx.user.username}
+                    👋&nbsp; 歡迎, {user.username}
                 </Text>
             </Flex>
             <Flex flexDirection="column" p="10px">
@@ -56,8 +56,8 @@ export default function UserOptionMenu() {
                     color="red.400"
                     borderRadius="8px"
                     px="14px"
-                    isLoading={logout.isLoading}
                     onClick={logout.mutate}
+                    disabled={logout.isLoading}
                 >
                     <Text fontSize="sm">登出</Text>
                 </MenuItem>

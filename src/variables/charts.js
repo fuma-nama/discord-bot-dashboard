@@ -231,8 +231,6 @@ export const pieChartOptions = {
   },
 };
 
-export const pieChartData = [63, 25, 12];
-
 //week
 export const lineChartOptionsTotalSpent = {
   chart: {

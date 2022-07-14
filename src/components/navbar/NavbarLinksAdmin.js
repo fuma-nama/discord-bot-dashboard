@@ -28,7 +28,7 @@ import {getNotifications} from "../../api/yeecord";
 import {GuildContext} from "../../contexts/GuildContext";
 import {QueryHolderSkeleton} from "../../contexts/components/AsyncContext";
 //api
-import {avatarToUrl} from "../../api/discord/DiscordApi";
+import {avatarToUrl} from "api/discord/DiscordApi";
 
 export default function HeaderLinks(props) {
     const {secondary} = props;
@@ -137,26 +137,21 @@ function Notifications() {
             border="none"
             mt="22px"
             me={{base: "30px", md: "unset"}}
-            minW={{base: "unset", md: "400px", xl: "450px"}}
+            minW={{base: "80vw", md: "400px", xl: "450px"}}
             maxW={{base: "360px", md: "unset"}}
         >
             <Text w="100%" mb="20px" fontSize="md" fontWeight="600" color={textColor}>
                 通知
             </Text>
-            <QueryHolderSkeleton query={query}>
-                <Flex flexDirection="column">
-                    {query.data && query.data.map((item, key) => (
-                        <MenuItem
-                            px="0"
-                            borderRadius="8px"
-                            mb="10px"
-                        >
-                            <ItemContent {...item} key={key}/>
+            <Flex direction="column" gap={3}>
+                <QueryHolderSkeleton query={query} height="100px" count={2}>{() =>
+                    query.data.map((item, key) => (
+                        <MenuItem key={key} borderRadius="8px" p={0}>
+                            <ItemContent {...item} />
                         </MenuItem>
-                    ))
-                    }
-                </Flex>
-            </QueryHolderSkeleton>
+                    ))}
+                </QueryHolderSkeleton>
+            </Flex>
         </MenuList>
     </Menu>
 }

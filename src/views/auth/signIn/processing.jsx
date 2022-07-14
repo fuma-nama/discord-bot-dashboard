@@ -1,9 +1,10 @@
 import React, {useEffect} from "react";
-import {useMutation} from "react-query";
+import {useMutation, useQueryClient} from "react-query";
 // Assets
 import SignIn from "./index";
 import ErrorModal from "components/modal/ErrorModal";
 import {login} from "api/yeecord";
+import { useNavigate } from "react-router-dom";
 
 function validate() {
 	const url = new URL(window.location.href)
@@ -23,13 +24,16 @@ function validate() {
 }
 
 function AuthProcessing() {
+	const client = useQueryClient()
+	const navigate = useNavigate()
 	const mutation = useMutation(
 		() => validate(),
 		{
 			onSuccess(result) {
 				if (result.ok) {
-					console.log("ok", result)
-					//window.location.href = "/admin"
+					client.invalidateQueries("logged_in").then(() => {
+						navigate("/admin", {replace: true})
+					})
 				}
 			}
 		}

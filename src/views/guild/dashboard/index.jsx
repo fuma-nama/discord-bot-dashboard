@@ -6,7 +6,6 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
-import MiniCalendar from "components/calendar/MiniCalendar";
 import MiniStatistics from "components/card/MiniStatistics";
 import IconBox from "components/icons/IconBox";
 import React, {useContext} from "react";
@@ -14,8 +13,6 @@ import {
     MdBarChart,
 } from "react-icons/md";
 import FeatureTable from "./components/FeatureTable";
-import ComplexTable from "./components/ComplexTable";
-import DailyTraffic from "./components/DailyTraffic";
 import Status from "./components/Status";
 import TotalCommand from "./components/TotalCommand";
 import WeeklyVC from "./components/WeeklyVC";
@@ -99,13 +96,14 @@ export function UserReports() {
                 />
             </SimpleGrid>
 
-            <QueryHolderSkeleton query={query} direction="row" height="400px">
+            <SimpleGrid columns={{base: 1, md: 2, xl: 2}} gap="20px" mb="20px">
+                <QueryHolderSkeleton query={query} height="400px" count={2}>
 
-                <SimpleGrid columns={{base: 1, md: 2, xl: 2}} gap="20px" mb="20px">
-                    <TotalCommand data={query.data}/>
-                    <WeeklyVC data={query.data}/>
-                </SimpleGrid>
-            </QueryHolderSkeleton>
+                <TotalCommand data={query.data}/>
+                <WeeklyVC data={query.data}/>
+                </QueryHolderSkeleton>
+
+            </SimpleGrid>
             <SimpleGrid columns={{base: 1, md: 1, xl: 2}} gap="20px" mb="20px">
                 <FeatureTable />
                 <SimpleGrid columns={{base: 1, md: 2, xl: 2}} gap="20px">

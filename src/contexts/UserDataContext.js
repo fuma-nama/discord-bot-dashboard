@@ -7,7 +7,10 @@ export const UserDataContext = createContext();
 
 export function UserDataProvider({ children }) {
   const query = useQuery("user_data",
-      () => getAccountInfo()
+      () => getAccountInfo(),
+      {
+          refetchOnWindowFocus: false
+      }
   )
 
   return (

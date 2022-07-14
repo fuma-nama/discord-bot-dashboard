@@ -39,9 +39,7 @@ function Actions() {
           gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
         >
           <Banner />
-          <ActionsProvider>
-            <ActionsList />
-          </ActionsProvider>
+          <ActionsList />
         </Flex>
         <Flex
           flexDirection="column"
