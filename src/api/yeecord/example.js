@@ -93,6 +93,35 @@ export const ExampleOption9 = {
     type: "image",
     value: "", //as image url, non-nullable
 }
+export const ExampleOption10 = {
+    id: "emoji",
+    name: "Emoji Example",
+    description: "Select an Emoji to see",
+    type: "emoji",
+    value: "", //id of enum
+}
+export const ExampleOption11 = {
+    id: "pair",
+    name: "Pair Example",
+    description: "Create a pair of strings",
+    type: "pair",
+    element: {
+        first: {
+            type: "emoji",
+        },
+        second: { //option holder
+            type: "id_enum",
+            choices: [
+                {name: "Admin", id: 432423},
+            ],
+            element: {
+                type: "role"
+            },
+            multiple: true,
+        }
+    },
+    value: ["☝️", []], //pair is an 2-length array
+}
 
 export const ExampleOptions = [
     ExampleOption,
@@ -103,7 +132,9 @@ export const ExampleOptions = [
     ExampleOption6,
     ExampleOption7,
     ExampleOption8,
-    ExampleOption9
+    ExampleOption9,
+    ExampleOption10,
+    ExampleOption11
 ]
 
 //Used to test to async function

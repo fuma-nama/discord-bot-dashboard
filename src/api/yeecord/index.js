@@ -1,4 +1,4 @@
-import {delay} from "../utils";
+import {delay, fetchAuto} from "../utils";
 import {
   betaFeatures,
   ExampleOptions,
@@ -11,13 +11,13 @@ import {
 
 export * from "./action";
 export * from "./auth";
+
 /**
  * Get configurable servers
  * @returns A array of server ids which yeecord is enabled in the server and owned by user
  */
-export async function getConfigurableServers(userId) {
-  await delay(3000);
-  return ["600363644991176822", "684766026776576052"];
+export function getGuilds() {
+  return fetchAuto("/guilds", {toJson: true})
 }
 
 /**
