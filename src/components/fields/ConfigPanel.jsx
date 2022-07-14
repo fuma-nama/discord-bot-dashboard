@@ -1,8 +1,5 @@
 import React, {useState} from "react";
-import {
-    Box,
-    Stack,
-} from "@chakra-ui/react";
+import {Box, Stack,} from "@chakra-ui/react";
 import {OptionPanel} from "./OptionPanel";
 import {SaveAlert} from "components/alert/SaveAlert";
 import ErrorModal from "../modal/ErrorModal";
@@ -99,7 +96,7 @@ function ConfigGroupItem({group, saving, changes, onChange: setChanges}) {
 }
 
 function ConfigItemList({options, changes, onChange}) {
-    return <Stack mt="10">
+    return <Stack mt="10" overflow="hidden">
         {options.map((option) => (
             <OptionPanel
                 option={option}
