@@ -138,7 +138,7 @@ const cards = [
         <ItemDetail>
             她可以用歌聲拯救你的人生，治癒你的內心
             <br/>
-            不過不要惹他生氣(
+            不過不要惹她生氣(
         </ItemDetail>
         <ItemTags tags={["偶像", "超級無敵可愛", "心理治療師", "Vtuber"]}/>
     </Item>,
