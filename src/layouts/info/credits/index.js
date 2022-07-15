@@ -15,7 +15,7 @@ export default function Credits() {
 
     return (
         <PageInfoProvider>
-            <Box w="full" position="absolute" top={0} left={0} overflowX="hidden">
+            <Box w="full" position="absolute" maxH="80rem" top={0} left={0} overflowX="hidden">
                 <Image w="full" minW="50rem" src={BannerImage} opacity={opacity}/>
             </Box>
             <Box

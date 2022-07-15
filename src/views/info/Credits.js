@@ -20,7 +20,7 @@ import MONEY from "assets/img/info/MONEY.jpg"
 import Shark from "assets/img/info/Shark.jpg";
 import Kane from "assets/img/info/Kane.png"
 import {credit, github} from "../../variables/links";
-import {avatarToUrl} from "../../api/discord/DiscordApi";
+import {avatarToUrl} from "api/discord/DiscordApi";
 
 export default function CreditsBoard() {
     usePageInfo("感謝面板")
@@ -34,10 +34,10 @@ export default function CreditsBoard() {
                 mb={{base: "3rem", md: "6rem"}}
                 fontSize={{base: "5xl", md: "8xl"}}
                 color="white">
-                貢獻者
+                感謝你 貢獻者
             </Heading>
             <Link href={credit}>
-                <Button size="lg" mx="auto" bg="white" color="black">查看所有英雄</Button>
+                <Button size="lg" mx="auto" bg="white" color="black">查看所有貢獻者</Button>
             </Link>
         </Center>
 
