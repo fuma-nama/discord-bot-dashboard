@@ -48,9 +48,6 @@ function AppRouter() {
                             <Route path="/guild/:id/*" element={<GuildLayout/>}>
                                 {GuildRoutes()}
                             </Route>
-                            <Route path="/info">
-                                <Route path="credits" element={<Credits/>}/>
-                            </Route>
 
                             <Route path="/invite" element={
                                 <Redirect url={invite}/>
@@ -61,6 +58,10 @@ function AppRouter() {
                             }/>
                         </>
                     )}
+
+                    <Route path="/info">
+                        <Route path="credits" element={<Credits/>}/>
+                    </Route>
 
                     {!loggedIn && (
                         <>
