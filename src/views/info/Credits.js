@@ -8,6 +8,7 @@ import {
     Heading,
     HStack,
     Image,
+    Link,
     Text,
     useColorModeValue
 } from "@chakra-ui/react";
@@ -18,7 +19,8 @@ import {usePageInfo} from "contexts/PageInfoContext";
 import MONEY from "assets/img/info/MONEY.jpg"
 import Shark from "assets/img/info/Shark.jpg";
 import Kane from "assets/img/info/Kane.png"
-import RickRoll from "assets/img/info/rickroll.jpg"
+import {credit, github} from "../../variables/links";
+import {avatarToUrl} from "../../api/discord/DiscordApi";
 
 export default function CreditsBoard() {
     usePageInfo("感謝面板")
@@ -34,7 +36,9 @@ export default function CreditsBoard() {
                 color="white">
                 貢獻者
             </Heading>
-            <Button size="lg" mx="auto" bg="white" color="black">查看所有英雄</Button>
+            <Link href={credit}>
+                <Button size="lg" mx="auto" bg="white" color="black">查看所有英雄</Button>
+            </Link>
         </Center>
 
         <Box pt={{base: "80px", md: "150px"}}>
@@ -46,7 +50,9 @@ export default function CreditsBoard() {
                 <Flex direction="column" gap={3} alignItems="start" p={5} bg={supportBg} rounded="lg">
                     <Text fontSize="2xl" fontWeight="bold">我們的英雄</Text>
                     <Text fontSize="xl">感謝在這個儀表板上付出生命的英雄</Text>
-                    <BannerButton mt={5}>Support Us</BannerButton>
+                    <Link href={github}>
+                        <BannerButton mt={5}>在Github上貢獻</BannerButton>
+                    </Link>
                 </Flex>
                 <Flex direction="column" justify="center" align="center" mt={8}>
                     <Content/>
@@ -127,19 +133,23 @@ const cards = [
         <ItemTags tags={["Database Manage", "Backend Develop"]}/>
     </Item>,
     <Item rowStart={2} rowEnd={{base: 3, md: 4}} colStart={1} colEnd={3}>
-        <ItemImage src={RickRoll}/>
-        <ItemText>那些在語音頻道播Rickroll的傢伙</ItemText>
-        <ItemDetail>傷害你的耳朵，然後放棄你。毀掉了我們整個社區和生活</ItemDetail>
-        <ItemTags tags={Array(10).fill("滾出去")}/>
+        <ItemImage src={avatarToUrl("831900084039712798", "a_f6ce06b071a028c197aa6c312dd3caad")}/>
+        <ItemText>月月</ItemText>
+        <ItemDetail>
+            她可以用歌聲拯救你的人生，治癒你的內心
+            <br/>
+            不過不要惹他生氣(
+        </ItemDetail>
+        <ItemTags tags={["偶像", "超級無敵可愛", "心理治療師", "Vtuber"]}/>
     </Item>,
     <Item colSpan={2} rowSpan={4}>
         <ItemImage src={Shark}/>
-        <ItemText>某月的鯊鯊 (?</ItemText>
+        <ItemText>月月的鯊鯊 (?</ItemText>
         <ItemDetail>
-            鯊鯊很可愛，它可以治療你的心 ww
+            鯊鯊很可愛，可以舒解你一整天的壓力 ww
             <br/>
             鯊鯊救了MONEY的命，如果沒有鯊鯊，他就不會為Yeecord工作
         </ItemDetail>
-        <ItemTags tags={["吉祥物", "可愛", "心理治療師"]}/>
+        <ItemTags tags={["吉祥物", "可愛", "寵物"]}/>
     </Item>
 ]
