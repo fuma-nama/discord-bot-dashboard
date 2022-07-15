@@ -12,6 +12,4 @@ export const support = "https://discord.gg/yeecord"
 
 export const homepage = "https://yeecord.com/"
 
-export const blog = "https://yeecord.com/blog"
-
 export const invite = "https://yeecord.com/link"

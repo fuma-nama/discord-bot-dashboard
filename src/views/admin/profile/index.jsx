@@ -35,7 +35,7 @@ export default function Overview() {
     const guilds = guildQuery.data
 
     return (
-        <Box pt={{base: "130px", md: "80px", xl: "80px"}}>
+        <Box pt={{base: "30px", md: "80px"}}>
             <Grid
                 templateColumns={{
                     base: "1fr",

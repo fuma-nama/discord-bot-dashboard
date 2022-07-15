@@ -1,25 +1,18 @@
 import React, {useEffect} from "react";
 import ReactDOM from 'react-dom';
 import "assets/css/App.css";
-import {
-    BrowserRouter,
-    Navigate,
-    Route,
-    Routes,
-} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes,} from "react-router-dom";
 import AuthLayout from "layouts/auth";
 import AdminLayout from "layouts/admin";
 import GuildLayout, {GuildRoutes} from "layouts/guild";
 import {Center, ChakraProvider, Spinner, Stack, Text} from "@chakra-ui/react";
 import theme from "theme/theme";
-import {
-    QueryClient,
-    QueryClientProvider, useQuery,
-} from 'react-query'
+import {QueryClient, QueryClientProvider, useQuery,} from 'react-query'
 
 import {invite} from "./variables/links";
 import {hasLoggedIn} from "./api/yeecord";
 import {QueryHolder} from "./contexts/components/AsyncContext";
+import Credits from "./layouts/info/credits";
 
 const queryClient = new QueryClient()
 
@@ -54,6 +47,9 @@ function AppRouter() {
                             <Route path={`/admin`} element={<AdminLayout/>}/>
                             <Route path="/guild/:id/*" element={<GuildLayout/>}>
                                 {GuildRoutes()}
+                            </Route>
+                            <Route path="/info">
+                                <Route path="credits" element={<Credits/>}/>
                             </Route>
 
                             <Route path="/invite" element={

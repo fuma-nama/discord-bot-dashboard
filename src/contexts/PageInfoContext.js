@@ -1,4 +1,5 @@
-import {createContext, useContext, useEffect} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
+import routes from "../routes";
 
 export const PageInfoContext = createContext({
     routes: null,
@@ -7,12 +8,31 @@ export const PageInfoContext = createContext({
     info: null,
     setInfo: null
 });
+
 export function usePageInfo(name) {
     const {setInfo} = useContext(PageInfoContext);
 
     useEffect(() => {
         setInfo({
-            name: name
+            name,
         })
     }, [name, setInfo])
+}
+
+export function PageInfoProvider({children}) {
+    const [toggleSidebar, setToggleSidebar] = useState(false);
+    const [info, setInfo] = useState({
+        name: "",
+    })
+
+    return <PageInfoContext.Provider
+        value={{
+            routes,
+            toggleSidebar,
+            setToggleSidebar,
+            info,
+            setInfo
+        }}>
+        {children}
+    </PageInfoContext.Provider>
 }

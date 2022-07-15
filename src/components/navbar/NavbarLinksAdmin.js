@@ -3,13 +3,15 @@ import {
     Avatar,
     Flex,
     Icon,
+    IconButton,
     Menu,
     MenuButton,
     MenuItem,
     MenuList,
     Text,
+    useColorMode,
     useColorModeValue,
-    useColorMode, useDisclosure, IconButton,
+    useDisclosure,
 } from "@chakra-ui/react";
 import UserOptionMenu from "components/menu/UserOptionMenu";
 // Custom Components
@@ -24,38 +26,23 @@ import {IoMdMoon, IoMdSunny} from "react-icons/io";
 import {UserDataContext} from "contexts/UserDataContext";
 import {PageInfoContext} from "contexts/PageInfoContext";
 import {useQuery} from "react-query";
-import {getNotifications} from "../../api/yeecord";
-import {GuildContext} from "../../contexts/GuildContext";
-import {QueryHolderSkeleton} from "../../contexts/components/AsyncContext";
+import {getNotifications} from "api/yeecord";
+import {GuildContext} from "contexts/GuildContext";
+import {QueryHolderSkeleton} from "contexts/components/AsyncContext";
 //api
 import {avatarToUrl} from "api/discord/DiscordApi";
 
-export default function HeaderLinks(props) {
-    const {secondary} = props;
+export default function HeaderLinks() {
     const {colorMode, toggleColorMode} = useColorMode();
     const {routes} = useContext(PageInfoContext);
 
     // Chakra Color Mode
     const navbarIcon = useColorModeValue("gray.400", "white");
-    let menuBg = useColorModeValue("white", "navy.800");
-    const shadow = useColorModeValue(
-        "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
-        "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
-    );
 
     return (
-        <Flex
-            w={{sm: "100%", md: "auto"}}
-            alignItems="center"
-            flexDirection="row"
-            bg={menuBg}
-            flexWrap={secondary ? {base: "wrap", md: "nowrap"} : "unset"}
-            p="10px"
-            borderRadius="30px"
-            boxShadow={shadow}
-        >
+        <>
             <SearchBar
-                mb={secondary ? {base: "10px", md: "unset"} : "unset"}
+                mb={{base: "10px", md: "unset"}}
                 me="10px"
                 borderRadius="30px"
             />
@@ -73,7 +60,7 @@ export default function HeaderLinks(props) {
                 />}
             />
             <UserMenu/>
-        </Flex>
+        </>
     );
 }
 

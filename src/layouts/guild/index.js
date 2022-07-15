@@ -1,11 +1,11 @@
 // Chakra imports
-import {Box, Portal, useDisclosure} from "@chakra-ui/react";
+import {Box, Portal} from "@chakra-ui/react";
 import Footer from "components/footer/FooterAdmin.js";
 // Layout components
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
-import {PageInfoContext} from "contexts/PageInfoContext";
-import React, {useState} from "react";
+import {PageInfoProvider} from "contexts/PageInfoContext";
+import React from "react";
 import {Navigate, Outlet, Route, useParams} from "react-router-dom";
 import {UserDataProvider} from "contexts/UserDataContext";
 //routes
@@ -25,23 +25,8 @@ function getRoutes(routes) {
 function RouteWrapper({children}) {
     // states and functions
 
-    const {onOpen} = useDisclosure();
-    const [fixed] = useState(false)
-    const [toggleSidebar, setToggleSidebar] = useState(false);
-    const [info, setInfo] = useState({
-        name: "",
-    })
-
     return <Box>
-        <PageInfoContext.Provider
-            value={{
-                routes,
-                toggleSidebar,
-                setToggleSidebar,
-                info,
-                setInfo
-            }}
-        >
+        <PageInfoProvider>
             <Sidebar routes={routes} display="none"/>
             <Box
                 float="right"
@@ -59,13 +44,7 @@ function RouteWrapper({children}) {
             >
                 <Portal>
                     <Box>
-                        <Navbar
-                            onOpen={onOpen}
-                            logoText={"Horizon UI Dashboard PRO"}
-                            brandText={info ? info.name : "Loading..."}
-                            message={info ? info.name : "Loading..."}
-                            fixed={fixed}
-                        />
+                        <Navbar/>
                     </Box>
                 </Portal>
 
@@ -82,7 +61,7 @@ function RouteWrapper({children}) {
                     <Footer/>
                 </Box>
             </Box>
-        </PageInfoContext.Provider>
+        </PageInfoProvider>
     </Box>
 }
 
