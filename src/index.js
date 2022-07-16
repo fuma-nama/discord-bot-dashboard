@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import ReactDOM from 'react-dom';
 import "assets/css/App.css";
 import {BrowserRouter, Navigate, Route, Routes,} from "react-router-dom";
@@ -13,6 +13,8 @@ import {invite} from "./variables/links";
 import {hasLoggedIn} from "./api/yeecord";
 import {QueryHolder} from "./contexts/components/AsyncContext";
 import Credits from "./layouts/info/credits";
+import Dino from "./views/info/dino";
+import {SettingsContext, SettingsProvider} from "./contexts/SettingsContext";
 
 const queryClient = new QueryClient()
 
@@ -20,7 +22,9 @@ ReactDOM.render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>
             <QueryClientProvider client={queryClient}>
-                <AppRouter/>
+                <SettingsProvider>
+                    <AppRouter/>
+                </SettingsProvider>
             </QueryClientProvider>
         </ChakraProvider>
     </React.StrictMode>,
@@ -35,11 +39,14 @@ function AppRouter() {
             refetchOnWindowFocus: false
         }
     )
+    const {fixedWidth} = useContext(SettingsContext)
 
     const loggedIn = loginQuery.data
 
     return (
         <QueryHolder query={loginQuery}>
+            <meta name="viewport" content={`width=${fixedWidth ? "400" : "device-width"}, initial-scale=1`}/>
+
             <BrowserRouter>
                 <Routes>
                     {loggedIn && (
@@ -61,6 +68,7 @@ function AppRouter() {
 
                     <Route path="/info">
                         <Route path="credits" element={<Credits/>}/>
+                        <Route path="dino" element={<Dino/>}/>
                     </Route>
 
                     {!loggedIn && (

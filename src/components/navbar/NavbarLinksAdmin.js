@@ -27,7 +27,7 @@ import {UserDataContext} from "contexts/UserDataContext";
 import {PageInfoContext} from "contexts/PageInfoContext";
 import {useQuery} from "react-query";
 import {getNotifications} from "api/yeecord";
-import {GuildContext} from "contexts/GuildContext";
+import {GuildContext} from "contexts/guild/GuildContext";
 import {QueryHolderSkeleton} from "contexts/components/AsyncContext";
 //api
 import {avatarToUrl} from "api/discord/DiscordApi";

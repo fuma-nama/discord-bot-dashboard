@@ -1,12 +1,5 @@
 import React, {Fragment, useContext} from "react";
-import {
-    Button,
-    Flex,
-    Grid,
-    GridItem,
-    Text,
-    useColorModeValue
-} from "@chakra-ui/react";
+import {Button, Flex, Grid, GridItem, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card";
 import {Link} from "react-router-dom";
 import {cloneAction, deleteAction, runAction} from "api/yeecord";
@@ -14,7 +7,7 @@ import {useMutation, useQueryClient} from "react-query";
 import ErrorModal from "components/modal/ErrorModal";
 import {FaRegClone} from "react-icons/fa";
 import ActionMenu from "components/menu/ActionMenu";
-import {GuildContext} from "contexts/GuildContext";
+import {GuildContext} from "contexts/guild/GuildContext";
 
 function ValueField({options}) {
     return <Grid

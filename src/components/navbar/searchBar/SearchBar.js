@@ -1,76 +1,38 @@
 import React, {useContext, useEffect, useMemo, useState} from "react";
 import {
-    IconButton,
-    Input,
-    InputGroup,
-    InputLeftElement,
-    useColorModeValue,
+    Button,
     Modal,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
     ModalBody,
-    ModalCloseButton, useDisclosure, Button, SimpleGrid, Stack, Text,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    Stack,
+    Text,
+    useColorModeValue,
+    useDisclosure,
 } from "@chakra-ui/react";
-import {SearchIcon} from "@chakra-ui/icons";
 import {FeatureContext, FeaturesProvider} from "../../../contexts/FeatureContext";
 import Feature from "../../card/Feature";
 import {useLocation} from "react-router-dom";
+import SearchInput from "../../fields/SearchInput";
 
-export function SearchBar(props) {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    // Pass the computed styles into the `__css` prop
-    const {variant, background, children, placeholder, borderRadius, ...rest} =
-        props;
-    // Chakra Color Mode
-    const searchIconColor = useColorModeValue("gray.700", "white");
-    const inputBg = useColorModeValue("secondaryGray.300", "navy.900");
-    const inputText = useColorModeValue("gray.700", "gray.100");
+export function SearchBar({...rest}) {
+    const {isOpen, onOpen, onClose} = useDisclosure()
 
     const [search, setSearch] = useState("")
     const location = useLocation();
-
     useEffect(onClose, [location.pathname, onClose])
 
+    const groupStyle = {
+        w: {base: "100%", md: "200px"},
+        ...rest
+    }
     return (
         <>
-            <SearchModal isOpen={isOpen} onClose={onClose} search={search} />
-            <InputGroup w={{base: "100%", md: "200px"}} {...rest}>
-                <InputLeftElement
-                    children={
-                        <IconButton
-                            onClick={onOpen}
-                            bg='inherit'
-                            borderRadius='inherit'
-                            _hover='none'
-                            _active={{
-                                bg: "inherit",
-                                transform: "none",
-                                borderColor: "transparent",
-                            }}
-                            _focus={{
-                                boxShadow: "none",
-                            }}
-                            icon={
-                                <SearchIcon color={searchIconColor} w='15px' h='15px'/>
-                            }/>
-                    }
-                />
-                <Input
-                    variant='search'
-                    fontSize='sm'
-                    bg={background ? background : inputBg}
-                    color={inputText}
-                    fontWeight='500'
-                    _placeholder={{color: "gray.400", fontSize: "14px"}}
-                    borderRadius={borderRadius ? borderRadius : "30px"}
-                    placeholder={placeholder ? placeholder : "搜索功能..."}
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                />
-            </InputGroup>
+            <SearchModal isOpen={isOpen} onClose={onClose} search={search}/>
+            <SearchInput value={search} onChange={setSearch} groupStyle={groupStyle} onSearch={onOpen}/>
         </>
-
     );
 }
 

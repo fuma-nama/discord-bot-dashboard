@@ -2,9 +2,9 @@ import {createContext, useContext} from "react";
 import {QueryHolder} from "../components/AsyncContext";
 import {useQuery} from "react-query";
 import {getServerDetails} from "../../api/yeecord";
-import {GuildContext} from "../GuildContext";
+import {GuildContext} from "./GuildContext";
 
-export const ServerDetailContext = createContext({
+export const GuildDetailContext = createContext({
     detail: null
 })
 
@@ -17,10 +17,10 @@ export function ServerDetailProvider({children}) {
     )
 
     return <QueryHolder query={query}>
-        <ServerDetailContext.Provider value={{
+        <GuildDetailContext.Provider value={{
             detail: query.data
         }}>
             {children}
-        </ServerDetailContext.Provider>
+        </GuildDetailContext.Provider>
     </QueryHolder>
 }

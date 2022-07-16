@@ -1,24 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 
-import {
-  Box,
-  Flex,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import {Box, Flex,} from "@chakra-ui/react";
 
 // Custom components
 import Banner from "./components/Banner";
-import { updateFeatureOptions } from "api/yeecord";
+import {updateFeatureOptions} from "api/yeecord";
 
-import {
-  FeatureDetailProvider,
-  FeatureDetailContext,
-} from "contexts/FeatureDetailContext";
-import { useContext } from "react";
+import {FeatureDetailContext, FeatureDetailProvider,} from "contexts/FeatureDetailContext";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
-import {GuildContext} from "../../../contexts/GuildContext";
+import {GuildContext} from "../../../contexts/guild/GuildContext";
 import {ConfigPanel} from "../../../components/fields/ConfigPanel";
-import {useParams} from "react-router-dom";
 
 export default function FeaturePanel() {
 

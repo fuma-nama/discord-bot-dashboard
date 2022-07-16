@@ -1,7 +1,7 @@
 import {createContext} from "react";
-import { QueryHolderSkeleton} from "../components/AsyncContext";
+import {QueryHolderSkeleton} from "../components/AsyncContext";
 import {getActions, getActionTypes} from "api/yeecord";
-import {GuildContext} from "../GuildContext";
+import {GuildContext} from "../guild/GuildContext";
 import {useQuery} from "react-query";
 
 export const ActionsContext = createContext({

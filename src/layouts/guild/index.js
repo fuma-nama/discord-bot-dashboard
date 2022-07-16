@@ -11,7 +11,7 @@ import {UserDataProvider} from "contexts/UserDataContext";
 //routes
 import routes from "routes.js";
 import hidden_routes from "hidden_routes.js";
-import {GuildContext} from "contexts/GuildContext";
+import {GuildContext} from "contexts/guild/GuildContext";
 
 function getRoutes(routes) {
     return routes.map((prop, key) => {

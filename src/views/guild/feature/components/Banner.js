@@ -6,7 +6,7 @@ import {FeatureDetailContext} from "contexts/FeatureDetailContext";
 import Banner from "components/card/Banner";
 // Assets
 import banner from "assets/img/layout/NftBanner1.png";
-import {GuildContext} from "contexts/GuildContext";
+import {GuildContext} from "contexts/guild/GuildContext";
 import {BiArrowBack} from "react-icons/bi";
 import {Link} from "react-router-dom";
 

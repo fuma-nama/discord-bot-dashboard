@@ -1,21 +1,21 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 
 // Chakra imports
-import { Button, Flex, Text } from "@chakra-ui/react";
+import {Button, Flex, Text} from "@chakra-ui/react";
 // Assets
 import banner from "assets/img/layout/NftBanner1.png";
-import { GuildContext } from "contexts/GuildContext";
-import { BiArrowBack } from "react-icons/bi";
+import {GuildContext} from "contexts/guild/GuildContext";
+import {BiArrowBack} from "react-icons/bi";
 import {ActionDetailContext} from "../../../../../contexts/actions/ActionDetailContext";
 import {Link} from "react-router-dom";
 
 export default function ActionBanner() {
-  const { description, status } = useContext(ActionDetailContext).action;
+  const {description, status} = useContext(ActionDetailContext).action;
 
   return (
-    <Flex
-      direction="column"
-      bgImage={banner}
+      <Flex
+          direction="column"
+          bgImage={banner}
       bgSize="cover"
       py={{ base: "30px", md: "56px" }}
       px={{ base: "30px", md: "64px" }}

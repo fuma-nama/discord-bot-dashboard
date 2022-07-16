@@ -1,30 +1,23 @@
 // Chakra imports
-import {
-    Box,
-    Icon,
-    SimpleGrid,
-    useColorModeValue,
-} from "@chakra-ui/react";
+import {Box, Icon, SimpleGrid, useColorModeValue,} from "@chakra-ui/react";
 // Custom components
 import MiniStatistics from "components/card/MiniStatistics";
 import IconBox from "components/icons/IconBox";
 import React, {useContext} from "react";
-import {
-    MdBarChart,
-} from "react-icons/md";
+import {MdBarChart,} from "react-icons/md";
 import FeatureTable from "./components/FeatureTable";
 import Status from "./components/Status";
 import TotalCommand from "./components/TotalCommand";
 import WeeklyVC from "./components/WeeklyVC";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
-import {ServerDetailContext, ServerDetailProvider} from "../../../contexts/server/ServerDetailContext";
+import {GuildDetailContext, ServerDetailProvider} from "../../../contexts/guild/GuildDetailContext";
 import {BsPeopleFill} from "react-icons/bs";
 import {VscDebugConsole} from "react-icons/vsc";
 import {FiCommand} from "react-icons/fi";
 import {useQuery} from "react-query";
 import {getServerAdvancedDetails} from "../../../api/yeecord";
-import { QueryHolderSkeleton} from "../../../contexts/components/AsyncContext";
-import {GuildContext} from "../../../contexts/GuildContext";
+import {QueryHolderSkeleton} from "../../../contexts/components/AsyncContext";
+import {GuildContext} from "../../../contexts/guild/GuildContext";
 
 export default function Dashboard() {
     return <ServerDetailProvider>
@@ -34,7 +27,7 @@ export default function Dashboard() {
 
 export function UserReports() {
     usePageInfo("服務器儀表板")
-    const {detail} = useContext(ServerDetailContext)
+    const {detail} = useContext(GuildDetailContext)
     const {id: serverId} = useContext(GuildContext)
 
     // Chakra Color Mode

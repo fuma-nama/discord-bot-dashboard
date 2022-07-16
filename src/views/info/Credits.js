@@ -15,12 +15,12 @@ import {
 import React from "react";
 import {BannerButton} from "components/card/Banner";
 import {usePageInfo} from "contexts/PageInfoContext";
+import {avatarToUrl} from "api/discord/DiscordApi";
 //assets
 import MONEY from "assets/img/info/MONEY.jpg"
 import Shark from "assets/img/info/Shark.jpg";
 import Kane from "assets/img/info/Kane.png"
 import {credit, github} from "../../variables/links";
-import {avatarToUrl} from "api/discord/DiscordApi";
 
 export default function CreditsBoard() {
     usePageInfo("感謝面板")

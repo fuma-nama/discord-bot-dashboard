@@ -1,17 +1,17 @@
 import {createContext, useContext} from "react";
-import { QueryHolder} from "./components/AsyncContext";
-import { getFeatures } from "api/yeecord";
-import {GuildContext} from "./GuildContext";
+import {QueryHolder} from "./components/AsyncContext";
+import {getFeatures} from "api/yeecord";
+import {GuildContext} from "./guild/GuildContext";
 import {useQuery} from "react-query";
 
 export const FeatureContext = createContext({
-  features: null,
-  betaFeatures: null
+    features: null,
+    betaFeatures: null
 });
 
-export function FeaturesProvider({ children }) {
-  const {id: serverId} = useContext(GuildContext);
-  const query = useQuery(["features", serverId], () =>
+export function FeaturesProvider({children}) {
+    const {id: serverId} = useContext(GuildContext);
+    const query = useQuery(["features", serverId], () =>
       getFeatures(serverId)
   )
 

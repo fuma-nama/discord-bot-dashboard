@@ -1,18 +1,11 @@
 // Chakra imports
-import {
-    Box,
-    Button,
-    Flex,
-    Image,
-    Text,
-    useColorModeValue,
-} from "@chakra-ui/react";
+import {Box, Button, Flex, Image, Text, useColorModeValue,} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
 // Custom components
 import Card from "components/card/Card.js";
 // Assets
 import React, {useContext, useState} from "react";
-import {GuildContext} from "../../contexts/GuildContext";
+import {GuildContext} from "../../contexts/guild/GuildContext";
 import {enableFeature} from "api/yeecord";
 import {useMutation, useQueryClient} from "react-query";
 

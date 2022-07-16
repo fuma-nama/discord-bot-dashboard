@@ -1,26 +1,11 @@
-import {
-  Flex,
-  Table,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  useColorModeValue, Icon,
-} from "@chakra-ui/react";
+import {Flex, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue,} from "@chakra-ui/react";
 import React, {useContext} from "react";
-import {
-  useGlobalFilter,
-  usePagination,
-  useSortBy,
-  useTable,
-} from "react-table";
+import {useGlobalFilter, usePagination, useSortBy, useTable,} from "react-table";
 
 // Custom components
 import Card from "components/card/Card";
 import Menu from "components/menu/MainMenu";
-import {ServerDetailContext} from "contexts/server/ServerDetailContext";
+import {GuildDetailContext} from "contexts/guild/GuildDetailContext";
 import {MdCancel, MdCheckCircle} from "react-icons/md";
 
 export const columns = [
@@ -35,7 +20,7 @@ export const columns = [
 ];
 
 export default function FeatureTable() {
-  const {detail} = useContext(ServerDetailContext)
+  const {detail} = useContext(GuildDetailContext)
 
   const tableInstance = useTable(
     {
