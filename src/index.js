@@ -45,7 +45,7 @@ function AppRouter() {
 
     return (
         <QueryHolder query={loginQuery}>
-            <meta name="viewport" content={`width=${fixedWidth ? "400" : "device-width"}, initial-scale=1`}/>
+            <meta name="viewport" content={`width=${fixedWidth ? "340" : "device-width"}, initial-scale=1`}/>
 
             <BrowserRouter>
                 <Routes>
