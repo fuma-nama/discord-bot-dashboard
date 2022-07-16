@@ -310,7 +310,7 @@ export default class Game extends React.Component {
                 this.canvas = ref
             }}
                     width={document.body.clientWidth}
-                    height={document.body.clientHeight}
+                    height={160}
             />
         );
     }

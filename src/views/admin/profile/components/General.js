@@ -30,7 +30,7 @@ export default function GeneralInformation({data, ...rest}) {
                 而這個就是你的Yee面板...
             </Text>
 
-            <SimpleGrid columns="2" gap="20px">{
+            <SimpleGrid columns={2} gap="20px">{
                 data.map((item, key) =>
                     <Information
                         key={key}
