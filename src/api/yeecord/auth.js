@@ -13,18 +13,6 @@ export function hasLoggedIn() {
     )
 }
 
-export function login(code) {
-    return fetchAuto("/auth", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            code
-        }),
-    })
-}
-
 export async function logout() {
     return fetchAuto("/auth/signout")
 }

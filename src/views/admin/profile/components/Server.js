@@ -1,5 +1,5 @@
 // Chakra imports
-import {Button, Flex, Image, Stack, Text, useColorModeValue,} from "@chakra-ui/react";
+import {Avatar, Button, Flex, Image, Stack, Text, useColorModeValue,} from "@chakra-ui/react";
 // Custom components
 import {Link} from "react-router-dom";
 import Card from "components/card/Card.js";
@@ -7,8 +7,7 @@ import React from "react";
 // Assets
 import {iconToUrl} from "api/discord/DiscordApi";
 
-export default function Server(props) {
-  const { server, ...rest } = props;
+export default function Server({ server, ...rest }) {
   const { name, id, icon } = server;
 
   // Chakra Color Mode
@@ -17,13 +16,15 @@ export default function Server(props) {
   return (
     <Card bg={bg} {...rest} p="14px">
       <Flex align="center" direction={{ base: "column", md: "row" }}>
-        <Image
+        <Avatar
           h="160px"
           w="160px"
-          src={iconToUrl(id, icon)}
+          src={icon && iconToUrl(id, icon)}
+          name={name}
+          bg={icon && "transparent"}
           borderRadius="8px"
           me="20px"
-          loading={"lazy"}
+          loading="lazy"
         />
         <Stack
           mt={{ base: "10px", md: "0" }}

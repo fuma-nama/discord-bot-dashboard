@@ -7,7 +7,7 @@ import Server from "views/admin/profile/components/Server";
 import {QueryHolderSkeleton} from "../../../../contexts/components/AsyncContext";
 import SearchInput from "../../../../components/fields/SearchInput";
 
-export default function ServerPicker({query, ...rest}) {
+export default function ServerPicker({guilds, ...rest}) {
 
     // Chakra Color Mode
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -33,9 +33,7 @@ export default function ServerPicker({query, ...rest}) {
                 mb: "40px"
             }}/>
             <Stack direction="column">
-                <QueryHolderSkeleton query={query} count={3}>
-                    <Servers filter={filter} guilds={query.data}/>
-                </QueryHolderSkeleton>
+                <Servers filter={filter} guilds={guilds}/>
             </Stack>
         </Card>
     );

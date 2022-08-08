@@ -13,14 +13,6 @@ export * from "./action";
 export * from "./auth";
 
 /**
- * Get configurable servers
- * @returns A array of server ids which yeecord is enabled in the server and owned by user
- */
-export function getGuilds() {
-  return fetchAuto("/guilds", {toJson: true})
-}
-
-/**
  * Get configurable features of a server
  * @returns An array of features
  */

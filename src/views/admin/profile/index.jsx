@@ -10,13 +10,13 @@ import ServerPicker from "views/admin/profile/components/ServerPicker";
 import React, {useContext} from "react";
 import {UserDataContext} from "contexts/UserDataContext";
 import {avatarToUrl, bannerToUrl} from "api/discord/DiscordApi";
-import {getGuilds, getRPGInfo} from "api/yeecord";
+import { getRPGInfo} from "api/yeecord";
 import {QueryHolderSkeleton} from "../../../contexts/components/AsyncContext";
 import {useQuery} from "react-query";
 
 export default function Overview() {
-    const userData = useContext(UserDataContext);
-    const {id, banner, username, avatar} = userData.user;
+    const {user, guilds} = useContext(UserDataContext);
+    const {id, banner, username, avatar} = user;
 
     const rpgQuery = useQuery(
         ["user_rpg_info", id],
@@ -26,13 +26,6 @@ export default function Overview() {
             refetchInterval: 20 * 1000
         }
     )
-
-    const guildQuery = useQuery(
-        "guilds",
-        () => getGuilds()
-    )
-
-    const guilds = guildQuery.data
 
     return (
         <Box pt={{base: "30px", md: "80px"}}>
@@ -52,8 +45,8 @@ export default function Overview() {
                     banner={banner && bannerToUrl(id, banner)}
                     avatar={avatarToUrl(id, avatar)}
                     name={username}
-                    joinedServers={guildQuery.isSuccess ? guilds.filter(g => g.exist).length : "Loading..."}
-                    servers={guildQuery.isSuccess ? guilds.length : "Loading..."}
+                    joinedServers={guilds.filter(g => g.exist).length}
+                    servers={guilds.length}
                 />
                 <Settings
                     gridArea={{
@@ -76,7 +69,7 @@ export default function Overview() {
                 }}
                 gap={{base: "20px", xl: "20px"}}
             >
-                <ServerPicker query={guildQuery} gridArea="1 / 1 / 2 / 2"/>
+                <ServerPicker guilds={guilds} gridArea="1 / 1 / 2 / 2"/>
                 <QueryHolderSkeleton query={rpgQuery} height="400px">
                     <General
                         gridArea={{

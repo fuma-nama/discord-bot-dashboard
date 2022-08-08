@@ -34,10 +34,8 @@ function SignIn({loading = false}) {
   );
 
   const onSignIn = () => {
-    const state = Math.floor(Math.random() * 100000000)
-    
-    window.localStorage.setItem("_ls", state.toString())
-    window.location.href = oauth2(state)
+
+    window.location.href = oauth2
   };
 
   return (
