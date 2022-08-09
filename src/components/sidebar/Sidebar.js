@@ -25,8 +25,7 @@ import PropTypes from "prop-types";
 // Assets
 import { IoMenuOutline } from "react-icons/io5";
 
-function Sidebar(props) {
-  const { routes } = props;
+function Sidebar({ routes }) {
 
   let variantChange = "0.2s linear";
   let shadow = useColorModeValue(
@@ -94,22 +93,15 @@ export function SidebarResponsive(props) {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent w="285px" maxW="285px" bg={sidebarBackgroundColor}>
+        <DrawerContent w="285px" bg={sidebarBackgroundColor}>
           <DrawerCloseButton
             zIndex="3"
             onClose={onClose}
             _focus={{ boxShadow: "none" }}
             _hover={{ boxShadow: "none" }}
           />
-          <DrawerBody px="0rem" pb="0">
-            <Scrollbars
-              autoHide
-              renderTrackVertical={renderTrack}
-              renderThumbVertical={renderThumb}
-              renderView={renderView}
-            >
-              <Content routes={routes} />
-            </Scrollbars>
+          <DrawerBody p={0}>
+            <Content routes={routes} />
           </DrawerBody>
         </DrawerContent>
       </Drawer>

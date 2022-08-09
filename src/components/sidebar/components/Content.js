@@ -20,7 +20,7 @@ function SidebarContent(props) {
     >
       <Brand />
       <Stack direction="column" mb="auto" mt="8px">
-        <Box ps="20px" pe={{ md: "16px", "2xl": "1px" }}>
+        <Box ps="20px">
           <Links routes={routes} />
         </Box>
       </Stack>

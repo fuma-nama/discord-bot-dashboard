@@ -31,7 +31,6 @@ export function SidebarLinks(props) {
       return (
         <NavLink key={index} to={route.path}>
           {route.icon ? (
-            <Box>
               <HStack spacing={active ? "22px" : "26px"} py="5px" ps="10px">
                 <Flex w="100%" alignItems="center" justifyContent="center">
                   <Box color={active ? activeIcon : textColor} me="18px">
@@ -52,7 +51,6 @@ export function SidebarLinks(props) {
                   borderRadius="5px"
                 />
               </HStack>
-            </Box>
           ) : (
             <Box>
               <HStack spacing={active ? "22px" : "26px"} py="5px" ps="10px">
