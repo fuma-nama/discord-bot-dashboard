@@ -3,10 +3,7 @@ import {getAccountInfo} from "api/discord/DiscordApi";
 import {QueryHolder} from "./components/AsyncContext";
 import {useQuery} from "react-query";
 
-export const UserDataContext = createContext({
-    user: null,
-    guilds: null
-});
+export const UserDataContext = createContext({});
 
 export function UserDataProvider({children}) {
     const query = useQuery("user_data",
