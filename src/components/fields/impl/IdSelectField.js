@@ -1,4 +1,4 @@
-import {SelectField} from "./SelectField";
+import {SelectField} from "../SelectField";
 import { chakraComponents } from "chakra-react-select";
 import {Icon} from "@chakra-ui/react";
 import {BsChatRightTextFill, BsPeopleFill} from "react-icons/bs";

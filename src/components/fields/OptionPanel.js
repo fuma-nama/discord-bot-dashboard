@@ -1,16 +1,17 @@
 import {Box, Switch, Text} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import {SelectField} from "components/fields/SelectField";
-import {InputField} from "./InputField";
+import {InputField} from "./impl/InputField";
 import MessageBuildCard from "./complex/MessageBuildCard";
-import ColorField from "./ColorField";
+import ColorField from "./impl/ColorField";
 import {createContext, useContext, useMemo} from "react";
 import ArrayField from "./complex/ArrayField";
 import TextArea from "./TextArea";
-import IdSelectField from "./IdSelectField";
-import ImageField from "./ImageField";
-import EmojiField from "./EmojiField";
+import IdSelectField from "./impl/IdSelectField";
+import ImageField from "./impl/ImageField";
+import EmojiField from "./impl/EmojiField";
 import PairField from "./complex/PairField";
+import {OptionTypes} from "../../variables/type";
 
 export function OptionPanel({value, onChange, option}) {
     const input = useInput(value, onChange, option)
@@ -50,20 +51,20 @@ export function useInput(value, onChange, option) {
 export function getInput(value, onChange, option) {
 
     switch (option.type) {
-        case "message_create":
+        case OptionTypes.Message_Create:
             return (
                 <MessageBuildCard value={value} onChange={onChange} />
             );
-        case "array":
+        case OptionTypes.Array:
             return (
                 <ArrayField element={option.element} value={value} onChange={onChange} />
             )
-        case "color":
+        case OptionTypes.Color:
             return <ColorField
                 value={value}
                 onChange={onChange}
             />
-        case "boolean":
+        case OptionTypes.Boolean:
             return (
                 <Switch
                     colorScheme="brandScheme"
@@ -73,16 +74,17 @@ export function getInput(value, onChange, option) {
                     onChange={({target}) => onChange(target.checked)}
                 />
             );
-        case "long_string":
+        case OptionTypes.MultiLine_Text:
             return (
                 <TextArea
                     value={value}
                     onChange={e => onChange(e.target.value)}
                 />
             )
-        case "number":
-        case "string":
-            const isText = option.type === "string";
+        case OptionTypes.Number:
+        case OptionTypes.Text:
+            const isText = option.type === OptionTypes.Text;
+
             return (
                 <InputField
                     type={isText ? "text" : "number"}
@@ -93,7 +95,7 @@ export function getInput(value, onChange, option) {
                     }
                 />
             );
-        case "enum":
+        case OptionTypes.Enum:
             return (
                 <SelectField
                     options={option.choices.map((choice) => ({
@@ -106,7 +108,7 @@ export function getInput(value, onChange, option) {
                     isMulti={option.multiple}
                 />
             );
-        case "id_enum":
+        case OptionTypes.Advanced_Enum:
             return (
                 <IdSelectField
                     value={value}
@@ -116,15 +118,15 @@ export function getInput(value, onChange, option) {
                     element={option.element}
                 />
             )
-        case "image":
+        case OptionTypes.Image:
             return (
                 <ImageField value={value} onChange={onChange}/>
             )
-        case "emoji":
+        case OptionTypes.Emoji:
             return (
                 <EmojiField value={value} onChange={onChange}/>
             )
-        case "pair":
+        case OptionTypes.Pair:
             return (
                 <PairField element={option.element} value={value} onChange={onChange}/>
             )

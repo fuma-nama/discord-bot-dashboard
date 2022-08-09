@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import {OptionField, OptionHandlerContext} from "../OptionPanel";
 import {HSeparator} from "../../separator/Separator";
-import {InputField} from "../InputField";
+import {InputField} from "../impl/InputField";
 
 const DefaultEmbed = {
     title: "",
