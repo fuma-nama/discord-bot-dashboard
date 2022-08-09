@@ -5,7 +5,7 @@ import Footer from "components/footer/FooterAdmin.js";
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import {PageInfoProvider} from "contexts/PageInfoContext";
-import React from "react";
+import React, {useContext} from "react";
 import {Navigate, Outlet, Route, useParams} from "react-router-dom";
 import {UserDataProvider} from "contexts/UserDataContext";
 //routes
@@ -23,8 +23,6 @@ function getRoutes(routes) {
 }
 
 function RouteWrapper({children}) {
-    // states and functions
-
     return <Box>
         <PageInfoProvider>
             <Sidebar routes={routes} display="none"/>

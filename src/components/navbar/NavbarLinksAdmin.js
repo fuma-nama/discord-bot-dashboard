@@ -65,7 +65,7 @@ export default function HeaderLinks() {
 }
 
 function UserMenu() {
-    const {username, avatar, id} = useContext(UserDataContext).user;
+    const {username, avatar, id} = useContext(UserDataContext);
 
     return (
         <Menu>

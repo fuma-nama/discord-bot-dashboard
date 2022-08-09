@@ -7,7 +7,7 @@ import AdminLayout from "layouts/admin";
 import GuildLayout, {GuildRoutes} from "layouts/guild";
 import {Center, ChakraProvider, Spinner, Stack, Text} from "@chakra-ui/react";
 import theme from "theme/theme";
-import {QueryClient, QueryClientProvider, useQuery,} from 'react-query'
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
 
 import {invite} from "./variables/links";
 import {hasLoggedIn} from "./api/yeecord";
@@ -15,11 +15,14 @@ import {QueryHolder} from "./contexts/components/AsyncContext";
 import Credits from "./layouts/info/credits";
 import Dino from "./views/info/dino";
 import {SettingsContext, SettingsProvider} from "./contexts/SettingsContext";
+import {config} from "./variables/config";
 
 const queryClient = new QueryClient()
 
 ReactDOM.render(
     <React.StrictMode>
+        <title itemProp="name">{config.name} Dashboard</title>
+
         <ChakraProvider theme={theme}>
             <QueryClientProvider client={queryClient}>
                 <SettingsProvider>

@@ -19,7 +19,7 @@ export default function UserOptionMenu() {
         "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
     );
     const borderColor = useColorModeValue("#E6ECFA", "rgba(135, 140, 189, 0.3)");
-    const {user} = useContext(UserDataContext);
+    const user = useContext(UserDataContext);
     const logout = useLogout()
 
     return (

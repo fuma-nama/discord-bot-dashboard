@@ -2,6 +2,7 @@
 import { Avatar, Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import React from "react";
+import {config} from "../../../../variables/config";
 
 export default function Banner(props) {
   const { banner, avatar, name, joinedServers, servers } = props;
@@ -36,7 +37,7 @@ export default function Banner(props) {
         {name}
       </Text>
       <Text color={textColorSecondary} fontSize="sm">
-        歡迎回到 yeecord
+        歡迎回到 {config.name}
       </Text>
       <Flex w="max-content" mx="auto" mt="26px" flexWrap="wrap">
         <Flex mx="auto" me="60px" align="center" direction="column">
@@ -44,7 +45,7 @@ export default function Banner(props) {
             {joinedServers}
           </Text>
           <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
-            Yeecord 加入的服務器
+              已加入的服務器
           </Text>
         </Flex>
         <Flex mx="auto" align="center" direction="column">

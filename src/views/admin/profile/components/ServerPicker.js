@@ -6,8 +6,9 @@ import React, {useState} from "react";
 import Server from "views/admin/profile/components/Server";
 import {QueryHolderSkeleton} from "../../../../contexts/components/AsyncContext";
 import SearchInput from "../../../../components/fields/SearchInput";
+import {config} from "../../../../variables/config";
 
-export default function ServerPicker({guilds, ...rest}) {
+export default function ServerPicker({query, ...rest}) {
 
     // Chakra Color Mode
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
@@ -26,14 +27,16 @@ export default function ServerPicker({guilds, ...rest}) {
                 您的服務器
             </Text>
             <Text color={textColorSecondary} fontSize="md" me="26px">
-                把Yeecord邀請到你的服務器, 並且客製化你的機器人
+                把{config.name}邀請到你的服務器, 並且客製化你的機器人
             </Text>
             <SearchInput value={filter} onChange={setFilter} groupStyle={{
                 mt: 5,
                 mb: "40px"
             }}/>
             <Stack direction="column">
-                <Servers filter={filter} guilds={guilds}/>
+                <QueryHolderSkeleton count={3} query={query}>
+                    <Servers filter={filter} guilds={query.data}/>
+                </QueryHolderSkeleton>
             </Stack>
         </Card>
     );

@@ -6,10 +6,12 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import {config} from "variables/config";
+import {homepage} from "variables/links";
 
 export default function Footer() {
   let textColor = useColorModeValue("gray.400", "white");
-  let linkColor = useColorModeValue({ base: "gray.400", lg: "white" }, "white");
+
   return (
     <Flex
       zIndex='3'
@@ -34,15 +36,15 @@ export default function Footer() {
         {" "}
         &copy; {1900 + new Date().getYear()}
         <Text as='span' fontWeight='500' ms='4px'>
-          Dashboard. All Rights Reserved. Made with love by
-          <Link
-            mx='3px'
-            color={textColor}
-            href='https://www.simmmple.com'
-            target='_blank'
-            fontWeight='700'>
-            Yeecord!
-          </Link>
+            {config.name} Dashboard. All Rights Reserved. Made with
+            <Link
+                mx='3px'
+                color={textColor}
+                href={homepage}
+                target='_blank'
+                fontWeight='700'>
+                Discord Dashboard!
+            </Link>
         </Text>
       </Text>
     </Flex>

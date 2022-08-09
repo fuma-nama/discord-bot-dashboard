@@ -1,4 +1,4 @@
-# Yeecord Dashboard
+# Discord Dashboard
 
 Manage everything from website :D
 

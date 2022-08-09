@@ -23,11 +23,10 @@ export default function GeneralInformation({data, ...rest}) {
                 mt="10px"
                 mb="4px"
             >
-                Yeecord RPG 個人信息
+                個人信息
             </Text>
             <Text color={textColorSecondary} fontSize="md" me="26px" mb="40px">
-                Yeecord這個世界真的很Yee, 仿佛就像是去到了Yee之地, 你甚至見到了Yee帝,
-                而這個就是你的Yee面板...
+                Discord機器人的用戶信息
             </Text>
 
             <SimpleGrid columns={2} gap="20px">{
