@@ -6,7 +6,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import {config} from "variables/config";
+import {config} from "config/config";
 import {homepage} from "variables/links";
 
 export default function Footer() {

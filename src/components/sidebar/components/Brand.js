@@ -8,7 +8,7 @@ import { HSeparator } from "components/separator/Separator";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {iconToUrl, useGuild} from "api/discord/DiscordApi";
 import {QueryHolderSkeleton} from "contexts/components/AsyncContext";
-import {config} from "../../../variables/config";
+import {config} from "../../../config/config";
 
 export function SidebarBrand() {
   //   Chakra color mode
@@ -35,7 +35,7 @@ export function SidebarBrand() {
 function GuildHeader({id, logoColor}) {
   const query = useGuild(id)
 
-  return <QueryHolderSkeleton query={query} count={1}>{() =>
+  return <QueryHolderSkeleton query={query} height="100px" count={1}>{() =>
       <HStack align="center" mb={5} px={5}>
         <Avatar name={query.data.name} src={iconToUrl(query.data.id, query.data.icon)} />
         <Text fontWeight="extrabold" fontSize="2xl" color={logoColor}>

@@ -14,7 +14,7 @@ import {ActionTypesContext} from "contexts/actions/ActionsContext";
 import {useMutation, useQueryClient} from "react-query";
 import {addAction} from "api/yeecord";
 import {useParams} from "react-router-dom";
-import {InputField} from "components/fields/InputField";
+import {InputField} from "components/fields/impl/InputField";
 
 export function ActionBar() {
     const textColor = useColorModeValue("secondaryGray.900", "white");

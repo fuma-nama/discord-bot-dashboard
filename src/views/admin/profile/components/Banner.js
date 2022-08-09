@@ -2,7 +2,7 @@
 import { Avatar, Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import React from "react";
-import {config} from "../../../../variables/config";
+import {config} from "../../../../config/config";
 
 export default function Banner(props) {
   const { banner, avatar, name, joinedServers, servers } = props;

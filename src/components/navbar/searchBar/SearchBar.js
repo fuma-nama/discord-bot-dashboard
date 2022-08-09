@@ -15,7 +15,7 @@ import {
 import {FeatureContext, FeaturesProvider} from "../../../contexts/FeatureContext";
 import Feature from "../../card/Feature";
 import {useLocation} from "react-router-dom";
-import SearchInput from "../../fields/SearchInput";
+import SearchInput from "../../fields/impl/SearchInput";
 
 export function SearchBar({...rest}) {
     const {isOpen, onOpen, onClose} = useDisclosure()

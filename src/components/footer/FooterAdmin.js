@@ -2,7 +2,7 @@
 import React from "react";
 import {Flex, Link as LinkText, List, ListItem, Text, useColorModeValue,} from "@chakra-ui/react";
 import {homepage} from "variables/links";
-import {config} from "variables/config";
+import {config} from "config/config";
 
 export default function Footer() {
     const textColor = useColorModeValue("gray.400", "white");

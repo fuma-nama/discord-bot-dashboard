@@ -2,7 +2,7 @@
 import {Button, Stack, Text, useColorMode, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 // Custom components
-import SwitchField from "components/fields/SwitchField";
+import SwitchField from "components/fields/impl/SwitchField";
 import {useLogout} from "../../../../api/yeecord";
 import {useContext} from "react";
 import {Link} from "react-router-dom";

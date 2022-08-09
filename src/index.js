@@ -15,7 +15,7 @@ import {QueryHolder} from "./contexts/components/AsyncContext";
 import Credits from "./layouts/info/credits";
 import Dino from "./views/info/dino";
 import {SettingsContext, SettingsProvider} from "./contexts/SettingsContext";
-import {config} from "./variables/config";
+import {config} from "./config/config";
 
 const queryClient = new QueryClient()
 

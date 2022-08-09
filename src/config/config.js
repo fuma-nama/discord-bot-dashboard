@@ -1,3 +1,5 @@
+import {data} from "./data";
+
 export const config = {
     name: "Dishub",
     footer: [
@@ -5,6 +7,8 @@ export const config = {
             name: "Support",
             url: ""
         }
-    ]
-
+    ],
+    dashboard: {
+        data
+    }
 }

@@ -59,33 +59,7 @@ export default function Overview() {
                     }}
                 />
             </Grid>
-            <Grid
-                mb="20px"
-                templateColumns={{
-                    base: "1fr",
-                    lg: "repeat(2, 1fr)",
-                    "2xl": "1.34fr 1.62fr",
-                }}
-                templateRows={{
-                    base: "1fr",
-                    lg: "repeat(2, 1fr)",
-                    "2xl": "1fr",
-                }}
-                gap={{base: "20px", xl: "20px"}}
-            >
-                <ServerPicker query={guildsQuery} gridArea="1 / 1 / 2 / 2"/>
-                <QueryHolderSkeleton query={rpgQuery} height="400px">
-                    <General
-                        gridArea={{
-                            base: "2 / 1 / 4 / 2",
-                            lg: "1 / 2 / 2 / 2",
-                        }}
-                        minH="365px"
-                        pe="20px"
-                        data={rpgQuery.data}
-                    />
-                </QueryHolderSkeleton>
-            </Grid>
+            <ServerPicker query={guildsQuery} gridArea="1 / 1 / 2 / 2"/>
         </Box>
     );
 }
