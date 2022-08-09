@@ -8,24 +8,12 @@ import Menu from "components/menu/MainMenu";
 import {GuildDetailContext} from "contexts/guild/GuildDetailContext";
 import {MdCancel, MdCheckCircle} from "react-icons/md";
 
-export const columns = [
-  {
-    Header: "NAME",
-    accessor: "name",
-  },
-  {
-    Header: "ENABLED",
-    accessor: "enabled",
-  },
-];
-
-export default function FeatureTable() {
-  const {detail} = useContext(GuildDetailContext)
+export default function DataTable({name, data, columns}) {
 
   const tableInstance = useTable(
     {
       columns,
-      data: detail.unlocked
+      data
     },
     useGlobalFilter,
     useSortBy,
@@ -56,7 +44,7 @@ export default function FeatureTable() {
           fontSize='22px'
           fontWeight='700'
           lineHeight='100%'>
-          服務器功能
+          {name}
         </Text>
         <Menu />
       </Flex>
@@ -75,7 +63,7 @@ export default function FeatureTable() {
                     align='center'
                     fontSize={{ sm: "10px", lg: "12px" }}
                     color='gray.400'>
-                    {column.render("Header")}
+                    {column.render("header")}
                   </Flex>
                 </Th>
               ))}
@@ -88,51 +76,22 @@ export default function FeatureTable() {
             return (
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
-                  let data = "";
-
-                  switch (cell.column.Header) {
-                    case "NAME": {
-                      data = (
-                          <Text color={textColor} fontSize='md' fontWeight='700'>
-                            {cell.value}
-                          </Text>
-                      );
-                      break;
-                    }
-                    case "ENABLED": {
-                      data = (
-                          <Flex align='center'>
-                            <Icon
-                                w='24px'
-                                h='24px'
-                                me='5px'
-                                color={
-                                  cell.value? "green.500" : "red.500"
-                                }
-                                as={
-                                  cell.value? MdCheckCircle : MdCancel
-                                }
-                            />
-                            <Text color={textColor} fontSize='sm' fontWeight='700'>
-                              {cell.value? "Enabled" : "Locked"}
-                            </Text>
-                          </Flex>
-                      );
-                      break;
-                    }
-                    default: {
-                      data = "UNKNOWN"
-                    }
-                  }
 
                   return (
                     <Td
                       {...cell.getCellProps()}
                       key={index}
+                      color={textColor}
                       fontSize={{ sm: "14px" }}
                       minW={{ sm: "150px", md: "200px", lg: "auto" }}
                       borderColor='transparent'>
-                      {data}
+                      {
+                          cell.column.wrapper?
+                              cell.column.wrapper(cell.value) :
+                              <Text fontSize='md' fontWeight='700'>
+                                  {cell.value}
+                              </Text>
+                      }
                     </Td>
                   );
                 })}
