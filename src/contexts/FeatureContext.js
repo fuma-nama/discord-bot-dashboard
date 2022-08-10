@@ -11,8 +11,11 @@ export const FeatureContext = createContext({
 
 export function FeaturesProvider({children}) {
     const {id: serverId} = useContext(GuildContext);
-    const query = useQuery(["features", serverId], () =>
-      getFeatures(serverId)
+    const query = useQuery(["features", serverId],
+        () => getFeatures(serverId),
+        {
+            retry: 0
+        }
   )
 
   return (

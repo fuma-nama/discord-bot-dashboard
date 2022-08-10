@@ -17,9 +17,9 @@ export * from "./auth";
  * @returns An array of features
  */
 export async function getFeatures(serverId) {
-  await delay(3000);
+
   return {
-    features,
+    features: await fetchAuto(`/guild/${serverId}/features`, {toJson: true}),
     betaFeatures
   };
 }
@@ -35,20 +35,18 @@ export async function enableFeature(serverId, featureId) {
  * @returns feature info, and configurable options
  */
 export async function getFeatureDetail(serverId, featureId) {
-  await delay(2000);
-  return {
-    id: featureId,
-    name: "自動殺死凱恩",
-    description: "凱恩加入服務器時自動殺死凱恩",
-    options: ExampleOptions,
-  };
+  return fetchAuto(`/guild/${serverId}/feature/${featureId}`, {toJson: true})
 }
 
 /**
  * Update Feature options value
  */
 export async function updateFeatureOptions(serverId, featureId, options) {
-  await delay(3000);
+  return fetchAuto(`/guild/${serverId}/feature/${featureId}`, {
+    toJson: true,
+    method: "PATCH",
+    body: options
+  })
 }
 
 /**

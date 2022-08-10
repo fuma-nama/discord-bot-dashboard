@@ -6,16 +6,20 @@ import {useQuery} from "react-query";
 import {useParams} from "react-router-dom";
 
 export const FeatureDetailContext = createContext({
+  id: null,
   name: null,
   description: null,
-  options: null,
+  values: null
 });
 
 export function FeatureDetailProvider({children}) {
   const { feature: featureId } = useParams()
   const { id: serverId } = useContext(GuildContext);
-  const query = useQuery(["feature_detail", serverId, featureId] , () =>
-      getFeatureDetail(serverId, featureId)
+  const query = useQuery(["feature_detail", serverId, featureId],
+      () => getFeatureDetail(serverId, featureId),
+      {
+        retry: 0
+      }
   )
 
   return (

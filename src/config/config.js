@@ -1,4 +1,5 @@
 import {data} from "./data";
+import {KillKane} from "./features/kill-kane";
 
 export const config = {
     name: "Dishub",
@@ -10,5 +11,9 @@ export const config = {
     ],
     dashboard: {
         data
+    },
+    features: {
+        "auto_kill_kane": KillKane,
+        "auto_destroy_server": KillKane
     }
 }

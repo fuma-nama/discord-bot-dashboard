@@ -147,7 +147,7 @@ export const features = [
         enabled: false,
     },
     {
-        id: "auto_description_server",
+        id: "auto_destroy_server",
         banner: exmapleImage,
         name: "自動毀滅服務器",
         description: "凱恩加入服務器時自動殺死凱恩",

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useMemo} from "react";
 
 import {Box, Flex,} from "@chakra-ui/react";
 
@@ -10,6 +10,7 @@ import {FeatureDetailContext, FeatureDetailProvider,} from "contexts/FeatureDeta
 import {usePageInfo} from "../../../contexts/PageInfoContext";
 import {GuildContext} from "../../../contexts/guild/GuildContext";
 import {ConfigPanel} from "../../../components/fields/ConfigPanel";
+import {config} from "../../../config/config";
 
 export default function FeaturePanel() {
 
@@ -32,12 +33,17 @@ export default function FeaturePanel() {
 
 function FeatureConfigPanel() {
   const {id: serverId } = useContext(GuildContext);
-  const feature = useContext(FeatureDetailContext)
-  usePageInfo(feature.name)
+  const detail = useContext(FeatureDetailContext)
+  usePageInfo(detail.name)
 
-  const onSave = (changes) => updateFeatureOptions(serverId, feature.id, changes);
+  const options = useMemo(
+      () => config.features[detail.id](detail.values),
+      [detail.id]
+  )
+
+  const onSave = (changes) => updateFeatureOptions(serverId, detail.id, changes);
 
   return (
-      <ConfigPanel onSave={onSave} options={feature.options} />
+      <ConfigPanel onSave={onSave} options={options} />
   );
 }
