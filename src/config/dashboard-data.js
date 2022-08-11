@@ -7,7 +7,10 @@ import {lineChartOptionsTotalSpent, pieChartOptions, weekBarChartOptions} from "
 import {Flex, Icon, Text} from "@chakra-ui/react";
 import React from "react";
 
-export const data = [
+/**
+ * @type Array<DashboardDataRow>
+ */
+export const dashboardData = [
     {
         advanced: false,
         count: 4,
@@ -22,7 +25,6 @@ export const data = [
                 name: "成員數量",
                 icon: BsPeopleFill,
                 value: `${detail.members.count}人`,
-                growth: `+${detail.members.grow}%`,
                 type: DataTypes.Statistics
             },
             {
@@ -36,7 +38,7 @@ export const data = [
                 icon: FiCommand,
                 value: detail.command.most,
                 type: DataTypes.Statistics
-            }
+            },
         ]
     },
     {
@@ -106,6 +108,7 @@ export const data = [
                         name: "CPU使用量",
                         type: DataTypes.Pie_Chart,
                         options: pieChartOptions,
+                        unit: "%",
                         value: [
                             detail.bot.cpu,
                             100 - detail.bot.cpu,
@@ -115,6 +118,7 @@ export const data = [
                         name: "RAM使用量",
                         type: DataTypes.Pie_Chart,
                         options: pieChartOptions,
+                        unit: "%",
                         value: [
                             detail.bot.ram,
                             100 - detail.bot.ram
