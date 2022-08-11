@@ -12,8 +12,7 @@ export const FeatureDetailContext = createContext({
   values: null
 });
 
-export function FeatureDetailProvider({children}) {
-  const { feature: featureId } = useParams()
+export function FeatureDetailProvider({children, featureId}) {
   const { id: serverId } = useContext(GuildContext);
   const query = useQuery(["feature_detail", serverId, featureId],
       () => getFeatureDetail(serverId, featureId),

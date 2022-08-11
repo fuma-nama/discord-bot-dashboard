@@ -5,8 +5,7 @@ import {GuildContext} from "./guild/GuildContext";
 import {useQuery} from "react-query";
 
 export const FeatureContext = createContext({
-    features: null,
-    betaFeatures: null
+    features: null
 });
 
 export function FeaturesProvider({children}) {

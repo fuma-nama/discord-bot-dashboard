@@ -8,7 +8,6 @@ export default function FeatureGrid() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const { features } = useContext(FeatureContext);
 
-  console.log(features)
   return (
     <Flex direction="column">
       <Flex

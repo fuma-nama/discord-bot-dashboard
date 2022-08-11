@@ -11,11 +11,18 @@ import {usePageInfo} from "../../../contexts/PageInfoContext";
 import {GuildContext} from "../../../contexts/guild/GuildContext";
 import {ConfigPanel} from "../../../components/fields/ConfigPanel";
 import {config} from "../../../config/config";
+import {useNavigate, useParams} from "react-router-dom";
+import NotFound from "../../info/Not_Found";
 
 export default function FeaturePanel() {
+  const { feature: featureId } = useParams()
+
+  if (config.features[featureId] == null) {
+    return <NotFound />
+  }
 
   return (
-    <FeatureDetailProvider>
+    <FeatureDetailProvider featureId={featureId}>
       <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
         {/* Main Fields */}
         <Flex
