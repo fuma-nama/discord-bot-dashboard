@@ -15,7 +15,6 @@ export const ExampleOption = {
     name: "殺死他的朋友",
     description: "當他的朋友加入時也殺死他們",
     type: "boolean", //boolean, string, enum, number, color, message_create, array, id_enum, image
-    choices: null, //only enum type option have choices array
     value: true, //value must be nonnull in string, boolean, number type
 };
 

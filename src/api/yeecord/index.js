@@ -14,14 +14,17 @@ export * from "./auth";
 
 /**
  * Get configurable features of a server
- * @returns An array of features
+ * You may include other data
+ *
+ * example: {
+ *     features: [...] //required
+ *     another_data: {} //optional
+ * }
+ * @returns An object includes a features array
  */
 export async function getFeatures(serverId) {
 
-  return {
-    features: await fetchAuto(`/guild/${serverId}/features`, {toJson: true}),
-    betaFeatures
-  };
+  return await fetchAuto(`/guild/${serverId}/features`, {toJson: true})
 }
 
 /**
