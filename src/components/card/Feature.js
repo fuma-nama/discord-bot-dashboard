@@ -33,6 +33,8 @@ export default function Feature({
     )
 
     const textColor = useColorModeValue("navy.700", "white");
+    const detailColor = useColorModeValue("secondaryGray.900", "secondaryGray.600");
+
     const brandColor = useColorModeValue("brand.500", "brand.400");
 
     return (
@@ -57,7 +59,7 @@ export default function Feature({
                             {name}
                         </Text>
                         <Text
-                            color="secondaryGray.600"
+                            color={detailColor}
                             fontSize="sm"
                             fontWeight="400"
                             me="14px"
