@@ -1,18 +1,7 @@
 import {delay} from "../utils";
 import {ExampleOptions} from "./example";
 
-const ActionTypes = [
-    {
-        name: "Kill Kane",
-        id: "kill_kane"
-    },
-    {
-        name: "Kill Kane Every day",
-        id: "kill_kane_day"
-    }
-]
-
-const Actions = [
+const ActionTasks = [
     {
         id: "action_id",
         description: "Directly Kill Kane", //written by the user, it is nullable
@@ -29,7 +18,23 @@ const Actions = [
     }
 ]
 
-const ActionDetail = {
+const Actions = [
+    {
+        id: "kill_kane",
+        banner: "",
+        name: "Kill Kane",
+        description: "Kill Kane in a channel"
+    },
+    {
+        id: "kill_kane_day",
+        banner: "",
+        name: "Kill Kane Every day",
+        description: "Kill kane in a channel every day"
+    }
+
+]
+
+const TaskDetail = {
     action: Actions[0],
     options: ExampleOptions
 }
@@ -42,51 +47,18 @@ export async function getActions(serverId) {
     return Actions
 }
 
-export async function getActionTypes() {
-    await delay(2000)
-    return ActionTypes
+export async function getTasks(serverId, actionId) {
+
 }
 
-/**
- * Add an action
- * description might be null or empty
- * @returns added action ids
- */
-export async function addAction(serverId, typeId, description) {
-    await delay(3000)
-    return "action_id"
+export async function getTaskDetail(serverId, actionId, taskId) {
+
 }
 
-export async function cloneAction(actionId) {
-    await delay(2000)
+export async function updateTask(serverId, actionId, taskId, options) {
+
 }
 
-export async function deleteAction(actionId) {
-    await delay(2000)
-}
+export async function deleteDetail(serverId, actionId, taskId) {
 
-/**
- * Execute the action
- */
-export async function runAction(actionId) {
-    await delay(3000)
-}
-
-export async function getActionDetail(actionId) {
-    await delay(3000)
-    return ActionDetail
-}
-
-/**
- * Modify Action Info (ex: description)
- */
-export async function modifyActionInfo(actionId, description) {
-    await delay(1000)
-}
-
-/**
- * Update Action Options
- */
-export async function modifyAction(actionId, options) {
-    await delay(3000)
 }

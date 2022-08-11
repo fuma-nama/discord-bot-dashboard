@@ -89,11 +89,3 @@ export async function getNotifications(serverId) {
   await delay(2000)
   return Notifications
 }
-
-/**
- * RPG information of a user
- */
-export async function getRPGInfo(userId) {
-  await delay(3000)
-  return ExampleRPGInfo
-}

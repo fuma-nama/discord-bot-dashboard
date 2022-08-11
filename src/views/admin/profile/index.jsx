@@ -10,24 +10,12 @@ import ServerPicker from "views/admin/profile/components/ServerPicker";
 import React, {useContext} from "react";
 import {UserDataContext} from "contexts/UserDataContext";
 import {avatarToUrl, bannerToUrl, useGuilds} from "api/discord/DiscordApi";
-import { getRPGInfo} from "api/yeecord";
-import {QueryHolderSkeleton} from "../../../contexts/components/AsyncContext";
-import {useQuery} from "react-query";
 
 export default function Overview() {
     const user = useContext(UserDataContext);
     const {id, banner, username, avatar} = user;
 
     const guildsQuery = useGuilds()
-
-    const rpgQuery = useQuery(
-        ["user_rpg_info", id],
-        () => getRPGInfo(id),
-        {
-            refetchOnWindowFocus: false,
-            refetchInterval: 20 * 1000
-        }
-    )
 
     const guilds = guildsQuery.data
 
