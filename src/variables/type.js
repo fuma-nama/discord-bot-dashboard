@@ -5,7 +5,8 @@ export const DataTypes = {
     Pie_Chart: "pie_chart",
     Table: "table",
     Group: "group",
-    List: "list"
+    List: "list",
+    Custom: "custom"
 }
 
 export const OptionTypes = {

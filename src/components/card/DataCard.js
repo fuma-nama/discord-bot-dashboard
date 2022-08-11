@@ -6,6 +6,14 @@ import IconBox from "../icons/IconBox";
 import ChartData from "../charts/ChartData";
 import DataTable from "./DataTable";
 import DataPieChart from "../charts/DataPieChart";
+import {List} from "./List";
+
+export function DataList({items}) {
+    return items.map((item, key) => {
+
+        return <DataCard key={key} {...item} />
+    })
+}
 
 export default function DataCard({name, value, type, ...optional}) {
     const getItem = () => {
@@ -39,9 +47,9 @@ export default function DataCard({name, value, type, ...optional}) {
                 />
 
             case DataTypes.Pie_Chart: {
-                const {options} = optional
+                const {options, unit} = optional
 
-                return <DataPieChart name={name} data={value} options={options} />
+                return <DataPieChart name={name} data={value} options={options} unit={unit} />
             }
 
             case DataTypes.Table:{
@@ -54,6 +62,17 @@ export default function DataCard({name, value, type, ...optional}) {
                 return <SimpleGrid columns={{base: 1, xl: value.length}} gap="20px">
                     {value.map((item, key) => <DataCard key={key} {...item} />)}
                 </SimpleGrid>
+            }
+
+            case DataTypes.List: {
+                const {description, icon} = optional
+                console.log(value)
+
+                return <List title={name} description={description} icon={icon} items={value} />
+            }
+
+            case DataTypes.Custom: {
+                return value
             }
 
             default: return <></>
