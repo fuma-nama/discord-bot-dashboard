@@ -14,7 +14,7 @@ import Card from "components/card/Card.js";
 import React from "react";
 
 export default function Default(props) {
-  const { startContent, endContent, name, growth, value } = props;
+  const { startContent, endContent, name, value } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
 
@@ -43,16 +43,6 @@ export default function Default(props) {
             }}>
             {value}
           </StatNumber>
-          {growth ? (
-            <Flex align='center'>
-              <Text color='green.500' fontSize='xs' fontWeight='700' me='5px'>
-                {growth}
-              </Text>
-              <Text color='secondaryGray.600' fontSize='xs' fontWeight='400'>
-                自上個月以來
-              </Text>
-            </Flex>
-          ) : null}
         </Stat>
         <Flex ms='auto' w='max-content'>
           {endContent}

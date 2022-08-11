@@ -7,7 +7,7 @@ import { pieChartOptions } from "variables/charts";
 import { VSeparator } from "components/separator/Separator";
 import React from "react";
 
-export default function DataPieChart({name, data, options}) {
+export default function DataPieChart({name, data, options, unit}) {
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -47,7 +47,7 @@ export default function DataPieChart({name, data, options}) {
         mx='auto'>
         {
           data.map((v, i) =>
-              <Flex align="center" justify="center" direction='column' py='5px'>
+              <Flex align="center" justify="center" direction='column' py='5px' key={i}>
                   <Flex>
                       <Box h='8px' w='8px' bg='brand.500' borderRadius='50%' me='4px' />
                       <Text
@@ -59,7 +59,7 @@ export default function DataPieChart({name, data, options}) {
                       </Text>
                   </Flex>
                   <Text align="start" fontSize='lg' color={textColor} fontWeight='700'>
-                      {v}
+                      {v}{unit}
                   </Text>
               </Flex>
           )

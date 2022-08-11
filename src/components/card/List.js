@@ -1,12 +1,25 @@
 import {Flex, Icon, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card";
-import React, {useContext} from "react";
-import {BsPeopleFill} from "react-icons/bs";
-import {FeatureContext} from "../../../../contexts/FeatureContext";
+import React from "react";
 
-export function BetaFeatures() {
+/**
+ * input:
+ * {
+ *     title: "Hello World"
+ *     description: "Brun"
+ *     icon: MiMoney
+ *     items: [
+ *         {
+ *             name: "Money"
+ *             description: "Money you have"
+ *             value: 0
+ *             //icon: <...> (optional)
+ *         }
+ *     ]
+ * }
+ */
+export function List({title, description, icon, items}) {
     const textColor = useColorModeValue("secondaryGray.900", "white");
-    const {betaFeatures} = useContext(FeatureContext);
 
     return <Card p="0px">
             <Flex
@@ -16,22 +29,21 @@ export function BetaFeatures() {
                 py="18px"
             >
                 <Text color={textColor} fontSize="xl" fontWeight="600">
-                    測試版功能
+                    {title}
                 </Text>
                 <Text color={textColor}>
-                    在我們的不和諧服務器中投票，告訴我們您希望什麼功能
+                    {description}
                 </Text>
             </Flex>
         {
-            betaFeatures.map((feature, key) => (
-                <BetaFeature key={key} {...feature} />
+            items.map((item, key) => (
+                <ListItem key={key} icon={icon} {...item} />
             ))
         }
     </Card>
-
 }
 
-function BetaFeature({name, description, votes}) {
+function ListItem({name, description, value, icon}) {
     // Chakra Color Mode
     const textColor = useColorModeValue("brands.900", "white");
     const bgItem = useColorModeValue(
@@ -76,9 +88,9 @@ function BetaFeature({name, description, votes}) {
                     <Flex
                         me={{base: "4px", md: "32px", xl: "10px", "3xl": "32px"}}
                         align='center'>
-                        <Icon as={BsPeopleFill} color={textColor} width='18px' me='7px'/>
+                        <Icon as={icon} color={textColor} width='18px' me='7px'/>
                         <Text fontWeight='700' fontSize='md' color={textColor}>
-                            {votes}
+                            {value}
                         </Text>
                     </Flex>
                 </Flex>
