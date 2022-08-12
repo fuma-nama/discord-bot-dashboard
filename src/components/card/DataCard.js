@@ -66,7 +66,6 @@ export default function DataCard({name, value, type, ...optional}) {
 
             case DataTypes.List: {
                 const {description, icon} = optional
-                console.log(value)
 
                 return <List title={name} description={description} icon={icon} items={value} />
             }
