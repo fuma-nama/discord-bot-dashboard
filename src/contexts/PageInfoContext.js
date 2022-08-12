@@ -22,7 +22,7 @@ export function usePageInfo(name) {
 export function PageInfoProvider({children}) {
     const [toggleSidebar, setToggleSidebar] = useState(false);
     const [info, setInfo] = useState({
-        name: "",
+        name: [],
     })
 
     return <PageInfoContext.Provider

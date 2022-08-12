@@ -12,7 +12,7 @@ import {
     useColorModeValue,
     useDisclosure,
 } from "@chakra-ui/react";
-import {FeatureContext, FeaturesProvider} from "../../../contexts/FeatureContext";
+import {FeaturesContext, FeaturesProvider} from "../../../contexts/FeaturesContext";
 import Feature from "../../card/Feature";
 import {useLocation} from "react-router-dom";
 import SearchInput from "../../fields/impl/SearchInput";
@@ -37,7 +37,7 @@ export function SearchBar({...rest}) {
 }
 
 function SearchList({search}) {
-    const {features} = useContext(FeatureContext)
+    const {features} = useContext(FeaturesContext)
 
     const filtered = useMemo(
         () => features.filter(feature => feature.name.includes(search)),

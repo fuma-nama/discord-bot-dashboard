@@ -78,10 +78,17 @@ export default function NavAlert({rootText, childText, children, clip = true}) {
                         <BreadcrumbItem color={secondaryText} fontSize="sm" mb="5px">
                             <Text color={secondaryText}>{rootText}</Text>
                         </BreadcrumbItem>
-
-                        <BreadcrumbItem color={secondaryText} fontSize="sm">
-                            <Text color={secondaryText}>{childText}</Text>
-                        </BreadcrumbItem>
+                        {
+                            Array.isArray(childText)?
+                                childText.map(text =>
+                                    <BreadcrumbItem color={secondaryText} fontSize="sm">
+                                        <Text color={secondaryText}>{text}</Text>
+                                    </BreadcrumbItem>
+                                ) :
+                                <BreadcrumbItem color={secondaryText} fontSize="sm">
+                                    <Text color={secondaryText}>{childText}</Text>
+                                </BreadcrumbItem>
+                        }
                     </Breadcrumb>
                     <Link
                         mt={6}
@@ -100,7 +107,7 @@ export default function NavAlert({rootText, childText, children, clip = true}) {
                             boxShadow: "none",
                         }}
                     >
-                        {childText}
+                        {Array.isArray(childText)? childText[childText.length - 1] : childText}
                     </Link>
                 </Box>
                 <Flex
