@@ -1,15 +1,13 @@
 import React, {useContext} from "react";
 
-import {Box, Flex} from "@chakra-ui/react";
+import {Box, Button, Flex, SimpleGrid, Text, VStack} from "@chakra-ui/react";
 
 import {usePageInfo} from "contexts/PageInfoContext";
-import { MultiConfigPanel} from "components/fields/ConfigPanel";
-import {modifyAction, modifyActionInfo} from "api/yeecord";
 import {ActionDetailContext, ActionDetailProvider} from "contexts/actions/ActionDetailContext";
-import {useParams} from "react-router-dom";
 import ActionBanner from "./components/ActionBanner";
+import Card from "components/card/Card";
 
-export default function ActionPanel() {
+export default function ActionTasks() {
     return (
         <ActionDetailProvider>
             <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
@@ -19,16 +17,36 @@ export default function ActionPanel() {
                     gridArea={{xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2"}}
                 >
                     <ActionBanner />
-                    <ActionConfigPanel/>
+                    <TasksPanel />
                 </Flex>
             </Box>
         </ActionDetailProvider>
     );
 }
 
+function TasksPanel() {
+    const {name, tasks} = useContext(ActionDetailContext)
+    usePageInfo(["動作", name])
+
+    return <VStack gap={5} p={10}>
+        <Text fontSize={24} fontWeight="bold">運行中</Text>
+        <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
+            {
+                tasks.map(task =>
+                    <Card p={5} gap={5}>
+                        <Text fontSize="lg" fontWeight="bold">{task.status}</Text>
+                        <Button>Config</Button>
+                    </Card>
+                )
+            }
+        </SimpleGrid>
+    </VStack>
+}
+
+/*
 function ActionConfigPanel() {
     const {action: actionId} = useParams();
-    const {action, options} = useContext(ActionDetailContext);
+    const {action, options} = useContext(TasksContext);
     usePageInfo(action.type.name)
 
     const onSave = async (changes) => {
@@ -40,7 +58,7 @@ function ActionConfigPanel() {
             await modifyActionInfo(actionId, description)
         }
 
-        await modifyAction(actionId, changes.get("options"))
+        await updateTask(actionId, changes.get("options"))
     }
 
     const groups = [
@@ -64,3 +82,4 @@ function ActionConfigPanel() {
 
     return (<MultiConfigPanel groups={groups} onSave={onSave}/>)
 }
+ */

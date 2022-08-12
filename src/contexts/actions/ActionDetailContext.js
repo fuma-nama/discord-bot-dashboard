@@ -5,14 +5,13 @@ import {useParams} from "react-router-dom";
 import {getActionDetail} from "../../api/yeecord";
 
 export const ActionDetailContext = createContext({
-    action: null,
-    options: []
+    tasks: []
 })
 
 export function ActionDetailProvider({children}) {
-    const {action} = useParams();
+    const {guild, action} = useParams();
     const query = useQuery(["action_detail", action], () =>
-        getActionDetail(action)
+        getActionDetail(guild, action)
     )
 
     return <QueryHolder query={query}>

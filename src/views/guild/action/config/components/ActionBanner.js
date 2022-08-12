@@ -1,21 +1,24 @@
 import React, {useContext} from "react";
 
 // Chakra imports
-import {Button, Flex, Text} from "@chakra-ui/react";
+import {Button, Flex, HStack, Text} from "@chakra-ui/react";
 // Assets
-import banner from "assets/img/layout/NftBanner1.png";
+import bannerImg from "assets/img/layout/NftBanner1.png";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {BiArrowBack} from "react-icons/bi";
-import {ActionDetailContext} from "../../../../../contexts/actions/ActionDetailContext";
-import {Link} from "react-router-dom";
+import {ActionDetailContext} from "contexts/actions/ActionDetailContext";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import {useMutation, useQueryClient} from "react-query";
+import {addTask} from "api/yeecord";
+import {AddIcon, SmallAddIcon} from "@chakra-ui/icons";
 
 export default function ActionBanner() {
-  const {description, status} = useContext(ActionDetailContext).action;
+  const {name, description, banner} = useContext(ActionDetailContext);
 
   return (
       <Flex
           direction="column"
-          bgImage={banner}
+          bgImage={banner || bannerImg}
       bgSize="cover"
       py={{ base: "30px", md: "56px" }}
       px={{ base: "30px", md: "64px" }}
@@ -28,7 +31,7 @@ export default function ActionBanner() {
         fontWeight="700"
         lineHeight={{ base: "32px", md: "42px" }}
       >
-        {description}
+        {name}
       </Text>
         <Text
             color="white"
@@ -36,13 +39,42 @@ export default function ActionBanner() {
             fontWeight="700"
             lineHeight={{ base: "32px", md: "42px" }}
         >
-            {status}
+            {description}
         </Text>
-      <Flex align="center">
+      <HStack align="center">
         <BackButton />
-      </Flex>
+        <CreateButton />
+      </HStack>
     </Flex>
   );
+}
+
+function CreateButton() {
+  const {guild, action} = useParams();
+  const navigate = useNavigate()
+
+  const create = useMutation(
+      () => addTask(guild, action),
+      {
+        onSuccess(data) {
+
+          navigate(`../action/${action}/${data}`)
+        }
+      }
+  )
+
+  return <Button
+      _hover={{ bg: "brand.400" }}
+      bg="brand.400"
+      color="white"
+      py="20px"
+      minH="full"
+      onClick={create.mutate}
+      isLoading={create.isLoading}
+      leftIcon={<SmallAddIcon />}
+  >
+    創建新任務
+  </Button>
 }
 
 function BackButton() {
@@ -59,8 +91,7 @@ function BackButton() {
         fontWeight="500"
         fontSize="14px"
         py="20px"
-        px="27"
-        me="38px"
+        minH="full"
         leftIcon={<BiArrowBack />}
       >
         返回動作面板

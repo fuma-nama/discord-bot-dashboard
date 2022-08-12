@@ -3,25 +3,21 @@ import {ExampleOptions} from "./example";
 
 const ActionTasks = [
     {
-        id: "action_id",
-        description: "Directly Kill Kane", //written by the user, it is nullable
-        status: "Waiting for his reply", //status of the action
+        id: 0,
+        status: "In Channel #Genernal", //status of the action, nullable
         createdAt: new Date(),
-        type: ActionTypes[0]
     },
     {
-        id: "action_id_2",
-        description: null,
-        status: "Ready to kill Kane In #General-Channel",
+        id: 1,
+        status: "In Channel #Genernal",
         createdAt: new Date(),
-        type: ActionTypes[1]
     }
 ]
 
 const Actions = [
     {
         id: "kill_kane",
-        banner: "",
+        banner: "https://images.unsplash.com/photo-1553095066-5014bc7b7f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80",
         name: "Kill Kane",
         description: "Kill Kane in a channel"
     },
@@ -31,28 +27,41 @@ const Actions = [
         name: "Kill Kane Every day",
         description: "Kill kane in a channel every day"
     }
-
 ]
 
-const TaskDetail = {
-    action: Actions[0],
-    options: ExampleOptions
+/**
+ * Only fetch when config.data.actions is not null
+ *
+ * @returns a custom data object
+ */
+export async function getActionsData(serverId) {
+    await delay(3000)
+    return {
+        test: "Test"
+    }
 }
 
 /**
- * @returns a string array of all actions types usable for server
+ *
+ * @returns {Promise<{tasks: {createdAt: Date, id: number, status: string}[]}>}
  */
-export async function getActions(serverId) {
+export async function getActionDetail(serverId, actionId) {
     await delay(3000)
-    return Actions
-}
-
-export async function getTasks(serverId, actionId) {
-
+    return {
+        tasks: ActionTasks
+    }
 }
 
 export async function getTaskDetail(serverId, actionId, taskId) {
+    await delay(2000)
+    return {
+        options: ExampleOptions
+    }
+}
 
+export async function addTask(serverId, actionId) {
+    await delay(2000)
+    return 0
 }
 
 export async function updateTask(serverId, actionId, taskId, options) {
