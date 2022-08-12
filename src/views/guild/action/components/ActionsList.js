@@ -1,8 +1,7 @@
-import {Flex, Text, useColorModeValue, Stack} from "@chakra-ui/react";
-import {useContext} from "react";
+import {Flex, Text, useColorModeValue, SimpleGrid} from "@chakra-ui/react";
 
 import {Action} from "./Action";
-import {ActionsContext, ActionsProvider} from "contexts/actions/ActionsContext";
+import {config} from "../../../../config/config";
 
 export default function ActionsList() {
     const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -20,24 +19,23 @@ export default function ActionsList() {
                     動作列表
                 </Text>
             </Flex>
-            <Stack direction="column" gap="20px">
-                <ActionsProvider>
-                    <Actions/>
-                </ActionsProvider>
-            </Stack>
+            <SimpleGrid columns={{base: 1, lg: 2}} gap="20px">
+                <Actions/>
+            </SimpleGrid>
         </Flex>
     );
 }
 
 function Actions() {
-    const {actions} = useContext(ActionsContext);
 
-    return actions.map((action) => {
+    return Object.entries(config.actions).map(([id, action]) => {
         return (
             <Action
-                key={action.id}
-                {...action}
-                configUrl={`../action/${action.id}`}
+                key={id}
+                action={{
+                    id: id,
+                    ...action
+                }}
             />
         );
     })

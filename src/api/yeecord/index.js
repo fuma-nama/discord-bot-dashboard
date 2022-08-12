@@ -17,10 +17,10 @@ export * from "./auth";
  * You may include other data
  *
  * example: {
- *     features: [...] //required
- *     another_data: {} //optional
+ *     enabled: [],
+ *     data: {} //nullable
  * }
- * @returns An object includes a features array
+ * @returns {enabled: string[], data: any} an object contains an array of enabled feature ids and custom data
  */
 export async function getFeatures(serverId) {
 
@@ -45,10 +45,10 @@ export async function getFeatureDetail(serverId, featureId) {
  * Update Feature options value
  */
 export async function updateFeatureOptions(serverId, featureId, options) {
-  return fetchAuto(`/guild/${serverId}/feature/${featureId}`, {
-    toJson: true,
+
+  await fetchAuto(`/guild/${serverId}/feature/${featureId}`, {
     method: "PATCH",
-    body: options
+    body: JSON.stringify(Object.fromEntries(options))
   })
 }
 

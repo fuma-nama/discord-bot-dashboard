@@ -149,7 +149,7 @@ export function ConfigPanel({options: defaultOptions, onSave: save}) {
         <>
             <ErrorModal
                 header="未能保存更改"
-                error={mutation.error}
+                error={mutation.error && mutation.error.toString()}
                 onClose={mutation.reset}
             />
             <Box mb={70}>
@@ -162,7 +162,7 @@ export function ConfigPanel({options: defaultOptions, onSave: save}) {
             <SaveAlert
                 visible={changes.size !== 0}
                 saving={mutation.isLoading}
-                onSave={mutation.mutate}
+                onSave={() => mutation.mutate(changes)}
                 onDiscard={onDiscard}
             />
         </>
