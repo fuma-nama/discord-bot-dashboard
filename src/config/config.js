@@ -2,6 +2,7 @@ import {dashboardData} from "./dashboard-data";
 import {KillKane} from "./features/kill-kane";
 import {BsPeopleFill} from "react-icons/bs";
 import {DataTypes} from "../variables/type";
+import {KillKaneAction} from "./actions/Killkane";
 
 /**
  * @type ConfigType
@@ -14,6 +15,9 @@ export const config = {
             url: ""
         }
     ],
+    actions: {
+        "kill_kane": KillKaneAction
+    },
     features: {
         "auto_kill_kane": KillKane
     },

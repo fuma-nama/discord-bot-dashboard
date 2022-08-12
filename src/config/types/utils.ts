@@ -1,10 +1,10 @@
 import {DataItem} from "./data";
-import {FeatureOption} from "./option";
+import {Option} from "./option";
 
 export function data(options: DataItem): DataItem {
     return options
 }
 
-export function option(options: FeatureOption): FeatureOption {
+export function option(options: Option): Option {
     return options
 }

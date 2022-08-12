@@ -1,5 +1,6 @@
-import {Feature, FeatureOption} from "./types/option";
+import {Option} from "./types/option";
 import {DataItem} from "./types/data";
+export declare const config: ConfigType
 
 export type DashboardDataRow = {
     advanced: boolean,
@@ -7,10 +8,6 @@ export type DashboardDataRow = {
     items: (detail: any) => DataItem[]
 }
 
-type Features = {
-    features: Feature[]
-    [key: string]: any
-}
 type FooterItem = {
     name: string,
     url: string
@@ -18,12 +15,26 @@ type FooterItem = {
 
 export type ConfigType = {
     name: string,
+    actions: {
+        [key: string]: {
+            banner?: any,
+            name: string,
+            description: string,
+            options: (data: any) => Option[]
+        }
+    },
     features: {
-        [key: string]: (data: any) => FeatureOption[]
+        [key: string]: {
+            banner?: any,
+            name: string,
+            description: string,
+            options: (data: any) => Option[]
+        }
     },
     data: {
-        features: (data: Features) => DataItem[],
-        dashboard: DashboardDataRow[]
+        features?: (data: any) => DataItem[],
+        dashboard: DashboardDataRow[],
+        actions?: (data: any) => DataItem[]
     },
     footer: FooterItem[]
 }

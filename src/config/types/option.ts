@@ -1,17 +1,9 @@
 import {DataItem} from "./data";
 
-export type FeatureOption =
+export type Option =
     BooleanOption | TextOption | EnumOption | NumberOption
     | ColorOption | MessageCreateOption
     | ArrayOption | IdEnumOption | EmojiOption | PairOption
-
-export type Feature = {
-    id: string,
-    banner?: string,
-    name: string,
-    description: string,
-    enabled: boolean,
-}
 
 type IOption = {
     id: string,
@@ -78,7 +70,7 @@ type MessageCreateOption = IOption & {
 type ArrayOption = IOption & {
     type: "array"
     element: {
-        type: FeatureOption["type"]
+        type: Option["type"]
         holder: any
     }
     value: any[] | null
