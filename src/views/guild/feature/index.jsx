@@ -44,7 +44,7 @@ function FeatureConfigPanel() {
   usePageInfo(detail.name)
 
   const options = useMemo(
-      () => config.features[detail.id](detail.values),
+      () => config.features[detail.id].options(detail.values),
       [detail.id]
   )
 

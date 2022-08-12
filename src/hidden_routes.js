@@ -1,5 +1,5 @@
 import Feature from "views/guild/feature";
-import ActionPanel from "./views/guild/action/config";
+import ActionTasks from "./views/guild/action/config";
 
 /**
  * Routes that cannot access from sidebar
@@ -12,7 +12,7 @@ const routes = [
   },
   {
     path: "action/:action",
-    component: <ActionPanel />
+    component: <ActionTasks />
   }
 ];
 

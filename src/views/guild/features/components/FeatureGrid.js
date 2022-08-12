@@ -2,11 +2,11 @@ import { Flex, Text, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
 import Feature from "components/card/Feature";
 import { useContext } from "react";
 
-import { FeatureContext } from "contexts/FeatureContext";
+import { FeaturesContext } from "contexts/FeaturesContext";
+import {config} from "../../../../config/config";
 
 export default function FeatureGrid() {
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const { features } = useContext(FeatureContext);
 
   return (
     <Flex direction="column">
@@ -22,15 +22,21 @@ export default function FeatureGrid() {
         </Text>
       </Flex>
       <SimpleGrid columns={{ base: 1, lg: 3, xl:2, "2xl": 3 }} gap="20px">
-        {features.map((feature) => {
-          return (
-            <Feature
-              key={feature.id}
-              {...feature}
-            />
-          );
-        })}
+        <Features />
       </SimpleGrid>
     </Flex>
   );
+}
+
+function Features() {
+    const {enabled} = useContext(FeaturesContext);
+
+    return Object.entries(config.features).map(([id, feature]) =>
+        <Feature
+            key={id}
+            {...feature}
+            id={id}
+            enabled={enabled.includes(id)}
+        />
+    )
 }
