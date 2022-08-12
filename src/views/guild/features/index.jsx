@@ -12,9 +12,8 @@ import {
 // Custom components
 import Banner from "./components/Banner";
 import FeatureGrid from "./components/FeatureGrid";
-import {FeatureContext, FeaturesProvider} from "contexts/FeatureContext";
+import {FeaturesContext, FeaturesProvider, useFeaturesDataQuery} from "contexts/FeaturesContext";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
-import {List} from "../../../components/card/List";
 import {DataList} from "../../../components/card/DataCard";
 import {config} from "../../../config/config";
 
@@ -28,9 +27,10 @@ export default function FeaturesBoard() {
 
 function Features() {
   usePageInfo("功能控制板")
-  const data = useContext(FeatureContext)
+  const {data} = useContext(FeaturesContext)
 
   if (config.data.features) {
+
     return (
         <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
           <Grid
@@ -51,7 +51,7 @@ function Features() {
                 flexDirection="column"
                 gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}
             >
-              <DataList items={config.featuresData(data)} />
+              <DataList items={config.data.features(data)} />
             </Flex>
           </Grid>
         </Box>
