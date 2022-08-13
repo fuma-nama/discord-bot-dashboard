@@ -7,7 +7,7 @@ export const KillKaneAction = {
             name: "殺死他的朋友",
             description: "當他的朋友加入時也殺死他們",
             type: "string",
-            value: values.test,
+            value: values? values.test : "",
         },
         {
             id: "kill_friends_types",
@@ -17,6 +17,7 @@ export const KillKaneAction = {
             choices: ["Gay", "Dalao", "None"],
             multiple: true, //allow selecting multi options, the value might be return as an array
             value: "Gay",
+            required: true
         },
         {
             id: "kill_friends_count",

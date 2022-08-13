@@ -6,9 +6,26 @@ export type Option =
     | ArrayOption | IdEnumOption | EmojiOption | PairOption
 
 type IOption = {
+    /**
+     * Option id for server-side to read
+     */
     id: string,
+    /**
+     * Field Name
+     */
     name: string,
-    description: string,
+    /**
+     * Nullable field description
+     */
+    description?: string,
+    /**
+     * If this field is required, the user must enter something to save it
+     */
+    required?: boolean,
+    /**
+     * Help text for form control
+     */
+    helper?: string
 }
 
 type BooleanOption = IOption & {
