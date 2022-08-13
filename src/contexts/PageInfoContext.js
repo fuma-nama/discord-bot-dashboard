@@ -16,7 +16,7 @@ export function usePageInfo(name) {
         setInfo({
             name,
         })
-    }, [name, setInfo])
+    }, Array.isArray(name)? name: [name])
 }
 
 export function PageInfoProvider({children}) {
