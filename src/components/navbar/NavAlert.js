@@ -80,8 +80,8 @@ export default function NavAlert({rootText, childText, children, clip = true}) {
                         </BreadcrumbItem>
                         {
                             Array.isArray(childText)?
-                                childText.map(text =>
-                                    <BreadcrumbItem color={secondaryText} fontSize="sm">
+                                childText.map((text, key) =>
+                                    <BreadcrumbItem key={key} color={secondaryText} fontSize="sm">
                                         <Text color={secondaryText}>{text}</Text>
                                     </BreadcrumbItem>
                                 ) :
