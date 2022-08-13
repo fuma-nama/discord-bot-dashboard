@@ -3,13 +3,14 @@ import {QueryHolder} from "../components/AsyncContext";
 import {useQuery} from "react-query";
 import {useParams} from "react-router-dom";
 import {getActionDetail} from "../../api/yeecord";
+import {config} from "../../config/config";
 
 export const ActionDetailContext = createContext({
     tasks: []
 })
 
 export function ActionDetailProvider({children}) {
-    const {guild, action} = useParams();
+    const {id: guild, action} = useParams();
     const query = useQuery(["action_detail", action], () =>
         getActionDetail(guild, action)
     )
@@ -19,4 +20,9 @@ export function ActionDetailProvider({children}) {
             {children}
         </ActionDetailContext.Provider>
     </QueryHolder>
+}
+
+export function useActionInfo() {
+    const {action} = useParams()
+    return config.actions[action]
 }
