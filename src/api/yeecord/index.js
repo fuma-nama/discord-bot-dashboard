@@ -35,7 +35,10 @@ export async function enableFeature(serverId, featureId) {
 }
 
 /**
- * @returns feature info, and configurable options
+ *
+ * @param serverId
+ * @param featureId
+ * @returns {Promise<{id: string, name: string, description: string, values: any}>} feature info and option values
  */
 export async function getFeatureDetail(serverId, featureId) {
   return fetchAuto(`/guild/${serverId}/feature/${featureId}`, {toJson: true})

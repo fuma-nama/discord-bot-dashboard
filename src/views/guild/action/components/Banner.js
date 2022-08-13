@@ -13,7 +13,7 @@ export default function BannerWrapper() {
         <Banner
             image={banner}
             title="通過儀表板直接管理您的服務器"
-            description="給你的服務器更多的Yee力，讓你的社區活躍起來!"
+            description="讓您的服務器充滿活力，活躍起來!"
             clip={false}
         >
             <Button

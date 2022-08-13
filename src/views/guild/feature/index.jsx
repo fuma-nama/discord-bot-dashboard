@@ -1,17 +1,16 @@
 import React, {useContext, useMemo} from "react";
 
-import {Box, Flex,} from "@chakra-ui/react";
+import {Box, Flex, Stack,} from "@chakra-ui/react";
 
 // Custom components
 import Banner from "./components/Banner";
 import {updateFeatureOptions} from "api/yeecord";
 
 import {FeatureDetailContext, FeatureDetailProvider,} from "contexts/FeatureDetailContext";
-import {usePageInfo} from "../../../contexts/PageInfoContext";
-import {GuildContext} from "../../../contexts/guild/GuildContext";
-import {ConfigPanel} from "../../../components/fields/ConfigPanel";
-import {config} from "../../../config/config";
-import {useNavigate, useParams} from "react-router-dom";
+import {usePageInfo} from "contexts/PageInfoContext";
+import {GuildContext} from "contexts/guild/GuildContext";
+import {ConfigPanel} from "components/fields/ConfigPanel";
+import {config} from "config/config";
 import NotFound from "../../info/Not_Found";
 
 export default function FeaturePanel() {
@@ -24,7 +23,6 @@ export default function FeaturePanel() {
   return (
     <FeatureDetailProvider featureId={featureId}>
       <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-        {/* Main Fields */}
         <Flex
             flexDirection="column"
             mb="10"
@@ -51,6 +49,8 @@ function FeatureConfigPanel() {
   const onSave = (changes) => updateFeatureOptions(serverId, detail.id, changes);
 
   return (
-      <ConfigPanel onSave={onSave} options={options} />
+      <Stack mt="10" mb={70}>
+        <ConfigPanel onSave={onSave} options={options} />
+      </Stack>
   );
 }

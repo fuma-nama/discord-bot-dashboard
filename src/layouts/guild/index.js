@@ -5,8 +5,8 @@ import Footer from "components/footer/FooterAdmin.js";
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import {PageInfoProvider} from "contexts/PageInfoContext";
-import React, {useContext} from "react";
-import {Navigate, Outlet, Route, useParams} from "react-router-dom";
+import React, {useContext, useEffect} from "react";
+import {Navigate, Outlet, Route, useLocation, useParams} from "react-router-dom";
 import {UserDataProvider} from "contexts/UserDataContext";
 //routes
 import routes from "routes.js";
