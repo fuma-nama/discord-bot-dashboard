@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 
 // Chakra imports
-import {Box, Button, Flex, HStack, Text} from "@chakra-ui/react";
+import {Box, Button, Flex, HStack, Stack, Text} from "@chakra-ui/react";
 // Assets
 import bannerImg from "assets/img/common/ActionBanner.jpg";
 import {GuildContext} from "contexts/guild/GuildContext";
@@ -25,7 +25,7 @@ export default function ActionBanner({children}) {
             backdropFilter="auto"
             backdropBrightness={0.5}
             py={{ base: "30px", md: "56px" }}
-            px={{ base: "30px", md: "64px" }}
+            px={{ base: "10px", "2sm": "30px", md: "64px" }}
         >
           <Text
               fontSize={{ base: "24px", md: "34px" }}
@@ -44,9 +44,9 @@ export default function ActionBanner({children}) {
           >
             {description}
           </Text>
-          <HStack mt={5} align="center">
+          <Stack mt={5} direction={{base: "column", sm: "row"}} gap={3} spacing={0}>
             {children}
-          </HStack>
+          </Stack>
         </Flex>
       </Box>
   );

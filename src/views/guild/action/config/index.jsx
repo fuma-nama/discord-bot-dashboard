@@ -41,7 +41,7 @@ function TasksPanel() {
 
     usePageInfo(["動作", name])
 
-    return <Flex direction="column" gap={5} p={10}>
+    return <Flex direction="column" gap={5} pt={10} px={{base: 1, md: 3, lg: 10}}>
         <Text align="center" fontSize={24} fontWeight="bold">運行中</Text>
         <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
             {

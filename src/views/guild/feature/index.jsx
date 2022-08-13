@@ -12,6 +12,7 @@ import {GuildContext} from "contexts/guild/GuildContext";
 import {ConfigPanel} from "components/fields/ConfigPanel";
 import {config} from "config/config";
 import NotFound from "../../info/Not_Found";
+import {useParams} from "react-router-dom";
 
 export default function FeaturePanel() {
   const { feature: featureId } = useParams()
