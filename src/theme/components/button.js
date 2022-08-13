@@ -94,6 +94,19 @@ export const buttonStyles = {
             bg: mode("secondaryGray.200", "brand.400")(props),
           },
         }),
+        danger: (props) => ({
+          bg: mode("red.500", "red.400")(props),
+          color: "white",
+          _focus: {
+            bg: mode("red.500", "red.400")(props),
+          },
+          _active: {
+            bg: mode("red.500", "red.400")(props),
+          },
+          _hover: {
+            bg: mode("red.600", "red.400")(props),
+          },
+        }),
         setup: (props) => ({
           fontWeight: "500",
           borderRadius: "50px",
