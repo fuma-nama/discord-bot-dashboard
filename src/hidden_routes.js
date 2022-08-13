@@ -1,5 +1,7 @@
 import Feature from "views/guild/feature";
 import ActionTasks from "./views/guild/action/config";
+import SubmitTaskBoard from "./views/guild/action/add";
+import TaskConfigBoard from "./views/guild/action/task";
 
 /**
  * Routes that cannot access from sidebar
@@ -13,6 +15,14 @@ const routes = [
   {
     path: "action/:action",
     component: <ActionTasks />
+  },
+  {
+    path: "action/:action/task/:task",
+    component: <TaskConfigBoard />
+  },
+  {
+    path: "action/:action/add",
+    component: <SubmitTaskBoard />
   }
 ];
 
