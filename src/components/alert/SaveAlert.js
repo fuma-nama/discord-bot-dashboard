@@ -1,17 +1,17 @@
 import {
-  Button,
-  Text,
-  useColorModeValue,
-  Alert,
-  AlertIcon,
-  ButtonGroup,
-  Slide,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
+    Button,
+    Text,
+    useColorModeValue,
+    Alert,
+    AlertIcon,
+    ButtonGroup,
+    Slide,
+    Modal,
+    ModalContent,
+    ModalHeader,
+    ModalCloseButton,
+    ModalBody,
+    ModalFooter, Box, Flex,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -90,13 +90,13 @@ export function SubmitAlert({loading, visible, onSubmit}) {
             bg={alertBg}
             textColor={mainText}
             mb="10"
-            flexDirection={{base: "column", md: "row"}}
+            flexDirection={{base: "column", "2sm": "row"}}
         >
-          <AlertIcon />
-          您現在可以創建任務了
-          <Button ml="auto" bg={brand} isLoading={loading} onClick={onSubmit}>
-            發布任務
-          </Button>
+            <AlertIcon />
+            您現在可以創建任務了
+            <Button ml={{"2sm": "auto"}} bg={brand} isLoading={loading} onClick={onSubmit}>
+                發布任務
+            </Button>
         </Alert>
       </Slide>
   );
