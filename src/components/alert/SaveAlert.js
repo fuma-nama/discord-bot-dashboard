@@ -21,31 +21,15 @@ export function SaveAlert({
   onSave,
   onDiscard,
 }) {
-  const [error, setError] = useState(null);
   let alertBg = useColorModeValue(
     "rgba(244, 247, 254, 0.7)",
     "rgba(11,20,55,0.7)"
   );
-  let modalBg = useColorModeValue("rgba(244, 247, 254)", "rgba(11,20,55)");
 
   let mainText = useColorModeValue("navy.700", "white");
   let brand = useColorModeValue("green.300", "green.500");
 
   return (
-    <>
-      <Modal isCentered isOpen={error != null} onClose={() => setError(null)}>
-        <ModalContent bg={modalBg} rounded="2xl">
-          <ModalHeader>未能保存更改</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>{error}</Text>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button onClick={() => setError(null)}>關閉</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
       <Slide direction="bottom" in={visible} style={{ zIndex: 10 }}>
         <Alert
           w={{
@@ -77,6 +61,43 @@ export function SaveAlert({
           </ButtonGroup>
         </Alert>
       </Slide>
-    </>
+  );
+}
+
+export function SubmitAlert({loading, visible, onSubmit}) {
+  let alertBg = useColorModeValue(
+      "rgba(244, 247, 254, 0.7)",
+      "rgba(11,20,55,0.7)"
+  );
+
+  let mainText = useColorModeValue("navy.700", "white");
+  let brand = useColorModeValue("green.300", "green.500");
+
+  return (
+      <Slide direction="bottom" in={visible} style={{ zIndex: 10 }}>
+        <Alert
+            w={{
+              base: "calc(100vw - 6%)",
+              md: "calc(100vw - 8%)",
+              lg: "calc(100vw - 6%)",
+              xl: "calc(100vw - 350px)",
+              "2xl": "calc(100vw - 365px)",
+            }}
+            mx="auto"
+            rounded="2xl"
+            status="warning"
+            backdropFilter="blur(10px)"
+            bg={alertBg}
+            textColor={mainText}
+            mb="10"
+            flexDirection={{base: "column", md: "row"}}
+        >
+          <AlertIcon />
+          您現在可以創建任務了
+          <Button ml="auto" bg={brand} isLoading={loading} onClick={onSubmit}>
+            發布任務
+          </Button>
+        </Alert>
+      </Slide>
   );
 }
