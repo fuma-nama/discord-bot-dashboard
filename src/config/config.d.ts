@@ -20,7 +20,7 @@ export type ConfigType = {
             banner?: any,
             name: string,
             description: string,
-            options: (data: any) => Option[]
+            options: (data: any | null) => Option[]
         }
     },
     features: {
