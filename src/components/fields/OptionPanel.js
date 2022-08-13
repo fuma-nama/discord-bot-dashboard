@@ -1,4 +1,4 @@
-import {Box, Switch, Text} from "@chakra-ui/react";
+import {FormControl, FormHelperText, FormLabel, Switch, Text} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import {SelectField} from "components/fields/SelectField";
 import {InputField} from "./impl/InputField";
@@ -16,17 +16,22 @@ import {OptionTypes} from "../../variables/type";
 export function OptionPanel({value, onChange, option}) {
     const input = useInput(value, onChange, option)
 
-    const inline = option.type === "boolean"
+    const inline = option.type === OptionTypes.Boolean
 
     return (
         <Card flexDirection={inline ? "row-reverse" : "column"} gap={5}>
-            <Box w="full">
-                <Text fontWeight="extrabold" fontSize="xl">
-                    {option.name}
-                </Text>
-                <Text>{option.description}</Text>
-            </Box>
-            {input}
+            <FormControl isRequired={option.required}>
+                <FormLabel fontSize="xl" fontWeight="bold">{option.name}</FormLabel>
+                {option.description &&
+                    <Text mb={5}>{option.description}</Text>
+                }
+                {input}
+                {option.helper &&
+                    <FormHelperText>
+                        {option.helper}
+                    </FormHelperText>
+                }
+            </FormControl>
         </Card>
     );
 }

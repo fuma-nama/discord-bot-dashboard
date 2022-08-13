@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import { Stack } from "@chakra-ui/react";
 import {OptionPanel} from "./OptionPanel";
 import {SaveAlert} from "components/alert/SaveAlert";
 import ErrorModal from "../modal/ErrorModal";
@@ -18,7 +17,7 @@ export function ConfigItemList({options, changes, onChange}) {
     ))
 }
 
-export function ConfigPanel({options: defaultOptions, onSave: save}) {
+export function ConfigPanel({options: defaultOptions, hasChanges = false, onDiscard, onSave: save}) {
     const [options, setOptions] = useState(defaultOptions);
     const [changes, setChanges] = useState(new Map());
     const mutation = useMutation(save, {
@@ -49,10 +48,6 @@ export function ConfigPanel({options: defaultOptions, onSave: save}) {
         setChanges(new Map());
     }
 
-    const onDiscard = () => {
-        setChanges(new Map())
-    };
-
     return (
         <>
             <ErrorModal
@@ -60,18 +55,22 @@ export function ConfigPanel({options: defaultOptions, onSave: save}) {
                 error={mutation.error && mutation.error.toString()}
                 onClose={mutation.reset}
             />
-            <Stack mt="10" mb={70}>
-                <ConfigItemList
-                    options={options}
-                    changes={changes}
-                    onChange={onChange}
-                />
-            </Stack>
+            <ConfigItemList
+                options={options}
+                changes={changes}
+                onChange={onChange}
+            />
             <SaveAlert
-                visible={changes.size !== 0}
+                visible={hasChanges || changes.size !== 0}
                 saving={mutation.isLoading}
                 onSave={() => mutation.mutate(changes)}
-                onDiscard={onDiscard}
+                onDiscard={() => {
+                    setChanges(new Map())
+
+                    if (onDiscard != null) {
+                        onDiscard()
+                    }
+                }}
             />
         </>
     );

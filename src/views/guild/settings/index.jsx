@@ -1,12 +1,12 @@
 import React, {useContext} from "react";
 
-import {Box, Flex,} from "@chakra-ui/react";
+import {Box, Flex, Stack,} from "@chakra-ui/react";
 
-import {usePageInfo} from "../../../contexts/PageInfoContext";
+import {usePageInfo} from "contexts/PageInfoContext";
 import {SettingsContext, SettingsProvider} from "../../../contexts/guild/GuildSettingsContext";
-import {GuildContext} from "../../../contexts/guild/GuildContext";
-import {ConfigPanel} from "../../../components/fields/ConfigPanel";
-import {updateSettingsOptions} from "../../../api/yeecord";
+import {GuildContext} from "contexts/guild/GuildContext";
+import {ConfigPanel} from "components/fields/ConfigPanel";
+import {updateSettingsOptions} from "api/yeecord";
 
 export default function SettingsPanel() {
     usePageInfo("服務器設置")
@@ -33,6 +33,8 @@ function SettingsConfigPanel() {
   const onSave = (changes) => updateSettingsOptions(serverId, changes)
 
   return (
-   <ConfigPanel options={settings.options} onSave={onSave} />
+      <Stack mt="10" mb={70}>
+          <ConfigPanel options={settings.options} onSave={onSave} />
+      </Stack>
   );
 }
