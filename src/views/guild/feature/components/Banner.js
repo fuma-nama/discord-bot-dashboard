@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 
 // Chakra imports
 import {Button} from "@chakra-ui/react";
-import {FeatureDetailContext} from "contexts/FeatureDetailContext";
+import {FeatureDetailContext, useFeatureInfo} from "contexts/FeatureDetailContext";
 import Banner from "components/card/Banner";
 // Assets
 import banner from "assets/img/layout/NftBanner1.png";
@@ -11,7 +11,7 @@ import {BiArrowBack} from "react-icons/bi";
 import {Link} from "react-router-dom";
 
 export default function BannerWrapper() {
-    const {name, description} = useContext(FeatureDetailContext);
+    const {name, description} = useFeatureInfo()
 
     return (
         <Banner
