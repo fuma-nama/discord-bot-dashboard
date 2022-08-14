@@ -1,22 +1,32 @@
 import {api} from "variables/links";
 
 export const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-export function fetchAuto(url, {toJson = false, autoRead = true, ...options} = {}) {
-    let request = fetch(`${api}${url}`, {
+export function fetchAuto(url, {toJson = false, throwError = true, ...options} = {}) {
+    const request = fetch(`${api}${url}`, {
         credentials: "include",
         headers: {
             'content-type': 'application/json'
         },
         ...options
     })
+    let mapper
 
     if (toJson) {
-        request = request.then(res => res.json())
-    } else if (autoRead) {
-        request = request.then(res =>
-            res.text().then(() => res)
-        )
+        mapper = res => res.json()
+    } else {
+        mapper = res => res.text().then(() => res)
     }
 
-    return request
+    return request.then(res => {
+
+        if (res.ok) {
+
+            return mapper? mapper(res) : res
+        } else if (throwError) {
+            return res.text().then(s => {
+                const error = new Error(s);
+                throw error
+            })
+        }
+    })
 }
