@@ -36,7 +36,7 @@ export default function ServerPicker({query, ...rest}) {
                     maxW: "900px"
                 }}/>
             </Flex>
-            <SimpleGrid columns={{base: 1, md: 2, xl: 3}} gap={5}>
+            <SimpleGrid columns={{base: 1, lg: 2, "2xl": 3}} gap={5}>
                 <QueryHolderSkeleton count={3} query={query}>
                     <Servers filter={filter} guilds={query.data}/>
                 </QueryHolderSkeleton>
