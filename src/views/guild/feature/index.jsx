@@ -6,23 +6,30 @@ import {Box, Flex, Stack,} from "@chakra-ui/react";
 import Banner from "./components/Banner";
 import {updateFeatureOptions} from "api/yeecord";
 
-import {FeatureDetailContext, FeatureDetailProvider,} from "contexts/FeatureDetailContext";
+import {FeatureDetailContext, FeatureDetailProvider, useFeatureInfo,} from "contexts/FeatureDetailContext";
 import {usePageInfo} from "contexts/PageInfoContext";
 import {GuildContext} from "contexts/guild/GuildContext";
-import {ConfigGrid, ConfigPanel} from "components/fields/ConfigPanel";
+import {ConfigGrid} from "components/fields/ConfigPanel";
 import {config} from "config/config";
 import NotFound from "../../info/Not_Found";
 import {useParams} from "react-router-dom";
 
-export default function FeaturePanel() {
-  const { feature: featureId } = useParams()
+export default function Feature() {
+  const { feature } = useParams()
 
-  if (config.features[featureId] == null) {
+  if (config.features[feature] == null) {
     return <NotFound />
+  } else {
+    return <FeaturePanel />
   }
+}
+
+function FeaturePanel() {
+  const {id, name} = useFeatureInfo()
+
+  usePageInfo(name)
 
   return (
-    <FeatureDetailProvider featureId={featureId}>
       <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
         <Flex
             flexDirection="column"
@@ -30,26 +37,25 @@ export default function FeaturePanel() {
             gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
         >
           <Banner />
-          <FeatureConfigPanel />
+          <FeatureDetailProvider featureId={id}>
+            <FeatureConfigPanel />
+          </FeatureDetailProvider>
         </Flex>
       </Box>
-    </FeatureDetailProvider>
   );
 }
 
 function FeatureConfigPanel() {
   const {id: serverId } = useContext(GuildContext);
-  const detail = useContext(FeatureDetailContext)
-  usePageInfo(detail.name)
+  const {values} = useContext(FeatureDetailContext)
+  const info = useFeatureInfo()
 
   const options = useMemo(
-      () => config.features[detail.id].options(detail.values),
-      [detail.id]
+      () => info.options(values),
+      [info.id]
   )
 
-  const onSave = (changes) => updateFeatureOptions(serverId, detail.id, changes);
+  const onSave = (changes) => updateFeatureOptions(serverId, info.id, changes);
 
-  return (
-        <ConfigGrid onSave={onSave} options={options} />
-  )
+  return <ConfigGrid onSave={onSave} options={options} />
 }
