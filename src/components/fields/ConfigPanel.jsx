@@ -7,13 +7,12 @@ import {SimpleGrid, SlideFade} from "@chakra-ui/react";
 
 export function ConfigItemListAnimated({options, changes, onChange}) {
     return options.map((option) => (
-        <SlideFade in={true}>
+        <SlideFade key={option.id} in={true}>
             <OptionPanel
                 option={option}
                 value={
                     changes && changes.has(option.id) ? changes.get(option.id) : option.value
                 }
-                key={option.id}
                 onChange={(v) => onChange(option.id, v)}
             />
         </SlideFade>
@@ -32,7 +31,6 @@ export function ConfigItemList({options, changes, onChange}) {
             />
     ))
 }
-
 
 export function ConfigGrid({options, onSave}) {
     return <SimpleGrid columns={{base: 1, lg: 2}} gap={5} mt={10}>
