@@ -1,12 +1,12 @@
 // Chakra imports
-import {Box, Button, Flex, Image, Text, useColorModeValue,} from "@chakra-ui/react";
+import {Box, Button, ButtonGroup, Flex, Image, Text, useColorModeValue,} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
 // Custom components
 import Card from "components/card/Card.js";
 // Assets
 import React, {useContext, useState} from "react";
 import {GuildContext} from "../../contexts/guild/GuildContext";
-import {enableFeature} from "api/yeecord";
+import {setFeatureEnabled} from "api/yeecord";
 import {useMutation, useQueryClient} from "react-query";
 
 export default function Feature({
@@ -14,20 +14,31 @@ export default function Feature({
                                     name,
                                     description,
                                     id: featureId,
-                                    enabled: featureEnabled,
+                                    enabled,
                                 }) {
-    const [enabled, setEnabled] = useState(featureEnabled);
     const {id: serverId} = useContext(GuildContext);
     const client = useQueryClient()
 
     const configUrl = `/guild/${serverId}/feature/${featureId}`
     const enableMutation = useMutation(
-        () => enableFeature(serverId, featureId),
+        (enabled) => setFeatureEnabled(serverId, featureId, enabled),
         {
-            onSuccess() {
-                setEnabled(true)
+            onSuccess(_, enabled) {
+                const modify = (data) => {
+                    if (enabled) {
+                        return [...data.enabled, featureId]
+                    } else {
+                        return data.enabled.filter(id => featureId !== id)
+                    }
+                }
 
-                return client.invalidateQueries(["features", serverId])
+                return client.setQueryData(
+                    ["features", serverId],
+                    data => ({
+                        ...data,
+                        enabled: modify(data)
+                    })
+                )
             }
         }
     )
@@ -47,14 +58,12 @@ export default function Feature({
                         borderRadius="20px"
                     />
                 </Box>}
-                <Flex flexDirection="column" justify="space-between" h="100%">
+                <Flex flexDirection="column" justify="space-between" h="100%" gap={3}>
                     <Flex direction="column">
                         <Text
                             color={textColor}
                             fontSize="lg"
-                            mb="5px"
                             fontWeight="bold"
-                            me="14px"
                         >
                             {name}
                         </Text>
@@ -62,21 +71,20 @@ export default function Feature({
                             color={detailColor}
                             fontSize="sm"
                             fontWeight="400"
-                            me="14px"
                         >
                             {description}
                         </Text>
                     </Flex>
-                    <Flex mt="5">
-                        {enabled ? (
+                    <ButtonGroup mt="5">
+                        {enabled && (
                             <ConfigButton configUrl={configUrl}/>
-                        ) : (
-                            <EnableButton
-                                enabling={enableMutation.isLoading}
-                                onEnable={enableMutation.mutate}
-                            />
                         )}
-                    </Flex>
+                        <EnableButton
+                            enabled={enabled}
+                            isLoading={enableMutation.isLoading}
+                            onChange={enableMutation.mutate}
+                        />
+                    </ButtonGroup>
                 </Flex>
             </Flex>
         </Card>
@@ -101,17 +109,17 @@ function ConfigButton({configUrl}) {
     );
 }
 
-function EnableButton({enabling, onEnable}) {
+function EnableButton({enabled, isLoading, onChange}) {
     return (
         <Button
-            onClick={onEnable}
-            isLoading={enabling}
+            onClick={() => onChange(!enabled)}
+            isLoading={isLoading}
             fontSize="sm"
             borderRadius="70px"
             px="24px"
             py="5px"
         >
-            啟用此功能
+            {enabled? "禁用" : "啟用"}此功能
         </Button>
     );
 }

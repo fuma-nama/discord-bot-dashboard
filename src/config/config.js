@@ -1,7 +1,5 @@
 import {dashboardData} from "./dashboard-data";
 import {KillKane} from "./features/kill-kane";
-import {BsPeopleFill} from "react-icons/bs";
-import {DataTypes} from "../variables/type";
 import {KillKaneAction} from "./actions/Killkane";
 
 /**
@@ -32,6 +30,7 @@ export const config = {
     },
     data: {
         dashboard: dashboardData,
+        /*
         features: data => [
             {
                 name: "測試版功能",
@@ -41,5 +40,6 @@ export const config = {
                 value: data.betaFeatures
             }
         ]
+         */
     },
 }

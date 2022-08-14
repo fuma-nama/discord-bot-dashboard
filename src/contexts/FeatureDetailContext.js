@@ -4,6 +4,7 @@ import {GuildContext} from "./guild/GuildContext";
 import {getFeatureDetail} from "api/yeecord";
 import {useQuery} from "react-query";
 import {useParams} from "react-router-dom";
+import {config} from "../config/config";
 
 export const FeatureDetailContext = createContext({
   id: null,
@@ -28,4 +29,13 @@ export function FeatureDetailProvider({children, featureId}) {
         </FeatureDetailContext.Provider>
     </QueryHolder>
   );
+}
+
+export function useFeatureInfo() {
+    const { feature } = useParams()
+
+    return {
+        id: feature,
+        ...config.features[feature]
+    }
 }

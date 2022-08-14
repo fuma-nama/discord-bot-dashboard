@@ -30,15 +30,19 @@ export async function getFeatures(serverId) {
 /**
  * Enable a feature for a server
  */
-export async function enableFeature(serverId, featureId) {
-  await delay(2000);
+export async function setFeatureEnabled(serverId, featureId, enabled = true) {
+
+  return fetchAuto(`/guild/${serverId}/feature/${featureId}/enabled`, {
+    method: "PATCH",
+    body: enabled,
+  })
 }
 
 /**
  *
  * @param serverId
  * @param featureId
- * @returns {Promise<{id: string, name: string, description: string, values: any}>} feature info and option values
+ * @returns {Promise<{values: any}>} a map of option values
  */
 export async function getFeatureDetail(serverId, featureId) {
   return fetchAuto(`/guild/${serverId}/feature/${featureId}`, {toJson: true})
