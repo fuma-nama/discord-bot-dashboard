@@ -42,10 +42,7 @@ function TaskConfigPanel() {
             </ActionBanner>
             <Stack mt={10} gap={5}>
                 <Text fontSize={25} fontWeight="bold">修改任務</Text>
-
-                <SlideFade in={true}>
-                    <Config />
-                </SlideFade>
+                <Config />
             </Stack>
         </Flex>
     </Box>

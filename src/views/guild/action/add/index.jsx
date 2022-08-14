@@ -15,12 +15,11 @@ import {useActionInfo} from "contexts/actions/ActionDetailContext";
 import {useMutation, useQueryClient} from "react-query";
 import ErrorModal from "components/modal/ErrorModal";
 import {SubmitAlert} from "components/alert/SaveAlert";
-import {ConfigItemList} from "components/fields/ConfigPanel";
-import Card from "components/card/Card";
-import {InputField} from "components/fields/impl/InputField";
+import {ConfigItemListAnimated} from "components/fields/ConfigPanel";
 import {useNavigate, useParams} from "react-router-dom";
 import {addTask} from "api/yeecord";
 import {GuildContext} from "contexts/guild/GuildContext";
+import NameInput from "../components/NameInput";
 
 export default function SubmitTaskBoard() {
   return <SubmitTask />
@@ -86,22 +85,8 @@ function ConfigPanel() {
                 error={mutation.error && mutation.error.toString()}
                 onClose={mutation.reset}
             />
-            <Card gap={5}>
-                <FormControl isRequired>
-                    <FormLabel fontSize="lg" fontWeight="bold">Task Name</FormLabel>
-                    <InputField
-                        value={name}
-                        placeholder="請輸入文字"
-                        onChange={({target}) =>
-                            mutation.isLoading || setName(target.value)
-                        }
-                    />
-                    <FormHelperText>
-                        你必須輸入一個名字
-                    </FormHelperText>
-                </FormControl>
-            </Card>
-            <ConfigItemList
+            <NameInput value={name} onChange={setName} />
+            <ConfigItemListAnimated
                 options={options}
                 changes={changes}
                 onChange={onChange}

@@ -5,25 +5,39 @@ import ErrorModal from "../modal/ErrorModal";
 import {useMutation} from "react-query";
 import {SimpleGrid, SlideFade} from "@chakra-ui/react";
 
-export function ConfigItemList({options, changes, onChange}) {
+export function ConfigItemListAnimated({options, changes, onChange}) {
     return options.map((option) => (
-        <OptionPanel
-            option={option}
-            value={
-                changes && changes.has(option.id) ? changes.get(option.id) : option.value
-            }
-            key={option.id}
-            onChange={(v) => onChange(option.id, v)}
-        />
+        <SlideFade in={true}>
+            <OptionPanel
+                option={option}
+                value={
+                    changes && changes.has(option.id) ? changes.get(option.id) : option.value
+                }
+                key={option.id}
+                onChange={(v) => onChange(option.id, v)}
+            />
+        </SlideFade>
     ))
 }
 
+export function ConfigItemList({options, changes, onChange}) {
+    return options.map((option) => (
+            <OptionPanel
+                option={option}
+                value={
+                    changes && changes.has(option.id) ? changes.get(option.id) : option.value
+                }
+                key={option.id}
+                onChange={(v) => onChange(option.id, v)}
+            />
+    ))
+}
+
+
 export function ConfigGrid({options, onSave}) {
-    return <SlideFade in={true}>
-        <SimpleGrid columns={{base: 1, lg: 2}} gap={5} mt={10}>
-            <ConfigPanel options={options} onSave={onSave} />
-        </SimpleGrid>
-    </SlideFade>
+    return <SimpleGrid columns={{base: 1, lg: 2}} gap={5} mt={10}>
+        <ConfigPanel options={options} onSave={onSave} />
+    </SimpleGrid>
 }
 
 export function ConfigPanel({options: defaultOptions, hasChanges = false, onDiscard, onSave: save}) {
@@ -64,7 +78,7 @@ export function ConfigPanel({options: defaultOptions, hasChanges = false, onDisc
                 error={mutation.error && mutation.error.toString()}
                 onClose={mutation.reset}
             />
-            <ConfigItemList
+            <ConfigItemListAnimated
                 options={options}
                 changes={changes}
                 onChange={onChange}

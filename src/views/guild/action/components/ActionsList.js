@@ -30,9 +30,8 @@ function Actions() {
 
     return Object.entries(config.actions).map(([id, action]) => {
         return (
-            <ScaleFade in={true}>
+            <ScaleFade key={id} in={true}>
                 <Action
-                    key={id}
                     action={{
                         id: id,
                         ...action

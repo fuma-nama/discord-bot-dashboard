@@ -56,12 +56,15 @@ export async function updateFeatureOptions(serverId, featureId, options) {
 }
 
 /**
- * Get configurable settings of a server
+ * Get configuration settings values of a server
+ * @return {values: any}
  */
 export async function getSettings(serverId) {
   await delay(3000)
   return {
-    options: ExampleOptions,
+    values: {
+      test: "Test"
+    },
   }
 }
 
