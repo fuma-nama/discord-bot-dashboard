@@ -12,11 +12,11 @@ export const KillKane = {
             value: true, //value must be nonnull in string, boolean, number type
         },
         {
-            id: "test",
+            id: "message",
             name: "殺死他的朋友",
             description: "當他的朋友加入時也殺死他們",
             type: "string",
-            value: values.test,
+            value: values.message,
         },
         {
             id: "kill_friends_types",
