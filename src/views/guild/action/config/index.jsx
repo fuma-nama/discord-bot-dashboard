@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 
-import {Box, Button, ButtonGroup, Flex, HStack, SimpleGrid, Text, VStack} from "@chakra-ui/react";
+import {Box, Button, ButtonGroup, Flex, HStack, SimpleGrid, SlideFade, Text, VStack} from "@chakra-ui/react";
 
 import {usePageInfo} from "contexts/PageInfoContext";
 import {ActionDetailContext, ActionDetailProvider, useActionInfo} from "contexts/actions/ActionDetailContext";
@@ -43,13 +43,15 @@ function TasksPanel() {
 
     return <Flex direction="column" gap={5} pt={10} px={{base: 1, md: 3, lg: 10}}>
         <Text align="center" fontSize={24} fontWeight="bold">運行中</Text>
-        <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
-            {
-                tasks.map(task =>
-                    <Task key={task.id} task={task} />
-                )
-            }
-        </SimpleGrid>
+        <SlideFade in={true}>
+            <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
+                {
+                    tasks.map(task =>
+                        <Task key={task.id} task={task} />
+                    )
+                }
+            </SimpleGrid>
+        </SlideFade>
     </Flex>
 }
 

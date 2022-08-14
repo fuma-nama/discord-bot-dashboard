@@ -9,7 +9,7 @@ import {updateFeatureOptions} from "api/yeecord";
 import {FeatureDetailContext, FeatureDetailProvider,} from "contexts/FeatureDetailContext";
 import {usePageInfo} from "contexts/PageInfoContext";
 import {GuildContext} from "contexts/guild/GuildContext";
-import {ConfigPanel} from "components/fields/ConfigPanel";
+import {ConfigGrid, ConfigPanel} from "components/fields/ConfigPanel";
 import {config} from "config/config";
 import NotFound from "../../info/Not_Found";
 import {useParams} from "react-router-dom";
@@ -50,8 +50,6 @@ function FeatureConfigPanel() {
   const onSave = (changes) => updateFeatureOptions(serverId, detail.id, changes);
 
   return (
-      <Stack mt="10" mb={70}>
-        <ConfigPanel onSave={onSave} options={options} />
-      </Stack>
-  );
+        <ConfigGrid onSave={onSave} options={options} />
+  )
 }

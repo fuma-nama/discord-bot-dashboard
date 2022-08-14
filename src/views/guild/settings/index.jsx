@@ -5,7 +5,7 @@ import {Box, Flex, Stack,} from "@chakra-ui/react";
 import {usePageInfo} from "contexts/PageInfoContext";
 import {SettingsContext, SettingsProvider} from "../../../contexts/guild/GuildSettingsContext";
 import {GuildContext} from "contexts/guild/GuildContext";
-import {ConfigPanel} from "components/fields/ConfigPanel";
+import {ConfigGrid, ConfigPanel} from "components/fields/ConfigPanel";
 import {updateSettingsOptions} from "api/yeecord";
 
 export default function SettingsPanel() {
@@ -33,8 +33,6 @@ function SettingsConfigPanel() {
   const onSave = (changes) => updateSettingsOptions(serverId, changes)
 
   return (
-      <Stack mt="10" mb={70}>
-          <ConfigPanel options={settings.options} onSave={onSave} />
-      </Stack>
-  );
+      <ConfigGrid options={settings.options} onSave={onSave} />
+  )
 }

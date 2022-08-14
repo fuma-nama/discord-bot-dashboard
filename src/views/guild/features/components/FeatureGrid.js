@@ -1,4 +1,4 @@
-import { Flex, Text, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
+import {Flex, Text, SimpleGrid, useColorModeValue, SlideFade} from "@chakra-ui/react";
 import Feature from "components/card/Feature";
 import { useContext } from "react";
 
@@ -21,9 +21,11 @@ export default function FeatureGrid() {
           功能列表
         </Text>
       </Flex>
-      <SimpleGrid columns={{ base: 1, lg: 3, xl:2, "2xl": 3 }} gap="20px">
-        <Features />
-      </SimpleGrid>
+        <SlideFade in={true} offsetY='20px'>
+            <SimpleGrid columns={{ base: 1, lg: 3, xl:2, "2xl": 3 }} gap="20px">
+                <Features />
+            </SimpleGrid>
+        </SlideFade>
     </Flex>
   );
 }

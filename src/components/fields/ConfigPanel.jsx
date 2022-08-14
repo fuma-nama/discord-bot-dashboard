@@ -3,6 +3,7 @@ import {OptionPanel} from "./OptionPanel";
 import {SaveAlert} from "components/alert/SaveAlert";
 import ErrorModal from "../modal/ErrorModal";
 import {useMutation} from "react-query";
+import {SimpleGrid, SlideFade} from "@chakra-ui/react";
 
 export function ConfigItemList({options, changes, onChange}) {
     return options.map((option) => (
@@ -15,6 +16,14 @@ export function ConfigItemList({options, changes, onChange}) {
             onChange={(v) => onChange(option.id, v)}
         />
     ))
+}
+
+export function ConfigGrid({options, onSave}) {
+    return <SlideFade in={true}>
+        <SimpleGrid columns={{base: 1, lg: 2}} gap={5} mt={10}>
+            <ConfigPanel options={options} onSave={onSave} />
+        </SimpleGrid>
+    </SlideFade>
 }
 
 export function ConfigPanel({options: defaultOptions, hasChanges = false, onDiscard, onSave: save}) {

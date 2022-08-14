@@ -4,7 +4,7 @@ import React, {useContext, useMemo, useState} from "react";
 import {
     Box, Button,
     Flex,
-    SimpleGrid, Stack, Text,
+    SimpleGrid, SlideFade, Stack, Text,
 } from "@chakra-ui/react";
 
 // Custom components
@@ -43,9 +43,9 @@ function TaskConfigPanel() {
             <Stack mt={10} gap={5}>
                 <Text fontSize={25} fontWeight="bold">修改任務</Text>
 
-                <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
+                <SlideFade in={true}>
                     <Config />
-                </SimpleGrid>
+                </SlideFade>
             </Stack>
         </Flex>
     </Box>
@@ -65,7 +65,7 @@ export function Config() {
             .then(() => setSavedName(name))
 
     return (
-        <>
+        <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
             <NameInput value={name} onChange={setName} />
             <ConfigPanel
                 options={options(values)}
@@ -73,7 +73,7 @@ export function Config() {
                 hasChanges={name !== savedName}
                 onDiscard={() => setName(savedName)}
             />
-        </>
+        </SimpleGrid>
     );
 }
 
