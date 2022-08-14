@@ -32,18 +32,18 @@ export function ConfigItemList({options, changes, onChange}) {
     ))
 }
 
-export function ConfigGrid({options, onSave}) {
+export function ConfigGrid(props) {
     return <SimpleGrid columns={{base: 1, lg: 2}} gap={5} mt={10}>
-        <ConfigPanel options={options} onSave={onSave} />
+        <ConfigPanel {...props} />
     </SimpleGrid>
 }
 
-export function ConfigPanel({options: defaultOptions, hasChanges = false, onDiscard, onSave: save}) {
-    const [options, setOptions] = useState(defaultOptions);
+export function ConfigPanel({options, hasChanges = false, onDiscard, onSave: save, onSaved}) {
     const [changes, setChanges] = useState(new Map());
     const mutation = useMutation(save, {
-        onSuccess() {
-            afterSave()
+        onSuccess(data) {
+            setChanges(new Map());
+            return onSaved && onSaved(data)
         }
     })
 
@@ -54,20 +54,6 @@ export function ConfigPanel({options: defaultOptions, hasChanges = false, onDisc
             changes.set(id, value)
         ))
     };
-
-    const afterSave = () => {
-        const updated = options.map((option) => {
-            return {
-                ...option,
-                value: changes.has(option.id)?
-                    changes.get(option.id) :
-                    option.value
-            };
-        });
-
-        setOptions(updated);
-        setChanges(new Map());
-    }
 
     return (
         <>

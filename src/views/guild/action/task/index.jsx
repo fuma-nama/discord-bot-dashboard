@@ -10,7 +10,7 @@ import {
 // Custom components
 import {usePageInfo} from "contexts/PageInfoContext";
 import {useActionInfo} from "contexts/actions/ActionDetailContext";
-import { ConfigPanel} from "components/fields/ConfigPanel";
+import {ConfigItemListAnimated} from "components/fields/ConfigPanel";
 import {Link, useParams} from "react-router-dom";
 import { updateTask} from "api/yeecord";
 import {GuildContext} from "contexts/guild/GuildContext";
@@ -18,6 +18,9 @@ import ActionBanner from "../components/ActionBanner";
 import {BiArrowBack} from "react-icons/bi";
 import {TaskDetailContext, TaskDetailProvider} from "../../../../contexts/actions/TaskDetailContext";
 import NameInput from "../components/NameInput";
+import {useMutation, useQueryClient} from "react-query";
+import ErrorModal from "components/modal/ErrorModal";
+import {SaveAlert} from "components/alert/SaveAlert";
 
 export default function TaskBoard() {
 
@@ -49,28 +52,77 @@ function TaskConfigPanel() {
 }
 
 export function Config() {
-    const {id: guild, action, task} = useParams();
+    const {id: guild, action, task} = useParams()
 
-    const {options} = useActionInfo()
-    const {name: initialName, values} = useContext(TaskDetailContext)
+    const {name, values} = useContext(TaskDetailContext)
+    const client = useQueryClient()
 
-    const [savedName, setSavedName] = useState(initialName)
-    const [name, setName] = useState(savedName)
-
-    const onSave = changes =>
-        updateTask(guild, action, task, name, changes)
-            .then(() => setSavedName(name))
+    const onSaved = data => {
+        return client.setQueryData(["task_detail", guild, action, task], data)
+    }
 
     return (
         <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
-            <NameInput value={name} onChange={setName} />
             <ConfigPanel
-                options={options(values)}
-                onSave={onSave}
-                hasChanges={name !== savedName}
-                onDiscard={() => setName(savedName)}
+                savedName={name}
+                values={values}
+                onSaved={onSaved}
             />
         </SimpleGrid>
+    );
+}
+
+function ConfigPanel({savedName, onSaved, values}) {
+    const [name, setName] = useState(savedName)
+    const [changes, setChanges] = useState(new Map())
+    const {id: guild, action, task} = useParams();
+    const info = useActionInfo()
+
+    const options = useMemo(
+        () => info.options(values),
+        [savedName, values]
+    )
+
+    const mutation = useMutation(
+        changes => updateTask(guild, action, task, name, changes), {
+        async onSuccess(data) {
+            await onSaved(data)
+            setChanges(new Map())
+        }
+    })
+
+    const onChange = (id, value) => {
+        if (mutation.isLoading) return;
+
+        setChanges(new Map(
+            changes.set(id, value)
+        ))
+    };
+
+    return (
+        <>
+            <ErrorModal
+                header="未能保存更改"
+                error={mutation.error && mutation.error.toString()}
+                onClose={mutation.reset}
+            />
+            <NameInput value={name} onChange={s => mutation.isLoading || setName(s)} />
+            <ConfigItemListAnimated
+                options={options}
+                changes={changes}
+                onChange={onChange}
+            />
+            <SaveAlert
+                visible={name !== savedName || changes.size !== 0}
+                saving={mutation.isLoading}
+                onSave={() => mutation.mutate(changes)}
+                onDiscard={() => {
+                    setChanges(new Map())
+
+                    setName(savedName)
+                }}
+            />
+        </>
     );
 }
 

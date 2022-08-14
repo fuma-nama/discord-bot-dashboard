@@ -1,11 +1,11 @@
 import React, {useContext, useMemo} from "react";
 
-import {Box, Flex, Stack,} from "@chakra-ui/react";
+import {Box, Flex} from "@chakra-ui/react";
 
 import {usePageInfo} from "contexts/PageInfoContext";
 import {SettingsContext, SettingsProvider} from "../../../contexts/guild/GuildSettingsContext";
 import {GuildContext} from "contexts/guild/GuildContext";
-import {ConfigGrid, ConfigPanel} from "components/fields/ConfigPanel";
+import {ConfigGrid} from "components/fields/ConfigPanel";
 import {updateSettingsOptions} from "api/yeecord";
 import {config} from "../../../config/config";
 

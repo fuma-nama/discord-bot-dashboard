@@ -7,9 +7,6 @@ import {useParams} from "react-router-dom";
 import {config} from "../config/config";
 
 export const FeatureDetailContext = createContext({
-  id: null,
-  name: null,
-  description: null,
   values: null
 });
 

@@ -59,6 +59,14 @@ export async function addTask(serverId, actionId, name, options) {
 
 export async function updateTask(serverId, actionId, taskId, name, options) {
     await delay(2000)
+    return {
+        id: taskId,
+        name: name,
+        createdAt: new Date(),
+        values: {
+            test: "Test"
+        }
+    }
 }
 
 export async function deleteTask(serverId, actionId, taskId) {

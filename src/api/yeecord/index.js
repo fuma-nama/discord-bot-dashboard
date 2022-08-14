@@ -50,12 +50,15 @@ export async function getFeatureDetail(serverId, featureId) {
 
 /**
  * Update Feature options value
+ *
+ * @return any The updated option values
  */
-export async function updateFeatureOptions(serverId, featureId, options) {
+export function updateFeatureOptions(serverId, featureId, options) {
 
-  await fetchAuto(`/guild/${serverId}/feature/${featureId}`, {
+  return fetchAuto(`/guild/${serverId}/feature/${featureId}`, {
     method: "PATCH",
-    body: JSON.stringify(Object.fromEntries(options))
+    body: JSON.stringify(Object.fromEntries(options)),
+    toJson: true
   })
 }
 

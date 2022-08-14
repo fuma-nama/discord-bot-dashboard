@@ -13,6 +13,7 @@ import {ConfigGrid} from "components/fields/ConfigPanel";
 import {config} from "config/config";
 import NotFound from "../../info/Not_Found";
 import {useParams} from "react-router-dom";
+import {useQuery, useQueryClient} from "react-query";
 
 export default function Feature() {
   const { feature } = useParams()
@@ -50,12 +51,25 @@ function FeatureConfigPanel() {
   const {values} = useContext(FeatureDetailContext)
   const info = useFeatureInfo()
 
+  const client = useQueryClient()
   const options = useMemo(
       () => info.options(values),
-      [info.id]
+      [info.id, values]
   )
 
   const onSave = (changes) => updateFeatureOptions(serverId, info.id, changes);
+  const onSaved = (data) => {
 
-  return <ConfigGrid onSave={onSave} options={options} />
+    return client.setQueryData(["feature_detail", serverId, info.id], current => ({
+          ...current,
+          values: data
+        })
+    )
+  }
+
+  return <ConfigGrid
+      onSave={onSave}
+      options={options}
+      onSaved={onSaved}
+  />
 }
