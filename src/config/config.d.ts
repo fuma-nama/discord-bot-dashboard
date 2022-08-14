@@ -31,6 +31,9 @@ export type ConfigType = {
             options: (data: any) => Option[]
         }
     },
+    settings: {
+        options: (data: any) => Option[]
+    }
     data: {
         features?: (data: any) => DataItem[],
         dashboard: DashboardDataRow[],

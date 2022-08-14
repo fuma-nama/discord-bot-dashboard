@@ -5,7 +5,7 @@ import {GuildContext} from "./GuildContext";
 import {useQuery} from "react-query";
 
 export const SettingsContext = createContext({
-    options: null
+    values: null
 })
 
 export function SettingsProvider({children}) {

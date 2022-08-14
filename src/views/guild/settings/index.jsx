@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useMemo} from "react";
 
 import {Box, Flex, Stack,} from "@chakra-ui/react";
 
@@ -7,6 +7,7 @@ import {SettingsContext, SettingsProvider} from "../../../contexts/guild/GuildSe
 import {GuildContext} from "contexts/guild/GuildContext";
 import {ConfigGrid, ConfigPanel} from "components/fields/ConfigPanel";
 import {updateSettingsOptions} from "api/yeecord";
+import {config} from "../../../config/config";
 
 export default function SettingsPanel() {
     usePageInfo("服務器設置")
@@ -27,12 +28,16 @@ export default function SettingsPanel() {
 }
 
 function SettingsConfigPanel() {
-  const settings = useContext(SettingsContext);
-  const {id: serverId} = useContext(GuildContext);
+    const settings = useContext(SettingsContext);
+    const {id: serverId} = useContext(GuildContext);
 
-  const onSave = (changes) => updateSettingsOptions(serverId, changes)
+    const onSave = (changes) => updateSettingsOptions(serverId, changes)
 
-  return (
-      <ConfigGrid options={settings.options} onSave={onSave} />
-  )
+    const options = useMemo(
+        () => config.settings.options(settings), []
+    )
+
+    return (
+        <ConfigGrid options={options} onSave={onSave} />
+    )
 }

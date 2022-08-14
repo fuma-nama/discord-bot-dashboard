@@ -15,6 +15,15 @@ export const config = {
             url: ""
         }
     ],
+    settings: {
+        options: detail => [
+            {
+                name: "Test",
+                type: "string",
+                value: detail.test
+            }
+        ]
+    },
     actions: {
         "kill_kane": KillKaneAction
     },
