@@ -38,16 +38,15 @@ export default function DataTable({name, data, columns}) {
       w='100%'
       px='0px'
       overflowX={{ sm: "scroll", lg: "hidden" }}>
-      <Flex px='25px' justify='space-between' align='center'>
         <Text
-          color={textColor}
-          fontSize='22px'
-          fontWeight='700'
-          lineHeight='100%'>
-          {name}
+            ml="25px"
+            color={textColor}
+            fontSize='22px'
+            fontWeight='700'
+            lineHeight='100%'
+        >
+            {name}
         </Text>
-        <Menu />
-      </Flex>
       <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
         <Thead>
           {headerGroups.map((headerGroup, index) => (
