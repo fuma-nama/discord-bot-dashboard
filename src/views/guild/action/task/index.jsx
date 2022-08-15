@@ -1,18 +1,14 @@
 import React, {useContext, useMemo} from "react";
 
 // Chakra imports
-import {
-    Box, Button,
-    Flex,
-    SimpleGrid, Stack, Text,
-} from "@chakra-ui/react";
+import {Box, Button, Flex, SimpleGrid, Stack, Text,} from "@chakra-ui/react";
 
 // Custom components
 import {usePageInfo} from "contexts/PageInfoContext";
 import {useActionInfo} from "contexts/actions/ActionDetailContext";
-import { MultiConfigPanel} from "components/fields/ConfigPanel";
+import {MultiConfigPanel} from "components/fields/ConfigPanel";
 import {Link, useParams} from "react-router-dom";
-import { updateTask} from "api/yeecord";
+import {updateTask} from "api/yeecord";
 import {GuildContext} from "contexts/guild/GuildContext";
 import ActionBanner from "../components/ActionBanner";
 import {BiArrowBack} from "react-icons/bi";

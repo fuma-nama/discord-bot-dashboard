@@ -59,7 +59,7 @@ export default function EmojiField({value, onChange: change}) {
                             w="18px"
                             as={MdArrowDropDown}
                         />}
-                    />
+                     aria-label="Select Emoji" />
                 </InputRightElement>
             </PopoverTrigger>
             <PopoverContent bg="transparent" _focus={{outline: "none"}}>

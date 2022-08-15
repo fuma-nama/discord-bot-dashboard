@@ -48,15 +48,19 @@ function TasksPanel() {
 
     return <Flex direction="column" gap={5} pt={10} px={{base: 1, md: 3, lg: 10}}>
         <Text align="center" fontSize={24} fontWeight="bold">運行中</Text>
-        <SlideFade in={true}>
-            <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
-                {
-                    tasks.map(task =>
-                        <Task key={task.id} task={task} />
-                    )
-                }
-            </SimpleGrid>
-        </SlideFade>
+
+        {
+            tasks.length === 0?
+                <Text align="center">沒有任務正在運行</Text>
+                :
+                <SlideFade in={true}>
+                    <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
+                        {tasks.map(task =>
+                            <Task key={task.id} task={task} />
+                        )}
+                    </SimpleGrid>
+                </SlideFade>
+        }
     </Flex>
 }
 

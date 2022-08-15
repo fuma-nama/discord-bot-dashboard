@@ -20,7 +20,7 @@ export function OptionPanel({value, onChange, option}) {
 
     return (
         <Card flexDirection={inline ? "row-reverse" : "column"} gap={5}>
-            <FormControl isRequired={option.required}>
+            <FormControl isRequired={option.required} h="full">
                 <FormLabel fontSize="xl" fontWeight="bold">{option.name}</FormLabel>
                 {option.description &&
                     <Text mb={5}>{option.description}</Text>

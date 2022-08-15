@@ -3,32 +3,34 @@ import {OptionPanel} from "./OptionPanel";
 import {SaveAlert} from "components/alert/SaveAlert";
 import ErrorModal from "../modal/ErrorModal";
 import {useMutation} from "react-query";
-import {SimpleGrid, SlideFade} from "@chakra-ui/react";
+import {Flex, SimpleGrid, SlideFade} from "@chakra-ui/react";
 
 export function ConfigItemListAnimated({options, changes, onChange}) {
     return options.map((option) => (
         <SlideFade key={option.id} in={true}>
-            <OptionPanel
-                option={option}
-                value={
-                    changes && changes.has(option.id) ? changes.get(option.id) : option.value
-                }
-                onChange={(v) => onChange(option.id, v)}
-            />
+            <Flex w="full" h="full">
+                <OptionPanel
+                    option={option}
+                    value={
+                        changes && changes.has(option.id) ? changes.get(option.id) : option.value
+                    }
+                    onChange={(v) => onChange(option.id, v)}
+                />
+            </Flex>
         </SlideFade>
     ))
 }
 
 export function ConfigItemList({options, changes, onChange}) {
     return options.map((option) => (
-            <OptionPanel
-                option={option}
-                value={
-                    changes && changes.has(option.id) ? changes.get(option.id) : option.value
-                }
-                key={option.id}
-                onChange={(v) => onChange(option.id, v)}
-            />
+        <OptionPanel
+            option={option}
+            value={
+                changes && changes.has(option.id) ? changes.get(option.id) : option.value
+            }
+            key={option.id}
+            onChange={(v) => onChange(option.id, v)}
+        />
     ))
 }
 
