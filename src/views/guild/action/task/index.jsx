@@ -1,26 +1,23 @@
-import React, {useContext, useMemo, useState} from "react";
+import React, {useContext, useMemo} from "react";
 
 // Chakra imports
 import {
     Box, Button,
     Flex,
-    SimpleGrid, SlideFade, Stack, Text,
+    SimpleGrid, Stack, Text,
 } from "@chakra-ui/react";
 
 // Custom components
 import {usePageInfo} from "contexts/PageInfoContext";
 import {useActionInfo} from "contexts/actions/ActionDetailContext";
-import {ConfigItemListAnimated} from "components/fields/ConfigPanel";
+import { MultiConfigPanel} from "components/fields/ConfigPanel";
 import {Link, useParams} from "react-router-dom";
 import { updateTask} from "api/yeecord";
 import {GuildContext} from "contexts/guild/GuildContext";
 import ActionBanner from "../components/ActionBanner";
 import {BiArrowBack} from "react-icons/bi";
 import {TaskDetailContext, TaskDetailProvider} from "../../../../contexts/actions/TaskDetailContext";
-import NameInput from "../components/NameInput";
-import {useMutation, useQueryClient} from "react-query";
-import ErrorModal from "components/modal/ErrorModal";
-import {SaveAlert} from "components/alert/SaveAlert";
+import {useQueryClient} from "react-query";
 
 export default function TaskBoard() {
 
@@ -73,56 +70,34 @@ export function Config() {
 }
 
 function ConfigPanel({savedName, onSaved, values}) {
-    const [name, setName] = useState(savedName)
-    const [changes, setChanges] = useState(new Map())
     const {id: guild, action, task} = useParams();
     const info = useActionInfo()
 
     const options = useMemo(
         () => info.options(values),
-        [savedName, values]
+        [values]
     )
 
-    const mutation = useMutation(
-        changes => updateTask(guild, action, task, name, changes), {
-        async onSuccess(data) {
-            await onSaved(data)
-            setChanges(new Map())
-        }
-    })
+    const onSave = ([nameChanges, changes]) => {
+        return updateTask(guild, action, task, nameChanges.get("name"), changes)
+    }
 
-    const onChange = (id, value) => {
-        if (mutation.isLoading) return;
-
-        setChanges(new Map(
-            changes.set(id, value)
-        ))
-    };
+    const nameOption = {
+        id: "name",
+        type: "string",
+        name: "Task Name",
+        value: savedName,
+        required: true
+    }
 
     return (
-        <>
-            <ErrorModal
-                header="未能保存更改"
-                error={mutation.error && mutation.error.toString()}
-                onClose={mutation.reset}
-            />
-            <NameInput value={name} onChange={s => mutation.isLoading || setName(s)} />
-            <ConfigItemListAnimated
-                options={options}
-                changes={changes}
-                onChange={onChange}
-            />
-            <SaveAlert
-                visible={name !== savedName || changes.size !== 0}
-                saving={mutation.isLoading}
-                onSave={() => mutation.mutate(changes)}
-                onDiscard={() => {
-                    setChanges(new Map())
-
-                    setName(savedName)
-                }}
-            />
-        </>
+        <MultiConfigPanel
+            groups={[
+                [nameOption], options
+            ]}
+            onSave={onSave}
+            onSaved={onSaved}
+        />
     );
 }
 

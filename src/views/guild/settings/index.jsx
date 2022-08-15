@@ -16,13 +16,13 @@ export default function SettingsPanel() {
         <SettingsProvider>
             <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
                 <Flex
-            flexDirection="column"
-            mb="10"
-            gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
-          >
-            <SettingsConfigPanel />
-          </Flex>
-      </Box>
+                    flexDirection="column"
+                    mb="10"
+                    gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
+                >
+                    <SettingsConfigPanel />
+                </Flex>
+            </Box>
     </SettingsProvider>
   );
 }

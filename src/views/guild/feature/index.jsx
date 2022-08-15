@@ -13,7 +13,7 @@ import {ConfigGrid} from "components/fields/ConfigPanel";
 import {config} from "config/config";
 import NotFound from "../../info/Not_Found";
 import {useParams} from "react-router-dom";
-import {useQuery, useQueryClient} from "react-query";
+import {useQueryClient} from "react-query";
 
 export default function Feature() {
   const { feature } = useParams()
