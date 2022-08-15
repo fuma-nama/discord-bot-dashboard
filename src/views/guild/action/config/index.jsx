@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 
-import {Box, Button, ButtonGroup, Flex, HStack, SimpleGrid, SlideFade, Text, VStack} from "@chakra-ui/react";
+import {Box, Button, Flex, HStack, SimpleGrid, SlideFade, Text, VStack} from "@chakra-ui/react";
 
 import {usePageInfo} from "contexts/PageInfoContext";
 import {ActionDetailContext, ActionDetailProvider, useActionInfo} from "contexts/actions/ActionDetailContext";
@@ -20,7 +20,7 @@ export default function ActionTasks() {
     }
 
     return (
-        <ActionDetailProvider>
+        <DetailProvider>
             <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
                 <Flex
                     flexDirection="column"
@@ -31,15 +31,21 @@ export default function ActionTasks() {
                     <TasksPanel />
                 </Flex>
             </Box>
-        </ActionDetailProvider>
+        </DetailProvider>
     );
 }
 
-function TasksPanel() {
+function DetailProvider({children}) {
     const {name} = useActionInfo()
-    const {tasks} = useContext(ActionDetailContext)
-
     usePageInfo(["動作", name])
+
+    return <ActionDetailProvider>
+        {children}
+    </ActionDetailProvider>
+}
+
+function TasksPanel() {
+    const {tasks} = useContext(ActionDetailContext)
 
     return <Flex direction="column" gap={5} pt={10} px={{base: 1, md: 3, lg: 10}}>
         <Text align="center" fontSize={24} fontWeight="bold">運行中</Text>
