@@ -8,7 +8,6 @@ import TasksBanner from "./components/TasksBanner";
 import Card from "components/card/Card";
 import {Link, useParams} from "react-router-dom";
 import NotFound from "../../../info/Not_Found";
-import {GuildContext} from "contexts/guild/GuildContext";
 import {useMutation, useQueryClient} from "react-query";
 import {deleteTask} from "api/yeecord";
 
@@ -62,15 +61,20 @@ function TasksPanel() {
 }
 
 function Task({task}) {
-    const {id: guild} = useContext(GuildContext)
-    const {action} = useParams()
+    const {id: guild, action} = useParams()
 
     const client = useQueryClient()
-    const mutation = useMutation(
+    const deleteMutation = useMutation(
         () => deleteTask(guild, action, task.id),
         {
             onSuccess() {
-                return client.invalidateQueries(["action_detail", action])
+                return client.setQueryData(
+                    ["action_detail", action],
+                    data => ({
+                        ...data,
+                        tasks: data.tasks.filter(t => t.id !== task.id)
+                    })
+                )
             }
         }
     )
@@ -88,7 +92,11 @@ function Task({task}) {
                 </HStack>
             </VStack>
 
-            <Button ml="auto" variant="danger" onClick={mutation.mutate} isLoading={mutation.isLoading}>
+            <Button
+                ml="auto"
+                variant="danger"
+                onClick={deleteMutation.mutate}
+                isLoading={deleteMutation.isLoading}>
                 Delete
             </Button>
         </Flex>

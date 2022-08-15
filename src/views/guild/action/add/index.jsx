@@ -1,11 +1,7 @@
-import React, {useContext, useMemo, useState} from "react";
+import React, {useMemo, useState} from "react";
 
 // Chakra imports
-import {
-    Box,
-    Flex, FormControl, FormHelperText, FormLabel,
-    SimpleGrid, Stack, Text,
-} from "@chakra-ui/react";
+import {Box, Flex, SimpleGrid, Stack, Text,} from "@chakra-ui/react";
 
 // Custom components
 import {usePageInfo} from "contexts/PageInfoContext";
@@ -18,7 +14,6 @@ import {SubmitAlert} from "components/alert/SaveAlert";
 import {ConfigItemListAnimated} from "components/fields/ConfigPanel";
 import {useNavigate, useParams} from "react-router-dom";
 import {addTask} from "api/yeecord";
-import {GuildContext} from "contexts/guild/GuildContext";
 import NameInput from "../components/NameInput";
 
 export default function SubmitTaskBoard() {
@@ -49,8 +44,7 @@ function SubmitTask() {
 }
 
 function ConfigPanel() {
-    const {id: guild} = useContext(GuildContext)
-    const {action} = useParams()
+    const {id: guild, action} = useParams()
     const navigate = useNavigate()
     const client = useQueryClient()
 
@@ -64,9 +58,13 @@ function ConfigPanel() {
 
     const mutation = useMutation(
         () => addTask(guild, action, name, changes), {
-        async onSuccess() {
-            await client.invalidateQueries(["action_detail", action])
-            navigate(`/guild/${guild}/action/${action}`)
+        onSuccess(data) {
+            client.setQueryData(
+                ["task_detail", guild, action, data.id.toString()],
+                data
+            )
+
+            navigate(`/guild/${guild}/action/${action}/task/${data.id}`)
         }
     })
 

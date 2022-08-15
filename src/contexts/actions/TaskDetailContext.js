@@ -1,5 +1,5 @@
 import {createContext, useContext} from "react";
-import {useQuery} from "react-query";
+import {useQuery, useQueryClient} from "react-query";
 import {useParams} from "react-router-dom";
 import {getTaskDetail} from "api/yeecord";
 import {GuildContext} from "../guild/GuildContext";
@@ -15,10 +15,17 @@ export const TaskDetailContext = createContext({
 export function TaskDetailProvider({children}) {
     const {id: guild} = useContext(GuildContext)
     const {action, task} = useParams()
+    const client = useQueryClient()
+
+    const key = ["task_detail", guild, action, task]
 
     const query = useQuery(
-        ["task_detail", guild, action, task],
-        () => getTaskDetail(guild, action, task)
+        key,
+        () => getTaskDetail(guild, action, task), {
+            initialData() {
+                return client.getQueryData(key)
+            }
+        }
     )
 
     return <QueryHolder query={query}>
