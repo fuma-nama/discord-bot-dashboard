@@ -38,6 +38,56 @@ export function ConfigGrid(props) {
     </SimpleGrid>
 }
 
+export function MultiConfigPanel({groups, onSave: save, onSaved}) {
+    function getInitial() {
+        return groups.map(() => new Map())
+    }
+
+    const [changes, setChanges] = useState(getInitial())
+
+    const mutation = useMutation(save, {
+        onSuccess(data) {
+            setChanges(getInitial())
+            return onSaved && onSaved(data)
+        }
+    })
+
+    const onChange = (i, id, value) => {
+        if (mutation.isLoading) return;
+
+        const clone = [...changes]
+        clone[i].set(id, value)
+
+        setChanges(clone)
+    }
+
+    return (
+        <>
+            <ErrorModal
+                header="未能保存更改"
+                error={mutation.error && mutation.error.toString()}
+                onClose={mutation.reset}
+            />
+            {
+                groups.map((options, i) =>
+                    <ConfigItemListAnimated
+                        key={i}
+                        options={options}
+                        changes={changes[i]}
+                        onChange={(id, value) => onChange(i, id, value)}
+                    />
+                )
+            }
+            <SaveAlert
+                visible={changes.some(item => item.size > 0)}
+                saving={mutation.isLoading}
+                onSave={() => mutation.mutate(changes)}
+                onDiscard={() => setChanges(getInitial())}
+            />
+        </>
+    );
+}
+
 export function ConfigPanel({options, hasChanges = false, onDiscard, onSave: save, onSaved}) {
     const [changes, setChanges] = useState(new Map());
     const mutation = useMutation(save, {
