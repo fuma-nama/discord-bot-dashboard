@@ -30,8 +30,6 @@ export default function DataPieChart({name, data, options, unit}) {
       </Flex>
 
       <PieChart
-        w='100%'
-        maxW="100%"
         chartData={data}
         chartOptions={options}
       />
