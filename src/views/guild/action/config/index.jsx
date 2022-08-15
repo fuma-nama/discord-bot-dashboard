@@ -76,13 +76,15 @@ function Task({task}) {
     )
 
     const configUrl = `/guild/${guild}/action/${action}/task/${task.id}`
+    const createdAt = new Date(Date.parse(task.createdAt))
+
     return <Card p={5} gap={5}>
         <Flex direction="row" gap={5}>
             <VStack align="start">
                 <Text fontSize="lg" fontWeight="bold">{task.name}</Text>
                 <HStack>
                     <Text fontWeight="bold">創建於: </Text>
-                    <Text>{task.createdAt.toLocaleDateString("en-US")}</Text>
+                    <Text>{createdAt.toLocaleString()}</Text>
                 </HStack>
             </VStack>
 
