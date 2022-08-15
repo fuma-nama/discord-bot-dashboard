@@ -1,18 +1,5 @@
-import {delay} from "../utils";
+import {delay, fetchAuto} from "../utils";
 import {ExampleOptions} from "./example";
-
-const ActionTasks = [
-    {
-        id: 0,
-        name: "In Channel #Genernal", //status of the action, nullable
-        createdAt: new Date(),
-    },
-    {
-        id: 1,
-        name: "In Channel #Genernal",
-        createdAt: new Date(),
-    }
-]
 
 /**
  * Only fetch when config.data.actions is not null
@@ -27,48 +14,60 @@ export async function getActionsData(serverId) {
 }
 
 /**
- *
- * @returns {Promise<{tasks: Array<{createdAt: Date, id: number, status: string}>}>}
+ * @returns {Promise<{tasks: Array<{createdAt: Date, id: number, status: string}>}>} an object contains an array of tasks
  */
-export async function getActionDetail(serverId, actionId) {
-    await delay(3000)
-    return {
-        tasks: ActionTasks
-    }
+export function getActionDetail(serverId, actionId) {
+    return fetchAuto(`/guild/${serverId}/action/${actionId}`,
+        { toJson: true }
+    )
+}
+
+/**
+ *
+ * @return {Promise<{createdAt: Date, values: any, name: string, id: number}>} The added task detail
+ */
+export function addTask(serverId, actionId, name, options) {
+    return fetchAuto(`/guild/${serverId}/action/${actionId}`,
+        {
+            method: "POST",
+            body: JSON.stringify({
+                name,
+                options: Object.fromEntries(options)
+            }),
+            toJson: true
+        }
+    )
 }
 
 /**
  * @returns {Promise<{createdAt: Date, values: any, name: string, id: number}>} Task Info and option values
  */
-export async function getTaskDetail(serverId, actionId, taskId) {
-    await delay(2000)
-    return {
-        id: taskId,
-        name: "In Channel #Genernal",
-        createdAt: new Date(),
-        values: {
-            test: "Test"
-        }
-    }
+export function getTaskDetail(serverId, actionId, taskId) {
+    return fetchAuto(`/guild/${serverId}/action/${actionId}/${taskId}`,
+        { toJson: true }
+    )
 }
 
-export async function addTask(serverId, actionId, name, options) {
-    await delay(2000)
-    return 0
-}
-
-export async function updateTask(serverId, actionId, taskId, name, options) {
-    await delay(2000)
-    return {
-        id: taskId,
-        name: name,
-        createdAt: new Date(),
-        values: {
-            test: "Test"
+/**
+ * @return {*} Updated Task options
+ */
+export function updateTask(serverId, actionId, taskId, name, options) {
+    return fetchAuto(`/guild/${serverId}/action/${actionId}/${taskId}`,
+        {
+            method: "PATCH",
+            body: JSON.stringify({
+                name,
+                options: Object.fromEntries(options)
+            }),
+            toJson: true
         }
-    }
+    )
 }
 
 export async function deleteTask(serverId, actionId, taskId) {
-    await delay(2000)
+    return fetchAuto(`/guild/${serverId}/action/${actionId}/${taskId}`,
+        {
+            method: "DELETE",
+        }
+    )
 }
