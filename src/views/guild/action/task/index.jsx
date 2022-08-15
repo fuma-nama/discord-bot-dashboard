@@ -21,17 +21,6 @@ import {useQueryClient} from "react-query";
 
 export default function TaskBoard() {
 
-    return <TaskDetailProvider>
-        <TaskConfigPanel />
-    </TaskDetailProvider>
-}
-
-function TaskConfigPanel() {
-    const {name: action} = useActionInfo()
-    const {name: task} = useContext(TaskDetailContext)
-
-    usePageInfo(["動作", action, task])
-
     return <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
         <Flex
             flexDirection="column"
@@ -40,12 +29,23 @@ function TaskConfigPanel() {
             <ActionBanner>
                 <BackButton />
             </ActionBanner>
-            <Stack mt={10} gap={5}>
-                <Text fontSize={25} fontWeight="bold">修改任務</Text>
-                <Config />
-            </Stack>
+            <TaskDetailProvider>
+                <TaskConfigPanel />
+            </TaskDetailProvider>
         </Flex>
     </Box>
+}
+
+function TaskConfigPanel() {
+    const {name: action} = useActionInfo()
+    const {name: task} = useContext(TaskDetailContext)
+
+    usePageInfo(["動作", action, task])
+
+    return <Stack mt={10} gap={5}>
+        <Text fontSize={25} fontWeight="bold">修改任務</Text>
+        <Config />
+    </Stack>
 }
 
 export function Config() {
