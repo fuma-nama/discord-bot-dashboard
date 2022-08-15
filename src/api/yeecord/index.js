@@ -75,8 +75,15 @@ export async function getSettings(serverId) {
   }
 }
 
+/**
+ *
+ * @return {Promise<any>} updated option values
+ */
 export async function updateSettingsOptions(serverId, changes) {
   await delay(3000);
+  return {
+    test: "Test"
+  }
 }
 
 /**

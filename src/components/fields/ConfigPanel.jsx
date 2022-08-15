@@ -88,7 +88,7 @@ export function MultiConfigPanel({groups, onSave: save, onSaved}) {
     );
 }
 
-export function ConfigPanel({options, hasChanges = false, onDiscard, onSave: save, onSaved}) {
+export function ConfigPanel({options, onDiscard, onSave: save, onSaved}) {
     const [changes, setChanges] = useState(new Map());
     const mutation = useMutation(save, {
         onSuccess(data) {
@@ -118,7 +118,7 @@ export function ConfigPanel({options, hasChanges = false, onDiscard, onSave: sav
                 onChange={onChange}
             />
             <SaveAlert
-                visible={hasChanges || changes.size !== 0}
+                visible={changes.size !== 0}
                 saving={mutation.isLoading}
                 onSave={() => mutation.mutate(changes)}
                 onDiscard={() => {

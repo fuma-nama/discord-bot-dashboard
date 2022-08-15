@@ -8,6 +8,7 @@ import {GuildContext} from "contexts/guild/GuildContext";
 import {ConfigGrid} from "components/fields/ConfigPanel";
 import {updateSettingsOptions} from "api/yeecord";
 import {config} from "../../../config/config";
+import {useQueryClient} from "react-query";
 
 export default function SettingsPanel() {
     usePageInfo("服務器設置")
@@ -30,14 +31,20 @@ export default function SettingsPanel() {
 function SettingsConfigPanel() {
     const settings = useContext(SettingsContext);
     const {id: serverId} = useContext(GuildContext);
+    const client = useQueryClient()
 
     const onSave = (changes) => updateSettingsOptions(serverId, changes)
 
+    const onSaved = data => client.setQueryData(["settings", serverId], {
+        ...settings,
+        values: data
+    })
+
     const options = useMemo(
-        () => config.settings.options(settings), []
+        () => config.settings.options(settings.values), []
     )
 
     return (
-        <ConfigGrid options={options} onSave={onSave} />
+        <ConfigGrid options={options} onSave={onSave} onSaved={onSaved} />
     )
 }

@@ -10,7 +10,7 @@ export const SettingsContext = createContext({
 
 export function SettingsProvider({children}) {
     const {id: serverId} = useContext(GuildContext);
-    const query = useQuery("settings", () =>
+    const query = useQuery(["settings", serverId], () =>
         getSettings(serverId)
     )
 
