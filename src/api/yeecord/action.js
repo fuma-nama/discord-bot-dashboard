@@ -1,5 +1,4 @@
-import {delay, fetchAuto} from "../utils";
-import {ExampleOptions} from "./example";
+import {fetchAuto} from "../utils";
 
 /**
  * Only fetch when config.data.actions is not null
@@ -7,10 +6,9 @@ import {ExampleOptions} from "./example";
  * @returns a custom data object
  */
 export async function getActionsData(serverId) {
-    await delay(3000)
-    return {
-        test: "Test"
-    }
+    return fetchAuto(`/guild/${serverId}/actions`, {
+        toJson: true
+    })
 }
 
 /**

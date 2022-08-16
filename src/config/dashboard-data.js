@@ -1,16 +1,33 @@
-import {MdBarChart, MdCancel, MdCheckCircle} from "react-icons/md";
 import {DataTypes} from "../variables/type";
-import {BsPeopleFill} from "react-icons/bs";
-import {VscDebugConsole} from "react-icons/vsc";
-import {FiCommand} from "react-icons/fi";
-import {lineChartOptionsTotalSpent, pieChartOptions, weekBarChartOptions} from "../variables/charts";
-import {Flex, Icon, Text} from "@chakra-ui/react";
 import React from "react";
 
 /**
  * @type Array<DashboardDataRow>
  */
 export const dashboardData = [
+    {
+        advanced: false,
+        count: 1,
+        items: (detail) => [
+            {
+                name: "Guild Members",
+                value: `$${detail.members}`,
+                type: DataTypes.Statistics
+            }
+        ]
+    },
+    {
+        advanced: true,
+        count: 1,
+        items: (detail) => [
+            {
+                name: "Guild Members",
+                value: `$${detail.members}`,
+                type: DataTypes.Statistics
+            }
+        ]
+    },
+    /*
     {
         advanced: false,
         count: 4,
@@ -128,4 +145,5 @@ export const dashboardData = [
             }
         ]
     }
+     */
 ]

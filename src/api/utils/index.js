@@ -19,10 +19,10 @@ export function fetchAuto(url, {toJson = false, throwError = true, ...options} =
 
     return request.then(res => {
 
-        if (res.ok) {
+        if (res.ok || !throwError) {
 
             return mapper? mapper(res) : res
-        } else if (throwError) {
+        } else {
             return res.text().then(s => {
                 const error = new Error(s);
                 throw error

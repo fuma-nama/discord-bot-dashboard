@@ -1,5 +1,5 @@
 // Chakra imports
-import {Box, Flex, Icon, SimpleGrid, Text, useColorModeValue,} from "@chakra-ui/react";
+import {Box, SimpleGrid,} from "@chakra-ui/react";
 // Custom components
 import React, {useContext, useMemo} from "react";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
@@ -8,7 +8,7 @@ import {useQuery} from "react-query";
 import {getServerAdvancedDetails} from "api/yeecord";
 import {QueryHolderSkeleton} from "contexts/components/AsyncContext";
 import {GuildContext} from "contexts/guild/GuildContext";
-import DataCard, {DataList} from "components/card/DataCard";
+import {DataList} from "components/card/DataCard";
 import {config} from "../../../config/config";
 
 export default function Dashboard() {
@@ -68,7 +68,7 @@ function Data({row, detail}) {
 
 function AdvancedData({row, advanced, detail}) {
     const items = useMemo(
-        () => {console.log("aa"); return row.items(advanced, detail)},
+        () => row.items(advanced, detail),
         [detail]
     )
 

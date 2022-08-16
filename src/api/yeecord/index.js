@@ -1,13 +1,4 @@
-import {delay, fetchAuto} from "../utils";
-import {
-  betaFeatures,
-  ExampleOptions,
-  ExampleRPGInfo,
-  features,
-  Notifications,
-  ServerDetails,
-  ServerDetailsAdvanced
-} from "./example";
+import {fetchAuto} from "../utils";
 
 export * from "./action";
 export * from "./auth";
@@ -67,12 +58,9 @@ export function updateFeatureOptions(serverId, featureId, options) {
  * @return {values: any}
  */
 export async function getSettings(serverId) {
-  await delay(3000)
-  return {
-    values: {
-      test: "Test"
-    },
-  }
+  return fetchAuto(`/guild/${serverId}/settings`, {
+    toJson: true
+  })
 }
 
 /**
@@ -80,32 +68,38 @@ export async function getSettings(serverId) {
  * @return {Promise<any>} updated option values
  */
 export async function updateSettingsOptions(serverId, changes) {
-  await delay(3000);
-  return {
-    test: "Test"
-  }
+  return fetchAuto(`/guild/${serverId}/settings`, {
+    method: "PATCH",
+    body: JSON.stringify(
+        Object.fromEntries(changes)
+    ),
+    toJson: true
+  })
 }
 
 /**
  * Normal server details
  */
-export async function getServerDetails(serverId) {
-  await delay(3000)
-  return ServerDetails
+export function getServerDetails(serverId) {
+  return fetchAuto(`/guild/${serverId}/detail`, {
+    toJson: true
+  })
 }
 
 /**
  * Advanced Details of server
  */
 export async function getServerAdvancedDetails(serverId) {
-  await delay(3000)
-  return ServerDetailsAdvanced
+  return fetchAuto(`/guild/${serverId}/detail/advanced`, {
+    toJson: true
+  })
 }
 
 /**
  * get Notifications of server
  */
 export async function getNotifications(serverId) {
-  await delay(2000)
-  return Notifications
+  return fetchAuto(`/guild/${serverId}/notification`, {
+    toJson: true
+  })
 }

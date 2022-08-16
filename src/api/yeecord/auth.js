@@ -7,6 +7,7 @@ export function hasLoggedIn() {
         {
             credentials: "include",
             method: "HEAD",
+            throwError: false
         }
     ).then(res =>
         res.ok
