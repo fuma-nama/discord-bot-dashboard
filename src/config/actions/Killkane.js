@@ -9,19 +9,5 @@ export const KillKaneAction = {
             type: "number",
             value: values? values.channel : "",
         },
-        {
-            id: "channel",
-            name: "Channel",
-            description: "The Channel to kill Kane",
-            type: "number",
-            value: values? values.channel : "",
-        },
-        {
-            id: "channel",
-            name: "Channel",
-            description: "The Channel to kill Kane",
-            type: "number",
-            value: values? values.channel : "",
-        },
     ]
 }
