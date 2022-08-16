@@ -1,21 +1,30 @@
 import React, {useContext, useEffect, useMemo, useState} from "react";
 import {
     Button,
+    Heading,
     Modal,
     ModalBody,
     ModalCloseButton,
     ModalContent,
     ModalFooter,
     ModalHeader,
+    Skeleton,
     Stack,
     Text,
     useColorModeValue,
     useDisclosure,
+    VStack,
 } from "@chakra-ui/react";
-import {FeaturesContext, FeaturesProvider} from "../../../contexts/FeaturesContext";
+import {FeaturesContext} from "contexts/FeaturesContext";
 import Feature from "../../card/Feature";
 import {useLocation} from "react-router-dom";
 import SearchInput from "../../fields/impl/SearchInput";
+import {GuildContext} from "contexts/guild/GuildContext";
+import {useQuery} from "react-query";
+import {getFeatures} from "api/yeecord";
+import {Query} from "contexts/components/AsyncContext";
+import {config} from "../../../config/config";
+import {Action} from "../../../views/guild/action/components/Action";
 
 export function SearchBar({...rest}) {
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -37,23 +46,41 @@ export function SearchBar({...rest}) {
 }
 
 function SearchList({search}) {
-    const {features} = useContext(FeaturesContext)
+    const {enabled} = useContext(FeaturesContext)
 
-    const filtered = useMemo(
-        () => features.filter(feature => feature.name.includes(search)),
-        [features, search]
+    const {features, actions} = useMemo(
+        () => ({
+            features: Object.entries(config.features)
+                .filter(([, feature]) => feature.name.includes(search)),
+            actions: Object.entries(config.actions)
+                .filter(([, action]) => action.name.includes(search))
+        }),
+        [search]
     )
 
+    const empty = features.length === 0 || actions.length === 0
+
     return  <Stack gap="20px">
-        {filtered.length === 0 && <Text>No Result Found</Text>}
-        {filtered.map((feature) => {
-            return (
-                <Feature
-                    key={feature.id}
-                    {...feature}
-                />
-            );
-        })}
+        {empty && <Text>No Result Found</Text>}
+        <Heading size="md">Features</Heading>
+        {features.map(([id, feature]) =>
+            <Feature
+                key={id}
+                id={id}
+                {...feature}
+                enabled={enabled.includes(id)}
+            />
+        )}
+        <Heading size="md">Actions</Heading>
+        {actions.map(([id, action]) =>
+            <Action
+                key={id}
+                action={{
+                    id,
+                    ...action
+                }}
+            />
+        )}
     </Stack>
 }
 
@@ -66,9 +93,9 @@ function SearchModal({isOpen, onClose, search }) {
             <ModalCloseButton />
 
             <ModalBody>
-                <FeaturesProvider>
+                <DataProvider>
                     <SearchList search={search} />
-                </FeaturesProvider>
+                </DataProvider>
             </ModalBody>
 
             <ModalFooter>
@@ -78,4 +105,28 @@ function SearchModal({isOpen, onClose, search }) {
             </ModalFooter>
         </ModalContent>
     </Modal>
+}
+
+function DataProvider({children}) {
+    const {id: serverId} = useContext(GuildContext)
+
+    const features = useQuery(["features", serverId],
+        () => getFeatures(serverId),
+        { retry: 0 }
+    )
+
+    return (
+        <Query
+            query={features}
+            placeholder={
+                <VStack>
+                    <Skeleton rounded="lg" height="100px" />
+                    <Skeleton rounded="lg" height="100px" />
+                </VStack>
+        }>
+            <FeaturesContext.Provider value={features.data}>
+                {children}
+            </FeaturesContext.Provider>
+        </Query>
+    );
 }

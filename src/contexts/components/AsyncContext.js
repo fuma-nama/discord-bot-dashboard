@@ -71,7 +71,7 @@ function parseChildren(children) {
         children() : children
 }
 
-function ErrorPanel({error, onRetry, ...rest}) {
+export function ErrorPanel({error, onRetry, ...rest}) {
     return <Center {...rest}>
         <Stack direction="column" align="center">
             <Text>加載失敗</Text>
