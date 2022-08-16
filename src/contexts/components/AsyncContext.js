@@ -1,4 +1,4 @@
-import {Text, Spinner, Center, Stack, Button, Skeleton} from "@chakra-ui/react";
+import {Button, Center, Skeleton, Spinner, Stack, Text} from "@chakra-ui/react";
 import React from "react";
 
 export function QueryHolder({query, children, nullable}) {
@@ -27,7 +27,25 @@ export function QueryHolder({query, children, nullable}) {
     return <></>
 }
 
-export function QueryHolderSkeleton({query, height = "200px", children, count = 1, nullable}) {
+export function Query({query, children, placeholder, height = "200px"}) {
+    const {error, isLoading, refetch} = query
+
+    if (error) {
+        return <ErrorPanel height={height} error={error} onRetry={refetch}/>
+    }
+
+    if (isLoading) {
+        return placeholder
+    }
+
+    if (query.data != null) {
+        return parseChildren(children)
+    }
+
+    return <></>
+}
+
+export function QueryHolderSkeleton({query, height = "200px", children, count = 1, nullable = false}) {
     const {error, isLoading, refetch} = query
 
     if (error) {

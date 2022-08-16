@@ -1,5 +1,5 @@
 import {createContext} from "react";
-import {QueryHolder} from "../components/AsyncContext";
+import {QueryHolderSkeleton} from "../components/AsyncContext";
 import {useQuery} from "react-query";
 import {useParams} from "react-router-dom";
 import {getActionDetail} from "../../api/yeecord";
@@ -15,11 +15,11 @@ export function ActionDetailProvider({children}) {
         getActionDetail(guild, action)
     )
 
-    return <QueryHolder query={query}>
+    return <QueryHolderSkeleton query={query} count={2}>
         <ActionDetailContext.Provider value={query.data}>
             {children}
         </ActionDetailContext.Provider>
-    </QueryHolder>
+    </QueryHolderSkeleton>
 }
 
 export function useActionInfo() {

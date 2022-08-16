@@ -25,9 +25,14 @@ export default function TaskBoard() {
             <ActionBanner>
                 <BackButton />
             </ActionBanner>
-            <TaskDetailProvider>
-                <TaskConfigPanel />
-            </TaskDetailProvider>
+
+            <Stack mt={10} gap={5}>
+                <Text fontSize={25} fontWeight="bold">修改任務</Text>
+
+                <TaskDetailProvider>
+                    <TaskConfigPanel />
+                </TaskDetailProvider>
+            </Stack>
         </Flex>
     </Box>
 }
@@ -38,10 +43,7 @@ function TaskConfigPanel() {
 
     usePageInfo(["動作", action, task])
 
-    return <Stack mt={10} gap={5}>
-        <Text fontSize={25} fontWeight="bold">修改任務</Text>
-        <Config />
-    </Stack>
+    return <Config />
 }
 
 export function Config() {

@@ -3,7 +3,8 @@ import {useQuery, useQueryClient} from "react-query";
 import {useParams} from "react-router-dom";
 import {getTaskDetail} from "api/yeecord";
 import {GuildContext} from "../guild/GuildContext";
-import {QueryHolder} from "../components/AsyncContext";
+import {Query} from "../components/AsyncContext";
+import {SimpleGrid, Skeleton} from "@chakra-ui/react";
 
 export const TaskDetailContext = createContext({
     banner: null,
@@ -29,9 +30,17 @@ export function TaskDetailProvider({children}) {
         }
     )
 
-    return <QueryHolder query={query}>
+    return <Query
+        query={query}
+        placeholder={
+            <SimpleGrid columns={{base: 1, lg: 2}} gap={10}>
+                <Skeleton rounded="lg" height="200px" />
+                <Skeleton rounded="lg" height="200px" />
+                <Skeleton rounded="lg" height="200px" />
+            </SimpleGrid>
+        }>
         <TaskDetailContext.Provider value={query.data}>
             {children}
         </TaskDetailContext.Provider>
-    </QueryHolder>
+    </Query>
 }

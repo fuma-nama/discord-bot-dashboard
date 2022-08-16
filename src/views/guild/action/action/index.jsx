@@ -35,7 +35,6 @@ export default function ActionTasks() {
     }
 
     return (
-        <DetailProvider>
             <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
                 <Flex
                     flexDirection="column"
@@ -46,7 +45,6 @@ export default function ActionTasks() {
                     <TasksPanel />
                 </Flex>
             </Box>
-        </DetailProvider>
     );
 }
 
@@ -64,7 +62,6 @@ function like(s1, s2) {
 }
 
 function TasksPanel() {
-    const {tasks} = useContext(ActionDetailContext)
     const [filter, setFilter] = useState("")
 
     const inputBg = useColorModeValue("secondaryGray.400", "navy.800");
@@ -75,29 +72,33 @@ function TasksPanel() {
 
             <SearchInput value={filter} onChange={setFilter} bg={inputBg} groupStyle={{maxW: "20rem"}} />
         </Center>
-
-        {
-            tasks.length === 0?
-                <Box bgImg={not_found} bgSize="cover" h="50vh">
-                    <VStack w="full" h="full" backdropFilter="blur(50px)">
-                        <Text align="center" fontSize={22} fontWeight="bold" mt={10}>沒有任務正在運行</Text>
-                        <CreateButton />
-                    </VStack>
-                </Box>
-
-                :
-                <SlideFade in={true}>
-                    <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
-                        {tasks
-                            .filter(task => like(task.name, filter))
-                            .map(task =>
-                                <Task key={task.id} task={task} />
-                            )
-                        }
-                    </SimpleGrid>
-                </SlideFade>
-        }
+        <DetailProvider>
+            <TasksContent filter={filter} />
+        </DetailProvider>
     </Flex>
+}
+
+function TasksContent({filter}) {
+    const {tasks} = useContext(ActionDetailContext)
+
+    return tasks.length === 0?
+        <Box bgImg={not_found} bgSize="cover" h="50vh">
+            <VStack w="full" h="full" backdropFilter="blur(50px)">
+                <Text align="center" fontSize={22} fontWeight="bold" mt={10}>沒有任務正在運行</Text>
+                <CreateButton />
+            </VStack>
+        </Box>
+        :
+        <SlideFade in={true}>
+            <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
+                {tasks
+                    .filter(task => like(task.name, filter))
+                    .map(task =>
+                        <Task key={task.id} task={task} />
+                    )
+                }
+            </SimpleGrid>
+        </SlideFade>
 }
 
 function Task({task}) {
