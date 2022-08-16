@@ -1,5 +1,5 @@
 import {Box, Center, Heading, Image, Text} from "@chakra-ui/react";
-import not_found from "assets/img/info/not_found.svg"
+import not_found from "assets/img/info/not_found_404.svg"
 
 export default function NotFound() {
     return <Center h="100vh" position="relative">

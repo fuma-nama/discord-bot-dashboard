@@ -24,7 +24,8 @@ export function TaskDetailProvider({children}) {
         () => getTaskDetail(guild, action, task), {
             initialData() {
                 return client.getQueryData(key)
-            }
+            },
+            refetchOnWindowFocus: false
         }
     )
 

@@ -1,6 +1,17 @@
 import React, {useContext, useState} from "react";
 
-import {Box, Button, Flex, HStack, SimpleGrid, SlideFade, Text, VStack} from "@chakra-ui/react";
+import {
+    Box,
+    Button,
+    Center,
+    Flex,
+    HStack,
+    SimpleGrid,
+    SlideFade,
+    Text,
+    useColorModeValue,
+    VStack
+} from "@chakra-ui/react";
 
 import {usePageInfo} from "contexts/PageInfoContext";
 import {ActionDetailContext, ActionDetailProvider, useActionInfo} from "contexts/actions/ActionDetailContext";
@@ -10,7 +21,11 @@ import {Link, useParams} from "react-router-dom";
 import NotFound from "../../../info/Not_Found";
 import {useMutation, useQueryClient} from "react-query";
 import {deleteTask} from "api/yeecord";
-import SearchInput from "../../../../components/fields/impl/SearchInput";
+import SearchInput from "components/fields/impl/SearchInput";
+
+//assets
+import not_found from "assets/img/info/not_found.svg"
+import CreateButton from "./components/CreateButton";
 
 export default function ActionTasks() {
     const info = useActionInfo()
@@ -44,22 +59,37 @@ function DetailProvider({children}) {
     </ActionDetailProvider>
 }
 
+function like(s1, s2) {
+    return s1.toLowerCase().includes(s2.toLowerCase())
+}
+
 function TasksPanel() {
     const {tasks} = useContext(ActionDetailContext)
     const [filter, setFilter] = useState("")
 
-    return <Flex direction="column" gap={5} pt={10} px={{base: 1, md: 3, lg: 10}}>
-        <Text align="center" fontSize={24} fontWeight="bold">運行中</Text>
+    const inputBg = useColorModeValue("secondaryGray.400", "navy.800");
 
-        <SearchInput value={filter} onChange={setFilter} />
+    return <Flex direction="column" gap={5} pt={10} px={{base: 1, md: 3, lg: 10}}>
+        <Center flexDirection="column" gap={5} mb={5}>
+            <Text fontSize={24} fontWeight="bold">運行中</Text>
+
+            <SearchInput value={filter} onChange={setFilter} bg={inputBg} groupStyle={{maxW: "20rem"}} />
+        </Center>
+
         {
             tasks.length === 0?
-                <Text align="center">沒有任務正在運行</Text>
+                <Box bgImg={not_found} bgSize="cover" h="50vh">
+                    <VStack w="full" h="full" backdropFilter="blur(50px)">
+                        <Text align="center" fontSize={22} fontWeight="bold" mt={10}>沒有任務正在運行</Text>
+                        <CreateButton />
+                    </VStack>
+                </Box>
+
                 :
                 <SlideFade in={true}>
                     <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
                         {tasks
-                            .filter(task => task.name === filter)
+                            .filter(task => like(task.name, filter))
                             .map(task =>
                                 <Task key={task.id} task={task} />
                             )

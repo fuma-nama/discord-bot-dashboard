@@ -3,9 +3,9 @@ import React, {useContext} from "react";
 import ActionBanner from "../../components/ActionBanner";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {Button} from "@chakra-ui/react";
-import {Link, useParams} from "react-router-dom";
-import {SmallAddIcon} from "@chakra-ui/icons";
+import {Link} from "react-router-dom";
 import {BiArrowBack} from "react-icons/bi";
+import CreateButton from "./CreateButton";
 
 export default function TasksBanner() {
 
@@ -15,24 +15,6 @@ export default function TasksBanner() {
         <CreateButton />
       </ActionBanner>
   );
-}
-
-function CreateButton() {
-  const { id: guild } = useContext(GuildContext);
-  const {action} = useParams();
-
-  return <Link to={`/guild/${guild}/action/${action}/add`}>
-    <Button
-        _hover={{ bg: "brand.400" }}
-        bg="brand.400"
-        color="white"
-        py="20px"
-        minH="full"
-        leftIcon={<SmallAddIcon />}
-    >
-      創建新任務
-    </Button>
-  </Link>
 }
 
 function BackButton() {
