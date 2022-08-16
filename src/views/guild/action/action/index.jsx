@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 
 import {Box, Button, Flex, HStack, SimpleGrid, SlideFade, Text, VStack} from "@chakra-ui/react";
 
@@ -10,6 +10,7 @@ import {Link, useParams} from "react-router-dom";
 import NotFound from "../../../info/Not_Found";
 import {useMutation, useQueryClient} from "react-query";
 import {deleteTask} from "api/yeecord";
+import SearchInput from "../../../../components/fields/impl/SearchInput";
 
 export default function ActionTasks() {
     const info = useActionInfo()
@@ -45,19 +46,24 @@ function DetailProvider({children}) {
 
 function TasksPanel() {
     const {tasks} = useContext(ActionDetailContext)
+    const [filter, setFilter] = useState("")
 
     return <Flex direction="column" gap={5} pt={10} px={{base: 1, md: 3, lg: 10}}>
         <Text align="center" fontSize={24} fontWeight="bold">運行中</Text>
 
+        <SearchInput value={filter} onChange={setFilter} />
         {
             tasks.length === 0?
                 <Text align="center">沒有任務正在運行</Text>
                 :
                 <SlideFade in={true}>
                     <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
-                        {tasks.map(task =>
-                            <Task key={task.id} task={task} />
-                        )}
+                        {tasks
+                            .filter(task => task.name === filter)
+                            .map(task =>
+                                <Task key={task.id} task={task} />
+                            )
+                        }
                     </SimpleGrid>
                 </SlideFade>
         }

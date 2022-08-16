@@ -1,11 +1,7 @@
 import React, {useContext} from "react";
 
 // Chakra imports
-import {
-  Box,
-  Flex,
-  Grid,
-} from "@chakra-ui/react";
+import {Box, Flex, Grid,} from "@chakra-ui/react";
 
 // Custom components
 import Banner from "./components/Banner";
@@ -14,8 +10,6 @@ import {usePageInfo} from "contexts/PageInfoContext";
 import {ActionsDataContext, ActionsDataProvider} from "../../../contexts/actions/ActionsDataContext";
 import {DataList} from "components/card/DataCard";
 import {config} from "config/config";
-import {useActionInfo} from "../../../contexts/actions/ActionDetailContext";
-import NotFound from "../../info/Not_Found";
 
 export default function ActionsBoard() {
 
