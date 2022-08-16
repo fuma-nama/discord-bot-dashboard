@@ -13,15 +13,14 @@ export const config = {
             url: ""
         }
     ],
-    settings: {
-        options: detail => [
-            {
-                name: "Test",
-                type: "string",
-                value: detail.test
-            }
-        ]
-    },
+    settings: detail => [
+        {
+            id: "say",
+            name: "Test",
+            type: "string",
+            value: detail["say"]
+        }
+    ],
     actions: {
         "kill_kane": KillKaneAction
     },

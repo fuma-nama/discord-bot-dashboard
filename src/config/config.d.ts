@@ -1,5 +1,6 @@
 import {Option} from "./types/option";
 import {DataItem} from "./types/data";
+
 export declare const config: ConfigType
 
 export type DashboardDataRow = {
@@ -31,9 +32,7 @@ export type ConfigType = {
             options: (data: any) => Option[]
         }
     },
-    settings: {
-        options: (data: any) => Option[]
-    }
+    settings: (data: any) => Option[]
     data: {
         features?: (data: any) => DataItem[],
         dashboard: DashboardDataRow[],

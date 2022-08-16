@@ -41,7 +41,8 @@ function SettingsConfigPanel() {
     })
 
     const options = useMemo(
-        () => config.settings.options(settings.values), []
+        () => config.settings(settings.values),
+        [settings.values]
     )
 
     return (

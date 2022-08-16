@@ -1,5 +1,5 @@
 import Feature from "views/guild/feature";
-import ActionTasks from "./views/guild/action/config";
+import ActionTasks from "./views/guild/action/action";
 import SubmitTaskBoard from "./views/guild/action/add";
 import TaskConfigBoard from "./views/guild/action/task";
 
