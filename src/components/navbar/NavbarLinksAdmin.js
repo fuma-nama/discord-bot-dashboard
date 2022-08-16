@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import UserOptionMenu from "components/menu/UserOptionMenu";
 // Custom Components
-import {ItemContent} from "components/menu/ItemContent";
+import {NotificationItem} from "components/menu/NotificationItem";
 import {SearchBar} from "components/navbar/searchBar/SearchBar";
 import {SidebarResponsive} from "components/sidebar/Sidebar";
 import PropTypes from "prop-types";
@@ -134,7 +134,7 @@ function Notifications() {
                 <QueryHolderSkeleton query={query} height="100px" count={2}>{() =>
                     query.data.map((item, key) => (
                         <MenuItem key={key} borderRadius="8px" p={0}>
-                            <ItemContent {...item} />
+                            <NotificationItem {...item} />
                         </MenuItem>
                     ))}
                 </QueryHolderSkeleton>
