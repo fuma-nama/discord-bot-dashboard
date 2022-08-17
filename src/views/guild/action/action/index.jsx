@@ -128,7 +128,7 @@ function Task({task}) {
             <VStack align="start">
                 <Text fontSize="lg" fontWeight="bold">{task.name}</Text>
                 <HStack>
-                    <Text fontWeight="bold">創建於: </Text>
+                    <Text minW="fit-content" fontWeight="bold">創建於: </Text>
                     <Text>{createdAt.toLocaleString()}</Text>
                 </HStack>
             </VStack>
@@ -138,12 +138,12 @@ function Task({task}) {
                 variant="danger"
                 onClick={deleteMutation.mutate}
                 isLoading={deleteMutation.isLoading}>
-                Delete
+                刪除
             </Button>
         </Flex>
-        <Box>
+        <Box w={{base: "full", "3sm": "fit-content"}}>
             <Link to={configUrl}>
-                <Button px={10} variant="action">Config</Button>
+                <Button w="full" fontWeight="bold" px={10} variant="action">修改選項</Button>
             </Link>
         </Box>
     </Card>

@@ -5,8 +5,9 @@ import {Icon, SimpleGrid, useColorModeValue} from "@chakra-ui/react";
 import IconBox from "../icons/IconBox";
 import ChartData from "../charts/ChartData";
 import DataTable from "./DataTable";
-import DataPieChart from "../charts/DataPieChart";
+import PieChartData from "../charts/PieChartData";
 import {List} from "./List";
+import InformationMap from "./InformationMap";
 
 export function DataList({items}) {
     return items.map((item, key) => {
@@ -31,7 +32,15 @@ export default function DataCard({name, value, type, ...optional}) {
                     value={value}
                 />
             }
+            case DataTypes.InfoMap: {
+                const {description} = optional
 
+                return <InformationMap
+                    name={name}
+                    description={description}
+                    value={value}
+                />
+            }
             case DataTypes.Bar_Chart:
             case DataTypes.Line_Chart:
                 const {time_unit, description, status, options} = optional
@@ -49,7 +58,7 @@ export default function DataCard({name, value, type, ...optional}) {
             case DataTypes.Pie_Chart: {
                 const {options, unit} = optional
 
-                return <DataPieChart name={name} data={value} options={options} unit={unit} />
+                return <PieChartData name={name} data={value} options={options} unit={unit} />
             }
 
             case DataTypes.Table:{

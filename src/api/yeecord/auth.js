@@ -15,7 +15,9 @@ export function hasLoggedIn() {
 }
 
 export async function logout() {
-    return fetchAuto("/auth/signout")
+    return fetchAuto("/auth/signout", {
+        method: "POST"
+    })
 }
 
 export function useLogout() {

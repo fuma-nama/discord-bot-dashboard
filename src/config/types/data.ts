@@ -1,13 +1,20 @@
 import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
-import { ApexOptions } from "apexcharts";
+import {ApexOptions} from "apexcharts";
 
-export type DataItem = Group | Statistics | LineChart | BarChart | PieChart | Table | List
+export type DataItem = Group | Statistics | LineChart | BarChart | PieChart | Table | List | InfoMap
 
 interface Statistics {
    type: "statistics"
     name: string
     icon?: any | undefined
     value: number
+}
+
+interface InfoMap {
+    type: "info_map"
+    name: string
+    description?: string,
+    value: {name: string, value: any}[]
 }
 
 interface LineChart extends ChartData {
