@@ -3,8 +3,6 @@ import {QueryHolder} from "../components/AsyncContext";
 import {useQuery} from "react-query";
 import {getServerDetails} from "../../api/yeecord";
 import {GuildContext} from "./GuildContext";
-import {Icon, useColorModeValue} from "@chakra-ui/react";
-import IconBox from "../../components/icons/IconBox";
 
 export const GuildDetailContext = createContext({
     detail: null

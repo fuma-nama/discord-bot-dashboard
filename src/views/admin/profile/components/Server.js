@@ -1,5 +1,5 @@
 // Chakra imports
-import {Avatar, Button, Flex, Image, Stack, Text, useColorModeValue,} from "@chakra-ui/react";
+import {Avatar, Button, Flex, Stack, Text, useColorModeValue,} from "@chakra-ui/react";
 // Custom components
 import {Link} from "react-router-dom";
 import Card from "components/card/Card.js";

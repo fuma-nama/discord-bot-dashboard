@@ -1,6 +1,6 @@
 import React, {useContext, useMemo} from "react";
 
-import {Box, Flex, Stack,} from "@chakra-ui/react";
+import {Box, Flex,} from "@chakra-ui/react";
 
 // Custom components
 import Banner from "./components/Banner";

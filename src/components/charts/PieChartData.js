@@ -3,11 +3,9 @@ import {Box, Flex, SimpleGrid, Text, useColorModeValue} from "@chakra-ui/react";
 // Custom components
 import Card from "components/card/Card.js";
 import PieChart from "components/charts/PieChart";
-import { pieChartOptions } from "variables/charts";
-import { VSeparator } from "components/separator/Separator";
 import React from "react";
 
-export default function DataPieChart({name, data, options, unit}) {
+export default function PieChartData({name, data, options, unit}) {
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");

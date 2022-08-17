@@ -1,12 +1,9 @@
-import {Flex, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue,} from "@chakra-ui/react";
-import React, {useContext} from "react";
+import {Flex, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue,} from "@chakra-ui/react";
+import React from "react";
 import {useGlobalFilter, usePagination, useSortBy, useTable,} from "react-table";
 
 // Custom components
 import Card from "components/card/Card";
-import Menu from "components/menu/MainMenu";
-import {GuildDetailContext} from "contexts/guild/GuildDetailContext";
-import {MdCancel, MdCheckCircle} from "react-icons/md";
 
 export default function DataTable({name, data, columns}) {
 

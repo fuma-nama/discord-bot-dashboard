@@ -2,8 +2,6 @@ import React from "react";
 // Assets
 import SignIn from "./index";
 import ErrorModal from "components/modal/ErrorModal";
-import {login} from "api/yeecord";
-import { useNavigate } from "react-router-dom";
 
 function AuthProcessing() {
 

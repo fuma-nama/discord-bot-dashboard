@@ -1,18 +1,12 @@
 import React, {useContext} from "react";
 
 // Chakra imports
-import {
-  Box,
-  Flex,
-  Grid,
-
-
-} from "@chakra-ui/react";
+import {Box, Flex, Grid,} from "@chakra-ui/react";
 
 // Custom components
 import Banner from "./components/Banner";
 import FeatureGrid from "./components/FeatureGrid";
-import {FeaturesContext, FeaturesProvider, useFeaturesDataQuery} from "contexts/FeaturesContext";
+import {FeaturesContext, FeaturesProvider} from "contexts/FeaturesContext";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
 import {DataList} from "../../../components/card/DataCard";
 import {config} from "../../../config/config";

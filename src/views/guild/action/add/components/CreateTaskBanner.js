@@ -1,13 +1,14 @@
 import React, {useContext} from "react";
 
 // Chakra imports
-import {Button, Flex, HStack, Text} from "@chakra-ui/react";
+import {Button} from "@chakra-ui/react";
 // Assets
 import {GuildContext} from "contexts/guild/GuildContext";
 import {BiArrowBack} from "react-icons/bi";
 
 import {Link, useParams} from "react-router-dom";
 import ActionBanner from "../../components/ActionBanner";
+
 export default function CreateTaskBanner() {
 
   return (

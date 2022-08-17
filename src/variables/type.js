@@ -3,6 +3,7 @@ export const DataTypes = {
     Line_Chart: "line_chart",
     Bar_Chart: "bar_chart",
     Pie_Chart: "pie_chart",
+    InfoMap: "info_map",
     Table: "table",
     Group: "group",
     List: "list",

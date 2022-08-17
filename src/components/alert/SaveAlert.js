@@ -1,19 +1,4 @@
-import {
-    Button,
-    Text,
-    useColorModeValue,
-    Alert,
-    AlertIcon,
-    ButtonGroup,
-    Slide,
-    Modal,
-    ModalContent,
-    ModalHeader,
-    ModalCloseButton,
-    ModalBody,
-    ModalFooter, Box, Flex,
-} from "@chakra-ui/react";
-import { useState } from "react";
+import {Alert, AlertIcon, Button, ButtonGroup, Slide, useColorModeValue,} from "@chakra-ui/react";
 
 export function SaveAlert({
   saving,

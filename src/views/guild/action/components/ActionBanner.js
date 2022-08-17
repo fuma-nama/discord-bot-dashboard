@@ -1,13 +1,9 @@
-import React, {useContext} from "react";
+import React from "react";
 
 // Chakra imports
-import {Box, Button, Flex, HStack, Stack, Text} from "@chakra-ui/react";
+import {Box, Flex, Stack, Text} from "@chakra-ui/react";
 // Assets
 import bannerImg from "assets/img/common/ActionBanner.jpg";
-import {GuildContext} from "contexts/guild/GuildContext";
-import {BiArrowBack} from "react-icons/bi";
-import {Link, useParams} from "react-router-dom";
-import {SmallAddIcon} from "@chakra-ui/icons";
 import {useActionInfo} from "contexts/actions/ActionDetailContext";
 
 export default function ActionBanner({children}) {

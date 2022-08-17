@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 
 // Chakra imports
 import {Button} from "@chakra-ui/react";
-import {FeatureDetailContext, useFeatureInfo} from "contexts/FeatureDetailContext";
+import {useFeatureInfo} from "contexts/FeatureDetailContext";
 import Banner from "components/card/Banner";
 // Assets
 import banner from "assets/img/layout/NftBanner1.png";
