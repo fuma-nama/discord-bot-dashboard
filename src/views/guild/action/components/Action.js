@@ -1,5 +1,5 @@
-import React, {Fragment, useContext} from "react";
-import {Box, Button, Flex, Grid, GridItem, HStack, Image, Text, useColorModeValue} from "@chakra-ui/react";
+import React, {useContext} from "react";
+import {Box, Button, Flex, HStack, Image, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card";
 import {Link} from "react-router-dom";
 import {GuildContext} from "contexts/guild/GuildContext";
@@ -44,7 +44,7 @@ export function Action({action}) {
                 </Text>
                 <HStack>
                     <Link to={configUrl}>
-                        <Button px={10} variant="brand">Open</Button>
+                        <Button px={10} variant="brand">打開</Button>
                     </Link>
                 </HStack>
             </Flex>
