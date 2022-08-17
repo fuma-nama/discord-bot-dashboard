@@ -10,6 +10,17 @@ export const dashboardData = [
         count: 1,
         items: (detail) => [
             {
+                name: "Personal Information",
+                description: "All of your personal information about you",
+                type: DataTypes.InfoMap,
+                value: [
+                    {
+                        name: "Job",
+                        value: "Software Engineer"
+                    }
+                ]
+            },
+            {
                 name: "Guild Members",
                 value: `$${detail.members}`,
                 type: DataTypes.Statistics
