@@ -12,8 +12,6 @@ import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
 import {invite} from "./variables/links";
 import {hasLoggedIn} from "./api/yeecord";
 import {QueryHolder} from "./contexts/components/AsyncContext";
-import Credits from "./layouts/info/credits";
-import Dino from "./views/info/dino";
 import {SettingsContext, SettingsProvider} from "./contexts/SettingsContext";
 import {config} from "./config/config";
 
@@ -68,11 +66,6 @@ function AppRouter() {
                             }/>
                         </>
                     )}
-
-                    <Route path="/info">
-                        <Route path="credits" element={<Credits/>}/>
-                        <Route path="dino" element={<Dino/>}/>
-                    </Route>
 
                     {!loggedIn && (
                         <>
