@@ -1,15 +1,10 @@
 // Chakra Imports
-import {
-    Flex,
-    MenuItem,
-    MenuList,
-    Text,
-    useColorModeValue,
-} from "@chakra-ui/react";
+import {Flex, MenuItem, MenuList, Text, useColorModeValue,} from "@chakra-ui/react";
 import {useContext} from "react";
 import {UserDataContext} from "contexts/UserDataContext";
 import {Link} from "react-router-dom";
-import { useLogout} from "../../api/yeecord";
+import {useLogout} from "../../api/yeecord";
+import {Locale} from "../../utils/Language";
 
 export default function UserOptionMenu() {
     const menuBg = useColorModeValue("white", "navy.800");
@@ -43,13 +38,13 @@ export default function UserOptionMenu() {
                     fontWeight="700"
                     color={textColor}
                 >
-                    👋&nbsp; 歡迎, {user.username}
+                    👋&nbsp; <Locale zh="歡迎" en="Welcome"/>, {user.username}
                 </Text>
             </Flex>
             <Flex flexDirection="column" p="10px">
                 <Link to="/admin">
                     <MenuItem borderRadius="8px" px="14px">
-                        個人信息
+                        <Locale zh="個人信息" en="Profile" />
                     </MenuItem>
                 </Link>
                 <MenuItem
@@ -59,7 +54,9 @@ export default function UserOptionMenu() {
                     onClick={logout.mutate}
                     disabled={logout.isLoading}
                 >
-                    <Text fontSize="sm">登出</Text>
+                    <Text fontSize="sm">
+                        <Locale zh="登出" en="Log out" />
+                    </Text>
                 </MenuItem>
             </Flex>
         </MenuList>
