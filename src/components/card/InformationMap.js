@@ -12,7 +12,7 @@ export default function InformationMap({name, description, value, ...rest}) {
         "unset"
     );
     return (
-        <Card mb={{base: "0px", "2xl": "20px"}} {...rest}>
+        <Card {...rest}>
             <Text
                 color={textColorPrimary}
                 fontWeight="bold"
