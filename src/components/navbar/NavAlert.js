@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Breadcrumb, BreadcrumbItem, Flex, Link, Text, useColorModeValue} from "@chakra-ui/react";
+import {Box, Breadcrumb, BreadcrumbItem, Flex, Text, useColorModeValue} from "@chakra-ui/react";
 
 export default function NavAlert({rootText, childText, children, clip = true}) {
     // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
@@ -90,25 +90,13 @@ export default function NavAlert({rootText, childText, children, clip = true}) {
                                 </BreadcrumbItem>
                         }
                     </Breadcrumb>
-                    <Link
-                        mt={6}
+                    <Text
                         color={mainText}
-                        bg="inherit"
-                        borderRadius="inherit"
                         fontWeight="bold"
                         fontSize="34px"
-                        _hover={{color: mainText}}
-                        _active={{
-                            bg: "inherit",
-                            transform: "none",
-                            borderColor: "transparent",
-                        }}
-                        _focus={{
-                            boxShadow: "none",
-                        }}
                     >
                         {Array.isArray(childText)? childText[childText.length - 1] : childText}
-                    </Link>
+                    </Text>
                 </Box>
                 <Flex
                     ms="auto"
