@@ -7,6 +7,16 @@ export const Languages = [
 ]
 
 /**
+ *
+ * @param lang {string}
+ * @param props {{[key: string]: string}}
+ * @return {string}
+ */
+export function locale(lang, props) {
+    return props[lang]
+}
+
+/**
  * @return {({[key: string]: string}) => string}
  */
 export function useLocale() {
