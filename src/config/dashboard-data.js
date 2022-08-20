@@ -1,5 +1,6 @@
 import {DataTypes} from "../variables/type";
 import React from "react";
+import {Locale} from "../utils/Language";
 
 /**
  * @type Array<DashboardDataRow>
@@ -7,11 +8,17 @@ import React from "react";
 export const dashboardData = [
     {
         advanced: false,
-        count: 1,
-        items: (detail) => [
+        count: 2,
+        items: (detail, {lang}) => [
             {
-                name: "Personal Information",
-                description: "All of your personal information about you",
+                name: <Locale
+                    zh="個人信息"
+                    en="Personal Information"
+                />,
+                description: <Locale
+                    zh="關於您的所有個人信息"
+                    en="All of your personal information about you"
+                />,
                 type: DataTypes.InfoMap,
                 value: [
                     {
@@ -30,10 +37,10 @@ export const dashboardData = [
     {
         advanced: true,
         count: 1,
-        items: (detail) => [
+        items: (detail, {advanced}) => [
             {
                 name: "Guild Members",
-                value: `$${detail.members}`,
+                value: `$${advanced.members}`,
                 type: DataTypes.Statistics
             }
         ]

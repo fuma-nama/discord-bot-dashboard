@@ -9,19 +9,23 @@ import {getServerAdvancedDetails} from "api/yeecord";
 import {QueryHolderSkeleton} from "contexts/components/AsyncContext";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {DataList} from "components/card/DataCard";
-import {config} from "../../../config/config";
+import {config} from "config/config";
+import {usePageState} from "utils/State";
+import {useLocale} from "utils/Language";
 
 export default function Dashboard() {
     return <ServerDetailProvider>
-        <UserReports/>
+        <UserReports />
     </ServerDetailProvider>
 }
 
 export function UserReports() {
-    usePageInfo("服務器儀表板")
+    const locale = useLocale()
     const {detail} = useContext(GuildDetailContext)
     const {id: serverId} = useContext(GuildContext)
     const data = config.data.dashboard
+
+    usePageInfo(locale({zh: "服務器儀表板", en: "Server Statistics"}))
 
     const query = useQuery(
         "server_advanced_detail",
@@ -45,7 +49,7 @@ export function UserReports() {
                     >
                         {row.advanced?
                             <QueryHolderSkeleton query={query} height="400px" count={row.count}>
-                                {() => <AdvancedData row={row} data={detail} advanced={query.data} />}
+                                {() => <Data row={row} data={detail} advanced={query.data} />}
                             </QueryHolderSkeleton>
                             :
                             <Data row={row} detail={detail} />
@@ -57,18 +61,13 @@ export function UserReports() {
     );
 }
 
-function Data({row, detail}) {
-    const items = useMemo(
-        () => row.items(detail),
-        [detail]
-    )
+function Data({row, detail, advanced}) {
+    const state = usePageState({
+        advanced
+    })
 
-    return <DataList items={items} />
-}
-
-function AdvancedData({row, advanced, detail}) {
     const items = useMemo(
-        () => row.items(advanced, detail),
+        () => row.items(detail, state),
         [detail]
     )
 

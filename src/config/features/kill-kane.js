@@ -1,7 +1,8 @@
+import {Locale} from "../../utils/Language";
 
 export const KillKane = {
-    name: "自動殺死凱恩",
-    description: "凱恩加入服務器時自動殺死凱恩",
+    name: <Locale zh="自動殺死凱恩" en="Auto Kill Kane" />,
+    description: <Locale zh="凱恩加入服務器時自動殺死凱恩" en="Kill Kane when he joined the server" />,
     options: values => [
         {
             id: "kill_friends",

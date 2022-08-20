@@ -15,6 +15,7 @@ import {ConfigItemListAnimated} from "components/fields/ConfigPanel";
 import {useNavigate, useParams} from "react-router-dom";
 import {addTask} from "api/yeecord";
 import NameInput from "../components/NameInput";
+import {usePageState} from "../../../../utils/State";
 
 export default function SubmitTaskBoard() {
   return <SubmitTask />
@@ -47,9 +48,10 @@ function ConfigPanel() {
     const {id: guild, action} = useParams()
     const navigate = useNavigate()
     const client = useQueryClient()
+    const state = usePageState()
 
     const options = useMemo(
-        () => config.actions[action].options(null),
+        () => config.actions[action].options(null, state),
         []
     )
 

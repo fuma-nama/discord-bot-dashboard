@@ -14,6 +14,7 @@ import ActionBanner from "../components/ActionBanner";
 import {BiArrowBack} from "react-icons/bi";
 import {TaskDetailContext, TaskDetailProvider} from "../../../../contexts/actions/TaskDetailContext";
 import {useQueryClient} from "react-query";
+import {usePageState} from "../../../../utils/State";
 
 export default function TaskBoard() {
 
@@ -70,9 +71,10 @@ export function Config() {
 function ConfigPanel({savedName, onSaved, values}) {
     const {id: guild, action, task} = useParams();
     const info = useActionInfo()
+    const state = usePageState()
 
     const options = useMemo(
-        () => info.options(values),
+        () => info.options(values, state),
         [values]
     )
 

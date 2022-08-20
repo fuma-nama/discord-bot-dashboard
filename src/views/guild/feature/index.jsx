@@ -14,6 +14,7 @@ import {config} from "config/config";
 import NotFound from "../../info/Not_Found";
 import {useParams} from "react-router-dom";
 import {useQueryClient} from "react-query";
+import {usePageState} from "../../../utils/State";
 
 export default function Feature() {
   const { feature } = useParams()
@@ -47,13 +48,14 @@ function FeaturePanel() {
 }
 
 function FeatureConfigPanel() {
-  const {id: serverId } = useContext(GuildContext);
+  const { id: serverId } = useContext(GuildContext);
   const {values} = useContext(FeatureDetailContext)
+    const state = usePageState()
   const info = useFeatureInfo()
 
   const client = useQueryClient()
   const options = useMemo(
-      () => info.options(values),
+      () => info.options(values, state),
       [info.id, values]
   )
 

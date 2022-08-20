@@ -3,12 +3,33 @@ import {DataItem} from "./types/data";
 
 export declare const config: ConfigType
 
+export type PageState = {
+    /**
+     * User's Language
+     */
+    lang: "en" | "zh"
+    darkMode: boolean
+}
+
+export type DashboardState = PageState & {
+    /**
+     * Advanced Data, only exists if `advanced` is true
+     */
+    advanced: any | undefined
+}
+
+export type OptionState = PageState & {
+    /**
+     * Additional Data, Defined by Server
+     */
+    data: any
+}
+
 export type DashboardDataRow = {
     advanced: boolean,
     count: number,
-    items: (detail: any) => DataItem[]
+    items: (detail: any, state: DashboardState) => DataItem[]
 }
-
 type FooterItem = {
     name: string,
     url: string
@@ -21,7 +42,7 @@ export type ConfigType = {
             banner?: any,
             name: string,
             description: string,
-            options: (data: any | null) => Option[]
+            options: (data: any | null, state: OptionState) => Option[]
         }
     },
     features: {
@@ -29,7 +50,7 @@ export type ConfigType = {
             banner?: any,
             name: string,
             description: string,
-            options: (data: any) => Option[]
+            options: (data: any, state: OptionState) => Option[]
         }
     },
     settings: (data: any) => Option[]
