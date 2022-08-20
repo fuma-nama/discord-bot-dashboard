@@ -1,16 +1,18 @@
 import {createContext, useEffect, useState} from "react";
 
 export const SettingsContext = createContext({
-    setSettings: null,
+    updateSettings: (settings) => {},
     devMode: null,
-    fixedWidth: null
+    fixedWidth: null,
+    language: "en"
 })
 
 export function SettingsProvider({children}) {
     const [settings, setSetting] = useState(() => ({
         devMode: getItem("dev_mode", false),
         fixedWidth: getItem("fixedWidth", true),
-        setSettings: (v) => {
+        language: getItem("lang", "en"),
+        updateSettings: (v) => {
             setSetting(prev => ({
                 ...prev,
                 ...v
@@ -19,6 +21,7 @@ export function SettingsProvider({children}) {
     }))
 
     useEffect(() => {
+            localStorage.setItem("lang", settings.language)
             localStorage.setItem("dev_mode", settings.devMode)
             localStorage.setItem("fixedWidth", settings.fixedWidth)
         },

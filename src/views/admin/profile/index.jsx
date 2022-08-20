@@ -36,8 +36,8 @@ export default function Overview() {
                     banner={banner && bannerToUrl(id, banner)}
                     avatar={avatarToUrl(id, avatar)}
                     name={username}
-                    joinedServers={guilds == null? "Loading..." : guilds.filter(g => g.exist).length}
-                    servers={guilds == null? "Loading..." : guilds.length}
+                    joinedServers={guilds && guilds.filter(g => g.exist).length}
+                    servers={guilds && guilds.length}
                 />
                 <Settings
                     gridArea={{

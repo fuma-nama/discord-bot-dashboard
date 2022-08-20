@@ -7,6 +7,7 @@ import Server from "views/admin/profile/components/Server";
 import {QueryHolderSkeleton} from "../../../../contexts/components/AsyncContext";
 import SearchInput from "../../../../components/fields/impl/SearchInput";
 import {config} from "../../../../config/config";
+import {Locale} from "../../../../utils/Language";
 
 export default function ServerPicker({query, ...rest}) {
 
@@ -25,10 +26,13 @@ export default function ServerPicker({query, ...rest}) {
                     fontSize="2xl"
                     mt="10px"
                 >
-                    您的服務器
+                    <Locale zh="您的服務器" en="Your Servers" />
                 </Text>
                 <Text color={textColorSecondary} fontSize="md">
-                    把{config.name}邀請到你的服務器, 並且客製化你的機器人
+                    <Locale
+                        zh={`把${config.name}邀請到你的服務器, 並且客製化你的機器人`}
+                        en={`Invite ${config.name} to Your Server, And Customize the bot`}
+                    />
                 </Text>
 
                 <SearchInput value={filter} onChange={setFilter} groupStyle={{

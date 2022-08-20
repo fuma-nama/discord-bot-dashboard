@@ -1,8 +1,9 @@
 // Chakra imports
-import { Avatar, Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import {Avatar, Box, Flex, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import React from "react";
 import {config} from "../../../../config/config";
+import {Locale} from "../../../../utils/Language";
 
 export default function Banner(props) {
   const { banner, avatar, name, joinedServers, servers } = props;
@@ -37,25 +38,29 @@ export default function Banner(props) {
         {name}
       </Text>
       <Text color={textColorSecondary} fontSize="sm">
-        歡迎回到 {config.name}
+        <Locale zh="歡迎回到" en="Welcome back to" /> {config.name}
       </Text>
       <Flex w="max-content" mx="auto" mt="26px" flexWrap="wrap">
-        <Flex mx="auto" me="60px" align="center" direction="column">
-          <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
-            {joinedServers}
-          </Text>
-          <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
-              已加入的服務器
-          </Text>
-        </Flex>
-        <Flex mx="auto" align="center" direction="column">
-          <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
-            {servers}
-          </Text>
-          <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
-            您擁有的服務器
-          </Text>
-        </Flex>
+          {
+              joinedServers && <Flex mx="auto" me="60px" align="center" direction="column">
+                  <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
+                      {joinedServers}
+                  </Text>
+                  <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
+                      <Locale zh="已加入的服務器" en="Joined Servers" />
+                  </Text>
+              </Flex>
+          }
+          {
+              servers && <Flex mx="auto" align="center" direction="column">
+                  <Text color={textColorPrimary} fontSize="2xl" fontWeight="700">
+                      {servers}
+                  </Text>
+                  <Text color={textColorSecondary} fontSize="sm" fontWeight="400">
+                      <Locale zh="您擁有的服務器" en="Total Servers" />
+                  </Text>
+              </Flex>
+          }
       </Flex>
     </Card>
   );

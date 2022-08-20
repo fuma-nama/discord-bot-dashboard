@@ -95,17 +95,15 @@ type ArrayOption = IOption & {
 
 type IdEnumOption = IOption & {
     type: "id_enum"
+    placeholder?: string
     choices: [
         {
             id: number
             name: string
-            description: string
             color?: string
+            icon: "channel" | "role" | any
         }
     ]
-    element?: {
-        type?: "channel" | "role" | undefined
-    }
     value: number
 }
 

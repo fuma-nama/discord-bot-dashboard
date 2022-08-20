@@ -6,6 +6,7 @@ import Card from "components/card/Card.js";
 import React from "react";
 // Assets
 import {iconToUrl} from "api/discord/DiscordApi";
+import {Locale} from "utils/Language";
 
 export default function Server({ server, ...rest }) {
   const { name, id, icon } = server;
@@ -38,19 +39,29 @@ export default function Server({ server, ...rest }) {
           >
             {name}
           </Text>
-          <ServerButton server={server} />
+          {server.exist? <ConfigButton server={server} /> : <InviteButton />}
         </Stack>
       </Flex>
     </Card>
   );
 }
 
-function ServerButton({server}) {
-  const url = server.exist ? `/guild/${server.id}` : "/invite";
+function InviteButton() {
+  const url = "/invite";
 
-  return <Link to={url} target={server.exist ? "_self" : "_blank"}>
-    <Button fontWeight="500" variant={server.exist ? "brand" : "outline"} fontSize="md">
-      {server.exist ? "配置服務器" : "邀請到服務器"}
+  return <Link to={url} target="_blank">
+    <Button fontWeight="500" variant={"outline"} fontSize="md">
+      <Locale zh="邀請到服務器" en="Invite to Server" />
+    </Button>
+  </Link>
+}
+
+function ConfigButton({server}) {
+  const url = `/guild/${server.id}`;
+
+  return <Link to={url}>
+    <Button fontWeight="500" variant="brand" fontSize="md">
+      <Locale zh="配置服務器" en="Customize" />
     </Button>
   </Link>
 }

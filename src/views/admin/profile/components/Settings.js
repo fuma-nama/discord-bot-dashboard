@@ -7,16 +7,29 @@ import {useLogout} from "../../../../api/yeecord";
 import {useContext} from "react";
 //Context
 import {SettingsContext} from "contexts/SettingsContext";
+import {SelectField} from "components/fields/SelectField";
+import {Languages, Locale, useLocale} from "utils/Language";
 
-export default function Settings(props) {
-    const {...rest} = props;
+export default function Settings({...rest}) {
     const {colorMode, setColorMode} = useColorMode();
-    const {setSettings, devMode, fixedWidth} = useContext(SettingsContext)
-
+    const {updateSettings, devMode, fixedWidth, language} = useContext(SettingsContext)
+    const locale = useLocale()
     const logout = useLogout()
 
     // Chakra Color Mode
-    const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
+    const textColorPrimary = useColorModeValue("secondaryGray.900", "white")
+    const Switch = ({label, isChecked, onChange, ...props}) => {
+        return <SwitchField
+            reversed={true}
+            fontSize="sm"
+            mb="20px"
+            label={locale(label)}
+            isChecked={isChecked}
+            onChange={e => onChange(e.target.checked)}
+            {...props}
+        />
+    }
+
     return (
         <Card mb="20px" {...rest}>
             <Text
@@ -26,45 +39,38 @@ export default function Settings(props) {
                 fontSize="2xl"
                 mb="30px"
             >
-                設置
+                <Locale zh="設置" en="Settings" />
             </Text>
-            <SwitchField
-                reversed={true}
-                fontSize="sm"
-                mb="20px"
-                id="1"
-                label="固定屏幕最小寬度"
+            <Switch
+                label={{zh: "固定屏幕最小寬度", en: "Fixed Screen Min-Width"}}
                 isChecked={fixedWidth}
-                onChange={e =>
-                    setSettings({
-                        fixedWidth: e.target.checked
+                onChange={v =>
+                    updateSettings({
+                        fixedWidth: v
                     })
                 }
             />
-            <SwitchField
-                reversed={true}
-                fontSize="sm"
-                mb="20px"
-                id="2"
-                label="開發者模式"
+            <Switch
+                label={{zh: "開發者模式", en: "Developer Mode"}}
                 isChecked={devMode}
                 onChange={e =>
-                    setSettings({
-                        devMode: e.target.checked
+                    updateSettings({
+                        devMode: e
                     })
                 }
             />
-            <SwitchField
-                reversed={true}
-                fontSize="sm"
-                mb="20px"
-                id="3"
-                label="黑暗主題"
+            <Switch
+                label={{zh: "黑暗主題", en: "Dark Mode"}}
                 isChecked={colorMode === "dark"}
-                onChange={({target}) => {
-                    setColorMode(target.checked ? "dark" : "light");
+                onChange={v => {
+                    setColorMode(v ? "dark" : "light");
                 }}
             />
+            <SelectField value={language} options={Languages} onChange={lang =>
+                updateSettings({
+                    language: lang
+                })
+            }/>
             <Stack mt="auto" gap={3}>
                 <Button
                     size="lg"
@@ -72,7 +78,7 @@ export default function Settings(props) {
                     isLoading={logout.isLoading}
                     onClick={logout.mutate}
                 >
-                    登出帳號
+                    <Locale en="Sign out" zh="登出帳號" />
                 </Button>
             </Stack>
         </Card>

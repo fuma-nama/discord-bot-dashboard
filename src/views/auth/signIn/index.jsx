@@ -7,10 +7,9 @@ import DefaultAuth from "layouts/auth/Default";
 import illustration from "assets/img/auth/Banner.jpg";
 import {FaDiscord} from "react-icons/fa";
 import {config} from "config/config";
-import {useNavigate} from "react-router-dom";
+import {Locale} from "../../../utils/Language";
 
 function SignIn({loading = false}) {
-  const navigate = useNavigate();
 
   // Chakra color mode
 
@@ -29,8 +28,7 @@ function SignIn({loading = false}) {
   );
 
   const onSignIn = () => {
-
-    navigate(`${config.serverUrl}/login`)
+    window.location.href = `${config.serverUrl}/login`
   };
 
   return (
@@ -50,7 +48,7 @@ function SignIn({loading = false}) {
       >
         <Box me="auto">
           <Heading color={textColor} fontSize="36px" mb="10px">
-            使用 Discord 登入控制面板
+            <Locale zh="使用 Discord 登入控制面板" en="Login to your Discord Account" />
           </Heading>
           <Text
             mb="36px"
@@ -59,7 +57,7 @@ function SignIn({loading = false}) {
             fontWeight="400"
             fontSize="md"
           >
-            讓 Discord 不再只是聊天軟體
+            <Locale zh="讓 Discord 不再只是聊天軟體" en="Discover more Features and Grow your Server up" />
           </Text>
         </Box>
         <Flex
@@ -90,7 +88,7 @@ function SignIn({loading = false}) {
             isLoading={loading}
           >
             <Icon as={FaDiscord} w="20px" h="20px" me="10px" />
-            Discord 登入
+            <Locale zh="Discord 登入" en="Login with Discord" />
           </Button>
           <Flex
             flexDirection="column"
@@ -100,7 +98,7 @@ function SignIn({loading = false}) {
             mt="0px"
           >
             <Text color={textColorDetails} fontWeight="400" fontSize="14px">
-              我們只會存取你的公開資料，所有資料都會保密
+              <Locale zh="您的所有個人信息都將被保密" en="All your personal information will be kept confidential" />
             </Text>
           </Flex>
         </Flex>
