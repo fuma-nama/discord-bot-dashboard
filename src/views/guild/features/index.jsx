@@ -10,6 +10,7 @@ import {FeaturesContext, FeaturesProvider} from "contexts/FeaturesContext";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
 import {DataList} from "../../../components/card/DataCard";
 import {config} from "../../../config/config";
+import {useLocale} from "../../../utils/Language";
 
 export default function FeaturesBoard() {
   return (
@@ -20,8 +21,12 @@ export default function FeaturesBoard() {
 }
 
 function Features() {
-  usePageInfo("功能控制板")
+  const locale = useLocale()
   const {data} = useContext(FeaturesContext)
+
+  usePageInfo(
+      locale({zh: "功能控制面板", en: "Features"})
+  )
 
   if (config.data.features) {
 

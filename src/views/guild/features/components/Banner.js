@@ -6,21 +6,31 @@ import {Link, Text} from "@chakra-ui/react";
 // Assets
 import banner from "assets/img/layout/NftBanner1.png";
 import Banner, {BannerButton} from "components/card/Banner";
+import {Locale, useLocale} from "../../../../utils/Language";
+import {config} from "../../../../config/config";
 
 export default function BannerWrapper() {
+    const locale = useLocale()
+
     // Chakra Color Mode
     return (
         <Banner
             image={banner}
-            title="發掘、學習、以及客製化Yeecord強大的功能"
-            description="進入這個 YEE 世界。立即發現最新功能或開始使用 定制你自己的！"
+            title={locale({
+                zh: "在線管理所有功能",
+                en: `Features Panel`
+            })}
+            description={locale({
+                zh: `發掘、學習、以及客製化${config.name}強大的功能`,
+                en: `Discover, Learn, And Customize the Powerful Features of ${config.name}`
+            })}
         >
             <BannerButton>
-                發現它們
+                <Locale zh="發現它們" en="Discover" />
             </BannerButton>
             <Link>
                 <Text color="white" fontSize="sm" fontWeight="500">
-                    觀看教程
+                    <Locale zh="觀看教程" en="Watch Tutorial" />
                 </Text>
             </Link>
         </Banner>

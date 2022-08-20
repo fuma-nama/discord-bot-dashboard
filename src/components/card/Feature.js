@@ -8,6 +8,7 @@ import React, {useContext} from "react";
 import {GuildContext} from "../../contexts/guild/GuildContext";
 import {setFeatureEnabled} from "api/yeecord";
 import {useMutation, useQueryClient} from "react-query";
+import {Locale} from "../../utils/Language";
 
 export default function Feature({
                                     banner,
@@ -103,7 +104,7 @@ function ConfigButton({configUrl}) {
                 px="24px"
                 py="5px"
             >
-                配置此功能
+                <Locale zh="配置此功能" en="Configure"/>
             </Button>
         </Link>
     );
@@ -119,7 +120,11 @@ function EnableButton({enabled, isLoading, onChange}) {
             px="24px"
             py="5px"
         >
-            {enabled? "禁用" : "啟用"}此功能
+            {enabled?
+                <Locale zh="禁用此功能" en="Disable"/>
+                 :
+                <Locale zh="啟用此功能" en="Enable"/>
+            }
         </Button>
     );
 }
