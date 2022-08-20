@@ -10,7 +10,7 @@ export const config = {
     footer: [
         {
             name: "Support",
-            url: ""
+            url: "https://github.com/SonMooSans"
         }
     ],
     settings: detail => [
@@ -27,6 +27,8 @@ export const config = {
     features: {
         "auto_kill_kane": KillKane
     },
+    serverUrl: "http://localhost:8080",
+    inviteUrl: "https://yeecord.com/link",
     data: {
         dashboard: dashboardData,
         /*

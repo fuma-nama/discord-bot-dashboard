@@ -1,7 +1,7 @@
-import {api} from "variables/links";
+import {config} from "../../config/config";
 
 export function fetchAuto(url, {toJson = false, throwError = true, ...options} = {}) {
-    const request = fetch(`${api}${url}`, {
+    const request = fetch(`${config.serverUrl}${url}`, {
         credentials: "include",
         headers: {
             'content-type': 'application/json'

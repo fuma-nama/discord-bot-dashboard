@@ -1,22 +1,17 @@
 import React from "react";
 // Chakra imports
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Icon,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { oauth2 } from "variables/links";
+import {Box, Button, Flex, Heading, Icon, Text, useColorModeValue,} from "@chakra-ui/react";
 // Custom components
 import DefaultAuth from "layouts/auth/Default";
 // Assets
-import illustration from "assets/img/common/logo_1024x1024.png";
-import { FaDiscord } from "react-icons/fa";
+import illustration from "assets/img/auth/Banner.jpg";
+import {FaDiscord} from "react-icons/fa";
+import {config} from "config/config";
+import {useNavigate} from "react-router-dom";
 
 function SignIn({loading = false}) {
+  const navigate = useNavigate();
+
   // Chakra color mode
 
   const textColor = useColorModeValue("navy.700", "white");
@@ -35,7 +30,7 @@ function SignIn({loading = false}) {
 
   const onSignIn = () => {
 
-    window.location.href = oauth2
+    navigate(`${config.serverUrl}/login`)
   };
 
   return (

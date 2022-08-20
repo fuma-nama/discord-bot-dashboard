@@ -38,5 +38,7 @@ export type ConfigType = {
         dashboard: DashboardDataRow[],
         actions?: (data: any) => DataItem[]
     },
-    footer: FooterItem[]
+    footer: FooterItem[],
+    serverUrl: string,
+    inviteUrl: string
 }

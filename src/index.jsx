@@ -9,7 +9,6 @@ import {Center, ChakraProvider, Spinner, Stack, Text} from "@chakra-ui/react";
 import theme from "theme/theme";
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
 
-import {invite} from "./variables/links";
 import {hasLoggedIn} from "./api/yeecord";
 import {QueryHolder} from "./contexts/components/AsyncContext";
 import {SettingsContext, SettingsProvider} from "./contexts/SettingsContext";
@@ -58,7 +57,7 @@ function AppRouter() {
                             </Route>
 
                             <Route path="/invite" element={
-                                <Redirect url={invite}/>
+                                <Redirect url={config.inviteUrl}/>
                             }/>
 
                             <Route path="*" element={

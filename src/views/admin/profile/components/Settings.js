@@ -5,7 +5,6 @@ import Card from "components/card/Card.js";
 import SwitchField from "components/fields/impl/SwitchField";
 import {useLogout} from "../../../../api/yeecord";
 import {useContext} from "react";
-import {Link} from "react-router-dom";
 //Context
 import {SettingsContext} from "contexts/SettingsContext";
 
@@ -67,16 +66,6 @@ export default function Settings(props) {
                 }}
             />
             <Stack mt="auto" gap={3}>
-
-                {devMode && <Link to="/info/dino">
-                    <Button
-                        w="full"
-                        size="lg"
-                    >
-                        Dino
-                    </Button>
-                </Link>
-                }
                 <Button
                     size="lg"
                     variant="brand"
