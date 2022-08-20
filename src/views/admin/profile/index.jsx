@@ -2,7 +2,7 @@ import {Box, Grid} from "@chakra-ui/react";
 
 // Custom components
 import Banner from "views/admin/profile/components/Banner";
-import Settings from "views/admin/profile/components/Settings";
+import Settings from "components/card/Settings";
 import ServerPicker from "views/admin/profile/components/ServerPicker";
 
 // Assets

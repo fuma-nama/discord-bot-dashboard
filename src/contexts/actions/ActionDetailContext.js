@@ -24,5 +24,6 @@ export function ActionDetailProvider({children}) {
 
 export function useActionInfo() {
     const {action} = useParams()
+
     return config.actions[action]
 }

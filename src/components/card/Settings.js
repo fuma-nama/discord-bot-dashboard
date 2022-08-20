@@ -3,7 +3,7 @@ import {Button, Stack, Text, useColorMode, useColorModeValue} from "@chakra-ui/r
 import Card from "components/card/Card.js";
 // Custom components
 import SwitchField from "components/fields/impl/SwitchField";
-import {useLogout} from "../../../../api/yeecord";
+import {useLogout} from "../../api/yeecord";
 import {useContext} from "react";
 //Context
 import {SettingsContext} from "contexts/SettingsContext";
