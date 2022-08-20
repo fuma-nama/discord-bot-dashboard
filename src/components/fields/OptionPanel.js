@@ -118,9 +118,9 @@ export function getInput(value, onChange, option) {
                 <IdSelectField
                     value={value}
                     onChange={onChange}
+                    placeholder={option.placeholder}
                     options={option.choices}
                     multiple={option.multiple}
-                    element={option.element}
                 />
             )
         case OptionTypes.Image:
