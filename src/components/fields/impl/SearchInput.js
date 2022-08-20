@@ -1,8 +1,11 @@
 import {IconButton, Input, InputGroup, InputLeftElement, useColorModeValue} from "@chakra-ui/react";
 import {SearchIcon} from "@chakra-ui/icons";
 import React from "react";
+import {useLocale} from "../../../utils/Language";
 
 export default function SearchInput({value, onSearch, onChange, groupStyle, ...props}) {
+    const locale = useLocale()
+
     // Chakra Color Mode
     const searchIconColor = useColorModeValue("gray.700", "white");
     const inputBg = useColorModeValue("secondaryGray.300", "navy.900");
@@ -15,7 +18,9 @@ export default function SearchInput({value, onSearch, onChange, groupStyle, ...p
                     onClick={onSearch}
                     bg='inherit'
                     borderRadius='inherit'
-                    _hover='none'
+                    _hover={{
+                        cursor: onSearch? "pointer" : "default"
+                    }}
                     _active={{
                         bg: "inherit",
                         transform: "none",
@@ -37,7 +42,7 @@ export default function SearchInput({value, onSearch, onChange, groupStyle, ...p
             fontWeight='500'
             _placeholder={{color: "gray.400", fontSize: "14px"}}
             borderRadius="30px"
-            placeholder="搜索..."
+            placeholder={locale({zh: "搜索...", en: "Search Something..."})}
             value={value}
             onChange={e => onChange(e.target.value)}
             {...props}
