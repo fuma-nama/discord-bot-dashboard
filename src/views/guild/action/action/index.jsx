@@ -11,7 +11,7 @@ import SearchInput from "components/fields/impl/SearchInput";
 //assets
 import not_found from "assets/img/info/not_found.svg"
 import CreateButton from "./components/CreateButton";
-import {useLocale} from "../../../../utils/Language";
+import {Locale, useLocale} from "../../../../utils/Language";
 import {Task} from "../components/Task";
 
 export default function ActionTasks() {
@@ -53,7 +53,9 @@ function TasksPanel() {
 
     return <Flex direction="column" gap={5} pt={10} px={{base: 1, md: 3, lg: 10}}>
         <Center flexDirection="column" gap={5} mb={5}>
-            <Text fontSize={24} fontWeight="bold">運行中</Text>
+            <Text fontSize={24} fontWeight="bold">
+                <Locale zh="運行中" en="Tasks" />
+            </Text>
 
             <SearchInput value={filter} onChange={setFilter} bg={inputBg} groupStyle={{maxW: "20rem"}} />
         </Center>
