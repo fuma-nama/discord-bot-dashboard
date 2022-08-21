@@ -22,16 +22,22 @@ export default function FeaturesBoard() {
 
 function Features() {
   const locale = useLocale()
-  const {data} = useContext(FeaturesContext)
 
   usePageInfo(
       locale({zh: "功能控制面板", en: "Features"})
   )
 
+  return <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+    <Content />
+  </Box>
+}
+
+function Content() {
+  const {data} = useContext(FeaturesContext)
+
   if (config.data.features) {
 
     return (
-        <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
           <Grid
               mb="20px"
               gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
@@ -53,17 +59,14 @@ function Features() {
               <DataList items={config.data.features(data)} />
             </Flex>
           </Grid>
-        </Box>
     );
   } else {
-    return <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-      <Flex
+    return <Flex
           flexDirection="column"
           mb="10"
       >
         <Banner />
         <FeatureGrid />
       </Flex>
-    </Box>
   }
 }

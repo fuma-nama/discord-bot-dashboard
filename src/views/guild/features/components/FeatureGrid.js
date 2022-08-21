@@ -7,28 +7,25 @@ import {config} from "../../../../config/config";
 import {Locale} from "../../../../utils/Language";
 
 export default function FeatureGrid() {
-  const textColor = useColorModeValue("secondaryGray.900", "white");
+    const textColor = useColorModeValue("secondaryGray.900", "white");
 
-  return (
-    <Flex direction="column">
-      <Flex
-        mt="45px"
-        mb="20px"
-        justifyContent="space-between"
-        direction={{ base: "column", md: "row" }}
-        align={{ base: "start", md: "center" }}
-      >
-        <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
-          <Locale zh="功能列表" en="Features List" />
-        </Text>
-      </Flex>
-        <SlideFade in={true} offsetY='20px'>
-            <SimpleGrid columns={{ base: 1, lg: 3, xl:2, "2xl": 3 }} gap="20px">
-                <Features />
-            </SimpleGrid>
-        </SlideFade>
-    </Flex>
-  );
+    return (
+        <Flex direction="column" gap="20px">
+            <Text
+                color={textColor}
+                fontSize="2xl"
+                fontWeight="700"
+                ms="24px"
+                mt="45px">
+                <Locale zh="功能列表" en="Features List" />
+            </Text>
+            <SlideFade in={true} offsetY='20px'>
+                <SimpleGrid columns={{ base: 1, lg: 3, xl:2, "2xl": 3 }} gap="20px">
+                    <Features />
+                </SimpleGrid>
+            </SlideFade>
+        </Flex>
+    );
 }
 
 function Features() {
