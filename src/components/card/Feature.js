@@ -1,92 +1,64 @@
 // Chakra imports
-import {Box, Button, ButtonGroup, Flex, Image, Text, useColorModeValue,} from "@chakra-ui/react";
+import {Box, Button, ButtonGroup, Flex, Heading, Image, Text, useColorModeValue} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
 // Custom components
 import Card from "components/card/Card.js";
 // Assets
 import React, {useContext} from "react";
 import {GuildContext} from "../../contexts/guild/GuildContext";
-import {setFeatureEnabled} from "api/yeecord";
-import {useMutation, useQueryClient} from "react-query";
-import {Locale} from "../../utils/Language";
+import {Locale, useLocale} from "../../utils/Language";
+import {useEnableFeatureMutation} from "../../api/utils";
 
-export default function Feature({
-                                    banner,
-                                    name,
-                                    description,
-                                    id: featureId,
-                                    enabled,
-                                }) {
+export default function Feature({banner, name, description, id: featureId, enabled}) {
     const {id: serverId} = useContext(GuildContext);
-    const client = useQueryClient()
-
     const configUrl = `/guild/${serverId}/feature/${featureId}`
-    const enableMutation = useMutation(
-        (enabled) => setFeatureEnabled(serverId, featureId, enabled),
-        {
-            onSuccess(_, enabled) {
-                const modify = (data) => {
-                    if (enabled) {
-                        return [...data.enabled, featureId]
-                    } else {
-                        return data.enabled.filter(id => featureId !== id)
-                    }
-                }
+    const enableMutation = useEnableFeatureMutation(serverId, featureId)
+    const locale = useLocale()
 
-                return client.setQueryData(
-                    ["features", serverId],
-                    data => ({
-                        ...data,
-                        enabled: modify(data)
-                    })
-                )
-            }
-        }
-    )
-
+    //chakra colors
     const textColor = useColorModeValue("navy.700", "white");
     const detailColor = useColorModeValue("secondaryGray.900", "secondaryGray.600");
-
     const brandColor = useColorModeValue("brand.500", "brand.400");
 
     return (
-        <Card p="20px">
-            <Flex direction="row" gap={3} h="100%">
-                {banner && <Box w="10rem">
-                    <Image
-                        bgColor={brandColor}
-                        src={banner}
-                        borderRadius="20px"
-                    />
-                </Box>}
-                <Flex flexDirection="column" justify="space-between" h="100%" gap={3}>
-                    <Flex direction="column">
-                        <Text
-                            color={textColor}
-                            fontSize="lg"
-                            fontWeight="bold"
-                        >
-                            {name}
-                        </Text>
-                        <Text
-                            color={detailColor}
-                            fontSize="sm"
-                            fontWeight="400"
-                        >
-                            {description}
-                        </Text>
-                    </Flex>
-                    <ButtonGroup mt="5">
-                        {enabled && (
-                            <ConfigButton configUrl={configUrl}/>
-                        )}
-                        <EnableButton
-                            enabled={enabled}
-                            isLoading={enableMutation.isLoading}
-                            onChange={enableMutation.mutate}
-                        />
-                    </ButtonGroup>
+        <Card p="20px" overflow="hidden" gap={3}>
+            {banner?
+                <Image
+                    h={20}
+                    src={banner}
+                    bgSize="cover"
+                    rounded="lg"
+                />:
+                <Box
+                    h={20}
+                    bg={brandColor}
+                    rounded="lg"
+                />
+            }
+
+            <Flex direction="column" justify="space-between" gap={3}>
+                <Flex direction="column">
+                    <Heading size="md" color={textColor}>
+                        {locale(name)}
+                    </Heading>
+                    <Text
+                        color={detailColor}
+                        fontSize="sm"
+                        fontWeight="400"
+                    >
+                        {description}
+                    </Text>
                 </Flex>
+                <ButtonGroup mt="5">
+                    {enabled && (
+                        <ConfigButton configUrl={configUrl}/>
+                    )}
+                    <EnableButton
+                        enabled={enabled}
+                        isLoading={enableMutation.isLoading}
+                        onChange={enableMutation.mutate}
+                    />
+                </ButtonGroup>
             </Flex>
         </Card>
     );

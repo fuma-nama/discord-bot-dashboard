@@ -1,5 +1,6 @@
 import {Option} from "./types/option";
 import {DataItem} from "./types/data";
+import {MultiLang, TextElement} from "./types/locale";
 
 export declare const config: ConfigType
 
@@ -30,6 +31,7 @@ export type DashboardDataRow = {
     count: number,
     items: (detail: any, state: DashboardState) => DataItem[]
 }
+
 type FooterItem = {
     name: string,
     url: string
@@ -40,16 +42,16 @@ export type ConfigType = {
     actions: {
         [key: string]: {
             banner?: any,
-            name: string,
-            description: string,
+            name: MultiLang,
+            description: TextElement,
             options: (data: any | null, state: OptionState) => Option[]
         }
     },
     features: {
         [key: string]: {
             banner?: any,
-            name: string,
-            description: string,
+            name: MultiLang,
+            description: TextElement,
             options: (data: any, state: OptionState) => Option[]
         }
     },

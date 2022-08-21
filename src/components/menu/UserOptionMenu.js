@@ -3,7 +3,7 @@ import {Flex, MenuItem, MenuList, Text, useColorModeValue,} from "@chakra-ui/rea
 import {useContext} from "react";
 import {UserDataContext} from "contexts/UserDataContext";
 import {Link} from "react-router-dom";
-import {useLogout} from "../../api/yeecord";
+import {useLogout} from "../../api/internal";
 import {Locale} from "../../utils/Language";
 
 export default function UserOptionMenu() {

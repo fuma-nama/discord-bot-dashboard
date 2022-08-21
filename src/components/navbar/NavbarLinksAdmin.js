@@ -26,7 +26,7 @@ import {IoMdMoon, IoMdSunny} from "react-icons/io";
 import {UserDataContext} from "contexts/UserDataContext";
 import {PageInfoContext} from "contexts/PageInfoContext";
 import {useQuery} from "react-query";
-import {getNotifications} from "api/yeecord";
+import {getNotifications} from "api/internal";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {QueryHolderSkeleton} from "contexts/components/AsyncContext";
 //api

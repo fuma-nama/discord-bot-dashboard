@@ -3,21 +3,23 @@ import {Box, Button, Flex, HStack, Image, Text, useColorModeValue} from "@chakra
 import Card from "components/card/Card";
 import {Link} from "react-router-dom";
 import {GuildContext} from "contexts/guild/GuildContext";
+import {useLocale} from "../../utils/Language";
 
 /**
  * {
- *  id: "kill_kane",
  *  banner: "",
  *  name: "Kill Kane",
  *  description: "Kill Kane in a channel"
  * }
  */
-export function Action({action}) {
-    const textColor = useColorModeValue("navy.700", "white");
+export function Action({id, action}) {
     const {id: serverId} = useContext(GuildContext)
-    const actionId = action.id
+    const configUrl = `/guild/${serverId}/action/${id}`
+    const locale = useLocale()
 
-    const configUrl = `/guild/${serverId}/action/${actionId}`
+    const textColor = useColorModeValue("navy.700", "white");
+    const detailColor = useColorModeValue("secondaryGray.900", "secondaryGray.600");
+
     return (
         <Card p="20px">
             <Flex direction="column" gap={3}>
@@ -33,10 +35,10 @@ export function Action({action}) {
                     }}
                     fontWeight="bold"
                 >
-                    {action.name}
+                    {locale(action.name)}
                 </Text>
                 <Text
-                    color={textColor}
+                    color={detailColor}
                     fontSize="md"
                     mb={5}
                 >

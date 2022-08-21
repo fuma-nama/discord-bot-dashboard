@@ -6,7 +6,7 @@ import {usePageInfo} from "contexts/PageInfoContext";
 import {SettingsContext, SettingsProvider} from "../../../contexts/guild/GuildSettingsContext";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {ConfigGrid} from "components/fields/ConfigPanel";
-import {updateSettingsOptions} from "api/yeecord";
+import {updateSettingsOptions} from "api/internal";
 import {config} from "config/config";
 import {useQueryClient} from "react-query";
 import {useLocale} from "utils/Language";

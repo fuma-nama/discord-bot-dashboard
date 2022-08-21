@@ -9,11 +9,14 @@ export const Languages = [
 /**
  *
  * @param lang {string}
- * @param props {{[key: string]: string}}
+ * @param props {string | {[key: string]: string}}
  * @return {string}
  */
 export function locale(lang, props) {
-    return props[lang]
+    if (typeof props === "string")
+        return props
+
+    return props[lang] || props["en"]
 }
 
 /**
@@ -22,9 +25,7 @@ export function locale(lang, props) {
 export function useLocale() {
     const {language} = useContext(SettingsContext)
 
-    return (props) => {
-        return props[language] || props["en"]
-    }
+    return (props) => locale(language, props)
 }
 
 /**

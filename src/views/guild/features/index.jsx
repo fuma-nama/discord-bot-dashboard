@@ -8,7 +8,7 @@ import Banner from "./components/Banner";
 import FeatureGrid from "./components/FeatureGrid";
 import {FeaturesContext, FeaturesProvider} from "contexts/FeaturesContext";
 import {usePageInfo} from "../../../contexts/PageInfoContext";
-import {DataList} from "../../../components/card/DataCard";
+import {DataList} from "../../../components/card/data/DataCard";
 import {config} from "../../../config/config";
 import {useLocale} from "../../../utils/Language";
 

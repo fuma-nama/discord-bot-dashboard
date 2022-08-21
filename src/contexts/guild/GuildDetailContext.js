@@ -1,7 +1,7 @@
 import React, {createContext, useContext} from "react";
 import {QueryHolder} from "../components/AsyncContext";
 import {useQuery} from "react-query";
-import {getServerDetails} from "../../api/yeecord";
+import {getServerDetails} from "../../api/internal";
 import {GuildContext} from "./GuildContext";
 
 export const GuildDetailContext = createContext({

@@ -8,7 +8,7 @@ import Banner from "./components/Banner";
 import ActionsList from "./components/ActionsList";
 import {usePageInfo} from "contexts/PageInfoContext";
 import {ActionsDataContext, ActionsDataProvider} from "../../../contexts/actions/ActionsDataContext";
-import {DataList} from "components/card/DataCard";
+import {DataList} from "components/card/data/DataCard";
 import {config} from "config/config";
 
 export default function ActionsBoard() {

@@ -20,7 +20,7 @@ import Card from "components/card/Card";
 import {Link, useParams} from "react-router-dom";
 import NotFound from "../../../info/Not_Found";
 import {useMutation, useQueryClient} from "react-query";
-import {deleteTask} from "api/yeecord";
+import {deleteTask} from "api/internal";
 import SearchInput from "components/fields/impl/SearchInput";
 
 //assets

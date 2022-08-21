@@ -1,6 +1,6 @@
-import {Flex, Text, useColorModeValue, SimpleGrid, ScaleFade} from "@chakra-ui/react";
+import {Flex, ScaleFade, SimpleGrid, Text, useColorModeValue} from "@chakra-ui/react";
 
-import {Action} from "./Action";
+import {Action} from "../../../../components/card/Action";
 import {config} from "config/config";
 
 export default function ActionsList() {
@@ -19,9 +19,9 @@ export default function ActionsList() {
                     動作列表
                 </Text>
             </Flex>
-                <SimpleGrid columns={{base: 1, lg: 2}} gap="20px">
-                    <Actions/>
-                </SimpleGrid>
+            <SimpleGrid columns={{base: 1, lg: 2}} gap="20px">
+                <Actions/>
+            </SimpleGrid>
         </Flex>
     );
 }
@@ -32,10 +32,8 @@ function Actions() {
         return (
             <ScaleFade key={id} in={true}>
                 <Action
-                    action={{
-                        id: id,
-                        ...action
-                    }}
+                    id={id}
+                    action={action}
                 />
             </ScaleFade>
         );

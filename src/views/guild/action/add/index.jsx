@@ -13,7 +13,7 @@ import ErrorModal from "components/modal/ErrorModal";
 import {SubmitAlert} from "components/alert/SaveAlert";
 import {ConfigItemListAnimated} from "components/fields/ConfigPanel";
 import {useNavigate, useParams} from "react-router-dom";
-import {addTask} from "api/yeecord";
+import {addTask} from "api/internal";
 import NameInput from "../components/NameInput";
 import {usePageState} from "../../../../utils/State";
 

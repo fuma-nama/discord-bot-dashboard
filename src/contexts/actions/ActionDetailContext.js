@@ -2,7 +2,7 @@ import {createContext} from "react";
 import {QueryHolderSkeleton} from "../components/AsyncContext";
 import {useQuery} from "react-query";
 import {useParams} from "react-router-dom";
-import {getActionDetail} from "../../api/yeecord";
+import {getActionDetail} from "../../api/internal";
 import {config} from "config/config";
 
 export const ActionDetailContext = createContext({

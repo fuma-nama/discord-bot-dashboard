@@ -1,11 +1,11 @@
-import {DataTypes} from "../../variables/type";
+import {DataTypes} from "../../../variables/type";
 import MiniStatistics from "./MiniStatistics";
 import React from "react";
 import {Icon, SimpleGrid, useColorModeValue} from "@chakra-ui/react";
-import IconBox from "../icons/IconBox";
-import ChartData from "../charts/ChartData";
+import IconBox from "../../icons/IconBox";
+import ChartData from "../../charts/data/ChartData";
 import DataTable from "./DataTable";
-import PieChartData from "../charts/PieChartData";
+import PieChartData from "../../charts/data/PieChartData";
 import {List} from "./List";
 import InformationMap from "./InformationMap";
 

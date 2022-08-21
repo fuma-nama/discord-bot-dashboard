@@ -9,7 +9,7 @@ import {Center, ChakraProvider, Spinner, Stack, Text} from "@chakra-ui/react";
 import theme from "theme/theme";
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
 
-import {hasLoggedIn} from "./api/yeecord";
+import {hasLoggedIn} from "./api/internal";
 import {QueryHolder} from "./contexts/components/AsyncContext";
 import {SettingsContext, SettingsProvider} from "./contexts/SettingsContext";
 import {config} from "./config/config";

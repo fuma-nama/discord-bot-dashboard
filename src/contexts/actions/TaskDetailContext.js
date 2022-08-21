@@ -1,7 +1,7 @@
 import {createContext, useContext} from "react";
 import {useQuery, useQueryClient} from "react-query";
 import {useParams} from "react-router-dom";
-import {getTaskDetail} from "api/yeecord";
+import {getTaskDetail} from "api/internal";
 import {GuildContext} from "../guild/GuildContext";
 import {Query} from "../components/AsyncContext";
 import {SimpleGrid, Skeleton} from "@chakra-ui/react";

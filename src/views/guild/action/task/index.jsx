@@ -8,7 +8,7 @@ import {usePageInfo} from "contexts/PageInfoContext";
 import {useActionInfo} from "contexts/actions/ActionDetailContext";
 import {MultiConfigPanel} from "components/fields/ConfigPanel";
 import {Link, useParams} from "react-router-dom";
-import {updateTask} from "api/yeecord";
+import {updateTask} from "api/internal";
 import {GuildContext} from "contexts/guild/GuildContext";
 import ActionBanner from "../components/ActionBanner";
 import {BiArrowBack} from "react-icons/bi";

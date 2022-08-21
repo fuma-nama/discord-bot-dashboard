@@ -4,7 +4,7 @@ import {Box, Flex,} from "@chakra-ui/react";
 
 // Custom components
 import Banner from "./components/Banner";
-import {updateFeatureOptions} from "api/yeecord";
+import {updateFeatureOptions} from "api/internal";
 
 import {FeatureDetailContext, FeatureDetailProvider, useFeatureInfo,} from "contexts/FeatureDetailContext";
 import {usePageInfo} from "contexts/PageInfoContext";

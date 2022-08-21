@@ -1,4 +1,5 @@
 import {DataItem} from "./data";
+import {TextElement} from "./locale";
 
 export type Option =
     BooleanOption | TextOption | EnumOption | NumberOption
@@ -17,7 +18,7 @@ type IOption = {
     /**
      * Nullable field description
      */
-    description?: string,
+    description?: TextElement,
     /**
      * If this field is required, the user must enter something to save it
      */
@@ -25,7 +26,7 @@ type IOption = {
     /**
      * Help text for form control
      */
-    helper?: string
+    helper?: TextElement
 }
 
 type BooleanOption = IOption & {
