@@ -1,20 +1,5 @@
 import React, {useContext, useEffect, useMemo, useState} from "react";
-import {
-    Button,
-    Heading,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    Skeleton,
-    Stack,
-    Text,
-    useColorModeValue,
-    useDisclosure,
-    VStack,
-} from "@chakra-ui/react";
+import {Heading, Skeleton, Stack, Text, useDisclosure, VStack,} from "@chakra-ui/react";
 import {FeaturesContext} from "contexts/FeaturesContext";
 import Feature from "../../card/Feature";
 import {useLocation} from "react-router-dom";
@@ -26,6 +11,7 @@ import {Query} from "contexts/components/AsyncContext";
 import {config} from "../../../config/config";
 import {Action} from "../../card/Action";
 import {Locale, useLocale} from "../../../utils/Language";
+import Modal from "../../modal/Modal";
 
 export function SearchBar({...rest}) {
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -109,29 +95,20 @@ function Content({features, actions}) {
 }
 
 function SearchModal({isOpen, onClose, search }) {
-    const modalBg = useColorModeValue("rgba(244, 247, 254)", "rgba(11,20,55)");
     const all = search.length === 0
 
-    return <Modal isOpen={isOpen} onClose={onClose} isCentered size="4xl" scrollBehavior="inside">
-        <ModalContent bg={modalBg}>
-            <ModalHeader>
+    return <Modal
+        isOpen={isOpen} onClose={onClose}
+        size="4xl" scrollBehavior="inside"
+        header={
+            <>
                 <Locale zh="搜索功能: " en="Search For: " />
                 {all? <Locale zh="全部" en="All" /> : search}
-            </ModalHeader>
-            <ModalCloseButton />
-
-            <ModalBody>
-                <DataProvider>
-                    <SearchList search={search} />
-                </DataProvider>
-            </ModalBody>
-
-            <ModalFooter>
-                <Button variant="brand" mr={3} onClick={onClose}>
-                    <Locale zh="關閉" en="Close" />
-                </Button>
-            </ModalFooter>
-        </ModalContent>
+            </>
+        }>
+        <DataProvider>
+            <SearchList search={search} />
+        </DataProvider>
     </Modal>
 }
 

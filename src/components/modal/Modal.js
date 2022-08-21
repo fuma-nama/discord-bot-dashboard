@@ -6,20 +6,27 @@ import {
     ModalContent,
     ModalFooter,
     ModalHeader,
-    useColorModeValue
+    ModalOverlay,
+    useColorModeValue,
+    useToken
 } from "@chakra-ui/react";
 import {Locale, useLocale} from "utils/Language";
 
-export default function Modal({header, children: body, isOpen, onClose}) {
+export default function Modal({header, children, isOpen, onClose, ...props}) {
     const locale = useLocale()
-    let modalBg = useColorModeValue("rgba(244, 247, 254)", "rgba(11,20,55)");
+    const modalBg = useColorModeValue("secondaryGray.300", "navy.900");
+    const [overlayBg] = useToken("colors", [modalBg])
 
-    return <ModalBase isCentered isOpen={isOpen} onClose={onClose}>
-        <ModalContent bg={modalBg} rounded="2xl">
+    return <ModalBase isCentered isOpen={isOpen} onClose={onClose} {...props}>
+        <ModalOverlay
+            bg={`rgba(${overlayBg}, 0.4)`}
+            backdropFilter='blur(10px)'
+        />
+        <ModalContent bg={modalBg} rounded="2xl" shadow="lg">
             <ModalHeader>{locale(header)}</ModalHeader>
             <ModalCloseButton/>
             <ModalBody>
-                {body}
+                {children}
             </ModalBody>
 
             <ModalFooter>

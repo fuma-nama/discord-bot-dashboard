@@ -1,4 +1,5 @@
-import { mode } from "@chakra-ui/theme-tools";
+import {mode} from "@chakra-ui/theme-tools";
+
 export const globalStyles = {
   colors: {
     brand: {
@@ -69,10 +70,10 @@ export const globalStyles = {
       300: "#728fea",
       400: "#3652ba",
       500: "#1b3bbb",
-      600: "#24388a",
-      700: "#1B254B",
-      800: "#111c44",
-      900: "#0b1437",
+      600: "#60698a",
+      700: "#323252",
+      800: "#292e45",
+      900: "#1f2538",
     },
     gray: {
       100: "#FAFCFE",
