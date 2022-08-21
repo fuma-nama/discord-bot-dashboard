@@ -3,7 +3,7 @@ import {Box, Button, Flex, HStack, Image, Text, useColorModeValue} from "@chakra
 import Card from "components/card/Card";
 import {Link} from "react-router-dom";
 import {GuildContext} from "contexts/guild/GuildContext";
-import {useLocale} from "../../utils/Language";
+import {Locale, useLocale} from "../../utils/Language";
 
 /**
  * {
@@ -46,7 +46,9 @@ export function Action({id, action}) {
                 </Text>
                 <HStack>
                     <Link to={configUrl}>
-                        <Button px={10} variant="brand">打開</Button>
+                        <Button px={10} variant="brand">
+                            <Locale zh='打開' en="Open" />
+                        </Button>
                     </Link>
                 </HStack>
             </Flex>
