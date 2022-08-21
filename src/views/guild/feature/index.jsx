@@ -15,6 +15,7 @@ import NotFound from "../../info/Not_Found";
 import {useParams} from "react-router-dom";
 import {useQueryClient} from "react-query";
 import {usePageState} from "../../../utils/State";
+import {useLocale} from "../../../utils/Language";
 
 export default function Feature() {
   const { feature } = useParams()
@@ -27,51 +28,53 @@ export default function Feature() {
 }
 
 function FeaturePanel() {
-  const {id, name} = useFeatureInfo()
+    const {id, name} = useFeatureInfo()
+    const locale = useLocale()
+    const localeName = locale(name)
 
-  usePageInfo(name)
+    usePageInfo(localeName)
 
-  return (
-      <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-        <Flex
-            flexDirection="column"
-            mb="10"
-            gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
-        >
-          <Banner />
-          <FeatureDetailProvider featureId={id}>
-            <FeatureConfigPanel />
-          </FeatureDetailProvider>
-        </Flex>
-      </Box>
-  );
+    return (
+        <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+            <Flex
+                flexDirection="column"
+                mb="10"
+                gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
+            >
+                <Banner localeName={localeName} />
+                <FeatureDetailProvider featureId={id}>
+                    <FeatureConfigPanel />
+                </FeatureDetailProvider>
+            </Flex>
+        </Box>
+    );
 }
 
 function FeatureConfigPanel() {
-  const { id: serverId } = useContext(GuildContext);
-  const {values} = useContext(FeatureDetailContext)
+    const { id: serverId } = useContext(GuildContext);
+    const {values} = useContext(FeatureDetailContext)
     const state = usePageState()
-  const info = useFeatureInfo()
+    const info = useFeatureInfo()
 
-  const client = useQueryClient()
-  const options = useMemo(
-      () => info.options(values, state),
-      [info.id, values]
-  )
-
-  const onSave = (changes) => updateFeatureOptions(serverId, info.id, changes);
-  const onSaved = (data) => {
-
-    return client.setQueryData(["feature_detail", serverId, info.id], current => ({
-          ...current,
-          values: data
-        })
+    const client = useQueryClient()
+    const options = useMemo(
+        () => info.options(values, state),
+        [info.id, values]
     )
-  }
 
-  return <ConfigGrid
-      onSave={onSave}
-      options={options}
-      onSaved={onSaved}
-  />
+    const onSave = (changes) => updateFeatureOptions(serverId, info.id, changes);
+    const onSaved = (data) => {
+
+        return client.setQueryData(["feature_detail", serverId, info.id], current => ({
+                ...current,
+                values: data
+            })
+        )
+    }
+
+    return <ConfigGrid
+        onSave={onSave}
+        options={options}
+        onSaved={onSaved}
+    />
 }

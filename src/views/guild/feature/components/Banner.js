@@ -9,14 +9,15 @@ import banner from "assets/img/layout/NftBanner1.png";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {BiArrowBack} from "react-icons/bi";
 import {Link} from "react-router-dom";
+import {Locale} from "../../../../utils/Language";
 
-export default function BannerWrapper() {
-    const {name, description} = useFeatureInfo()
+export default function BannerWrapper({localeName}) {
+    const {description} = useFeatureInfo()
 
     return (
         <Banner
             image={banner}
-            title={name}
+            title={localeName}
             description={description}
         >
             <BackButton/>
@@ -34,7 +35,7 @@ function BackButton() {
         me="38px"
         leftIcon={<BiArrowBack />}
       >
-        返回控制面板
+          <Locale zh="返回控制面板" en="Back to Control Panel" />
       </Button>
     </Link>
   );

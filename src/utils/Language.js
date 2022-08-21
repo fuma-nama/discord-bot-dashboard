@@ -20,7 +20,7 @@ export function locale(lang, props) {
 }
 
 /**
- * @return {({[key: string]: string}) => string}
+ * @return {(props: string | {[key: string]: string}) => string}
  */
 export function useLocale() {
     const {language} = useContext(SettingsContext)
