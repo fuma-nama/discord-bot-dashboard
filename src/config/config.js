@@ -28,7 +28,7 @@ export const config = {
         "auto_kill_kane": KillKane
     },
     serverUrl: "http://localhost:8080",
-    inviteUrl: "https://yeecord.com/link",
+    inviteUrl: "https://discord.com/api/oauth2/authorize?client_id=1004280473956139038&permissions=8&scope=bot",
     data: {
         dashboard: dashboardData,
         /*

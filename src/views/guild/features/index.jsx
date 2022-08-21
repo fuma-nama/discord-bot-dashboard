@@ -13,23 +13,19 @@ import {config} from "../../../config/config";
 import {useLocale} from "../../../utils/Language";
 
 export default function FeaturesBoard() {
-  return (
-    <FeaturesProvider>
-      <Features />
-    </FeaturesProvider>
-  );
-}
-
-function Features() {
   const locale = useLocale()
 
   usePageInfo(
       locale({zh: "功能控制面板", en: "Features"})
   )
 
-  return <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-    <Content />
-  </Box>
+  return (
+    <FeaturesProvider>
+      <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+        <Content />
+      </Box>
+    </FeaturesProvider>
+  );
 }
 
 function Content() {
