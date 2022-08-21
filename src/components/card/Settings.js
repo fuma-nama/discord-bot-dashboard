@@ -73,6 +73,7 @@ export default function Settings({...rest}) {
             }/>
             <Stack mt="auto" gap={3}>
                 <Button
+                    mt={10}
                     size="lg"
                     variant="brand"
                     isLoading={logout.isLoading}
