@@ -1,8 +1,8 @@
 import {Flex, ScaleFade, SimpleGrid, Text, useColorModeValue} from "@chakra-ui/react";
 
-import {Action} from "../../../../components/card/Action";
+import {Action} from "components/card/Action";
 import {config} from "config/config";
-import {Locale} from "../../../../utils/Language";
+import {Locale} from "utils/Language";
 
 export default function ActionsList() {
     const textColor = useColorModeValue("secondaryGray.900", "white");

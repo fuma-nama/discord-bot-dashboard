@@ -48,7 +48,7 @@ export default function Banner({image, title, description, clip = true, children
             >
                 {description}
             </Text>
-            <Flex align="center" justify="start">
+            <Flex align="center" justify="start" gap={5}>
                 {children}
             </Flex>
         </Flex>
@@ -66,7 +66,6 @@ export function BannerButton(props) {
         fontSize="14px"
         py="20px"
         px="27"
-        me="38px"
         {...props}
     />
 }

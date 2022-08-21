@@ -8,8 +8,9 @@ import {BiArrowBack} from "react-icons/bi";
 
 import {Link, useParams} from "react-router-dom";
 import ActionBanner from "../../components/ActionBanner";
+import {Locale} from "../../../../../utils/Language";
 
-export default function CreateTaskBanner() {
+export default function Banner() {
 
   return (
       <ActionBanner>
@@ -27,18 +28,10 @@ function BackButton() {
   return (
     <Link to={actionUrl}>
       <Button
-        bg="white"
-        color="black"
-        _hover={{ bg: "whiteAlpha.900" }}
-        _active={{ bg: "white" }}
-        _focus={{ bg: "white" }}
-        fontWeight="500"
-        fontSize="14px"
-        py="20px"
-        minH="full"
+          variant="white"
         leftIcon={<BiArrowBack />}
       >
-        返回動作
+          <Locale zh="返回動作" en="Back" />
       </Button>
     </Link>
   );

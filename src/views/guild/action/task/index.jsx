@@ -15,6 +15,7 @@ import {BiArrowBack} from "react-icons/bi";
 import {TaskDetailContext, TaskDetailProvider} from "../../../../contexts/actions/TaskDetailContext";
 import {useQueryClient} from "react-query";
 import {usePageState} from "../../../../utils/State";
+import {Locale, useLocale} from "../../../../utils/Language";
 
 export default function TaskBoard() {
 
@@ -28,7 +29,9 @@ export default function TaskBoard() {
             </ActionBanner>
 
             <Stack mt={10} gap={5}>
-                <Text fontSize={25} fontWeight="bold">修改任務</Text>
+                <Text fontSize={25} fontWeight="bold">
+                    <Locale zh="修改任務" en="Modify Task" />
+                </Text>
 
                 <TaskDetailProvider>
                     <TaskConfigPanel />
@@ -41,8 +44,12 @@ export default function TaskBoard() {
 function TaskConfigPanel() {
     const {name: action} = useActionInfo()
     const {name: task} = useContext(TaskDetailContext)
+    const locale = useLocale()
 
-    usePageInfo(["動作", action, task])
+    usePageInfo(
+        [{zh: "動作", en: "Action"}, action, task]
+        .map(locale)
+    )
 
     return <Config />
 }
@@ -85,7 +92,7 @@ function ConfigPanel({savedName, onSaved, values}) {
     const nameOption = {
         id: "name",
         type: "string",
-        name: "Task Name",
+        name: <Locale zh="任務名稱" en="Task Name" />,
         value: savedName,
         required: true
     }
@@ -110,18 +117,10 @@ function BackButton() {
     return (
         <Link to={actionUrl}>
             <Button
-                bg="white"
-                color="black"
-                _hover={{ bg: "whiteAlpha.900" }}
-                _active={{ bg: "white" }}
-                _focus={{ bg: "white" }}
-                fontWeight="500"
-                fontSize="14px"
-                py="20px"
-                minH="full"
+                variant="white"
                 leftIcon={<BiArrowBack />}
             >
-                返回動作
+                <Locale zh="返回動作" en="Back" />
             </Button>
         </Link>
     );

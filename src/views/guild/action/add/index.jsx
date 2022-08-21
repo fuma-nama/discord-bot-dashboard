@@ -6,7 +6,7 @@ import {Box, Flex, SimpleGrid, Stack, Text,} from "@chakra-ui/react";
 // Custom components
 import {usePageInfo} from "contexts/PageInfoContext";
 import {config} from "config/config";
-import CreateTaskBanner from "./components/CreateTaskBanner";
+import Banner from "./components/Banner";
 import {useActionInfo} from "contexts/actions/ActionDetailContext";
 import {useMutation, useQueryClient} from "react-query";
 import ErrorModal from "components/modal/ErrorModal";
@@ -15,7 +15,8 @@ import {ConfigItemListAnimated} from "components/fields/ConfigPanel";
 import {useNavigate, useParams} from "react-router-dom";
 import {addTask} from "api/internal";
 import NameInput from "../components/NameInput";
-import {usePageState} from "../../../../utils/State";
+import {usePageState} from "utils/State";
+import {Locale, useLocale} from "utils/Language";
 
 export default function SubmitTaskBoard() {
   return <SubmitTask />
@@ -23,7 +24,13 @@ export default function SubmitTaskBoard() {
 
 function SubmitTask() {
     const {name} = useActionInfo()
-    usePageInfo(["動作", name, "新任務"])
+    const locale = useLocale()
+
+    usePageInfo([
+        {zh: "動作", en: "Action"},
+        name,
+        {zh: "新任務", en: "New Task"}
+    ].map(locale))
 
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
@@ -31,9 +38,11 @@ function SubmitTask() {
             flexDirection="column"
             mb="30"
         >
-            <CreateTaskBanner />
+            <Banner />
             <Stack mt={10} gap={5}>
-                <Text fontSize={25} fontWeight="bold">創建新任務</Text>
+                <Text fontSize={25} fontWeight="bold">
+                    <Locale zh="創建新任務" en="New Task" />
+                </Text>
 
                 <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
                     <ConfigPanel />
@@ -81,7 +90,7 @@ function ConfigPanel() {
     return (
         <>
             <ErrorModal
-                header="未能創建任務"
+                header={{zh: "未能創建任務", en: "Failed to Create Task"}}
                 error={mutation.error && mutation.error.toString()}
                 onClose={mutation.reset}
             />

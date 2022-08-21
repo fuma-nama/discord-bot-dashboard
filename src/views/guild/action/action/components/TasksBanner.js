@@ -6,6 +6,7 @@ import {Button} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
 import {BiArrowBack} from "react-icons/bi";
 import CreateButton from "./CreateButton";
+import {Locale} from "../../../../../utils/Language";
 
 export default function TasksBanner() {
 
@@ -23,18 +24,10 @@ function BackButton() {
   return (
     <Link to={`/guild/${serverId}/actions`}>
       <Button
-        bg="white"
-        color="black"
-        _hover={{ bg: "whiteAlpha.900" }}
-        _active={{ bg: "white" }}
-        _focus={{ bg: "white" }}
-        fontWeight="500"
-        fontSize="14px"
-        py="20px"
-        minH="full"
+          variant="white"
         leftIcon={<BiArrowBack />}
       >
-        返回動作面板
+          <Locale zh="返回動作面板" en="Back" />
       </Button>
     </Link>
   );

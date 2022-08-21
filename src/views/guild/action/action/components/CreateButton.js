@@ -3,6 +3,7 @@ import {SmallAddIcon} from "@chakra-ui/icons";
 import {Link, useParams} from "react-router-dom";
 import React, {useContext} from "react";
 import {GuildContext} from "contexts/guild/GuildContext";
+import {Locale} from "../../../../../utils/Language";
 
 export default function CreateButton() {
     const { id: guild } = useContext(GuildContext);
@@ -13,11 +14,9 @@ export default function CreateButton() {
             _hover={{ bg: "brand.400" }}
             bg="brand.400"
             color="white"
-            py="20px"
-            minH="full"
             leftIcon={<SmallAddIcon />}
         >
-            創建新任務
+            <Locale zh="創建新任務" en="New Task" />
         </Button>
     </Link>
 }
