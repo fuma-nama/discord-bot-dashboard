@@ -1,8 +1,8 @@
 // Chakra imports
-import { Box, Flex} from "@chakra-ui/react";
+import {Box, Flex} from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import React from "react";
-import Footer from "components/footer/FooterAuth";
+import FooterAuth from "components/footer/FooterAuth";
 import FixedPlugin from "components/fixedPlugin/FixedPlugin";
 // Custom components
 // Assets
@@ -49,7 +49,7 @@ function AuthIllustration(props) {
             borderBottomLeftRadius={{ lg: "120px", xl: "200px" }}
           ></Flex>
         </Box>
-        <Footer />
+        <FooterAuth />
       </Flex>
       <FixedPlugin />
     </Flex>

@@ -9,7 +9,7 @@ export const config = {
     name: "Dishub",
     footer: [
         {
-            name: "Support",
+            name: {zh: "支持", en: "Support"},
             url: "https://github.com/SonMooSans"
         }
     ],

@@ -33,7 +33,7 @@ export type DashboardDataRow = {
 }
 
 type FooterItem = {
-    name: string,
+    name: MultiLang,
     url: string
 }
 

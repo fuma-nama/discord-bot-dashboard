@@ -1,6 +1,6 @@
 // Chakra imports
 import {Box, Portal} from "@chakra-ui/react";
-import Footer from "components/footer/FooterAdmin.js";
+import AdminFooter from "components/footer/FooterAdmin.js";
 // Layout components
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
@@ -56,7 +56,7 @@ function RouteWrapper({children}) {
                     {children}
                 </Box>
                 <Box>
-                    <Footer/>
+                    <AdminFooter/>
                 </Box>
             </Box>
         </PageInfoProvider>

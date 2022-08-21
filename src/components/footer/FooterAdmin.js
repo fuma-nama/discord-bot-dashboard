@@ -1,49 +1,19 @@
-/*eslint-disable*/
 import React from "react";
-import {Flex, Link as LinkText, List, ListItem, Text, useColorModeValue,} from "@chakra-ui/react";
-import {homepage} from "variables/links";
+import {Link as LinkText, List, ListItem, useColorModeValue} from "@chakra-ui/react";
 import {config} from "config/config";
+import Footer from "./Footer";
+import {useLocale} from "utils/Language";
 
-export default function Footer() {
+export default function AdminFooter() {
     const textColor = useColorModeValue("gray.400", "white");
+    const locale = useLocale()
+
     return (
-        <Flex
-            zIndex='3'
-            flexDirection={{
-                base: "column",
-                xl: "row",
-            }}
-            alignItems={{
-                base: "center",
-                xl: "start",
-            }}
-            justifyContent='space-between'
-            px={{base: "30px", md: "50px"}}
-            pb='30px'>
-            <Text
-                color={textColor}
-                textAlign={{
-                    base: "center",
-                    xl: "start",
-                }}
-                mb={{base: "20px", xl: "0px"}}>
-                &copy; {1900 + new Date().getYear()}
-                <Text as='span' fontWeight='500' ms='4px'>
-                    {config.name} Dashboard. All Rights Reserved. Made with
-                    <LinkText
-                        mx='3px'
-                        color={textColor}
-                        href={homepage}
-                        target='_blank'
-                        fontWeight='700'>
-                        Discord Dashboard!
-                    </LinkText>
-                </Text>
-            </Text>
+        <Footer>
             <List display='flex'>{
-                config.footer.map(item => (
+                config.footer.map((item, i) => (
                     <ListItem
-                        key={item.name}
+                        key={i}
                         me={{
                             base: "20px",
                             md: "44px",
@@ -53,12 +23,12 @@ export default function Footer() {
                             color={textColor}
                             href={item.url}
                         >
-                            {item.name}
+                            {locale(item.name)}
                         </LinkText>
                     </ListItem>
                 ))
             }
             </List>
-        </Flex>
+        </Footer>
     );
 }
