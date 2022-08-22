@@ -4,7 +4,7 @@ import {Box, Flex, SimpleGrid, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import PieChart from "components/charts/PieChart";
 import React from "react";
-import {useNoteColor, useTextColor} from "../../../utils/colors";
+import {useNoteColor, useTextColor} from "utils/colors";
 
 export default function PieChartData({name, data, options, unit}) {
 
@@ -31,7 +31,11 @@ export default function PieChartData({name, data, options, unit}) {
             </Box>
 
             <SimpleGrid
-                columns={{base: 2, md: 3, "2xl": 4}}
+                columns={{
+                    base: Math.min(data.length, 2),
+                    md: Math.min(data.length, 3),
+                    "2xl": Math.min(data.length, 4)}
+                }
                 rounded="lg"
                 boxShadow={cardShadow}
                 w='100%'

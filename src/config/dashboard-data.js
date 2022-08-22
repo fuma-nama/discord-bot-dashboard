@@ -34,8 +34,11 @@ export const dashboardData = [
                     {
 
                         name: "Members Count",
-                        value: [detail.members, 3, 4, 5],
-                        options: pieChartOptions,
+                        value: [detail.members, 4],
+                        options: {
+                            ...pieChartOptions,
+                            labels: ["Gay", "Not Gay"],
+                        },
                         type: DataTypes.Pie_Chart
                     },
                 ]
