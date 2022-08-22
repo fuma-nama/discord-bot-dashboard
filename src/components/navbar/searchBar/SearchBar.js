@@ -100,12 +100,10 @@ function SearchModal({isOpen, onClose, search }) {
     return <Modal
         isOpen={isOpen} onClose={onClose}
         size="4xl" scrollBehavior="inside"
-        header={
-            <>
-                <Locale zh="搜索功能: " en="Search For: " />
-                {all? <Locale zh="全部" en="All" /> : search}
-            </>
-        }>
+        header={{
+            zh: `搜索功能: ${all? "全部" : search}`,
+            en: `Search Filter: ${all? "All" : search}`
+        }}>
         <DataProvider>
             <SearchList search={search} />
         </DataProvider>

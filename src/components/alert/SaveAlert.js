@@ -42,7 +42,7 @@ export function SaveAlert({
 
     return (
         <BaseAlert isOpen={visible}>
-            <Locale zh="您有一些未保存的更改" en="You have Some unsaved Changes" />
+            <Locale zh="您有一些未保存的更改" en="You have some unsaved Changes" />
 
             <ButtonGroup ml={{
                 base: "0",
@@ -65,7 +65,7 @@ export function SubmitAlert({loading, visible, onSubmit}) {
 
   return (
       <BaseAlert isOpen={visible}>
-          <Locale zh="您現在可以創建任務了" en="You can Create the Task Now" />
+          <Locale zh="您現在可以創建任務了" en="You can create the Task Now" />
 
           <Button ml={{"2sm": "auto"}} bg={brand} isLoading={loading} onClick={onSubmit}>
               <Locale zh="發布任務" en="Publish" />
