@@ -21,6 +21,7 @@
     "chakra-react-select": "^3.3.8",
     "emoji-mart": "^5.1.0",
     "framer-motion": "^4.1.17",
+    "hex-to-rgba": "^2.0.1",
     "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-apexcharts": "^1.4.0",

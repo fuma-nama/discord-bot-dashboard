@@ -9,10 +9,12 @@ export const Languages = [
 /**
  *
  * @param lang {string}
- * @param props {string | {[key: string]: string}}
+ * @param props? {string | {[key: string]: string}}
  * @return {string}
  */
 export function locale(lang, props) {
+    if (props == null) return props
+
     if (typeof props === "string")
         return props
 
