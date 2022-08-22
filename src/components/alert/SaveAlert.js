@@ -1,5 +1,6 @@
 import {Alert, AlertIcon, Button, ButtonGroup, Slide, useColorModeValue,} from "@chakra-ui/react";
 import {useAlertBg} from "../../utils/colors";
+import {Locale} from "../../utils/Language";
 
 function BaseAlert({isOpen, children}) {
     let alertBg = useAlertBg()
@@ -41,15 +42,18 @@ export function SaveAlert({
 
     return (
         <BaseAlert isOpen={visible}>
-            您有一些未保存的更改
+            <Locale zh="您有一些未保存的更改" en="You have Some unsaved Changes" />
+
             <ButtonGroup ml={{
                 base: "0",
                 md: "auto"
             }}>
                 <Button bg={brand} isLoading={saving} onClick={onSave}>
-                    立即保存
+                    <Locale zh="立即保存" en="Save Now" />
                 </Button>
-                <Button onClick={onDiscard}>放棄更改</Button>
+                <Button onClick={onDiscard}>
+                    <Locale zh="放棄更改" en="Discard" />
+                </Button>
             </ButtonGroup>
         </BaseAlert>
     );
@@ -61,9 +65,10 @@ export function SubmitAlert({loading, visible, onSubmit}) {
 
   return (
       <BaseAlert isOpen={visible}>
-          您現在可以創建任務了
+          <Locale zh="您現在可以創建任務了" en="You can Create the Task Now" />
+
           <Button ml={{"2sm": "auto"}} bg={brand} isLoading={loading} onClick={onSubmit}>
-              發布任務
+              <Locale zh="發布任務" en="Publish" />
           </Button>
       </BaseAlert>
   )
