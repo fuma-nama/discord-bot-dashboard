@@ -1,57 +1,51 @@
 import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
 import {ApexOptions} from "apexcharts";
+import {TextElement} from "./locale";
 
-export type DataItem = Group | Statistics | LineChart | BarChart | PieChart | Table | List | InfoMap
+export type DataItem = Group | Statistics | ChartData | PieChart | Table | List | InfoMap
 
-interface Statistics {
+type Item = {
+    name: TextElement
+}
+
+type Statistics = Item & {
    type: "statistics"
-    name: string
     icon?: any | undefined
     value: number
 }
 
-interface InfoMap {
+type InfoMap = Item & {
     type: "info_map"
-    name: string
     description?: string,
     value: {name: string, value: any}[]
 }
 
-interface LineChart extends ChartData {
-   type: "line_chart"
-}
-
-interface BarChart extends ChartData {
-   type: "bar_chart"
-}
-
-interface ChartData {
-    name: string
+type ChartData = Item & {
+    type: "line_chart" | "bar_chart"
     description?: string | undefined
     status?: {
         success: boolean,
-        text: string
+        text: TextElement
     }
     value: ApexOptions['series']
     options: ApexOptions
     time_unit?: string | undefined
 }
 
-interface PieChart {
+type PieChart = Item & {
    type: "pie_chart"
-    name: string
     unit?: string | undefined
     options: ApexOptions
     value: ApexOptions['series']
 }
 
-interface Group {
+type Group = {
    type: "group"
+    value: DataItem[]
 }
 
-interface Table {
+type Table = Item & {
    type: "table"
-    name: string
     columns: {
         header: string,
         accessor: string,
@@ -60,7 +54,7 @@ interface Table {
     value: any[]
 }
 
-interface List {
+type List = {
    type: "list",
     icon?: any,
     description?: string,

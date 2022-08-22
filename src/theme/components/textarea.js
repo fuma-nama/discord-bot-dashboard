@@ -19,14 +19,14 @@ export const textareaStyles = {
                     p: "20px",
                     _placeholder: {color: "secondaryGray.600"},
                 }),
-                auth: (props) => ({
+                auth: () => ({
                     bg: "white",
                     border: "1px solid",
                     borderColor: "secondaryGray.100",
                     borderRadius: "16px",
                     _placeholder: {color: "secondaryGray.600"},
                 }),
-                authSecondary: (props) => ({
+                authSecondary: () => ({
                     bg: "white",
                     border: "1px solid",
 

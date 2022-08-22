@@ -193,7 +193,7 @@ export const weekBarChartOptions = {
 };
 
 export const pieChartOptions = {
-  labels: ["使用量", "空閒"],
+  labels: ["使用量", "空閒", "Gay", "Not Gay"],
   colors: ["#4318FF", "#57c9ff"],
   chart: {
     width: "50px",
