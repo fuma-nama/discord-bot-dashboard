@@ -1,5 +1,6 @@
 import {Button, Center, Skeleton, Spinner, Stack, Text} from "@chakra-ui/react";
 import React from "react";
+import {Locale} from "../../utils/Language";
 
 export function QueryHolder({query, children, nullable}) {
     const {error, isLoading, refetch} = query;
@@ -14,7 +15,9 @@ export function QueryHolder({query, children, nullable}) {
             <Center height="100vh">
                 <Stack direction="column" align="center">
                     <Spinner size="lg"/>
-                    <Text>正在加載...</Text>
+                    <Text>
+                        <Locale zh="正在加載..." en="Loading..." />
+                    </Text>
                 </Stack>
             </Center>
         );
@@ -74,8 +77,12 @@ function parseChildren(children) {
 export function ErrorPanel({error, onRetry, ...rest}) {
     return <Center {...rest}>
         <Stack direction="column" align="center">
-            <Text>加載失敗</Text>
-            <Button onClick={onRetry}>再試一次</Button>
+            <Text>
+                <Locale zh="加載失敗" en="Failed to load" />
+            </Text>
+            <Button onClick={onRetry}>
+                <Locale zh="再試一次" en="Try Again" />
+            </Button>
         </Stack>
     </Center>
 }
