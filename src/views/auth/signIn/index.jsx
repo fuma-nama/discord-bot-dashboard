@@ -1,6 +1,6 @@
 import React from "react";
 // Chakra imports
-import {Box, Button, Flex, Heading, Icon, Text, useColorModeValue,} from "@chakra-ui/react";
+import {Box, Button, Flex, Heading, Icon, Text,} from "@chakra-ui/react";
 // Custom components
 import DefaultAuth from "layouts/auth/Default";
 // Assets
@@ -8,24 +8,14 @@ import illustration from "assets/img/auth/Banner.jpg";
 import {FaDiscord} from "react-icons/fa";
 import {config} from "config/config";
 import {Locale} from "../../../utils/Language";
+import {useDetailColor, useTextColor} from "../../../utils/colors";
 
 function SignIn({loading = false}) {
 
   // Chakra color mode
 
-  const textColor = useColorModeValue("navy.700", "white");
-  const textColorSecondary = "gray.400";
-  const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
-  const dcBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
-  const dcText = useColorModeValue("navy.700", "white");
-  const dcHover = useColorModeValue(
-    { bg: "gray.200" },
-    { bg: "whiteAlpha.300" }
-  );
-  const dcActive = useColorModeValue(
-    { bg: "secondaryGray.300" },
-    { bg: "whiteAlpha.200" }
-  );
+  const textColor = useTextColor();
+  const textColorSecondary = useDetailColor();
 
   const onSignIn = () => {
     window.location.href = `${config.serverUrl}/login`
@@ -72,18 +62,11 @@ function SignIn({loading = false}) {
           mb={{ base: "20px", md: "auto" }}
         >
           <Button
-            fontSize="sm"
-            me="0px"
+              variant="action"
             mb="26px"
-            py="15px"
             h="50px"
-            borderRadius="16px"
-            bg={dcBg}
-            color={dcText}
-            fontWeight="500"
-            _hover={dcHover}
-            _active={dcActive}
-            _focus={dcActive}
+            color={textColor}
+            fontWeight="bold"
             onClick={onSignIn}
             isLoading={loading}
           >
@@ -97,7 +80,7 @@ function SignIn({loading = false}) {
             maxW="100%"
             mt="0px"
           >
-            <Text color={textColorDetails} fontWeight="400" fontSize="14px">
+            <Text color={textColorSecondary} fontWeight="400" fontSize="14px">
               <Locale zh="您的所有個人信息都將被保密" en="All your personal information will be kept confidential" />
             </Text>
           </Flex>

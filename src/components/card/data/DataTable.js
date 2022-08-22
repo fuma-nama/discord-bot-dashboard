@@ -4,6 +4,7 @@ import {useGlobalFilter, usePagination, useSortBy, useTable,} from "react-table"
 
 // Custom components
 import Card from "components/card/Card";
+import {useTextColor} from "../../../utils/colors";
 
 export default function DataTable({name, data, columns}) {
 
@@ -27,7 +28,7 @@ export default function DataTable({name, data, columns}) {
   } = tableInstance;
   initialState.pageSize = 11;
 
-  const textColor = useColorModeValue("secondaryGray.900", "white");
+  const textColor = useTextColor();
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   return (
     <Card

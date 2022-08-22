@@ -17,6 +17,7 @@ import React, {useEffect, useRef} from "react";
 import {useQuery} from "react-query";
 import {MdArrowDropDown} from "react-icons/md";
 import {QueryHolderSkeleton} from "contexts/components/AsyncContext";
+import {useTextColor} from "../../../utils/colors";
 
 export default function EmojiField({value, onChange: change}) {
     const query = useQuery(
@@ -74,7 +75,7 @@ export default function EmojiField({value, onChange: change}) {
 function EmojiPicker({data, onChange}) {
     const ref = useRef()
     const bg = useColorModeValue("244, 247, 254", "11, 20, 55");
-    const textColor = useColorModeValue("gray.400", "white");
+    const textColor = useTextColor();
     const brand = useColorModeValue("51, 17, 219", "117, 81, 255")
     const change = useLatestRef(onChange)
 

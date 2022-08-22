@@ -8,12 +8,13 @@ import {QueryHolderSkeleton} from "../../../../contexts/components/AsyncContext"
 import SearchInput from "../../../../components/fields/impl/SearchInput";
 import {config} from "../../../../config/config";
 import {Locale} from "../../../../utils/Language";
+import {useDetailColor, useTextColor} from "../../../../utils/colors";
 
 export default function ServerPicker({query, ...rest}) {
 
     // Chakra Color Mode
-    const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
-    const textColorSecondary = "gray.400";
+    const textColorPrimary = useTextColor();
+    const textColorSecondary = useDetailColor();
 
     const [filter, setFilter] = useState("")
 

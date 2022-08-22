@@ -1,18 +1,19 @@
 import React, {useContext} from "react";
 
 // Chakra imports
-import {Text, Flex, useColorModeValue, Avatar, HStack} from "@chakra-ui/react";
+import {Avatar, Flex, HStack, Text} from "@chakra-ui/react";
 
 // Custom components
-import { HSeparator } from "components/separator/Separator";
+import {HSeparator} from "components/separator/Separator";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {iconToUrl, useGuild} from "api/discord/DiscordApi";
 import {QueryHolderSkeleton} from "contexts/components/AsyncContext";
 import {config} from "../../../config/config";
+import {useTextColor} from "../../../utils/colors";
 
 export function SidebarBrand() {
   //   Chakra color mode
-  let logoColor = useColorModeValue("navy.700", "white");
+  let logoColor = useTextColor()
   const {id} = useContext(GuildContext)
 
   return (
@@ -26,7 +27,6 @@ export function SidebarBrand() {
                 </Text>
             )
         }
-
       <HSeparator mb="20px" />
     </Flex>
   );

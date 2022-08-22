@@ -1,10 +1,11 @@
 // chakra imports
-import {Box, Center, Flex, Icon, Image, Text, useColorModeValue} from "@chakra-ui/react";
+import {Box, Center, Flex, Icon, Image, Text} from "@chakra-ui/react";
 import {MdUpgrade} from "react-icons/md";
 import React from "react";
+import {useTextColor} from "../../utils/colors";
 
 export function NotificationItem({title, description, image}) {
-  const textColor = useColorModeValue("navy.700", "white");
+  const textColor = useTextColor();
   return (
     <>
         <Box

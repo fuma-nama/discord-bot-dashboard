@@ -2,28 +2,25 @@ import React from "react";
 
 // chakra imports
 import {
-  Box,
-  Flex,
-  Drawer,
-  DrawerBody,
-  Icon,
-  useColorModeValue,
-  DrawerOverlay,
-  useDisclosure,
-  DrawerContent,
-  DrawerCloseButton,
+    Box,
+    Drawer,
+    DrawerBody,
+    DrawerCloseButton,
+    DrawerContent,
+    DrawerOverlay,
+    Flex,
+    Icon,
+    useColorModeValue,
+    useDisclosure,
 } from "@chakra-ui/react";
 import Content from "components/sidebar/components/Content";
-import {
-  renderThumb,
-  renderTrack,
-  renderView,
-} from "components/scrollbar/Scrollbar";
-import { Scrollbars } from "react-custom-scrollbars-2";
+import {renderThumb, renderTrack, renderView,} from "components/scrollbar/Scrollbar";
+import {Scrollbars} from "react-custom-scrollbars-2";
 import PropTypes from "prop-types";
 
 // Assets
-import { IoMenuOutline } from "react-icons/io5";
+import {IoMenuOutline} from "react-icons/io5";
+import {useCardBg} from "../../utils/colors";
 
 function Sidebar({ routes }) {
 
@@ -33,7 +30,7 @@ function Sidebar({ routes }) {
     "unset"
   );
   // Chakra Color Mode
-  let sidebarBg = useColorModeValue("white", "navy.800");
+  let sidebarBg = useCardBg();
 
   // SIDEBAR
   return (
@@ -62,7 +59,7 @@ function Sidebar({ routes }) {
 
 // FUNCTIONS
 export function SidebarResponsive(props) {
-  let sidebarBackgroundColor = useColorModeValue("white", "navy.800");
+  let sidebarBackgroundColor = useCardBg();
   let menuColor = useColorModeValue("gray.400", "white");
   // // SIDEBAR
   const { isOpen, onOpen, onClose } = useDisclosure();

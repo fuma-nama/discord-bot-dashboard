@@ -1,18 +1,18 @@
 import React from "react";
 import {Box, Breadcrumb, BreadcrumbItem, Flex, Text, useColorModeValue} from "@chakra-ui/react";
-import {useAlertBg} from "../../utils/colors";
+import {useAlertBg, useCardBg, useDetailColor, useTextColor} from "../../utils/colors";
 
 export default function NavAlert({rootText, childText, children, clip = true}) {
     // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
-    let mainText = useColorModeValue("navy.700", "white");
-    let secondaryText = useColorModeValue("black", "white");
+    let mainText = useTextColor();
+    let secondaryText = useDetailColor();
     let navbarPosition = "fixed";
     let navbarFilter = "none";
     let navbarBackdrop = "blur(20px)";
     let navbarShadow = "none";
     const navbarBg = useAlertBg()
     let navbarBorder = "transparent";
-    const menuBg = useColorModeValue("white", "navy.800");
+    const menuBg = useCardBg();
     const shadow = useColorModeValue(
         "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
         "14px 17px 40px 4px rgba(112, 144, 176, 0.1)"

@@ -2,6 +2,7 @@ import {IconButton, Input, InputGroup, InputLeftElement, useColorModeValue} from
 import {SearchIcon} from "@chakra-ui/icons";
 import React from "react";
 import {useLocale} from "../../../utils/Language";
+import {useTextColor} from "../../../utils/colors";
 
 export default function SearchInput({value, onSearch, onChange, groupStyle, ...props}) {
     const locale = useLocale()
@@ -9,31 +10,31 @@ export default function SearchInput({value, onSearch, onChange, groupStyle, ...p
     // Chakra Color Mode
     const searchIconColor = useColorModeValue("gray.700", "white");
     const inputBg = useColorModeValue("secondaryGray.300", "navy.900");
-    const inputText = useColorModeValue("gray.700", "gray.100");
+    const inputText = useTextColor()
 
     return <InputGroup {...groupStyle}>
-        <InputLeftElement
-            children={
-                <IconButton
-                    onClick={onSearch}
-                    bg='inherit'
-                    borderRadius='inherit'
-                    _hover={{
-                        cursor: onSearch? "pointer" : "default"
-                    }}
-                    _active={{
-                        bg: "inherit",
-                        transform: "none",
-                        borderColor: "transparent",
-                    }}
-                    _focus={{
-                        boxShadow: "none",
-                    }}
-                    icon={
-                        <SearchIcon color={searchIconColor} w='15px' h='15px'/>
-                    }/>
-            }
-        />
+        <InputLeftElement>
+            <IconButton
+                aria-label="Search"
+                onClick={onSearch}
+                bg='inherit'
+                borderRadius='inherit'
+                _hover={{
+                    cursor: onSearch? "pointer" : "default"
+                }}
+                _active={{
+                    bg: "inherit",
+                    transform: "none",
+                    borderColor: "transparent",
+                }}
+                _focus={{
+                    boxShadow: "none",
+                }}
+                icon={
+                    <SearchIcon color={searchIconColor} w='15px' h='15px'/>
+                }
+            />
+        </InputLeftElement>
         <Input
             variant='search'
             fontSize='sm'

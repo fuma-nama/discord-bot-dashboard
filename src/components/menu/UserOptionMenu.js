@@ -5,10 +5,11 @@ import {UserDataContext} from "contexts/UserDataContext";
 import {Link} from "react-router-dom";
 import {useLogout} from "../../api/internal";
 import {Locale} from "../../utils/Language";
+import {useCardBg, useTextColor} from "../../utils/colors";
 
 export default function UserOptionMenu() {
-    const menuBg = useColorModeValue("white", "navy.800");
-    const textColor = useColorModeValue("secondaryGray.900", "white");
+    const menuBg = useCardBg()
+    const textColor = useTextColor();
     const shadow = useColorModeValue(
         "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
         "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"

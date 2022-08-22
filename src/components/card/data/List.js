@@ -1,6 +1,7 @@
 import {Flex, Icon, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card";
 import React from "react";
+import {useTextColor} from "../../../utils/colors";
 
 /**
  * input:
@@ -19,7 +20,7 @@ import React from "react";
  * }
  */
 export function List({title, description, icon, items}) {
-    const textColor = useColorModeValue("secondaryGray.900", "white");
+    const textColor = useTextColor()
 
     return <Card p="0px">
             <Flex

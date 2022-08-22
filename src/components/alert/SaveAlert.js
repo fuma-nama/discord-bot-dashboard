@@ -1,11 +1,10 @@
-import {Alert, AlertIcon, Button, ButtonGroup, Slide, useColorModeValue,} from "@chakra-ui/react";
-import {useAlertBg} from "../../utils/colors";
+import {Alert, AlertIcon, Button, ButtonGroup, Slide,} from "@chakra-ui/react";
+import {useAlertBg, useSuccessBg, useTextColor} from "../../utils/colors";
 import {Locale} from "../../utils/Language";
 
 function BaseAlert({isOpen, children}) {
-    let alertBg = useAlertBg()
-
-    let mainText = useColorModeValue("navy.700", "white");
+    const alertBg = useAlertBg()
+    const mainText = useTextColor();
 
     return <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
         <Alert
@@ -31,14 +30,9 @@ function BaseAlert({isOpen, children}) {
     </Slide>
 }
 
-export function SaveAlert({
-  saving,
-  visible,
-  onSave,
-  onDiscard,
-}) {
+export function SaveAlert({saving, visible, onSave, onDiscard}) {
 
-  let brand = useColorModeValue("green.300", "green.500");
+    const brand = useSuccessBg()
 
     return (
         <BaseAlert isOpen={visible}>
@@ -61,9 +55,9 @@ export function SaveAlert({
 
 export function SubmitAlert({loading, visible, onSubmit}) {
 
-  let brand = useColorModeValue("green.300", "green.500");
+    const brand = useSuccessBg()
 
-  return (
+    return (
       <BaseAlert isOpen={visible}>
           <Locale zh="您現在可以創建任務了" en="You can create the Task Now" />
 

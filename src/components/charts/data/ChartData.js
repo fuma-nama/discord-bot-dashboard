@@ -8,22 +8,15 @@ import {MdBarChart, MdOutlineCalendarToday} from "react-icons/md";
 
 import {AiFillWarning} from "react-icons/ai";
 import ApexChart from "components/charts/ApexChart";
+import {useIconColor, useNoteColor, useTextColor} from "../../../utils/colors";
 
 export default function ChartData({name, description, value, time_unit, status, options, chartType}) {
     // Chakra Color Mode
-    const textColor = useColorModeValue("secondaryGray.900", "white");
-    const textColorSecondary = useColorModeValue("secondaryGray.600", "white");
+    const textColor = useTextColor()
+    const textColorSecondary = useNoteColor();
     const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-    const iconColor = useColorModeValue("brand.500", "white");
+    const iconColor = useIconColor()
     const bgButton = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-    const bgHover = useColorModeValue(
-        {bg: "secondaryGray.400"},
-        {bg: "whiteAlpha.50"}
-    );
-    const bgFocus = useColorModeValue(
-        {bg: "secondaryGray.300"},
-        {bg: "whiteAlpha.100"}
-    );
 
     return (
         <Card
@@ -36,11 +29,11 @@ export default function ChartData({name, description, value, time_unit, status, 
                         bg={boxBg}
                         fontSize='sm'
                         fontWeight='500'
-                        color={textColorSecondary}
+                        color={textColor}
                         borderRadius='7px'>
                         <Icon
                             as={MdOutlineCalendarToday}
-                            color={textColorSecondary}
+                            color={textColor}
                             me='4px'
                         />
                         {time_unit}
@@ -52,9 +45,6 @@ export default function ChartData({name, description, value, time_unit, status, 
                         align='center'
                         justifyContent='center'
                         bg={bgButton}
-                        _hover={bgHover}
-                        _focus={bgFocus}
-                        _active={bgFocus}
                         w='37px'
                         h='37px'
                         lineHeight='100%'
@@ -73,7 +63,7 @@ export default function ChartData({name, description, value, time_unit, status, 
                         {name}
                     </Text>
                     <Text
-                        color='secondaryGray.600'
+                        color={textColorSecondary}
                         fontSize='sm'
                         fontWeight='500'
                         mt='4px'

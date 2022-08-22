@@ -17,11 +17,12 @@ import {MdNotificationsNone} from "react-icons/md";
 import {Locale} from "../../utils/Language";
 import {QueryHolderSkeleton} from "../../contexts/components/AsyncContext";
 import {NotificationItem} from "./NotificationItem";
+import {useCardBg, useTextColor} from "../../utils/colors";
 
 export function Notifications() {
     const navbarIcon = useColorModeValue("gray.400", "white");
-    const textColor = useColorModeValue("secondaryGray.900", "white");
-    let menuBg = useColorModeValue("white", "navy.800");
+    const textColor = useTextColor();
+    const menuBg = useCardBg()
     const shadow = useColorModeValue(
         "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
         "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"

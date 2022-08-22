@@ -1,5 +1,5 @@
 // Chakra imports
-import {Button, Stack, Text, useColorMode, useColorModeValue} from "@chakra-ui/react";
+import {Button, Stack, Text, useColorMode} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 // Custom components
 import SwitchField from "components/fields/impl/SwitchField";
@@ -9,6 +9,7 @@ import {useContext} from "react";
 import {SettingsContext} from "contexts/SettingsContext";
 import {SelectField} from "components/fields/SelectField";
 import {Languages, Locale, useLocale} from "utils/Language";
+import {useTextColor} from "../../utils/colors";
 
 export default function Settings({...rest}) {
     const {colorMode, setColorMode} = useColorMode();
@@ -17,7 +18,8 @@ export default function Settings({...rest}) {
     const logout = useLogout()
 
     // Chakra Color Mode
-    const textColorPrimary = useColorModeValue("secondaryGray.900", "white")
+    const textColorPrimary = useTextColor()
+
     const Switch = ({label, isChecked, onChange, ...props}) => {
         return <SwitchField
             reversed={true}

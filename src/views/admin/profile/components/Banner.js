@@ -4,16 +4,18 @@ import Card from "components/card/Card.js";
 import React from "react";
 import {config} from "../../../../config/config";
 import {Locale} from "../../../../utils/Language";
+import {useDetailColor, useTextColor} from "../../../../utils/colors";
 
 export default function Banner(props) {
   const { banner, avatar, name, joinedServers, servers } = props;
   // Chakra Color Mode
-  const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
-  const textColorSecondary = "gray.400";
+  const textColorPrimary = useTextColor();
+  const textColorSecondary = useDetailColor();
   const borderColor = useColorModeValue(
     "white !important",
     "#111C44 !important"
   );
+
   return (
     <Card mb={{ base: "0px", lg: "20px" }} align="center">
       <Box

@@ -8,6 +8,7 @@ import DataTable from "./DataTable";
 import PieChartData from "../../charts/data/PieChartData";
 import {List} from "./List";
 import InformationMap from "./InformationMap";
+import {useIconColor} from "../../../utils/colors";
 
 export function DataList({items}) {
     return items.map((item, key) => {
@@ -101,7 +102,7 @@ function getChartType(type) {
 
 function BaseIcon({icon}) {
     // Chakra Color Mode
-    const brandColor = useColorModeValue("brand.500", "white");
+    const iconColor = useIconColor()
     const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
     return <IconBox
@@ -109,7 +110,7 @@ function BaseIcon({icon}) {
         h="56px"
         bg={boxBg}
         icon={
-            <Icon w="32px" h="32px" as={icon} color={brandColor}/>
+            <Icon w="32px" h="32px" as={icon} color={iconColor}/>
         }
     />
 }

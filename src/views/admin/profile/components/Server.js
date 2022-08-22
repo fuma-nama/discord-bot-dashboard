@@ -1,5 +1,5 @@
 // Chakra imports
-import {Avatar, Button, Flex, Stack, Text, useColorModeValue,} from "@chakra-ui/react";
+import {Avatar, Button, Flex, Stack, Text,} from "@chakra-ui/react";
 // Custom components
 import {Link} from "react-router-dom";
 import Card from "components/card/Card.js";
@@ -7,13 +7,15 @@ import React from "react";
 // Assets
 import {iconToUrl} from "api/discord/DiscordApi";
 import {Locale} from "utils/Language";
+import {useCardBg, useTextColor} from "../../../../utils/colors";
 
 export default function Server({ server, ...rest }) {
   const { name, id, icon } = server;
 
   // Chakra Color Mode
-  const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
-  const bg = useColorModeValue("white", "navy.700");
+  const textColorPrimary = useTextColor();
+  const bg = useCardBg()
+
   return (
     <Card bg={bg} {...rest} p="14px">
       <Flex align="center" direction={{ base: "column", md: "row" }}>

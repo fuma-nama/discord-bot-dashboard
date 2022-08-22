@@ -1,9 +1,10 @@
 import React, {useContext} from "react";
-import {Box, Button, Flex, HStack, Image, Text, useColorModeValue} from "@chakra-ui/react";
+import {Box, Button, Flex, HStack, Image, Text} from "@chakra-ui/react";
 import Card from "components/card/Card";
 import {Link} from "react-router-dom";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {Locale, useLocale} from "../../utils/Language";
+import {useBrandBg, useDetailColor, useTextColor} from "../../utils/colors";
 
 /**
  * {
@@ -17,15 +18,16 @@ export function Action({id, action}) {
     const configUrl = `/guild/${serverId}/action/${id}`
     const locale = useLocale()
 
-    const textColor = useColorModeValue("navy.700", "white");
-    const detailColor = useColorModeValue("secondaryGray.900", "secondaryGray.600");
+    const textColor = useTextColor();
+    const detailColor = useDetailColor();
+    const brandBg = useBrandBg()
 
     return (
         <Card p="20px">
             <Flex direction="column" gap={3}>
                 {action.banner?
-                    <Image h="5rem" objectFit="cover" rounded="lg" bg="brand.500" src={action.banner}/> :
-                    <Box h="5rem" rounded="lg" bg="brand.500" />
+                    <Image h="5rem" objectFit="cover" rounded="lg" bg={brandBg} src={action.banner}/> :
+                    <Box h="5rem" rounded="lg" bg={brandBg} />
                 }
                 <Text
                     color={textColor}

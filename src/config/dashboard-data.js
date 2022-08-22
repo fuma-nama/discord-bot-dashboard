@@ -1,6 +1,9 @@
 import {DataTypes} from "../variables/type";
 import React from "react";
 import {Locale} from "../utils/Language";
+import {lineChartOptionsTotalSpent, pieChartOptions, weekBarChartOptions} from "./charts";
+import {Flex, Icon, Text} from "@chakra-ui/react";
+import {MdCancel, MdCheckCircle} from "react-icons/md";
 
 /**
  * @type Array<DashboardDataRow>
@@ -9,7 +12,7 @@ export const dashboardData = [
     {
         advanced: false,
         count: 2,
-        items: (detail, {lang}) => [
+        items: (detail) => [
             {
                 name: <Locale
                     zh="個人信息"
@@ -45,56 +48,29 @@ export const dashboardData = [
             }
         ]
     },
-    /*
-    {
-        advanced: false,
-        count: 4,
-        items: (detail) => [
-            {
-                name: "RPG收益",
-                icon: MdBarChart,
-                value: `$${detail.earned}`,
-                type: DataTypes.Statistics
-            },
-            {
-                name: "成員數量",
-                icon: BsPeopleFill,
-                value: `${detail.members.count}人`,
-                type: DataTypes.Statistics
-            },
-            {
-                name: "總命令使用量",
-                icon: VscDebugConsole,
-                value: detail.command.total,
-                type: DataTypes.Statistics
-            },
-            {
-                name: "最常用的命令",
-                icon: FiCommand,
-                value: detail.command.most,
-                type: DataTypes.Statistics
-            },
-        ]
-    },
     {
         advanced: true,
         count: 2,
-        items: (detail) => [
+        items: () => [
             {
-                name: `${detail.command.total}次`,
+                name: `54次`,
                 description: "每月命令使用量",
                 status: {
                     success: true,
                     text: "在成長中"
                 },
-                value: detail.command.usage,
+                value: [
+                    {data: [543, 543,543,43]}
+                ],
                 options: lineChartOptionsTotalSpent,
                 time_unit: "這個月",
                 type: DataTypes.Line_Chart
             },
             {
                 name: "動態語音頻道數量",
-                value: detail.dvc.usage,
+                value: [
+                    {data: [543, 543,543,43]}
+                ],
                 options: weekBarChartOptions,
                 time_unit: "這個星期",
                 type: DataTypes.Bar_Chart
@@ -104,11 +80,16 @@ export const dashboardData = [
     {
         count: 2,
         advanced: false,
-        items: (detail) => [
+        items: () => [
             {
                 name: "服務器功能",
                 type: DataTypes.Table,
-                value: detail.unlocked,
+                value: [
+                    {
+                        name: "Gay",
+                        enabled: false
+                    }
+                ],
                 columns: [
                     {
                         header: "Name",
@@ -123,14 +104,14 @@ export const dashboardData = [
                                 h='24px'
                                 me='5px'
                                 color={
-                                    v? "green.500" : "red.500"
+                                    v ? "green.500" : "red.500"
                                 }
                                 as={
-                                    v? MdCheckCircle : MdCancel
+                                    v ? MdCheckCircle : MdCancel
                                 }
                             />
                             <Text fontSize='sm' fontWeight='700'>
-                                {v? "Enabled" : "Locked"}
+                                {v ? "Enabled" : "Locked"}
                             </Text>
                         </Flex>
                     },
@@ -145,8 +126,8 @@ export const dashboardData = [
                         options: pieChartOptions,
                         unit: "%",
                         value: [
-                            detail.bot.cpu,
-                            100 - detail.bot.cpu,
+                            54,
+                            100 - 54,
                         ]
                     },
                     {
@@ -155,13 +136,12 @@ export const dashboardData = [
                         options: pieChartOptions,
                         unit: "%",
                         value: [
-                            detail.bot.ram,
-                            100 - detail.bot.ram
+                            42,
+                            100 - 32
                         ]
                     }
                 ]
             }
         ]
     }
-     */
 ]

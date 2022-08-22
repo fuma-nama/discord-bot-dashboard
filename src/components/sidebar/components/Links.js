@@ -1,20 +1,16 @@
 /* eslint-disable */
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 // chakra imports
-import { Box, Flex, HStack, Text, useColorModeValue } from "@chakra-ui/react";
+import {Box, Flex, HStack, Text} from "@chakra-ui/react";
+import {useBrandBg, useNoteColor, useTextColor} from "utils/colors";
 
 export function SidebarLinks(props) {
   //   Chakra color mode
   let location = useLocation();
-  let activeColor = useColorModeValue("gray.700", "white");
-  let inactiveColor = useColorModeValue(
-    "secondaryGray.600",
-    "secondaryGray.600"
-  );
-  let activeIcon = useColorModeValue("brand.500", "white");
-  let textColor = useColorModeValue("secondaryGray.500", "white");
-  let brandColor = useColorModeValue("brand.500", "brand.400");
+  let activeColor = useTextColor();
+  let inactiveColor = useNoteColor()
+  let brandColor = useBrandBg();
 
   const { routes } = props;
 
@@ -33,12 +29,12 @@ export function SidebarLinks(props) {
           {route.icon ? (
               <HStack spacing={active ? "22px" : "26px"} py="5px" ps="10px">
                 <Flex w="100%" alignItems="center" justifyContent="center">
-                  <Box color={active ? activeIcon : textColor} me="18px">
+                  <Box color={active ? brandColor : inactiveColor} me="18px">
                     {route.icon}
                   </Box>
                   <Text
                     me="auto"
-                    color={active ? activeColor : textColor}
+                    color={active ? activeColor : inactiveColor}
                     fontWeight={active ? "bold" : "normal"}
                   >
                     {route.name}

@@ -1,11 +1,12 @@
 import React from "react";
-import {Flex, Link as LinkText, Text, useColorModeValue,} from "@chakra-ui/react";
+import {Flex, Link as LinkText, Text,} from "@chakra-ui/react";
 import {homepage} from "variables/links";
 import {config} from "config/config";
 import {Locale} from "../../utils/Language";
+import {useTextColor} from "../../utils/colors";
 
 export default function Footer({children}) {
-    const textColor = useColorModeValue("gray.400", "white");
+    const textColor = useTextColor();
 
     return (
         <Flex

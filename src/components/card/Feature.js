@@ -1,5 +1,5 @@
 // Chakra imports
-import {Box, Button, ButtonGroup, Flex, Heading, Image, Text, useColorModeValue} from "@chakra-ui/react";
+import {Box, Button, ButtonGroup, Flex, Heading, Image, Text} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
 // Custom components
 import Card from "components/card/Card.js";
@@ -8,6 +8,7 @@ import React, {useContext} from "react";
 import {GuildContext} from "../../contexts/guild/GuildContext";
 import {Locale, useLocale} from "../../utils/Language";
 import {useEnableFeatureMutation} from "../../api/utils";
+import {useBrandBg, useDetailColor, useTextColor} from "../../utils/colors";
 
 export default function Feature({banner, name, description, id: featureId, enabled}) {
     const {id: serverId} = useContext(GuildContext);
@@ -16,9 +17,9 @@ export default function Feature({banner, name, description, id: featureId, enabl
     const locale = useLocale()
 
     //chakra colors
-    const textColor = useColorModeValue("navy.700", "white");
-    const detailColor = useColorModeValue("secondaryGray.900", "secondaryGray.600");
-    const brandColor = useColorModeValue("brand.500", "brand.400");
+    const textColor = useTextColor();
+    const detailColor = useDetailColor();
+    const brandColor = useBrandBg()
 
     return (
         <Card p="20px" overflow="hidden" gap={3}>

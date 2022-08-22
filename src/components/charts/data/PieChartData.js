@@ -4,16 +4,18 @@ import {Box, Flex, SimpleGrid, Text, useColorModeValue} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import PieChart from "components/charts/PieChart";
 import React from "react";
+import {useNoteColor, useTextColor} from "../../../utils/colors";
 
 export default function PieChartData({name, data, options, unit}) {
 
   // Chakra Color Mode
-  const textColor = useColorModeValue("secondaryGray.900", "white");
-  const cardColor = useColorModeValue("white", "navy.700");
+  const textColor = useTextColor();
+  const detailColor = useNoteColor()
   const cardShadow = useColorModeValue(
     "0px 18px 40px rgba(112, 144, 176, 0.12)",
     "unset"
   );
+
   return (
     <Card p='20px' align='center' direction='column' w='100%'>
       <Flex
@@ -34,7 +36,6 @@ export default function PieChartData({name, data, options, unit}) {
       <SimpleGrid
           columns={2}
           rounded="lg"
-        bg={cardColor}
         boxShadow={cardShadow}
         w='100%'
         py='15px'
@@ -48,7 +49,7 @@ export default function PieChartData({name, data, options, unit}) {
                       <Box h='8px' w='8px' bg='brand.500' borderRadius='50%' me='4px' />
                       <Text
                           fontSize='xs'
-                          color='secondaryGray.600'
+                          color={detailColor}
                           fontWeight='700'
                           mb='5px'>
                           {options.labels[i]}
