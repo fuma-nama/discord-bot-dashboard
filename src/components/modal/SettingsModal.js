@@ -1,9 +1,14 @@
-import Modal from "./Modal";
+import {EmptyModal} from "./Modal";
 import Settings from "../card/Settings";
+import {ModalBody, ModalCloseButton, ModalHeader} from "@chakra-ui/react";
 
 export function SettingsModal({isOpen, onClose}) {
 
-    return <Modal isOpen={isOpen} onClose={onClose} header={{zh: "用戶設置", en: "Settings"}}>
-        <Settings />
-    </Modal>
+    return <EmptyModal isOpen={isOpen} onClose={onClose}>
+        <ModalHeader />
+        <ModalCloseButton />
+        <ModalBody>
+            <Settings />
+        </ModalBody>
+    </EmptyModal>
 }

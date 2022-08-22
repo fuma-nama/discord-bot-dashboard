@@ -37,9 +37,8 @@ export default function Settings({...rest}) {
                 color={textColorPrimary}
                 fontWeight="bold"
                 fontSize="2xl"
-                mb="30px"
-            >
-                <Locale zh="設置" en="Settings" />
+                mb="30px">
+                <Locale zh="用戶設置" en="Settings" />
             </Text>
             <Switch
                 label={{zh: "固定屏幕最小寬度", en: "Fixed Screen Min-Width"}}
