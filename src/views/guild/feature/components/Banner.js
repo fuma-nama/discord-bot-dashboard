@@ -5,11 +5,11 @@ import {Button} from "@chakra-ui/react";
 import {useFeatureInfo} from "contexts/FeatureDetailContext";
 import Banner from "components/card/Banner";
 // Assets
-import banner from "assets/img/layout/NftBanner1.png";
+import banner from "assets/img/common/FeatureBanner.png";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {BiArrowBack} from "react-icons/bi";
 import {Link} from "react-router-dom";
-import {Locale} from "../../../../utils/Language";
+import {Locale} from "utils/Language";
 
 export default function BannerWrapper({localeName}) {
     const {description} = useFeatureInfo()

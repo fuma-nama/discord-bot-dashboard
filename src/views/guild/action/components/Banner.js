@@ -5,7 +5,7 @@ import {Button} from "@chakra-ui/react";
 import Banner from "components/card/Banner";
 
 // Assets
-import banner from "assets/img/common/ActionBanner.jpg";
+import banner from "assets/img/common/ActionBanner.png";
 import {Locale, useLocale} from "utils/Language";
 
 export default function BannerWrapper() {

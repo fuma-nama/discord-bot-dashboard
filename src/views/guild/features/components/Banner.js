@@ -4,10 +4,11 @@ import React from "react";
 import {Link, Text} from "@chakra-ui/react";
 
 // Assets
-import banner from "assets/img/layout/NftBanner1.png";
+import banner from "assets/img/common/FeatureBanner.png";
+
 import Banner, {BannerButton} from "components/card/Banner";
-import {Locale, useLocale} from "../../../../utils/Language";
-import {config} from "../../../../config/config";
+import {Locale, useLocale} from "utils/Language";
+import {config} from "config/config";
 
 export default function BannerWrapper() {
     const locale = useLocale()

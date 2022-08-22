@@ -1,6 +1,6 @@
 import React from "react";
 
-import bannerImg from "assets/img/common/ActionBanner.jpg";
+import bannerImg from "assets/img/common/ActionBanner.png";
 
 import {useActionInfo} from "contexts/actions/ActionDetailContext";
 import Banner from "components/card/Banner";
