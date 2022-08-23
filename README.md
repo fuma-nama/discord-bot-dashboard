@@ -22,7 +22,7 @@ Therefore, it requires a full Backend Implementation.
 <br>
 For the implementation in Kotlin, See the [Example](https://github.com/SonMooSans/discord-bot-dashboard-backend)
 
-You may implement your own Backend APi in another languages with required routes mentioned in its README
+You may implement your own Backend APi in another languages by implementing routes mentioned in its README
 
 ## Configuration
 Go to the [config.js](src/config/config.js)
