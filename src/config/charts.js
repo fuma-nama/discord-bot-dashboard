@@ -125,7 +125,8 @@ export const weekBarChartOptions = {
     theme: "dark",
   },
   xaxis: {
-    categories: ["週一", "週二", "週三", "週四", "週五", "週六", "週日"],
+    //["週一", "週二", "週三", "週四", "週五", "週六", "週日"]
+    categories: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     show: false,
     labels: {
       show: true,
@@ -273,7 +274,7 @@ export const lineChartOptionsTotalSpent = {
   },
   xaxis: {
     type: "numeric",
-    categories: Array.from({length: 31}, (_, i) => (i + 1) + "日"),
+    categories: Array.from({length: 31}, (_, i) => (i + 1) + " Day"),
     labels: {
       style: {
         colors: "#A3AED0",
