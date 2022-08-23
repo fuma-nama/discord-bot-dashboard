@@ -1,7 +1,7 @@
 import React from "react";
 
 // Chakra imports
-import {Button, Flex, Text} from "@chakra-ui/react";
+import {Button, Flex, Link, Text} from "@chakra-ui/react";
 
 export default function Banner({image, title, description, clip = true, children}) {
     return (
@@ -55,17 +55,11 @@ export default function Banner({image, title, description, clip = true, children
   );
 }
 
-export function BannerButton(props) {
-    return <Button
-        bg="white"
-        color="black"
-        _hover={{bg: "whiteAlpha.900"}}
-        _active={{bg: "white"}}
-        _focus={{bg: "white"}}
-        fontWeight="500"
-        fontSize="14px"
-        py="20px"
-        px="27"
-        {...props}
-    />
+export function BannerButton({url, ...props}) {
+    return <Link href={url}>
+        <Button
+            variant="white"
+            {...props}
+        />
+    </Link>
 }

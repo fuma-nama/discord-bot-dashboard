@@ -63,5 +63,9 @@ export type ConfigType = {
     },
     footer: FooterItem[],
     serverUrl: string,
-    inviteUrl: string
+    inviteUrl: string,
+    /**
+     * The tutorial or document website of the bot
+     */
+    tutorialUrl?: string,
 }

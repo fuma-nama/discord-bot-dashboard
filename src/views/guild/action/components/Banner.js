@@ -1,12 +1,13 @@
 import React from "react";
 
-// Chakra imports
-import {Button} from "@chakra-ui/react";
-import Banner from "components/card/Banner";
+import Banner, {BannerButton} from "components/card/Banner";
+import {Locale, useLocale} from "utils/Language";
+import {config} from "config/config";
 
 // Assets
 import banner from "assets/img/common/ActionBanner.png";
-import {Locale, useLocale} from "utils/Language";
+import {BiPlay} from "react-icons/bi";
+
 
 export default function BannerWrapper() {
     const locale = useLocale()
@@ -25,12 +26,14 @@ export default function BannerWrapper() {
             })}
             clip={false}
         >
-            <Button
-                variant="white"
-                me="38px"
-            >
-                <Locale zh="觀看教程" en="Watch Tutorial" />
-            </Button>
+            {
+                config.tutorialUrl && <BannerButton
+                    leftIcon={<BiPlay size={20} />}
+                    url={config.tutorialUrl}
+                >
+                    <Locale zh="觀看教程" en="Watch Tutorial" />
+                </BannerButton>
+            }
         </Banner>
     );
 }

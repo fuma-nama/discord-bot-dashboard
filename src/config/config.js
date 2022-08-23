@@ -27,20 +27,10 @@ export const config = {
     features: {
         "auto_kill_kane": KillKane
     },
+    tutorialUrl: "https://github.com/SonMooSans/discord-bot-dashboard",
     serverUrl: "http://localhost:8080",
     inviteUrl: "https://discord.com/api/oauth2/authorize?client_id=1004280473956139038&permissions=8&scope=bot",
     data: {
         dashboard: dashboardData,
-        /*
-        features: data => [
-            {
-                name: "測試版功能",
-                description: "在我們的不和諧服務器中投票，告訴我們您希望什麼功能",
-                icon: BsPeopleFill,
-                type: DataTypes.List,
-                value: data.betaFeatures
-            }
-        ]
-         */
     },
 }

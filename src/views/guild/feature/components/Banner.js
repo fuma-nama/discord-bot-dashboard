@@ -32,7 +32,6 @@ function BackButton() {
     <Link to={`/guild/${serverId}/features`}>
       <Button
           variant="white"
-        me="38px"
         leftIcon={<BiArrowBack />}
       >
           <Locale zh="返回控制面板" en="Back to Control Panel" />

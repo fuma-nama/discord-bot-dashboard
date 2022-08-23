@@ -1,19 +1,16 @@
 import React from "react";
 
-// Chakra imports
-import {Link, Text} from "@chakra-ui/react";
-
 // Assets
 import banner from "assets/img/common/FeatureBanner.png";
 
 import Banner, {BannerButton} from "components/card/Banner";
 import {Locale, useLocale} from "utils/Language";
 import {config} from "config/config";
+import {FaTripadvisor} from "react-icons/fa";
 
 export default function BannerWrapper() {
     const locale = useLocale()
 
-    // Chakra Color Mode
     return (
         <Banner
             image={banner}
@@ -26,14 +23,14 @@ export default function BannerWrapper() {
                 en: `Discover, Learn, And Customize the Powerful Features of ${config.name}`
             })}
         >
-            <BannerButton>
-                <Locale zh="發現它們" en="Discover" />
-            </BannerButton>
-            <Link>
-                <Text color="white" fontSize="sm" fontWeight="500">
-                    <Locale zh="觀看教程" en="Watch Tutorial" />
-                </Text>
-            </Link>
+            {
+                config.tutorialUrl && <BannerButton
+                    leftIcon={<FaTripadvisor size={20} />}
+                    url={config.tutorialUrl}
+                >
+                    <Locale zh="發現它們" en="Discover" />
+                </BannerButton>
+            }
         </Banner>
   );
 }
