@@ -155,5 +155,22 @@ const config = {
 }
 ```
 
+### Multi Languages
+Some fields support Multi Languages
+<br>
+You can see their type annotations to check about it
+
+For those fields, you can use: 
+```javascript
+text = {
+    zh: "Chinese",
+    en: "English"
+}
+```
+
+For now, we only supports **English (en)** or **Chinese (zh)**.
+<br>
+You can use `<Locale zh="Chinese" en="English" />` on some fields since they may supports `JSXElement`
+
 ## the Template of Template
 This Dashboard is Based on [Horizon UI ⚡️](https://horizon-ui.com/horizon-ui-chakra)
