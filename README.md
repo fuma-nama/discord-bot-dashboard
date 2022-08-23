@@ -134,7 +134,7 @@ const config = {
                 }
             ]
         }
-    }
+    },
     actions: {
         "id_of_action": {
             name: "Reaction Role",
