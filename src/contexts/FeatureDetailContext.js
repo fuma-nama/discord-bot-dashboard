@@ -1,5 +1,4 @@
 import {createContext, useContext} from "react";
-import {QueryHolder} from "./components/AsyncContext";
 import {GuildContext} from "./guild/GuildContext";
 import {getFeatureDetail} from "api/internal";
 import {useQuery} from "react-query";
@@ -10,22 +9,15 @@ export const FeatureDetailContext = createContext({
   values: null
 });
 
-export function FeatureDetailProvider({children, featureId}) {
-  const { id: serverId } = useContext(GuildContext);
-  const query = useQuery(["feature_detail", serverId, featureId],
-      () => getFeatureDetail(serverId, featureId),
-      {
-        retry: 0
-      }
-  )
+export function useFeatureDetailQuery(featureId) {
+    const { id: serverId } = useContext(GuildContext);
 
-  return (
-    <QueryHolder query={query}>
-        <FeatureDetailContext.Provider value={query.data}>
-          {children}
-        </FeatureDetailContext.Provider>
-    </QueryHolder>
-  );
+    return useQuery(["feature_detail", serverId, featureId],
+        () => getFeatureDetail(serverId, featureId),
+        {
+            retry: 0
+        }
+    )
 }
 
 export function useFeatureInfo() {

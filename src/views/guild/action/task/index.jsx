@@ -6,48 +6,45 @@ import {Button, SimpleGrid, Stack, Text,} from "@chakra-ui/react";
 // Custom components
 import {usePageInfo} from "contexts/PageInfoContext";
 import {useActionInfo} from "contexts/actions/ActionDetailContext";
-import {MultiConfigPanel} from "components/fields/ConfigPanel";
+import {ConfigGridSkeleton, MultiConfigPanel} from "components/fields/ConfigPanel";
 import {Link, useParams} from "react-router-dom";
 import {updateTask} from "api/internal";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {useActionBanner} from "../components/ActionBanner";
 import {BiArrowBack} from "react-icons/bi";
-import {TaskDetailContext, TaskDetailProvider} from "../../../../contexts/actions/TaskDetailContext";
+import {useTaskDetailQuery} from "../../../../contexts/actions/TaskDetailContext";
 import {useQueryClient} from "react-query";
 import {usePageState} from "../../../../utils/State";
 import {Locale, useLocale} from "../../../../utils/Language";
 
 export default function TaskBoard() {
+    const {name: action} = useActionInfo()
+    const locale = useLocale()
     useActionBanner([<BackButton />])
+
+    usePageInfo(
+        [{zh: "動作", en: "Action"}, action].map(locale)
+    )
 
     return <Stack mt={10} gap={5}>
         <Text fontSize={25} fontWeight="bold">
             <Locale zh="修改任務" en="Modify Task" />
         </Text>
 
-        <TaskDetailProvider>
-            <TaskConfigPanel />
-        </TaskDetailProvider>
+        <TaskConfigPanel />
     </Stack>
 }
 
 function TaskConfigPanel() {
-    const {name: action} = useActionInfo()
-    const {name: task} = useContext(TaskDetailContext)
-    const locale = useLocale()
+    const query = useTaskDetailQuery()
 
-    usePageInfo(
-        [{zh: "動作", en: "Action"}, action, task]
-        .map(locale)
-    )
-
-    return <Config />
+    return query.isLoading? <ConfigGridSkeleton/> : <Config detail={query.data} />
 }
 
-export function Config() {
+export function Config({detail}) {
     const {id: guild, action, task} = useParams()
 
-    const {name, values} = useContext(TaskDetailContext)
+    const {name, values} = detail
     const client = useQueryClient()
 
     const onSaved = data => {

@@ -3,7 +3,7 @@ import {OptionPanel} from "./OptionPanel";
 import {SaveAlert} from "components/alert/SaveAlert";
 import ErrorModal from "../modal/ErrorModal";
 import {useMutation} from "react-query";
-import {Flex, SimpleGrid, SlideFade} from "@chakra-ui/react";
+import {Flex, SimpleGrid, Skeleton, SlideFade} from "@chakra-ui/react";
 
 export function ConfigItemListAnimated({options, changes, onChange}) {
     return options.map((option) => (
@@ -21,17 +21,13 @@ export function ConfigItemListAnimated({options, changes, onChange}) {
     ))
 }
 
-export function ConfigItemList({options, changes, onChange}) {
-    return options.map((option) => (
-        <OptionPanel
-            option={option}
-            value={
-                changes && changes.has(option.id) ? changes.get(option.id) : option.value
-            }
-            key={option.id}
-            onChange={(v) => onChange(option.id, v)}
-        />
-    ))
+export function ConfigGridSkeleton() {
+    return <SimpleGrid columns={{base: 1, lg: 2}} gap={5} mt={10}>
+        <Skeleton height="20rem" rounded="lg" />
+        <Skeleton height="20rem" rounded="lg" />
+        <Skeleton height="20rem" rounded="lg" />
+        <Skeleton height="20rem" rounded="lg" />
+    </SimpleGrid>
 }
 
 export function ConfigGrid(props) {

@@ -1,13 +1,13 @@
 import React, {useContext, useMemo} from "react";
 
-import {Flex,} from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 
 // Custom components
 import {updateFeatureOptions} from "api/internal";
 
-import {FeatureDetailContext, FeatureDetailProvider, useFeatureInfo,} from "contexts/FeatureDetailContext";
+import {useFeatureDetailQuery, useFeatureInfo,} from "contexts/FeatureDetailContext";
 import {GuildContext} from "contexts/guild/GuildContext";
-import {ConfigGrid} from "components/fields/ConfigPanel";
+import {ConfigGrid, ConfigGridSkeleton} from "components/fields/ConfigPanel";
 import {config} from "config/config";
 import NotFound from "../../info/Not_Found";
 import {useParams} from "react-router-dom";
@@ -30,24 +30,27 @@ function FeaturePanel() {
     const {id, name} = useFeatureInfo()
     const locale = useLocale()
     useBanner(locale(name))
+    const query = useFeatureDetailQuery(id)
 
     return (
         <Flex
             flexDirection="column"
             mb="10"
         >
-            <FeatureDetailProvider featureId={id}>
-                <FeatureConfigPanel />
-            </FeatureDetailProvider>
+            {query.isLoading?
+                <ConfigGridSkeleton />
+                :
+                <FeatureConfigPanel detail={query.data} />
+            }
         </Flex>
     );
 }
 
-function FeatureConfigPanel() {
+function FeatureConfigPanel({detail}) {
     const { id: serverId } = useContext(GuildContext);
-    const {values} = useContext(FeatureDetailContext)
     const state = usePageState()
     const info = useFeatureInfo()
+    const {values} = detail
 
     const client = useQueryClient()
     const options = useMemo(

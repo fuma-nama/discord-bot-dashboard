@@ -43,7 +43,7 @@ export default function SearchInput({value, onSearch, onChange, groupStyle, ...p
             fontWeight='500'
             _placeholder={{color: "gray.400", fontSize: "14px"}}
             borderRadius="30px"
-            placeholder={locale({zh: "搜索...", en: "Search Something..."})}
+            placeholder={locale({zh: "搜索...", en: "Search"})}
             value={value}
             onChange={e => onChange(e.target.value)}
             {...props}
