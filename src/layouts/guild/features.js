@@ -4,6 +4,8 @@ import {Outlet} from "react-router-dom"
 import {LayoutContext, LayoutProvider} from "../../contexts/layouts/LayoutContext";
 import Banner from "../../components/card/Banner";
 import bannerImg from "assets/img/common/FeatureBanner.png";
+import {useLocale} from "../../utils/Language";
+import {usePageInfo} from "../../contexts/PageInfoContext";
 
 export function FeaturesLayout() {
     return <LayoutProvider>
@@ -30,6 +32,11 @@ function BannerWrapper({banner}) {
 
 function Content() {
     const {banner, dataList} = useContext(LayoutContext)
+    const locale = useLocale()
+
+    usePageInfo(
+        locale({zh: "功能控制面板", en: "Features"})
+    )
 
     if (dataList) {
 

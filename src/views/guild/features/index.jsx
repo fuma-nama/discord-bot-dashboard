@@ -3,7 +3,6 @@ import React, {useContext} from "react";
 // Custom components
 import FeatureGrid from "./components/FeatureGrid";
 import {FeaturesContext, FeaturesProvider} from "contexts/FeaturesContext";
-import {usePageInfo} from "contexts/PageInfoContext";
 import {DataList} from "components/card/data/DataCard";
 import {config} from "config/config";
 import {Locale, useLocale} from "utils/Language";
@@ -12,11 +11,6 @@ import {BannerButton} from "components/card/Banner";
 import {FaTripadvisor} from "react-icons/fa";
 
 export default function FeaturesBoard() {
-  const locale = useLocale()
-
-  usePageInfo(
-      locale({zh: "功能控制面板", en: "Features"})
-  )
 
   return (
       <FeaturesProvider>

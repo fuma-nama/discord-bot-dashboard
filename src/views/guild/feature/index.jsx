@@ -29,8 +29,8 @@ export default function Feature() {
 function FeaturePanel() {
     const {id, name} = useFeatureInfo()
     const locale = useLocale()
-    useBanner(locale(name))
     const query = useFeatureDetailQuery(id)
+    useBanner(locale(name))
 
     return (
         <Flex
