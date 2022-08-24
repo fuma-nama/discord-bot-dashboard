@@ -9,6 +9,7 @@ import {avatarToUrl} from "../../../api/discord/DiscordApi";
 import {useBrandBg, useTextColor} from "../../../utils/colors";
 import {NavLink} from "react-router-dom";
 import {IoIosArrowRoundBack} from "react-icons/io";
+import {Locale} from "../../../utils/Language";
 
 // FUNCTIONS
 
@@ -49,7 +50,9 @@ function UserPreview() {
       bgGradient={`linear(to-br, ${bg} 60%, ${brand}) 40%`}
   >
     <Box pos="absolute" mt="-40%" p={3} rounded="full" bg={bg}>
-      <Text fontWeight="bold">Logged As</Text>
+      <Text fontWeight="bold">
+        <Locale zh="登錄為" en="Logged As"/>
+      </Text>
     </Box>
 
     <Box pos="absolute" top={0} left={0} m={4}>
