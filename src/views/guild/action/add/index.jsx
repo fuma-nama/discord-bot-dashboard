@@ -75,7 +75,7 @@ function ConfigPanel() {
                 data
             )
 
-            navigate(`/guild/${guild}/action/${action}/task/${data.id}`)
+            navigate(`/guild/${guild}/actions/${action}/task/${data.id}`)
         }
     })
 

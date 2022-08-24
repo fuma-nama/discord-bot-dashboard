@@ -10,15 +10,14 @@ import {Navigate, Outlet, Route, useParams} from "react-router-dom";
 import {UserDataProvider} from "contexts/UserDataContext";
 //routes
 import routes from "routes.js";
-import hidden_routes from "hidden_routes.js";
 import {GuildContext} from "contexts/guild/GuildContext";
 
 function getRoutes(routes) {
-    return routes.map((prop, key) => {
-        return <Route path={prop.path}
-                      element={prop.component}
-                      key={key}
-        />;
+    return routes.map((route, key) => {
+
+        return <Route path={route.path} element={route.component} key={key}>
+            {route.children && getRoutes(route.children)}
+        </Route>
     });
 }
 
@@ -83,8 +82,6 @@ export default function GuildBoard() {
 export function GuildRoutes() {
     return <>
         {getRoutes(routes)}
-        {getRoutes(hidden_routes)}
         <Route path="*" element={<Navigate replace to="dashboard"/>}/>
-
     </>
 }

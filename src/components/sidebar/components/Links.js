@@ -19,13 +19,11 @@ export function SidebarLinks(props) {
     return location.pathname.includes(routeName);
   };
 
-  // this function creates the links from the secondary accordions (for example auth -> sign-in -> default)
-  const createLinks = (routes) => {
-    return routes.map((route, index) => {
-      const active = activeRoute(route.path.toLowerCase());
+  function createLink(route, key) {
+    const active = activeRoute(route.path.toLowerCase());
 
-      return (
-        <NavLink key={index} to={route.path}>
+    return (
+        <NavLink key={key} to={route.path}>
           {route.icon ? (
               <HStack spacing={active ? "22px" : "26px"} py="5px" ps="10px">
                 <Flex w="100%" alignItems="center" justifyContent="center">
@@ -33,40 +31,41 @@ export function SidebarLinks(props) {
                     {route.icon}
                   </Box>
                   <Text
-                    me="auto"
-                    color={active ? activeColor : inactiveColor}
-                    fontWeight={active ? "bold" : "normal"}
+                      me="auto"
+                      color={active ? activeColor : inactiveColor}
+                      fontWeight={active ? "bold" : "normal"}
                   >
                     {route.name}
                   </Text>
                 </Flex>
                 <Box
-                  h="36px"
-                  w="4px"
-                  bg={active ? brandColor : "transparent"}
-                  borderRadius="5px"
+                    h="36px"
+                    w="4px"
+                    bg={active ? brandColor : "transparent"}
+                    borderRadius="5px"
                 />
               </HStack>
           ) : (
-            <Box>
-              <HStack spacing={active ? "22px" : "26px"} py="5px" ps="10px">
-                <Text
-                  me="auto"
-                  color={active ? activeColor : inactiveColor}
-                  fontWeight={active ? "bold" : "normal"}
-                >
-                  {route.name}
-                </Text>
-                <Box h="36px" w="4px" bg="brand.400" borderRadius="5px" />
-              </HStack>
-            </Box>
+              <Box>
+                <HStack spacing={active ? "22px" : "26px"} py="5px" ps="10px">
+                  <Text
+                      me="auto"
+                      color={active ? activeColor : inactiveColor}
+                      fontWeight={active ? "bold" : "normal"}
+                  >
+                    {route.name}
+                  </Text>
+                  <Box h="36px" w="4px" bg="brand.400" borderRadius="5px" />
+                </HStack>
+              </Box>
           )}
         </NavLink>
-      );
-    });
-  };
-  //  BRAND
-  return createLinks(routes);
+    );
+  }
+
+  return routes
+      .filter((route) => !route.hide)
+      .map((route, index) => createLink(route, index));
 }
 
 export default SidebarLinks;

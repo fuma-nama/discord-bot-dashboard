@@ -9,7 +9,7 @@ export default function CreateButton() {
     const { id: guild } = useContext(GuildContext);
     const {action} = useParams();
 
-    return <Link to={`/guild/${guild}/action/${action}/add`}>
+    return <Link to={`/guild/${guild}/actions/${action}/add`}>
         <Button
             _hover={{ bg: "brand.400" }}
             bg="brand.400"

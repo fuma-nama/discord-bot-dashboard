@@ -30,7 +30,7 @@ export function Task({task}) {
 
     const deleteMutation = useDeleteMutation(guild, action, task.id)
 
-    const configUrl = `/guild/${guild}/action/${action}/task/${task.id}`
+    const configUrl = `/guild/${guild}/actions/${action}/task/${task.id}`
     const createdAt = new Date(Date.parse(task.createdAt))
 
     return <Card p={5} gap={5}>

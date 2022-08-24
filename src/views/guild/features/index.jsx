@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 
 // Chakra imports
-import {Box, Flex, Grid,} from "@chakra-ui/react";
+import {Flex, Grid,} from "@chakra-ui/react";
 
 // Custom components
 import Banner from "./components/Banner";
@@ -21,9 +21,7 @@ export default function FeaturesBoard() {
 
   return (
     <FeaturesProvider>
-      <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
         <Content />
-      </Box>
     </FeaturesProvider>
   );
 }

@@ -23,7 +23,7 @@ function BackButton() {
   const {action} = useParams()
   const {id: guild} = useContext(GuildContext)
 
-  const actionUrl = `/guild/${guild}/action/${action}`
+  const actionUrl = `/guild/${guild}/actions/${action}`
 
   return (
     <Link to={actionUrl}>

@@ -1,6 +1,6 @@
 import React, {useContext, useMemo} from "react";
 
-import {Box, Flex,} from "@chakra-ui/react";
+import {Flex,} from "@chakra-ui/react";
 
 // Custom components
 import Banner from "./components/Banner";
@@ -35,18 +35,16 @@ function FeaturePanel() {
     usePageInfo(localeName)
 
     return (
-        <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-            <Flex
-                flexDirection="column"
-                mb="10"
-                gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
-            >
-                <Banner localeName={localeName} />
-                <FeatureDetailProvider featureId={id}>
-                    <FeatureConfigPanel />
-                </FeatureDetailProvider>
-            </Flex>
-        </Box>
+        <Flex
+            flexDirection="column"
+            mb="10"
+            gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
+        >
+            <Banner localeName={localeName} />
+            <FeatureDetailProvider featureId={id}>
+                <FeatureConfigPanel />
+            </FeatureDetailProvider>
+        </Flex>
     );
 }
 

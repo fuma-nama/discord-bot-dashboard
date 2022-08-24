@@ -15,7 +15,7 @@ import {useBrandBg, useDetailColor, useTextColor} from "../../utils/colors";
  */
 export function Action({id, action}) {
     const {id: serverId} = useContext(GuildContext)
-    const configUrl = `/guild/${serverId}/action/${id}`
+    const configUrl = `/guild/${serverId}/actions/${id}`
     const locale = useLocale()
 
     const textColor = useTextColor();

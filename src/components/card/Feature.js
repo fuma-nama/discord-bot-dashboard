@@ -12,7 +12,7 @@ import {useBrandBg, useDetailColor, useTextColor} from "../../utils/colors";
 
 export default function Feature({banner, name, description, id: featureId, enabled}) {
     const {id: serverId} = useContext(GuildContext);
-    const configUrl = `/guild/${serverId}/feature/${featureId}`
+    const configUrl = `/guild/${serverId}/features/${featureId}`
     const enableMutation = useEnableFeatureMutation(serverId, featureId)
     const locale = useLocale()
 
