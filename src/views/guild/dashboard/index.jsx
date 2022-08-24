@@ -14,18 +14,19 @@ import {usePageState} from "utils/State";
 import {useLocale} from "utils/Language";
 
 export default function Dashboard() {
+    const locale = useLocale()
+
+    usePageInfo(locale({zh: "服務器儀表板", en: "Server Statistics"}))
+
     return <ServerDetailProvider>
         <UserReports />
     </ServerDetailProvider>
 }
 
 export function UserReports() {
-    const locale = useLocale()
     const {detail} = useContext(GuildDetailContext)
     const {id: serverId} = useContext(GuildContext)
     const data = config.data.dashboard
-
-    usePageInfo(locale({zh: "服務器儀表板", en: "Server Statistics"}))
 
     const query = useQuery(
         "server_advanced_detail",
@@ -68,7 +69,7 @@ function Data({row, detail, advanced}) {
 
     const items = useMemo(
         () => row.items(detail, state),
-        [detail]
+        [detail, ...Object.values(state)]
     )
 
     return <DataList items={items} />
