@@ -17,6 +17,7 @@ import ActionTasks from "./views/guild/action/action";
 import TaskConfigBoard from "./views/guild/action/task";
 import SubmitTaskBoard from "./views/guild/action/add";
 import {FeaturesLayout} from "./layouts/guild/features";
+import {ActionsLayout} from "./layouts/guild/actions";
 
 /**
  * Public Routes that can access on sidebar
@@ -61,19 +62,12 @@ const routes = [
             <Icon as={MdFrontHand} width="20px" height="20px" color="inherit"/>
         ),
         path: "actions",
+        component: <ActionsLayout />,
         children: [
-            {
-                path: "*",
-                component: <ActionsBoard/>,
-            },
             {
                 path: ":action",
                 hide: true,
                 children: [
-                    {
-                        path: "*",
-                        component: <ActionTasks/>,
-                    },
                     {
                         path: "task/:task",
                         component: <TaskConfigBoard/>,
@@ -82,7 +76,15 @@ const routes = [
                         path: "add",
                         component: <SubmitTaskBoard/>,
                     },
+                    {
+                        path: "*",
+                        component: <ActionTasks />,
+                    }
                 ]
+            },
+            {
+                path: "*",
+                component: <ActionsBoard/>,
             },
         ]
     },

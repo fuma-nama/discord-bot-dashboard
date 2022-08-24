@@ -3,7 +3,7 @@ import {SmallAddIcon} from "@chakra-ui/icons";
 import {Link, useParams} from "react-router-dom";
 import React, {useContext} from "react";
 import {GuildContext} from "contexts/guild/GuildContext";
-import {Locale} from "../../../../../utils/Language";
+import {Locale} from "utils/Language";
 
 export default function CreateButton() {
     const { id: guild } = useContext(GuildContext);

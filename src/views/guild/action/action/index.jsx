@@ -4,7 +4,7 @@ import {Box, Center, Flex, SimpleGrid, SlideFade, Text, useColorModeValue, VStac
 
 import {usePageInfo} from "contexts/PageInfoContext";
 import {ActionDetailContext, ActionDetailProvider, useActionInfo} from "contexts/actions/ActionDetailContext";
-import TasksBanner from "./components/TasksBanner";
+import {useBanner} from "./components/Banner";
 import NotFound from "../../../info/Not_Found";
 import SearchInput from "components/fields/impl/SearchInput";
 
@@ -21,18 +21,7 @@ export default function ActionTasks() {
         return <NotFound />
     }
 
-    return (
-        <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
-            <Flex
-                flexDirection="column"
-                mb="10"
-                gridArea={{xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2"}}
-            >
-                <TasksBanner />
-                <TasksPanel />
-            </Flex>
-        </Box>
-    );
+    return <TasksPanel />
 }
 
 function like(s1, s2) {
@@ -40,6 +29,7 @@ function like(s1, s2) {
 }
 
 function TasksPanel() {
+    useBanner()
     const [filter, setFilter] = useState("")
     const {name} = useActionInfo()
     const locale = useLocale()
@@ -71,7 +61,9 @@ function TasksContent({filter}) {
     return tasks.length === 0?
         <Box bgImg={not_found} bgSize="cover" h="50vh">
             <VStack w="full" h="full" backdropFilter="blur(50px)">
-                <Text align="center" fontSize={22} fontWeight="bold" mt={10}>沒有任務正在運行</Text>
+                <Text align="center" fontSize={22} fontWeight="bold" mt={10}>
+                    <Locale zh="沒有任務正在運行" en="No Tasks running" />
+                </Text>
                 <CreateButton />
             </VStack>
         </Box>

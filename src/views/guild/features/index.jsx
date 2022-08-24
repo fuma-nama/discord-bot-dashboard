@@ -7,7 +7,7 @@ import {usePageInfo} from "contexts/PageInfoContext";
 import {DataList} from "components/card/data/DataCard";
 import {config} from "config/config";
 import {Locale, useLocale} from "utils/Language";
-import {useLayoutUpdate} from "contexts/layouts/FeaturesLayoutContext";
+import {useLayoutUpdate} from "contexts/layouts/LayoutContext";
 import {BannerButton} from "components/card/Banner";
 import {FaTripadvisor} from "react-icons/fa";
 
@@ -40,7 +40,7 @@ function Content() {
         en: `Discover, Learn, And Customize the Powerful Features of ${config.name}`
       }),
       buttons: [
-        config.tutorialUrl && <TutorialButton key={0} />
+        config.tutorialUrl && <TutorialButton />
       ]
     },
     dataList: config.data.features && <DataList items={config.data.features(data)} />

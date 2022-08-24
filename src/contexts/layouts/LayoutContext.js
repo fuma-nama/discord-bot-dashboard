@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 
-export const FeaturesLayoutContext = createContext({
+export const LayoutContext = createContext({
     banner: {
         title: null,
         description: null,
@@ -11,7 +11,7 @@ export const FeaturesLayoutContext = createContext({
 })
 
 export function useLayoutUpdate(props) {
-    const {update} = useContext(FeaturesLayoutContext)
+    const {update} = useContext(LayoutContext)
 
     useEffect(
         () => update(props),
@@ -19,10 +19,10 @@ export function useLayoutUpdate(props) {
     )
 }
 
-export function FeaturesLayoutProvider({initial = {}, children}) {
+export function LayoutProvider({initial = {}, children}) {
     const [context, setContext] = useState(initial)
 
-    return <FeaturesLayoutContext.Provider
+    return <LayoutContext.Provider
         value={{
             ...context,
             update(next) {
@@ -30,5 +30,5 @@ export function FeaturesLayoutProvider({initial = {}, children}) {
             }
         }}>
         {children}
-    </FeaturesLayoutContext.Provider>
+    </LayoutContext.Provider>
 }

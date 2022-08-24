@@ -1,7 +1,7 @@
 import React, {useContext, useMemo} from "react";
 
 // Chakra imports
-import {Box, Button, Flex, SimpleGrid, Stack, Text,} from "@chakra-ui/react";
+import {Button, SimpleGrid, Stack, Text,} from "@chakra-ui/react";
 
 // Custom components
 import {usePageInfo} from "contexts/PageInfoContext";
@@ -10,7 +10,7 @@ import {MultiConfigPanel} from "components/fields/ConfigPanel";
 import {Link, useParams} from "react-router-dom";
 import {updateTask} from "api/internal";
 import {GuildContext} from "contexts/guild/GuildContext";
-import ActionBanner from "../components/ActionBanner";
+import {useActionBanner} from "../components/ActionBanner";
 import {BiArrowBack} from "react-icons/bi";
 import {TaskDetailContext, TaskDetailProvider} from "../../../../contexts/actions/TaskDetailContext";
 import {useQueryClient} from "react-query";
@@ -18,27 +18,17 @@ import {usePageState} from "../../../../utils/State";
 import {Locale, useLocale} from "../../../../utils/Language";
 
 export default function TaskBoard() {
+    useActionBanner([<BackButton />])
 
-    return <Box pt={{base: "180px", md: "80px", xl: "80px"}}>
-        <Flex
-            flexDirection="column"
-            mb="30"
-        >
-            <ActionBanner>
-                <BackButton />
-            </ActionBanner>
+    return <Stack mt={10} gap={5}>
+        <Text fontSize={25} fontWeight="bold">
+            <Locale zh="修改任務" en="Modify Task" />
+        </Text>
 
-            <Stack mt={10} gap={5}>
-                <Text fontSize={25} fontWeight="bold">
-                    <Locale zh="修改任務" en="Modify Task" />
-                </Text>
-
-                <TaskDetailProvider>
-                    <TaskConfigPanel />
-                </TaskDetailProvider>
-            </Stack>
-        </Flex>
-    </Box>
+        <TaskDetailProvider>
+            <TaskConfigPanel />
+        </TaskDetailProvider>
+    </Stack>
 }
 
 function TaskConfigPanel() {

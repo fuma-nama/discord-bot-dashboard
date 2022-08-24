@@ -1,11 +1,19 @@
-import {Box, Fade, Flex, Grid} from "@chakra-ui/react";
+import {Box, Flex, Grid} from "@chakra-ui/react";
 import React, {Fragment, useContext} from "react";
-import {Outlet} from "react-router-dom"
+import {usePageInfo} from "../../contexts/PageInfoContext";
+import {useLocale} from "../../utils/Language";
 import {LayoutContext, LayoutProvider} from "../../contexts/layouts/LayoutContext";
+import bannerImg from "../../assets/img/common/ActionBanner.png";
 import Banner from "../../components/card/Banner";
-import bannerImg from "assets/img/common/FeatureBanner.png";
+import {Outlet} from "react-router-dom"
 
-export function FeaturesLayout() {
+export function ActionsLayout() {
+    const locale = useLocale()
+
+    usePageInfo(
+        locale({zh: "動作面板", en: "Action Panel"})
+    );
+
     return <LayoutProvider>
         <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
             <Content />
@@ -15,24 +23,24 @@ export function FeaturesLayout() {
 
 function BannerWrapper({banner}) {
     if (banner == null) return <></>
-
-    return <Fade in={true}>
+    return (
         <Banner
-            image={bannerImg}
-            {...banner}
+            image={banner.image || bannerImg}
+            title={banner.title}
+            description={banner.description}
+            clip={false}
         >
             {banner.buttons.map((b, i) =>
                 <Fragment key={i}>{b}</Fragment>)
             }
         </Banner>
-    </Fade>
+    );
 }
 
 function Content() {
     const {banner, dataList} = useContext(LayoutContext)
 
     if (dataList) {
-
         return (
             <Grid
                 mb="20px"
@@ -59,7 +67,7 @@ function Content() {
     } else {
         return <Flex
             flexDirection="column"
-            mb="10"
+            mb="30"
         >
             <BannerWrapper banner={banner} />
             <Outlet />

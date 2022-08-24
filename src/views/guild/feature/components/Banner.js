@@ -9,7 +9,7 @@ import {GuildContext} from "contexts/guild/GuildContext";
 import {BiArrowBack} from "react-icons/bi";
 import {Link} from "react-router-dom";
 import {Locale} from "utils/Language";
-import {useLayoutUpdate} from "contexts/layouts/FeaturesLayoutContext";
+import {useLayoutUpdate} from "contexts/layouts/LayoutContext";
 
 export default function useBanner(localeName) {
     const {description} = useFeatureInfo()
@@ -18,7 +18,7 @@ export default function useBanner(localeName) {
         banner: {
             title: localeName,
             description,
-            buttons: [<BackButton key={0}/>]
+            buttons: [<BackButton />]
         }
     })
 }

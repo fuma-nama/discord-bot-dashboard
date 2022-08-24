@@ -1,12 +1,12 @@
 import React, {useMemo, useState} from "react";
 
 // Chakra imports
-import {Box, Flex, SimpleGrid, Stack, Text,} from "@chakra-ui/react";
+import {SimpleGrid, Stack, Text,} from "@chakra-ui/react";
 
 // Custom components
 import {usePageInfo} from "contexts/PageInfoContext";
 import {config} from "config/config";
-import Banner from "./components/Banner";
+import {useBanner} from "./components/Banner";
 import {useActionInfo} from "contexts/actions/ActionDetailContext";
 import {useMutation, useQueryClient} from "react-query";
 import ErrorModal from "components/modal/ErrorModal";
@@ -19,7 +19,9 @@ import {usePageState} from "utils/State";
 import {Locale, useLocale} from "utils/Language";
 
 export default function SubmitTaskBoard() {
-  return <SubmitTask />
+    useBanner()
+
+    return <SubmitTask />
 }
 
 function SubmitTask() {
@@ -32,25 +34,15 @@ function SubmitTask() {
         {zh: "新任務", en: "New Task"}
     ].map(locale))
 
-  return (
-    <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-        <Flex
-            flexDirection="column"
-            mb="30"
-        >
-            <Banner />
-            <Stack mt={10} gap={5}>
-                <Text fontSize={25} fontWeight="bold">
-                    <Locale zh="創建新任務" en="New Task" />
-                </Text>
+    return <Stack mt={10} gap={5}>
+        <Text fontSize={25} fontWeight="bold">
+            <Locale zh="創建新任務" en="New Task" />
+        </Text>
 
-                <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
-                    <ConfigPanel />
-                </SimpleGrid>
-            </Stack>
-        </Flex>
-    </Box>
-  );
+        <SimpleGrid columns={{base: 1, lg: 2}} gap={5}>
+            <ConfigPanel />
+        </SimpleGrid>
+    </Stack>
 }
 
 function ConfigPanel() {
@@ -69,15 +61,15 @@ function ConfigPanel() {
 
     const mutation = useMutation(
         () => addTask(guild, action, name, changes), {
-        onSuccess(data) {
-            client.setQueryData(
-                ["task_detail", guild, action, data.id.toString()],
-                data
-            )
+            onSuccess(data) {
+                client.setQueryData(
+                    ["task_detail", guild, action, data.id.toString()],
+                    data
+                )
 
-            navigate(`/guild/${guild}/actions/${action}/task/${data.id}`)
-        }
-    })
+                navigate(`/guild/${guild}/actions/${action}/task/${data.id}`)
+            }
+        })
 
     const onChange = (id, value) => {
         if (mutation.isLoading) return;

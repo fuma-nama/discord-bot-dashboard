@@ -7,16 +7,11 @@ import {GuildContext} from "contexts/guild/GuildContext";
 import {BiArrowBack} from "react-icons/bi";
 
 import {Link, useParams} from "react-router-dom";
-import ActionBanner from "../../components/ActionBanner";
+import {useActionBanner} from "../../components/ActionBanner";
 import {Locale} from "../../../../../utils/Language";
 
-export default function Banner() {
-
-  return (
-      <ActionBanner>
-        <BackButton />
-      </ActionBanner>
-  )
+export function useBanner() {
+    useActionBanner([<BackButton />])
 }
 
 function BackButton() {
