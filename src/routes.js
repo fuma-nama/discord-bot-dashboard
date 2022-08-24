@@ -11,13 +11,13 @@ import Dashboard from "views/guild/dashboard";
 import Features from "views/guild/features";
 import SettingsPanel from "./views/guild/settings";
 import ActionsBoard from "./views/guild/action";
-import {Locale} from "./utils/Language";
 import Feature from "./views/guild/feature";
 import ActionTasks from "./views/guild/action/action";
 import TaskConfigBoard from "./views/guild/action/task";
 import SubmitTaskBoard from "./views/guild/action/add";
 import {FeaturesLayout} from "./layouts/guild/features";
 import {ActionsLayout} from "./layouts/guild/actions";
+import {config} from "./config/config";
 
 /**
  * Public Routes that can access on sidebar
@@ -25,24 +25,28 @@ import {ActionsLayout} from "./layouts/guild/actions";
  */
 const routes = [
     {
-        name: <Locale zh="返回個人資料面板" en="Back to Profile"/>,
+        name: {zh: "返回個人資料面板", en: "Back to Profile"},
         icon: <Icon as={IoIosArrowRoundBack} width="20px" height="20px" color="inherit"/>,
         path: "../",
         component: <Navigate replace to="/admin"/>
     },
     {
-        name: <Locale zh="服務器儀表板" en="Statistics"/>,
+        name: {zh: "服務器儀表板", en: "Statistics"},
         icon: <Icon as={BiServer} width="20px" height="20px" color="inherit"/>,
         path: "dashboard",
         component: <Dashboard/>,
     },
     {
-        name: <Locale zh="功能控制板" en="Features"/>,
+        name: {zh: "功能控制板", en: "Features"},
         icon: (
             <Icon as={RiFunctionFill} width="20px" height="20px" color="inherit"/>
         ),
         path: "features",
         component: <FeaturesLayout />,
+        items: Object.entries(config.features).map(([id, feature]) => ({
+            name: feature.name,
+            path: id
+        })),
         children: [
             {
                 path: ":feature",
@@ -57,12 +61,16 @@ const routes = [
         ]
     },
     {
-        name: <Locale zh="動作面板" en="Actions"/>,
+        name: {zh: "動作面板", en: "Actions"},
         icon: (
             <Icon as={MdFrontHand} width="20px" height="20px" color="inherit"/>
         ),
         path: "actions",
         component: <ActionsLayout />,
+        items: Object.entries(config.actions).map(([id, action]) => ({
+            name: action.name,
+            path: id
+        })),
         children: [
             {
                 path: ":action",
@@ -89,7 +97,7 @@ const routes = [
         ]
     },
     {
-        name: <Locale zh="服務器設置" en="Settings"/>,
+        name: {zh: "服務器設置", en: "Settings"},
         icon: (
             <Icon as={IoIosSettings} width="20px" height="20px" color="inherit"/>
         ),
