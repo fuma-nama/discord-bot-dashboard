@@ -3,19 +3,18 @@ import React, {useContext, useMemo} from "react";
 import {Flex,} from "@chakra-ui/react";
 
 // Custom components
-import Banner from "./components/Banner";
 import {updateFeatureOptions} from "api/internal";
 
 import {FeatureDetailContext, FeatureDetailProvider, useFeatureInfo,} from "contexts/FeatureDetailContext";
-import {usePageInfo} from "contexts/PageInfoContext";
 import {GuildContext} from "contexts/guild/GuildContext";
 import {ConfigGrid} from "components/fields/ConfigPanel";
 import {config} from "config/config";
 import NotFound from "../../info/Not_Found";
 import {useParams} from "react-router-dom";
 import {useQueryClient} from "react-query";
-import {usePageState} from "../../../utils/State";
-import {useLocale} from "../../../utils/Language";
+import {usePageState} from "utils/State";
+import {useLocale} from "utils/Language";
+import useBanner from "./components/Banner";
 
 export default function Feature() {
   const { feature } = useParams()
@@ -30,17 +29,13 @@ export default function Feature() {
 function FeaturePanel() {
     const {id, name} = useFeatureInfo()
     const locale = useLocale()
-    const localeName = locale(name)
-
-    usePageInfo(localeName)
+    useBanner(locale(name))
 
     return (
         <Flex
             flexDirection="column"
             mb="10"
-            gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
         >
-            <Banner localeName={localeName} />
             <FeatureDetailProvider featureId={id}>
                 <FeatureConfigPanel />
             </FeatureDetailProvider>

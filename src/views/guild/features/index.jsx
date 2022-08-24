@@ -1,16 +1,15 @@
 import React, {useContext} from "react";
 
-// Chakra imports
-import {Flex, Grid,} from "@chakra-ui/react";
-
 // Custom components
-import Banner from "./components/Banner";
 import FeatureGrid from "./components/FeatureGrid";
 import {FeaturesContext, FeaturesProvider} from "contexts/FeaturesContext";
-import {usePageInfo} from "../../../contexts/PageInfoContext";
-import {DataList} from "../../../components/card/data/DataCard";
-import {config} from "../../../config/config";
-import {useLocale} from "../../../utils/Language";
+import {usePageInfo} from "contexts/PageInfoContext";
+import {DataList} from "components/card/data/DataCard";
+import {config} from "config/config";
+import {Locale, useLocale} from "utils/Language";
+import {useLayoutUpdate} from "contexts/layouts/FeaturesLayoutContext";
+import {BannerButton} from "components/card/Banner";
+import {FaTripadvisor} from "react-icons/fa";
 
 export default function FeaturesBoard() {
   const locale = useLocale()
@@ -20,47 +19,41 @@ export default function FeaturesBoard() {
   )
 
   return (
-    <FeaturesProvider>
+      <FeaturesProvider>
         <Content />
-    </FeaturesProvider>
+      </FeaturesProvider>
   );
 }
 
 function Content() {
   const {data} = useContext(FeaturesContext)
+  const locale = useLocale()
 
-  if (config.data.features) {
+  useLayoutUpdate({
+    banner: {
+      title: locale({
+        zh: "在線管理所有功能",
+        en: `Features Panel`
+      }),
+      description: locale({
+        zh: `發掘、學習、以及客製化${config.name}強大的功能`,
+        en: `Discover, Learn, And Customize the Powerful Features of ${config.name}`
+      }),
+      buttons: [
+        config.tutorialUrl && <TutorialButton key={0} />
+      ]
+    },
+    dataList: config.data.features && <DataList items={config.data.features(data)} />
+  })
 
-    return (
-          <Grid
-              mb="20px"
-              gridTemplateColumns={{ xl: "repeat(3, 1fr)", "2xl": "1fr 0.46fr" }}
-              gap={{ base: "20px", xl: "20px" }}
-              display={{ base: "block", xl: "grid" }}
-          >
-            <Flex
-                flexDirection="column"
-                mb="10"
-                gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
-            >
-              <Banner />
-              <FeatureGrid />
-            </Flex>
-            <Flex
-                flexDirection="column"
-                gridArea={{ xl: "1 / 3 / 2 / 4", "2xl": "1 / 2 / 2 / 3" }}
-            >
-              <DataList items={config.data.features(data)} />
-            </Flex>
-          </Grid>
-    );
-  } else {
-    return <Flex
-          flexDirection="column"
-          mb="10"
-      >
-        <Banner />
-        <FeatureGrid />
-      </Flex>
-  }
+  return <FeatureGrid />
+}
+
+function TutorialButton() {
+  return  <BannerButton
+      leftIcon={<FaTripadvisor size={20}/>}
+      url={config.tutorialUrl}
+  >
+    <Locale zh="發現它們" en="Discover"/>
+  </BannerButton>
 }
