@@ -4,47 +4,43 @@ import {NavLink, useLocation} from "react-router-dom";
 // chakra imports
 import {Box, Flex, HStack, Text} from "@chakra-ui/react";
 import {useBrandBg, useNoteColor, useTextColor} from "utils/colors";
-import {useLocale} from "../../../utils/Language";
+import {useLocale} from "utils/Language";
+import {CgShapeCircle} from "react-icons/cg";
 
 export function SidebarLinks({ routes }) {
-  //   Chakra color mode
-  let location = useLocation();
 
-  const activeRoute = (routeName) => {
-    return location.pathname.endsWith(routeName.toLowerCase());
-  };
-
-  const includesRoute = (routeName) => {
-    return location.pathname.includes(routeName.toLowerCase());
-  };
-
-  function createLinks(routes) {
-    return routes.map((route, index) =>
-        createLink(route, index)
-    );
-  }
-
-  function createLink(route, key) {
-    const active = activeRoute(route.path);
-    const includes = includesRoute(route.path)
-
-    return <>
-      <Item key={key} active={active} route={route} />
-
-      <Flex direction="column" pl={5}>
-        {includes && route.items && route.items.map((item, key) => {
-          const path = `${route.path}/${item.path}`
-
-          return <Item key={key} route={item} to={path} active={activeRoute(path)} />
-        })}
-      </Flex>
-    </>
-  }
-
-  return createLinks(routes);
+  return routes.map((route, index) =>
+      <RouteItem key={index} route={route} />
+  )
 }
 
-function Item({active, route, to = route.path}) {
+function RouteItem({route}) {
+  const location = useLocation();
+  const active = location.pathname.endsWith(route.path);
+  const includes = location.pathname.includes(route.path)
+
+  return (
+      <>
+        <Item name={route.name} path={route.path} active={active} icon={<Box me={2}>{route.icon}</Box>} />
+
+        <Flex direction="column" pl={7}>
+          {includes && route.items && route.items.map((item, key) => {
+            const path = `${route.path}/${item.path}`
+
+            return <Item
+                key={key}
+                path={path}
+                active={location.pathname.includes(path)}
+                name={item.name}
+                icon={<CgShapeCircle />}
+            />
+          })}
+        </Flex>
+      </>
+  );
+}
+
+function Item({active, name, path, icon}) {
   let activeColor = useTextColor();
   let inactiveColor = useNoteColor()
   let brandColor = useBrandBg();
@@ -52,21 +48,19 @@ function Item({active, route, to = route.path}) {
   const locale = useLocale()
 
   return (
-      <NavLink to={to}>
-        <HStack spacing={active ? "22px" : "26px"} py="5px" ps="10px">
+      <NavLink to={path}>
+        <HStack spacing={active ? "22px" : "26px"} py="5px">
           <Flex w="100%" alignItems="center" justifyContent="center">
-            {route.icon &&
-                <Box color={active ? brandColor : inactiveColor} me="18px">
-                  {route.icon}
-                </Box>
-            }
+            <Box color={active ? brandColor : inactiveColor} me={2}>
+              {icon}
+            </Box>
 
             <Text
                 me="auto"
                 color={active ? activeColor : inactiveColor}
                 fontWeight={active ? "bold" : "normal"}
             >
-              {locale(route.name)}
+              {locale(name)}
             </Text>
           </Flex>
           <Box
