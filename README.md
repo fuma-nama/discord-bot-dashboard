@@ -8,7 +8,7 @@ You can modify `config/config.js` to edit configuration without touching the cod
 <br>
 Feel free to contribute this project
 
-Maintained by MONEY
+**Watch the Demo on [YouTube](https://youtu.be/Z90Ax-v4uH4)**
 
 ## Getting Started
 **First, clone this Template**
