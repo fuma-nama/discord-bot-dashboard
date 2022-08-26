@@ -39,7 +39,7 @@ export function useGuilds() {
       "user_guilds",
       () => getGuilds(),
       {
-        refetchOnWindowFocus: false
+        refetchOnWindowFocus: false,
       }
   )
 }

@@ -10,6 +10,13 @@ Feel free to contribute this project
 
 **Watch the Demo on [YouTube](https://youtu.be/Z90Ax-v4uH4)**
 
+## Features
+* Modern Design with Chakra UI
+* Localization Support (English and Chinese)
+* Customizable UI (`config.js`)
+* Built-in **Features** and **Actions** System
+* Existing Backend Implementation
+
 ## Getting Started
 **First, clone this Template**
 ```
