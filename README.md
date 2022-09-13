@@ -59,19 +59,21 @@ const config = {
 ### Display Data or Statistics
 You can customize data to display in your dashboard.
 <br>
-Items function reads `detail` and `state`, then returns `DataItem` array which determines what to display
+#### Items function
+it reads `detail` and `state`, then returns `DataItem` array which determines what to display
 
 #### Dashboard Data
-It is an Array of Dashboard Data Row, you can customize options of the row to get additional data from `state`
-<br>
-You can set `advanced` to true, so the dashboard will fetch `/guild/:guild/detail/advanced` and pass to the function by `advanced` of `state`
+It is an Array of Dashboard Data Row, you can customize options of each row to get additional data from `state`
 
+Each Data Row contains a items function
+<br>
+You can set `advanced` to true, so the dashboard will fetch `/guild/:guild/detail/advanced` and pass the result to the function by `state.advanced`
 It will be displayed in **Statistics** Tab
 
 #### Actions and Features Data
-They are both Items functions, you must define data to returns in your API
+They are both **Items function**
 
-It will be displayed in **Actions** or **Features** Tab
+It will be displayed in **Actions** and **Features** Tab
 <br>
 you can display the statistics of things like **Ranks**, **Reaction Role** 
 
