@@ -1,3 +1,6 @@
+> Next generation of the Dashboard is in active development now <br>
+> https://github.com/SonMooSans/discord-bot-dashboard-2
+
 ![Demo](document/img.png)
 
 # D-Dash: Discord Bot Dashboard
