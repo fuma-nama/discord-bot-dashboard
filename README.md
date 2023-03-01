@@ -1,4 +1,4 @@
-> Next generation of the Dashboard is in active development now <br>
+> Next generation of the Dashboard is out! <br>
 > https://github.com/SonMooSans/discord-bot-dashboard-2
 
 ![Demo](document/img.png)
